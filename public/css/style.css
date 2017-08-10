@@ -1,0 +1,45 @@
+.diniz{
+    border: 1px solid red;
+    background-color: yellow;
+}  
+.jumbotron{
+    background-color: #bbb;
+    color: #333;
+    border-radius: 0;
+}
+.bg-gray{
+    background-color: #f6f6f6;
+}
+.container-fluid{
+    padding: 60px 50px;
+}
+.text-edit{
+    text-align: justify;
+    margin: 25px 0;
+}
+.image-edit{
+    text-align: center;
+    margin: 25px 0;
+}
+
+.navbar {
+    margin-bottom: 0;
+    background-color: #bbb;
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    padding-left: 10px;
+    color: black !important;
+    background-color: #fff !important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
