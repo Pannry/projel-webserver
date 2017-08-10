@@ -12,7 +12,10 @@ module.exports = function () {
     app.set('view engine', 'ejs');
 
     // caminho de views
-    app.set('views', './views');
+    app.set('views', './app/views');
+
+    // Careegar os módulos
+    load('routes', {cwd: 'app'}).then('infra').into(app);
 
     return app;
 };
