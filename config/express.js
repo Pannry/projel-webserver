@@ -14,6 +14,8 @@ module.exports = function () {
     // caminho de views
     app.set('views', './app/views');
 
+    app.use(bodyParser.urlencoded({extended: true}));
+
     // Careegar os módulos
     load('routes', {cwd: 'app'}).then('infra').into(app);
 
