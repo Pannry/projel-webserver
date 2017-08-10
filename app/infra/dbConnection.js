@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 module.exports = function(){
-    return criarConexaoComObanco;
+    return getConexaoComObanco;
 }
 
-function criarConexaoComObanco(){
+function getConexaoComObanco(){
     return mysql.createConnection({
         host: "localhost",
         user: "root",
