@@ -7,5 +7,5 @@ function UsuarioDAO(conexaoDb){
 }
 
 UsuarioDAO.prototype.salva = function(usuario, callback){
-    this._conexaoDb.query('insert into usuario set ?', usuario, callback);
+    this._conexaoDb.query('insert into aluno set ?', usuario, callback);
 }
