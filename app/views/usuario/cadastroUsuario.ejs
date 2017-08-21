@@ -44,11 +44,24 @@
                 </div>
             </div>
             <br><br>
+            <!-- Campo instituiao -->
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-6 col-sm-12">
+                    <label for="instituicao_id" class="font-weight-bold">Insituicçao que você pertence</label>
+                    <select class="form-control" name="instituicao_id">
+                        <% for (var i = 0; i < listaDeInstituicao.length; i++){%>
+                            <option value="<%=listaDeInstituicao[i].id%>"><%=listaDeInstituicao[i].nome%></option>
+                            <%}%>
+                        </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
                     <input type="submit" value="gravar" class="btn btn-default">
                 </div>
             </div>
+
         </form>
 
     </div>
