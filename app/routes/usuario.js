@@ -1,3 +1,5 @@
+var bcrypt = require('bcrypt-nodejs');
+
 module.exports = function(app){
     app.get('/usuario/cadastro', function(request, response){
         var conexaoDb = app.infra.dbConnection();
@@ -12,6 +14,11 @@ module.exports = function(app){
 
     app.post('/usuario', function(request, response){
         var usuario = request.body;
+        console.log( usuario );
+
+        usuario.senha = bcrypt.hashSync(usuario.senha, null, null);
+
+        // console.log( usuario );        
 
         var conexaoDb = app.infra.dbConnection();
         var usuarioDAO = new app.infra.usuarioDAO(conexaoDb);

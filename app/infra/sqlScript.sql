@@ -1,10 +1,23 @@
+create database projel;
+use projel;
+
+-- Tabela instituição
+create table instituicao(
+    id int auto_increment,
+    nome varchar(62),
+    cnpj varchar(32),
+    endereco varchar(64),
+    cep varchar(32),
+    numero varchar(32),
+    telefone varchar(32),
+    primary key (id)
+);
 -- Tabela aluna
 create table aluno(
     id int auto_increment primary key,
-    nome varchar(32),
-    matricula varchar(32),
-    email varchar(32),
-    senha varchar(32),
+    nome varchar(32) NOT NULL,
+    email varchar(32) NOT NULL,
+    senha varchar(60) NOT NULL,
     instituicao_id int,
     foreign key (instituicao_id) references instituicao(id)
 );
@@ -18,17 +31,6 @@ create table professor(
     numero int,
     telefone int,
     email varchar(32),
-    primary key (id)
-);
--- Tabela instituição
-create table instituicao(
-    id int auto_increment,
-    nome varchar(62),
-    cnpj varchar(32),
-    endereco varchar(64),
-    cep varchar(32),
-    numero varchar(32),
-    telefone varchar(32),
     primary key (id)
 );
 -- Tabela disciplina
