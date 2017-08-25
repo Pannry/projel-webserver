@@ -1,10 +1,9 @@
-// var bcrypt = require('bcrypt-nodejs');
-// var passport = require('passport');
-
+var bcrypt = require('bcrypt-nodejs');
 
 module.exports = function (app) {
     var passport = app.get('passport');
 
+    // Cadastro
     app.get('/usuario/cadastro', function(request, response){
         var conexaoDb = app.infra.dbConnection();
         var instituicaoDAO = new app.infra.InstituicaoDAO(conexaoDb);
@@ -30,6 +29,7 @@ module.exports = function (app) {
         conexaoDb.end();
     });
 
+    // Loigin
     app.get('/login', function(req, res){
         res.render('aluno/loginAluno');
     });
@@ -37,7 +37,6 @@ module.exports = function (app) {
     app.post('/login',
         passport.authenticate('local-login'),
         function (req, res) {
-            console.log( 'usuario autenticado' );
             console.log(req.user); 
 
         // res.redirect('caminho');
