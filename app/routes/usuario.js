@@ -1,6 +1,10 @@
-var bcrypt = require('bcrypt-nodejs');
+// var bcrypt = require('bcrypt-nodejs');
+// var passport = require('passport');
 
-module.exports = function(app){
+
+module.exports = function (app) {
+    var passport = app.get('passport');
+
     app.get('/usuario/cadastro', function(request, response){
         var conexaoDb = app.infra.dbConnection();
         var instituicaoDAO = new app.infra.InstituicaoDAO(conexaoDb);
@@ -14,20 +18,29 @@ module.exports = function(app){
 
     app.post('/usuario', function(request, response){
         var usuario = request.body;
-        console.log( usuario );
 
-        usuario.senha = bcrypt.hashSync(usuario.senha, null, null);
-
-        // console.log( usuario );        
+        usuario.senha = bcrypt.hashSync(usuario.senha, null, null);      
 
         var conexaoDb = app.infra.dbConnection();
         var usuarioDAO = new app.infra.usuarioDAO(conexaoDb);
 
-        usuarioDAO.salva(usuario, function(erro, resultado){
-            // console.log(erro);
-            // console.log(resultado);
-            response.redirect('/usuario/cadastro');
+        usuarioDAO.salvar(usuario, function(erro, resultado){
+            response.redirect('/aluno/cadastro');
         });
         conexaoDb.end();
     });
+
+    app.get('/login', function(req, res){
+        res.render('aluno/loginAluno');
+    });
+
+    app.post('/login',
+        passport.authenticate('local-login'),
+        function (req, res) {
+            console.log( 'usuario autenticado' );
+            console.log(req.user); 
+
+        // res.redirect('caminho');
+    });
+    
 }
