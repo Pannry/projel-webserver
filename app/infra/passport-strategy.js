@@ -1,4 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
+var bcrypt = require('bcrypt-nodejs');
 
 
 module.exports = function (app) {
@@ -14,9 +15,11 @@ module.exports = function (app) {
         passReqToCallback: true
     },
         function (req, username, password, done) {
-            var conexaoDb = app.infra.dbConnection();
-            var usuarioDAO = new app.infra.UsusarioDAO(conexaoDb);
-            
+            var conexaoDb = app.infra.banco.dbConnection();
+            var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
+
+            password = bcrypt.hashSync(password, null, null);
+
             usuarioDAO.buscar(
                 {
                     email: username,

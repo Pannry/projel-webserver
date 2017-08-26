@@ -4,33 +4,33 @@ module.exports = function (app) {
     var passport = app.get('passport');
 
     // Cadastro
-    app.get('/usuario/cadastro', function(request, response){
-        var conexaoDb = app.infra.dbConnection();
-        var instituicaoDAO = new app.infra.InstituicaoDAO(conexaoDb);
+    app.get('/signup/aluno', function(req, res){
+        var conexaoDb = app.infra.banco.dbConnection();
+        var instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
 
         instituicaoDAO.lista(function(exception, resultado) {
 
-            response.render('usuario/cadastroUsuario', {listaDeInstituicao: resultado});
+            res.render('aluno/signupAluno', {listaDeInstituicao: resultado});
         });
         conexaoDb.end();
     });
 
-    app.post('/usuario', function(request, response){
-        var usuario = request.body;
+    app.post('/signup', function(req, res){
+        var usuario = req.body;
 
         usuario.senha = bcrypt.hashSync(usuario.senha, null, null);      
 
-        var conexaoDb = app.infra.dbConnection();
-        var usuarioDAO = new app.infra.usuarioDAO(conexaoDb);
+        var conexaoDb = app.infra.banco.dbConnection();
+        var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
         usuarioDAO.salvar(usuario, function(erro, resultado){
-            response.redirect('/aluno/cadastro');
+            res.redirect('/signup/aluno');
         });
         conexaoDb.end();
     });
 
-    // Loigin
-    app.get('/login', function(req, res){
+    // Login
+    app.get('/login/aluno', function(req, res){
         res.render('aluno/loginAluno');
     });
 
