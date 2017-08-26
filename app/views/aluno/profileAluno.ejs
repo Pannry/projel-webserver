@@ -1,0 +1,48 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+
+<head>
+	<title>Node Authentication</title>
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<style>
+		body {
+			padding-top: 80px;
+			word-wrap: break-word;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="page-header text-center">
+			<h1><span class="fa fa-anchor"></span> Profile Page</h1>
+			<!-- <a href="/logout" class="btn btn-default btn-sm">Logout</a> -->
+		</div>
+
+		<div class="row">
+
+			<!-- LOCAL INFORMATION -->
+			<div class="col-sm-6">
+				<div class="well">
+					<h3><span class="fa fa-user"></span> Local</h3>
+					<p>
+						<strong>id</strong>:
+						<%= user.id %><br>
+							<strong>Email</strong>:
+							<%= user.email %><br>
+								<strong>Senha</strong>:
+								<%= user.senha %>
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script src="assets/js/jquery-3.2.1.js"></script>
+	<script src="assets/js/bootstrap.js"></script>
+</body>
+
+</html>
