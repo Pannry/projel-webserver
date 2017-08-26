@@ -44,6 +44,7 @@ module.exports = function (app) {
         failureRedirect: '/login/aluno',
     }),
         function (req, res) {
+            // Esse callback só ira acontecer se o login ja estiver autenticado
             console.log("hello");       //nao ta imprimindo
 
             if (req.body.remember) { 
