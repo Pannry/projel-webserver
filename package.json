@@ -24,7 +24,7 @@
     "ejs": "^2.3.2",
     "express": "^4.13.0",
     "express-load": "^1.1.16",
-    "express-session": "^1.11.3",
+    "express-session": "^1.15.5",
     "morgan": "^1.6.0",
     "mysql": "^2.14.1",
     "passport": "^0.2.2",

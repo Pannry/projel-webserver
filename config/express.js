@@ -1,5 +1,6 @@
 var express = require('express');
 var load = require('express-load');
+var session  = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var cookieParser = require('cookie-parser');
@@ -17,7 +18,11 @@ module.exports = function () {
     
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({ extended: true }));
-    // app.use(express.session({ secret: 'keyboard cat' }));
+    app.use(session({
+        secret: 'keyboard dog',
+        resave: true,
+        saveUninitialized: true
+    }));
     
     app.use(passport.initialize());
     app.use(passport.session());

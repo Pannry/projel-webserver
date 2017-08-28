@@ -42,20 +42,19 @@ module.exports = function (app) {
     app.post('/login', passport.authenticate('local-login', {
         successRedirect: '/profile/aluno',
         failureRedirect: '/login/aluno',
-    }),
-        function (req, res) {
-            // Esse callback só ira acontecer se o login ja estiver autenticado
-            console.log("hello");       //nao ta imprimindo
+    }), function (req, res) {
+        // Esse callback só ira acontecer se o login ja estiver autenticado
+        console.log("hello");       //nao ta imprimindo
 
-            if (req.body.remember) { 
-                req.session.cookie.maxAge = 1000 * 60 * 3; 
-            }
-            else { 
-                req.session.cookie.expires = false; 
-            }
+        if (req.body.remember) {
+            req.session.cookie.maxAge = 1000 * 10;// * 3; 
+        }
+        else {
+            req.session.cookie.expires = false;
+        }
 
-            res.redirect('/');
-        });
+        res.redirect('/');
+    });
 
 
     /**
