@@ -11,7 +11,7 @@ module.exports = function (app) {
         var instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
 
         instituicaoDAO.lista(function (exception, resultado) {
-            res.render('aluno/signupAluno', { listaDeInstituicao: resultado });
+            res.render('aluno/signup', { listaDeInstituicao: resultado });
         });
 
         conexaoDb.end();
@@ -26,7 +26,7 @@ module.exports = function (app) {
         var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
         usuarioDAO.salvar(usuario, function (erro, resultado) {
-            res.redirect('/profile/aluno');
+            res.redirect('/login/aluno');
         });
         conexaoDb.end();
     });
@@ -36,11 +36,11 @@ module.exports = function (app) {
      * Login 
      */
     app.get('/login/aluno', function (req, res) {
-        res.render('aluno/loginAluno');
+        res.render('aluno/login');
     });
 
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/profile/aluno',
+        successRedirect: '/profile/perfil',
         failureRedirect: '/login/aluno',
     }));
 
@@ -48,8 +48,12 @@ module.exports = function (app) {
     /**
      * profile
      */
-    app.get('/profile/aluno', checkAuthentication, function (req, res) {
-        res.render('aluno/profileAluno', { user: req.user });
+    app.get('/profile/perfil', checkAuthentication, function (req, res) {
+        res.render('aluno/perfil/perfil', { user: req.user });
+    });
+
+    app.get('/profile/turmas', checkAuthentication, function (req, res) {
+        res.render('aluno/perfil/turmas', { user: req.user });
     });
 
 }
