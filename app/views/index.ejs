@@ -1,169 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <style>
-        .jumbotron{
-            background-color: #bbb;
-            color: #333;
-            border-radius: 0;
-        }
-    </style>
-</head>
+    <head>
+        <% include partials/head.ejs %>
+    </head>
 
-<body>
-    <!-- Ancora -->
-    <i id="projel"> </i>
+    <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded sticky-top">
-        <div class="container">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            <a class="navbar-brand" href="#projel">Projel</a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#login">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#informacoes">Informações</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
-                </ul>
+        <!-- NAVBAR -->
+        <% include partials/navbar-dashboard.ejs %>
+
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Projel</h1>
+                <p class="lead text-muted"> Crie aqui sua conta ou entre nela.</p>
+                <p>
+                <a href="/signup/aluno" class="btn btn-primary">Criar Conta</a>
+                <a href="/login/aluno" class="btn btn-secondary">Entrar</a>
+                </p>
             </div>
-        </div>
-    </nav>
+        </section>
 
-    <!-- HEADER -->
-    <div class="jumbotron text-center">
-        <h1>Projel</h1>
-    </div>
-
-    <!-- Ancora -->    
-    <hr id="sobre">
-    <br><br><br>
-
-    <!-- SOBRE -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 text-edit">
-                <h2>Sobre o PROJEL</h2>
-                <p>O PROJEL é um ambiente de ensino e de elaboração individual de projetos de instalações elétricas prediais
+        <div class="container">
+            
+            <!-- SOBRE -->
+            <div class="row">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading">Sobre o PROJEL</h2>
+                    <p class="lead">O PROJEL é um ambiente de ensino e de elaboração individual de projetos de instalações elétricas prediais
                     de um pavimento em baixa tensão que vem sendo desenvolvido em parceria IFCE-MPCOMP-LCC-UECE, de fácil
                     interação, que direciona o aprendiz/usuário a sequência de etapas a serem cumpridas na elaboração de
-                    projetos elétricos, disponibilizando a um simples toque, toda legislação da ABNT</p>
+                    projetos elétricos, disponibilizando a um simples toque, toda legislação da ABNT.</p>
+                </div>
+                            
+                <div class="offset-md-1"> </div>
+                            
+                <div class="col-md-4">
+                    <img class="img-fluid mx-auto" src="/images/do_your_pj.png" alt="do your pj">
+                </div>          
             </div>
-            <div class="col-md-4 image-edit">
-                <img src="/images/do_your_pj.png" alt="img1">
-            </div>
-        </div>
-    </div>
 
-    <!-- Ancora -->    
-    <hr id="login">
-    <br><br><br>
+            <br><hr><br>
 
-    <!-- LOGIN -->
-    <div class="container bg-grey">
-        <h2>Login</h2>
-        <br>
-        <div class="row">
-            <div class="col-md-1 form-group ">
-                <a class="btn" type="submit" href="/login/aluno" >Logar</a>
-            </div>
-            <div class="col-md-1 form-group ">
-                <a class="btn" type="submit" href="/signup/aluno" >Criar conta</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Ancora -->    
-    <hr id="informacoes">
-    <br><br><br>
-
-    <!-- INFORMACOES  -->
-    <i id="informacoes"> </i>
-    <div class="container">
-        <div class="row">
-            <div class="col-md text-edit">
-                <h2>Sobre o PROJEL</h2>
-                <br>
-                <h5>Equipe de desenvolvimento</h5>
-                <p>Alan Tavares Leite Silva – (CBCC – LCC/UECE – Bolsista MPCOMP-IEPRO)</p>
-                <p>Clóvis Daniel – (CBCC – LCC/UECE –ICT/FUNCAP)</p>
-                <p>Thales Nogueira Diniz – (CBCC – LCC/UECE – Monitor EDII – UECE)</p>
-                <br>
-                <h5>Equipe de Apoio Técnico</h5>
-                <p>Gilberto – (Curso de Mecatrônica – IFCE)</p>
-                <p>Luiz Prudêncio Bondi de Souza – (CBCC – LCC/UECE – Monitoria TOP AVANÇADOS EM COMPUTAÇÂO – UECE)</p>
-                <p>Prof Marcos Negreiros, DSc-PD – (CBCC – LCC/UECE-MPCOMP)</p>
-                <p>Prof Abelardo Guerra - (IFCE)</p>
-                <br>
-                <h5>Ambiente</h5>
-                <p>Aplicação – UNITY</p>
-                <p>Cloud – Github</p>
-                <p>Página WEB – Bootstrap 4</p>
-            </div>
+            <!-- EQUIPE -->
             <div class="row">
-                <div class="col-md ">
-                    <img src="/images/logo-uece.png" alt="img1">
+                <div class="col-md text-edit">
+                    <h2>Sobre o PROJEL</h2>
+                    <br>
+                    <h5>Equipe de desenvolvimento</h5>
+                    <p>Alan Tavares Leite Silva – (CBCC – LCC/UECE – Bolsista MPCOMP-IEPRO)</p>
+                    <p>Clóvis Daniel – (CBCC – LCC/UECE –ICT/FUNCAP)</p>
+                    <p>Thales Nogueira Diniz – (CBCC – LCC/UECE – Monitor EDII – UECE)</p>
+                    <br>
+                    <h5>Equipe de Apoio Técnico</h5>
+                    <p>Gilberto – (Curso de Mecatrônica – IFCE)</p>
+                    <p>Luiz Prudêncio Bondi de Souza – (CBCC – LCC/UECE – Monitoria TOP AVANÇADOS EM COMPUTAÇÂO – UECE)</p>
+                    <p>Prof Marcos Negreiros, DSc-PD – (CBCC – LCC/UECE-MPCOMP)</p>
+                    <p>Prof Abelardo Guerra - (IFCE)</p>
+                    <br>
+                    <h5>Ambiente</h5>
+                    <p>Aplicação – UNITY</p>
+                    <p>Cloud – Github</p>
+                    <p>Página WEB – Bootstrap 4</p>
                 </div>
-                <div class="col-md ">
-                    <img src="/images/logo-ifce.png" alt="img1">
-                </div>
-                <div class="col-md">
-                    <img src="/images/logo-lcc.png" alt="img1">
-                </div>
-                <div class="col-md">
-                    <img src="/images/logo-mpcomp2.jpg" alt="img1">
+
+                <div class="row">
+                    <div class="col-md">    <img src="/images/logo-uece.png" alt="img1">       </div>
+                    <div class="col-md">    <img src="/images/logo-ifce.png" alt="img1">       </div>
+                    <div class="col-md">    <img src="/images/logo-lcc.png" alt="img1">        </div>
+                    <div class="col-md">    <img src="/images/logo-mpcomp2.jpg" alt="img1">    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Ancora -->    
-    <hr id="contato">
-    <br><br><br>
+            <br><hr><br>
 
-    <!-- CONTATO -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md text-edit">
-                <h2>Contato</h2>
-                <br>
-                <h5>LCC (Laboratório de Computação Cientifica)</h5>
-                <p>Telefone: (85) 3101-9783</p>
-                <p>Endereço: Av. Dr. Silas Munguba, 1700, Campus do Itaperi, Fortaleza-CE</p>
-                <p>CEP: 60.714.903 – Bloco CED (Centro de Educação)</p>
-                <br>
-                <h5>Alan Tavares Leite Silva</h5>
-                <p>Email: alan1tavares@gmail.com</p>
-                <br>
-                <h5>Clovis Daniel Souza Silva</h5>
-                <p>E-mail: clovisdanielss@gmail.com</p>
-                <br>
-                <h5>Thales Nogueira Diniz</h5>
-                <p>Email: thalestnd@gmail.com</p>
+            <!-- CONTATO -->
+            <div class="row">
+                <div class="col-md text-edit">
+                    <h2>Contato</h2>
+                    <br>
+                    <h5>LCC (Laboratório de Computação Cientifica)</h5>
+                    <p>Telefone: (85) 3101-9783</p>
+                    <p>Endereço: Av. Dr. Silas Munguba, 1700, Campus do Itaperi, Fortaleza-CE</p>
+                    <p>CEP: 60.714.903 – Bloco CED (Centro de Educação)</p>
+                    <br>
+                    <h5>Alan Tavares Leite Silva</h5>
+                    <p>Email: alan1tavares@gmail.com</p>
+                    <br>
+                    <h5>Clovis Daniel Souza Silva</h5>
+                    <p>E-mail: clovisdanielss@gmail.com</p>
+                    <br>
+                    <h5>Thales Nogueira Diniz</h5>
+                    <p>Email: thalestnd@gmail.com</p>
+                </div>
             </div>
+
+            <br><hr><br>
+
+            <!-- FOOTER -->
+            <footer class="text-muted">
+                <br><br>
+                <p class="float-right"> <a href="#">TOPO</a> </p>
+                <p>Projel - 2017</p>
+                <br><br>
+            </footer>
+            
         </div>
-    </div>
-
-    <hr>
-
-    <!-- FOOTER -->
 
 
-    <footer class="container-fluid text-center">
-        <a href="#projel">Topo</a>
-    </footer>
-
-    <script src="/js/jquery-3.2.1.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-</body>
+        <!-- Scripts -->
+        <% include partials/scripts.ejs %>
+    </body>
 
 </html>
