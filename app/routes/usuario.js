@@ -49,11 +49,17 @@ module.exports = function (app) {
      * profile
      */
     app.get('/profile/perfil', checkAuthentication, function (req, res) {
-        res.render('aluno/perfil/perfil', { user: req.user });
+        res.render('aluno/perfil/perfil', { 
+            user: req.user,
+            page_name: req.path
+        });
     });
 
     app.get('/profile/turmas', checkAuthentication, function (req, res) {
-        res.render('aluno/perfil/turmas', { user: req.user });
+        res.render('aluno/perfil/turmas', { 
+            user: req.user,
+            page_name: req.path
+         });
     });
 
 }
