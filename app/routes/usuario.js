@@ -1,26 +1,74 @@
-module.exports = function(app){
-    app.get('/usuario/cadastro', function(request, response){
-        var conexaoDb = app.infra.dbConnection();
-        var instituicaoDAO = new app.infra.InstituicaoDAO(conexaoDb);
+var bcrypt = require('bcrypt-nodejs');
 
-        instituicaoDAO.lista(function(exception, resultado) {
+module.exports = function (app) {
+    var passport = app.get('passport');
 
-            response.render('usuario/cadastroUsuario', {listaDeInstituicao: resultado});
+    /**
+     * Cadastro
+     */
+    app.get('/signup/aluno', function (req, res) {
+        var conexaoDb = app.infra.banco.dbConnection();
+        var instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
+
+        instituicaoDAO.lista(function (exception, resultado) {
+            res.render('aluno/signup', { listaDeInstituicao: resultado });
+        });
+
+        conexaoDb.end();
+    });
+
+    app.post('/signup', function (req, res) {
+        var usuario = req.body;
+
+        // usuario.senha = bcrypt.hashSync(usuario.senha, null, null);
+
+        var conexaoDb = app.infra.banco.dbConnection();
+        var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
+
+        usuarioDAO.salvar(usuario, function (erro, resultado) {
+            res.redirect('/login/aluno');
         });
         conexaoDb.end();
     });
 
-    app.post('/usuario', function(request, response){
-        var usuario = request.body;
 
-        var conexaoDb = app.infra.dbConnection();
-        var usuarioDAO = new app.infra.usuarioDAO(conexaoDb);
-
-        usuarioDAO.salva(usuario, function(erro, resultado){
-            // console.log(erro);
-            // console.log(resultado);
-            response.redirect('/usuario/cadastro');
-        });
-        conexaoDb.end();
+    /**
+     * Login 
+     */
+    app.get('/login/aluno', function (req, res) {
+        res.render('aluno/login');
     });
+
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect: '/profile/perfil',
+        failureRedirect: '/login/aluno',
+    }));
+
+
+    /**
+     * profile
+     */
+    app.get('/profile/perfil', checkAuthentication, function (req, res) {
+        res.render('aluno/perfil/perfil', { 
+            user: req.user,
+            page_name: req.path
+        });
+    });
+
+    app.get('/profile/turmas', checkAuthentication, function (req, res) {
+        res.render('aluno/perfil/turmas', { 
+            user: req.user,
+            page_name: req.path
+         });
+    });
+
+}
+
+function checkAuthentication(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    } else {
+        res.redirect('/');
+    }
+
 }

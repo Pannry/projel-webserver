@@ -1,45 +1,55 @@
-.diniz{
-    border: 1px solid red;
-    background-color: yellow;
-}  
-.jumbotron{
-    background-color: #bbb;
-    color: #333;
+body {
+    padding-top: 3.5rem;
+}
+  
+  /* Typography */ 
+h1 {
+    margin-bottom: 20px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #eee;
+}
+
+
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: 1px solid #eee;
+}
+.sidebar {
+    padding-left: 0;
+    padding-right: 0;
+}
+  
+.sidebar .nav {
+    margin-bottom: 20px;
+}
+  
+.sidebar .nav-item {
+    width: 100%;
+}
+  
+.sidebar .nav-item + .nav-item {
+    margin-left: 0;
+}
+  
+.sidebar .nav-link {
     border-radius: 0;
 }
-.bg-gray{
-    background-color: #f6f6f6;
-}
-.container-fluid{
-    padding: 60px 50px;
-}
-.text-edit{
-    text-align: justify;
-    margin: 25px 0;
-}
-.image-edit{
-    text-align: center;
-    margin: 25px 0;
-}
 
-.navbar {
-    margin-bottom: 0;
-    background-color: #bbb;
-    z-index: 9999;
-    border: 0;
-    font-size: 12px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 4px;
-    border-radius: 0;
+  /* Placeholders */
+.placeholders {
+    padding-bottom: 1rem;
 }
-
-.navbar-nav li a:hover, .navbar-nav li.active a {
-    padding-left: 10px;
-    color: black !important;
-    background-color: #fff !important;
-}
-
-.navbar-default .navbar-toggle {
-    border-color: transparent;
-    color: #fff !important;
+  
+.placeholder img {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 }

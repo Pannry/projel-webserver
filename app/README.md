@@ -1,3 +1,0 @@
-# app
-
-Arquivos da aplicação

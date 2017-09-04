@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Signup - projel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Nav dashboard -->
+        <% include ../partials/navbar-dashboard.ejs %>
+
+        <!-- apresentação  -->
+        <div class="row align-items-end" style="height: 150px">
+            <div class="offset-md-3 col-md-6">
+                <h2>Cadastro</h2>
+            </div>
+        </div>
+
+        <!-- Formulario de cadastro  -->
+        <form class="" action="/signup" method="post">
+            <br>
+            <div class="row">
+                <div class="offset-md-3 col-md-6 col-sm-12">
+                    <label for="nome" class="font-weight-bold">Nome Completo:</label>
+                    <input type="text" name="nome" value="" class="form-control" placeholder="Insira o seu nome.">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-3 col-md-6 col-sm-12">
+                    <label for="email" class="font-weight-bold">E-mail:</label>
+                    <input type="text" name="email" value="" class="form-control" placeholder="exemplo@exemplo.com">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-3 col-md-6 col-sm-12">
+                    <label for="senha" class="font-weight-bold">Senha:</label>
+                    <input type="password" name="senha" value="" class="form-control" placeholder="Insira a sua senha.">
+                </div>
+            </div>
+            <br><br>
+            <!-- Campo instituiao -->
+            <div class="row">
+                <div class="offset-md-3 col-md-6 col-sm-12">
+                    <label for="instituicao_id" class="font-weight-bold">Instituição que você pertence</label>
+                    <select class="form-control" name="instituicao_id">
+                        <% for (var i = 0; i < listaDeInstituicao.length; i++){%>
+                        <option value="<%=listaDeInstituicao[i].id%>"><%=listaDeInstituicao[i].nome%></option>
+                        <%}%>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="offset-md-3 col-md-6">
+                    <input type="submit" value="Cadastrar" class="btn btn-warning btn-lg">
+                </div>
+            </div>
+
+        </form>
+        <label for="" class="offset-md-3 col-md-6">
+            <hr>
+            Já possui conta no site? <a href="/login/aluno">Entrar</a><br>
+            Ou volte para <a href="/">home</a>.
+            <hr>
+        </label>
+
+        <!-- footer -->
+        <div class="row align-items-end">
+            <footer class="offset-md-3 col-md-6 footer" style="height: 150px">
+                <p>Projel - 2017</p>
+            </footer>
+        </div>
+
+    </div>
+
+
+    <script src="assets/js/jquery-3.2.1.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+</body>
+
+</html>
