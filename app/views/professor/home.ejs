@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <% include ../partials/head.ejs %>
+    </head>
+
+    <body>
+
+        <!-- NAVBAR -->
+        <% include ../partials/navbar-dashboard.ejs %>
+
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Projel</h1>
+                <p class="lead text-muted"> Área do professor!</p>
+                <p>
+                <a href="/professor/signup" class="btn btn-primary">Criar Conta</a>
+                <a href="/professor/login" class="btn btn-secondary">Entrar</a>
+                </p>
+            </div>
+        </section>
+        <div class="container">
+            <!-- FOOTER -->
+            <footer class="text-muted">
+                <br><br>
+                <p>Projel - 2017</p>
+                <br><br>
+            </footer>
+            
+        </div>
+
+
+        <!-- Scripts -->
+        <% include ../partials/scripts.ejs %>
+    </body>
+
+</html>

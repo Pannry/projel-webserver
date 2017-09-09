@@ -1,0 +1,30 @@
+Mudanças:
+    - criado a rota professor
+
+    - renomeado a rota 'usuario' para 'aluno'
+
+    - Diferenciado o 'passport-strategy', usando:
+        'local-login-professor' para o professor
+        'local-login-aluno' para o aluno
+
+    - att o sqlScript.sql para adicionar senha na tabela professor
+
+    - Adicionado o operações mysql em usuarioDAO para o professor
+
+    - Adicionado uma pagina 'notas' para o aluno
+    - Adicionado uma pagina 'criar turma' para o professor
+
+    - apagado o index, agora está dentro de aluno
+
+    - editado/criado o ejs para o professor em geral
+
+
+Problemas:
+    - A autenticação diferencia uma conta professor e aluno, mas 
+    ambos tem acesso a duas tipos de conta
+
+    Ex: se um aluno digitar '/professor/profile/perfil' ele entra em professor 
+
+    - Criar botao de Logout
+
+    - criar conta do professor nao está funcionando

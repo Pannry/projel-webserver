@@ -17,20 +17,21 @@ create table aluno(
     id int auto_increment primary key,
     nome varchar(32) NOT NULL,
     email varchar(32) NOT NULL,
-    senha varchar(60) NOT NULL,
+    senha varchar(64) NOT NULL,
     instituicao_id int,
     foreign key (instituicao_id) references instituicao(id)
 );
 -- Tabela professor
 create table professor(
     id int auto_increment,
-    nome varchar(32),
+    nome varchar(32) NOT NULL,
     cpf int,
     endereco varchar(64),
     cep int,
     numero int,
     telefone int,
-    email varchar(32),
+    email varchar(32) NOT NULL,
+    senha varchar(64) NOT NULL,
     primary key (id)
 );
 -- Tabela disciplina

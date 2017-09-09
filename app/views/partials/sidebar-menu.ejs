@@ -1,10 +1,31 @@
 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
     <ul class="nav nav-pills flex-column">
-        <li class="nav-item"> 
-            <a <% if (page_name === "/profile/perfil") { %>class="nav-link active" <% } %> class="nav-link" href="/profile/perfil">Perfil</a> 
-        </li>
-        <li class="nav-item"> 
-            <a <% if (page_name === "/profile/turmas") { %>class="nav-link active" <% } %> class="nav-link" href="/profile/turmas">Turmas</a> 
-        </li>
+
+
+        <% if (isProf === false) { %>
+            <li class="nav-item"> 
+                <a <% if (page_name === "/profile/perfil") { %>class="nav-link active" <% } %> class="nav-link" href="/profile/perfil">Perfil</a> 
+            </li>
+            <li class="nav-item"> 
+                <a <% if (page_name === "/profile/turmas") { %>class="nav-link active" <% } %> class="nav-link" href="/profile/turmas">Turmas</a> 
+            </li>
+            <li class="nav-item"> 
+                <a <% if (page_name === "/profile/notas") { %>class="nav-link active" <% } %> class="nav-link" href="/profile/notas">Notas</a> 
+            </li>
+        <% } %>
+
+        <% if (isProf === true) { %>
+            <li class="nav-item"> 
+                <a <% if (page_name === "/professor/profile/perfil") { %>class="nav-link active" <% } %> class="nav-link" href="/professor/profile/perfil">Perfil</a> 
+            </li>
+            <li class="nav-item"> 
+                <a <% if (page_name === "/professor/profile/turmas") { %>class="nav-link active" <% } %> class="nav-link" href="/professor/profile/turmas">Turmas</a> 
+            </li>
+            <li class="nav-item"> 
+                <a <% if (page_name === "/professor/profile/turmas/criar") { %>class="nav-link active" <% } %> class="nav-link" href="/professor/profile/turmas/criar">Criar Turma</a> 
+            </li>
+        <% } %>
+        
+
     </ul>
 </nav>

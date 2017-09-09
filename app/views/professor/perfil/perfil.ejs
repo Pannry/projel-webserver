@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <% include ../../partials/head.ejs%>
+    </head>
+
+    <body>
+
+        <!-- Nav dashboard -->
+        <% include ../../partials/navbar-dashboard.ejs %>
+
+        <!-- Sidebar Menu -->
+        <% include ../../partials/sidebar-menu.ejs %>
+
+
+        <!-- Content -->
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+            <h1>Perfil</h1>
+
+            <div class="row text-center placeholders">
+                <div class="offset-md-3 col-md-6 col-sm-3 placeholder">
+                    <label for="nome" class="col-sm-2 col-form-label">Nome do prof:</label>
+                    <input type="text" readonly class="form-control-plaintext" id="nome" value="<%= user.nome %>">
+                </div>
+            </div>
+            <div class="row text-center placeholders">
+                <div class="offset-md-3 col-md-6 col-sm-3 placeholder">
+                    <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                    <input type="text" readonly class="form-control-plaintext" id="email" value="<%= user.email %>">
+                </div>
+            </div>
+
+        </main>
+
+        <% include ../../partials/scripts.ejs /%>
+    </body>
+
+</html>
