@@ -32,6 +32,7 @@ module.exports = function (app) {
 
     app.post('/signup/professor', function (req, res) {
         var usuario = req.body;
+        console.log( usuario );
 
         // usuario.senha = bcrypt.hashSync(usuario.senha, null, null);
 
@@ -39,6 +40,7 @@ module.exports = function (app) {
         var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
         usuarioDAO.salvarProfessor(usuario, function (erro, resultado) {
+            console.log( erro );
             res.redirect('/professor/login');
         });
         conexaoDb.end();
