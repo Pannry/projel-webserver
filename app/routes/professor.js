@@ -59,6 +59,14 @@ module.exports = function (app) {
     }));
 
     /**
+     * Logout
+     */
+    app.get('/logout', function (req, res) {
+        req.logout();
+        res.redirect('/');
+    });
+    
+    /**
      * profile
      */
     app.get('/professor/profile/perfil', checkAuth, function (req, res) {
