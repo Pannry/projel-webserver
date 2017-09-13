@@ -26,7 +26,7 @@ module.exports = function (app) {
         conexaoDb.end();
     });
 
-    app.post('/signup/aluno', function (req, res) {
+    app.post('/aluno/signup', function (req, res) {
         var usuario = req.body;
 
         // usuario.senha = bcrypt.hashSync(usuario.senha, null, null);
@@ -50,7 +50,7 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/login/aluno', passport.authenticate('local-login-aluno', {
+    app.post('/aluno/login', passport.authenticate('local-login-aluno', {
         successRedirect: '/profile/perfil',
         failureRedirect: '/aluno/login',
     }));

@@ -30,7 +30,7 @@ module.exports = function (app) {
         conexaoDb.end();
     })
 
-    app.post('/signup/professor', function (req, res) {
+    app.post('/professor/signup', function (req, res) {
         var usuario = req.body;
 
         // usuario.senha = bcrypt.hashSync(usuario.senha, null, null);
