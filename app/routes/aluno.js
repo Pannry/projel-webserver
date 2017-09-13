@@ -3,7 +3,7 @@ var bcrypt = require('bcrypt-nodejs');
 module.exports = function (app) {
     var passport = app.get('passport');
 
-    app.get('/', function(req, res){
+    app.get('/', function (req, res) {
         res.render('index', {
             page_name: req.path
         });
@@ -17,7 +17,7 @@ module.exports = function (app) {
         var instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
 
         instituicaoDAO.lista(function (exception, resultado) {
-            res.render('aluno/signup', { 
+            res.render('aluno/signup', {
                 listaDeInstituicao: resultado,
                 page_name: req.path
             });
@@ -60,7 +60,8 @@ module.exports = function (app) {
      * profile
      */
     app.get('/profile/perfil', checkAuthentication, function (req, res) {
-        res.render('aluno/perfil/perfil', { 
+
+        res.render('aluno/perfil/perfil', {
             user: req.user,
             page_name: req.path,
             isProf: false
@@ -68,19 +69,19 @@ module.exports = function (app) {
     });
 
     app.get('/profile/turmas', checkAuthentication, function (req, res) {
-        res.render('aluno/perfil/turmas', { 
+        res.render('aluno/perfil/turmas', {
             user: req.user,
             page_name: req.path,
             isProf: false
-         });
+        });
     });
 
     app.get('/profile/notas', checkAuthentication, function (req, res) {
-        res.render('aluno/perfil/notas', { 
+        res.render('aluno/perfil/notas', {
             user: req.user,
             page_name: req.path,
             isProf: false
-         });
+        });
     });
 
 }

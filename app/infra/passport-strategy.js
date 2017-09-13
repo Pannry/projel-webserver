@@ -6,23 +6,29 @@ module.exports = function (app) {
     var passport = app.get('passport');
 
     passport.serializeUser(function (user, done) {
-        done(null, user.id);
+        var chave = {
+            id: user.id,
+            tipo: user.tipo
+        }
+        done(null, chave);
     });
 
-    passport.deserializeUser(function (id, done) {
+    passport.deserializeUser(function (usuario, done) {
+
         var conexaoDb = app.infra.banco.dbConnection();
         var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
-        if ( app.get('isAluno') === 'true' ) {
-            usuarioDAO.buscarIdAluno(id, function (err, usuario) {
+        if (usuario.tipo === 'aluno') {
+            usuarioDAO.buscarIdAluno(usuario.id, function (err, usuario) {
+                usuario[0].tipo = 'aluno';
                 done(err, usuario[0]);
             });
-        } else if(  app.get('isProfessor') === 'true' ) {     
-            usuarioDAO.buscarIdProfessor(id, function (err, usuario) {
+        } else if (usuario.tipo === 'professor') {
+            usuarioDAO.buscarIdProfessor(usuario.id, function (err, usuario) {
+                usuario[0].tipo = 'professor';
                 done(err, usuario[0]);
             });
         }
-
 
         conexaoDb.end();
     });
@@ -35,9 +41,6 @@ module.exports = function (app) {
         passwordField: 'senha',
         passReqToCallback: true
     }, function (req, username, password, done) {
-
-        app.set('isProfessor', 'false');
-        app.set('isAluno', 'true');
 
         var conexaoDb = app.infra.banco.dbConnection();
         var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
@@ -53,7 +56,7 @@ module.exports = function (app) {
                     return done(err);
                 if (!usuario)
                     return done(null, false, { message: 'Usuario não encontrado' });
-
+                usuario[0].tipo = "aluno";
                 return done(null, usuario[0]);
             }
         );
@@ -70,9 +73,6 @@ module.exports = function (app) {
         passReqToCallback: true
     }, function (req, username, password, done) {
 
-        app.set('isProfessor', 'true');
-        app.set('isAluno', 'false');
-
         var conexaoDb = app.infra.banco.dbConnection();
         var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
         // password = bcrypt.hashSync(password, null, null);
@@ -88,6 +88,7 @@ module.exports = function (app) {
                 if (!usuario)
                     return done(null, false, { message: 'Usuario não encontrado' });
 
+                usuario[0].tipo = 'professor';
                 return done(null, usuario[0]);
             }
         );
