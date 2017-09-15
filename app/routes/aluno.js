@@ -60,12 +60,17 @@ module.exports = function (app) {
      * profile
      */
     app.get('/profile/perfil', checkAuthentication, function (req, res) {
+        // if ( req.user.tipo == "aluno") {
 
-        res.render('aluno/perfil/perfil', {
-            user: req.user,
-            page_name: req.path,
-            isProf: false
-        });
+            res.render('aluno/perfil/perfil', {
+                user: req.user,
+                page_name: req.path,
+                isProf: false,
+        //        accountType: req.user.tipo
+            });
+        // } else {
+        //    res.status(404).render("/404.ejs");
+        // }
     });
 
     app.get('/profile/turmas', checkAuthentication, function (req, res) {
