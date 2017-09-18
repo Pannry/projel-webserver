@@ -51,8 +51,8 @@ module.exports = function (app) {
         res.render('professor/login');
     })
 
-    app.post('/login/professor', passport.authenticate('local-login-professor', {
-        successRedirect: '/professor/profile/perfil',
+    app.post('/professor/login', passport.authenticate('local-login-professor', {
+        successRedirect: '/professor/profile',
         failureRedirect: '/professor/login',
     }));
 
@@ -63,31 +63,44 @@ module.exports = function (app) {
         req.logout();
         res.redirect('/');
     });
-    
+
     /**
      * profile
      */
-    app.get('/professor/profile/perfil', checkAuth, function (req, res) {
-        res.render('professor/perfil/perfil', {
-            user: req.user,
-            page_name: req.path,
-            isProf: true
-        });
+    app.get('/professor/profile', checkAuth, function (req, res) {
+        if (req.user.tipo == 'professor') {
+            res.render('professor/perfil/perfil', {
+                user: req.user,
+                page_name: req.path,
+                accountType: req.user.tipo
+            });
+        } else {
+            res.status(404).send("professor: 404");
+        }
     });
 
     app.get('/professor/profile/turmas', checkAuth, function (req, res) {
-        res.render('professor/perfil/turmas', {
-            user: req.user,
-            page_name: req.path,
-            isProf: true
-        });
+        if (req.user.tipo == 'professor') {
+            res.render('professor/perfil/turmas', {
+                user: req.user,
+                page_name: req.path,
+                accountType: req.user.tipo
+            });
+
+        } else {
+            res.status(404).send("professor: 404");
+        }
     });
     app.get('/professor/profile/turmas/criar', checkAuth, function (req, res) {
-        res.render('professor/perfil/criarTurma', {
-            user: req.user,
-            page_name: req.path,
-            isProf: true
-        });
+        if (req.user.tipo == 'professor') {
+            res.render('professor/perfil/criarTurma', {
+                user: req.user,
+                page_name: req.path,
+                accountType: req.user.tipo
+            });
+        } else {
+            res.status(404).send("Professor: 404");
+        }
     });
 
 }

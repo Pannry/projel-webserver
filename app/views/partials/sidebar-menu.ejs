@@ -2,9 +2,10 @@
     <ul class="nav nav-pills flex-column">
 
 
-        <% if (isProf === false) { %>
+        <% if (accountType === "aluno" ) { %>
+            
             <li class="nav-item"> 
-                <a <% if (page_name === "/profile/perfil") { %>class="nav-link active" <% } %> class="nav-link" href="/profile/perfil">Perfil</a> 
+                <a <% if (page_name === "/profile") { %>class="nav-link active" <% } %> class="nav-link" href="/profile">Perfil</a> 
             </li>
             <li class="nav-item"> 
                 <a <% if (page_name === "/profile/turmas") { %>class="nav-link active" <% } %> class="nav-link" href="/profile/turmas">Turmas</a> 
@@ -12,11 +13,11 @@
             <li class="nav-item"> 
                 <a <% if (page_name === "/profile/notas") { %>class="nav-link active" <% } %> class="nav-link" href="/profile/notas">Notas</a> 
             </li>
-        <% } %>
 
-        <% if (isProf === true) { %>
+        <% } else if (accountType === "professor") { %>
+            
             <li class="nav-item"> 
-                <a <% if (page_name === "/professor/profile/perfil") { %>class="nav-link active" <% } %> class="nav-link" href="/professor/profile/perfil">Perfil</a> 
+                <a <% if (page_name === "/professor/profile") { %>class="nav-link active" <% } %> class="nav-link" href="/professor/profile">Perfil</a> 
             </li>
             <li class="nav-item"> 
                 <a <% if (page_name === "/professor/profile/turmas") { %>class="nav-link active" <% } %> class="nav-link" href="/professor/profile/turmas">Turmas</a> 
@@ -24,6 +25,7 @@
             <li class="nav-item"> 
                 <a <% if (page_name === "/professor/profile/turmas/criar") { %>class="nav-link active" <% } %> class="nav-link" href="/professor/profile/turmas/criar">Criar Turma</a> 
             </li>
+
         <% } %>
         
 

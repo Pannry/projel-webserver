@@ -51,42 +51,49 @@ module.exports = function (app) {
     });
 
     app.post('/aluno/login', passport.authenticate('local-login-aluno', {
-        successRedirect: '/profile/perfil',
+        successRedirect: '/profile',
         failureRedirect: '/aluno/login',
     }));
-
 
     /**
      * profile
      */
-    app.get('/profile/perfil', checkAuthentication, function (req, res) {
-        // if ( req.user.tipo == "aluno") {
+    app.get('/profile', checkAuthentication, function (req, res) {
+        if (req.user.tipo == "aluno") {
 
             res.render('aluno/perfil/perfil', {
                 user: req.user,
                 page_name: req.path,
                 isProf: false,
-        //        accountType: req.user.tipo
+                accountType: req.user.tipo
             });
-        // } else {
-        //    res.status(404).render("/404.ejs");
-        // }
+        } else {
+            res.status(404).send("aluno: 404");
+        }
     });
 
     app.get('/profile/turmas', checkAuthentication, function (req, res) {
-        res.render('aluno/perfil/turmas', {
-            user: req.user,
-            page_name: req.path,
-            isProf: false
-        });
+        if (req.user.tipo == 'aluno') {
+            res.render('aluno/perfil/turmas', {
+                user: req.user,
+                page_name: req.path,
+                accountType: req.user.tipo
+            });
+        } else {
+            res.status(404).send("aluno: 404");
+        }
     });
 
     app.get('/profile/notas', checkAuthentication, function (req, res) {
-        res.render('aluno/perfil/notas', {
-            user: req.user,
-            page_name: req.path,
-            isProf: false
-        });
+        if (req.user.tipo == 'aluno') {
+            res.render('aluno/perfil/notas', {
+                user: req.user,
+                page_name: req.path,
+                accountType: req.user.tipo
+            });
+        } else {
+            res.status(404).send("aluno: 404");
+        }
     });
 
 }

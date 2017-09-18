@@ -8,7 +8,17 @@
     <div class="navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link"href="/profile/perfil">Home</a>
+    
+                <% if( accountType == "professor" ) %>
+
+                    <a class="nav-link"href="/professor/profile">Home</a>
+                
+                <% } else if (accountType == "aluno") { %>
+                
+                    <a class="nav-link" href="/profile">Home</a>
+                
+                <% } %>
+    
             </li>
         </ul>
     </div>
