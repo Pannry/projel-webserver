@@ -68,7 +68,6 @@ module.exports = function (app) {
             res.render('aluno/perfil/perfil', {
                 user: req.user,
                 page_name: req.path,
-                isProf: false,
                 accountType: req.user.tipo
             });
         }
