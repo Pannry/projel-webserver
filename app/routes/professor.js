@@ -8,9 +8,16 @@ module.exports = function (app) {
     var passport = app.get('passport');
 
     app.get('/professor', function (req, res) {
-        res.render('professor/home', {
-            page_name: req.path
-        });
+        if (req.user == undefined) {
+            res.render('professor/home', {
+                accountType: ""
+            });
+
+        } else {
+            res.render('professor/home', {
+                accountType: req.user.tipo
+            });
+        }
     })
 
     /**
@@ -22,8 +29,7 @@ module.exports = function (app) {
 
         instituicaoDAO.lista(function (exception, resultado) {
             res.render('professor/signup', {
-                listaDeInstituicao: resultado,
-                page_name: req.path
+                listaDeInstituicao: resultado
             });
         });
 
@@ -74,8 +80,6 @@ module.exports = function (app) {
                 page_name: req.path,
                 accountType: req.user.tipo
             });
-        } else {
-            res.status(404).send("professor: 404");
         }
     });
 
@@ -87,8 +91,6 @@ module.exports = function (app) {
                 accountType: req.user.tipo
             });
 
-        } else {
-            res.status(404).send("professor: 404");
         }
     });
     app.get('/professor/profile/turmas/criar', checkAuth, function (req, res) {
@@ -98,8 +100,6 @@ module.exports = function (app) {
                 page_name: req.path,
                 accountType: req.user.tipo
             });
-        } else {
-            res.status(404).send("Professor: 404");
         }
     });
 

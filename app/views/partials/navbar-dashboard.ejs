@@ -9,13 +9,15 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
     
-                <% if( accountType == "professor" ) %>
+                <% if( accountType == "professor" ) { %>
 
                     <a class="nav-link"href="/professor/profile">Home</a>
                 
                 <% } else if (accountType == "aluno") { %>
                 
                     <a class="nav-link" href="/profile">Home</a>
+                
+                <% } else if (accountType == "") { %>
                 
                 <% } %>
     

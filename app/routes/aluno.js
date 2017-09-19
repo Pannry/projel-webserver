@@ -4,9 +4,16 @@ module.exports = function (app) {
     var passport = app.get('passport');
 
     app.get('/', function (req, res) {
-        res.render('index', {
-            page_name: req.path
-        });
+        if (req.user == undefined) {
+            res.render('index', {
+                accountType: ""
+            });
+
+        } else {
+            res.render('index', {
+                accountType: req.user.tipo
+            });
+        }
     });
 
     /**
@@ -18,8 +25,7 @@ module.exports = function (app) {
 
         instituicaoDAO.lista(function (exception, resultado) {
             res.render('aluno/signup', {
-                listaDeInstituicao: resultado,
-                page_name: req.path
+                listaDeInstituicao: resultado
             });
         });
 
@@ -45,9 +51,7 @@ module.exports = function (app) {
      * Login 
      */
     app.get('/aluno/login', function (req, res) {
-        res.render('aluno/login', {
-            page_name: req.path
-        });
+        res.render('aluno/login');
     });
 
     app.post('/aluno/login', passport.authenticate('local-login-aluno', {
@@ -67,8 +71,6 @@ module.exports = function (app) {
                 isProf: false,
                 accountType: req.user.tipo
             });
-        } else {
-            res.status(404).send("aluno: 404");
         }
     });
 
@@ -79,8 +81,6 @@ module.exports = function (app) {
                 page_name: req.path,
                 accountType: req.user.tipo
             });
-        } else {
-            res.status(404).send("aluno: 404");
         }
     });
 
@@ -91,8 +91,6 @@ module.exports = function (app) {
                 page_name: req.path,
                 accountType: req.user.tipo
             });
-        } else {
-            res.status(404).send("aluno: 404");
         }
     });
 
