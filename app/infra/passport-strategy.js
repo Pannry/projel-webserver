@@ -2,10 +2,10 @@ var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt-nodejs');
 
 
-module.exports = function (app) {
+module.exports = function(app) {
     var passport = app.get('passport');
 
-    passport.serializeUser(function (user, done) {
+    passport.serializeUser(function(user, done) {
         var chave = {
             id: user.id,
             tipo: user.tipo
@@ -13,18 +13,18 @@ module.exports = function (app) {
         done(null, chave);
     });
 
-    passport.deserializeUser(function (usuario, done) {
+    passport.deserializeUser(function(usuario, done) {
 
         var conexaoDb = app.infra.banco.dbConnection();
         var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
         if (usuario.tipo === 'aluno') {
-            usuarioDAO.buscarIdAluno(usuario.id, function (err, usuario) {
+            usuarioDAO.buscarIdAluno(usuario.id, function(err, usuario) {
                 usuario[0].tipo = 'aluno';
                 done(err, usuario[0]);
             });
         } else if (usuario.tipo === 'professor') {
-            usuarioDAO.buscarIdProfessor(usuario.id, function (err, usuario) {
+            usuarioDAO.buscarIdProfessor(usuario.id, function(err, usuario) {
                 usuario[0].tipo = 'professor';
                 done(err, usuario[0]);
             });
@@ -40,7 +40,7 @@ module.exports = function (app) {
         usernameField: 'email',
         passwordField: 'senha',
         passReqToCallback: true
-    }, function (req, username, password, done) {
+    }, function(req, username, password, done) {
 
         var conexaoDb = app.infra.banco.dbConnection();
         var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
@@ -51,18 +51,17 @@ module.exports = function (app) {
         };
 
         usuarioDAO.buscarAluno(usuario,
-            function (err, usuario) {
+            function(err, usuario) {
                 if (err)
                     return done(err);
-                if (!usuario)
+                if (!usuario.length)
                     return done(null, false, { message: 'Usuario não encontrado' });
                 usuario[0].tipo = "aluno";
                 return done(null, usuario[0]);
             }
         );
         conexaoDb.end();
-    }
-    ));
+    }));
 
     /**
      * Login do professor
@@ -71,7 +70,7 @@ module.exports = function (app) {
         usernameField: 'email',
         passwordField: 'senha',
         passReqToCallback: true
-    }, function (req, username, password, done) {
+    }, function(req, username, password, done) {
 
         var conexaoDb = app.infra.banco.dbConnection();
         var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
@@ -82,10 +81,10 @@ module.exports = function (app) {
         };
 
         usuarioDAO.buscarProfessor(usuario,
-            function (err, usuario) {
+            function(err, usuario) {
                 if (err)
                     return done(err);
-                if (!usuario)
+                if (!usuario.length)
                     return done(null, false, { message: 'Usuario não encontrado' });
 
                 usuario[0].tipo = 'professor';
@@ -93,8 +92,7 @@ module.exports = function (app) {
             }
         );
         conexaoDb.end();
-    }
-    ));
+    }));
 }
 
 // sites relacionados com multiplas 'local-strategy' 
