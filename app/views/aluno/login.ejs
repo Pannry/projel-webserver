@@ -17,42 +17,48 @@
             </div>
         </div>
 
-        <!-- Formulario de cadastro  -->
-        <form class="" action="/aluno/login" method="post">
-            <br>
-            <div class="row">
-                <div class="offset-md-3 col-md-6 col-sm-12">
-                    <label for="email" class="font-weight-bold">E-mail:</label>
-                    <input type="text" name="email" value="" class="form-control" placeholder="exemplo@exemplo.com">
-                </div>
+        <% if (message.length > 0) { %>
+            <div class="alert alert-danger">
+                <%= message %>
             </div>
-            <div class="row">
-                <div class="offset-md-3 col-md-6 col-sm-12">
-                    <label for="senha" class="font-weight-bold">Senha:</label>
-                    <input type="password" name="senha" value="" class="form-control" placeholder="Insira a sua senha.">
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="offset-md-3 col-md-6">
-                    <input type="submit" value="Entrar" class="btn btn-warning btn-lg">
-                </div>
-            </div>
-        </form>
-        <label for="" class="offset-md-3 col-md-6">
+            <% } %>
+
+                <!-- Formulario de cadastro  -->
+                <form class="" action="/aluno/login" method="post">
+                    <br>
+                    <div class="row">
+                        <div class="offset-md-3 col-md-6 col-sm-12">
+                            <label for="email" class="font-weight-bold">E-mail:</label>
+                            <input type="text" name="email" value="" class="form-control" placeholder="exemplo@exemplo.com">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-3 col-md-6 col-sm-12">
+                            <label for="senha" class="font-weight-bold">Senha:</label>
+                            <input type="password" name="senha" value="" class="form-control" placeholder="Insira a sua senha.">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="offset-md-3 col-md-6">
+                            <input type="submit" value="Entrar" class="btn btn-warning btn-lg">
+                        </div>
+                    </div>
+                </form>
+                <label for="" class="offset-md-3 col-md-6">
             <hr>
             Ainda não possui conta no site? <a href="/aluno/signup">cadastrar-se</a><br>
             Ou volte para <a href="/">home</a>.
             <hr>
         </label>
 
-        <!-- footer -->
-        <!-- footer -->
-        <div class="row align-items-end">
-                <footer class="offset-md-3 col-md-6 footer" style="height: 150px">
-                    <p>Projel - 2017</p>
-                </footer>
-            </div>
+                <!-- footer -->
+                <!-- footer -->
+                <div class="row align-items-end">
+                    <footer class="offset-md-3 col-md-6 footer" style="height: 150px">
+                        <p>Projel - 2017</p>
+                    </footer>
+                </div>
     </div>
 
 

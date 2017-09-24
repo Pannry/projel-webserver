@@ -4,10 +4,10 @@
 
 var bcrypt = require('bcrypt-nodejs');
 
-module.exports = function (app) {
+module.exports = function(app) {
     var passport = app.get('passport');
 
-    app.get('/professor', function (req, res) {
+    app.get('/professor', function(req, res) {
         if (req.user == undefined) {
             res.render('professor/home', {
                 accountType: ""
@@ -23,11 +23,11 @@ module.exports = function (app) {
     /**
      * Cadastro
      */
-    app.get('/professor/signup', function (req, res) {
+    app.get('/professor/signup', function(req, res) {
         var conexaoDb = app.infra.banco.dbConnection();
         var instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
 
-        instituicaoDAO.lista(function (exception, resultado) {
+        instituicaoDAO.lista(function(exception, resultado) {
             res.render('professor/signup', {
                 listaDeInstituicao: resultado
             });
@@ -36,7 +36,7 @@ module.exports = function (app) {
         conexaoDb.end();
     })
 
-    app.post('/professor/signup', function (req, res) {
+    app.post('/professor/signup', function(req, res) {
         var usuario = req.body;
 
         // usuario.senha = bcrypt.hashSync(usuario.senha, null, null);
@@ -44,7 +44,7 @@ module.exports = function (app) {
         var conexaoDb = app.infra.banco.dbConnection();
         var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
-        usuarioDAO.salvarProfessor(usuario, function (erro, resultado) {
+        usuarioDAO.salvarProfessor(usuario, function(erro, resultado) {
             res.redirect('/professor/login');
         });
         conexaoDb.end();
@@ -53,19 +53,20 @@ module.exports = function (app) {
     /**
      * Login
      */
-    app.get('/professor/login', function (req, res) {
-        res.render('professor/login');
-    })
+    app.get('/professor/login', function(req, res) {
+        res.render('professor/login', { message: req.flash('loginMessage') });
+    });
 
     app.post('/professor/login', passport.authenticate('local-login-professor', {
         successRedirect: '/professor/profile',
         failureRedirect: '/professor/login',
+        failureFlash: true
     }));
 
     /**
      * Logout
      */
-    app.get('/logout', function (req, res) {
+    app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
     });
@@ -73,7 +74,7 @@ module.exports = function (app) {
     /**
      * profile
      */
-    app.get('/professor/profile', checkAuth, function (req, res) {
+    app.get('/professor/profile', checkAuth, function(req, res) {
         if (req.user.tipo == 'professor') {
             res.render('professor/perfil/perfil', {
                 user: req.user,
@@ -83,7 +84,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/professor/profile/turmas', checkAuth, function (req, res) {
+    app.get('/professor/profile/turmas', checkAuth, function(req, res) {
         if (req.user.tipo == 'professor') {
             res.render('professor/perfil/turmas', {
                 user: req.user,
@@ -93,7 +94,7 @@ module.exports = function (app) {
 
         }
     });
-    app.get('/professor/profile/turmas/criar', checkAuth, function (req, res) {
+    app.get('/professor/profile/turmas/criar', checkAuth, function(req, res) {
         if (req.user.tipo == 'professor') {
             res.render('professor/perfil/criarTurma', {
                 user: req.user,

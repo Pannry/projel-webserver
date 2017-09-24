@@ -1,9 +1,9 @@
 var bcrypt = require('bcrypt-nodejs');
 
-module.exports = function (app) {
+module.exports = function(app) {
     var passport = app.get('passport');
 
-    app.get('/', function (req, res) {
+    app.get('/', function(req, res) {
         if (req.user == undefined) {
             res.render('index', {
                 accountType: ""
@@ -19,11 +19,11 @@ module.exports = function (app) {
     /**
      * Cadastro
      */
-    app.get('/aluno/signup', function (req, res) {
+    app.get('/aluno/signup', function(req, res) {
         var conexaoDb = app.infra.banco.dbConnection();
         var instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
 
-        instituicaoDAO.lista(function (exception, resultado) {
+        instituicaoDAO.lista(function(exception, resultado) {
             res.render('aluno/signup', {
                 listaDeInstituicao: resultado
             });
@@ -32,7 +32,7 @@ module.exports = function (app) {
         conexaoDb.end();
     });
 
-    app.post('/aluno/signup', function (req, res) {
+    app.post('/aluno/signup', function(req, res) {
         var usuario = req.body;
 
         // usuario.senha = bcrypt.hashSync(usuario.senha, null, null);
@@ -40,7 +40,7 @@ module.exports = function (app) {
         var conexaoDb = app.infra.banco.dbConnection();
         var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
-        usuarioDAO.salvarAluno(usuario, function (erro, resultado) {
+        usuarioDAO.salvarAluno(usuario, function(erro, resultado) {
             res.redirect('/aluno/login');
         });
         conexaoDb.end();
@@ -50,19 +50,20 @@ module.exports = function (app) {
     /**
      * Login 
      */
-    app.get('/aluno/login', function (req, res) {
-        res.render('aluno/login');
+    app.get('/aluno/login', function(req, res) {
+        res.render('aluno/login', { message: req.flash('loginMessage') });
     });
 
     app.post('/aluno/login', passport.authenticate('local-login-aluno', {
         successRedirect: '/profile',
         failureRedirect: '/aluno/login',
+        failureFlash: true
     }));
 
     /**
      * profile
      */
-    app.get('/profile', checkAuthentication, function (req, res) {
+    app.get('/profile', checkAuthentication, function(req, res) {
         if (req.user.tipo == "aluno") {
 
             res.render('aluno/perfil/perfil', {
@@ -73,7 +74,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/profile/turmas', checkAuthentication, function (req, res) {
+    app.get('/profile/turmas', checkAuthentication, function(req, res) {
         if (req.user.tipo == 'aluno') {
             res.render('aluno/perfil/turmas', {
                 user: req.user,
@@ -83,7 +84,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/profile/notas', checkAuthentication, function (req, res) {
+    app.get('/profile/notas', checkAuthentication, function(req, res) {
         if (req.user.tipo == 'aluno') {
             res.render('aluno/perfil/notas', {
                 user: req.user,

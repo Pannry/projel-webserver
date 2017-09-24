@@ -55,7 +55,7 @@ module.exports = function(app) {
                 if (err)
                     return done(err);
                 if (!usuario.length)
-                    return done(null, false, { message: 'Usuario não encontrado' });
+                    return done(null, false, req.flash('loginMessage', 'Aluno não encontrado, tente novamente.'));
                 usuario[0].tipo = "aluno";
                 return done(null, usuario[0]);
             }
@@ -85,7 +85,7 @@ module.exports = function(app) {
                 if (err)
                     return done(err);
                 if (!usuario.length)
-                    return done(null, false, { message: 'Usuario não encontrado' });
+                    return done(null, false, req.flash('loginMessage', 'Professor não encontrado, tente novamente.'));
 
                 usuario[0].tipo = 'professor';
                 return done(null, usuario[0]);
