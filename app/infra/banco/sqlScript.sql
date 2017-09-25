@@ -36,39 +36,65 @@ create table professor(
     foreign key (instituicao_id) references instituicao(id),
     primary key (id)
 );
--- Tabela disciplina
-create table disciplina(
-    id int auto_increment,
+-- Tabela da sala
+create table sala(
+    id int,
     nome varchar(32),
-    primary key (id)
-);
--- Tabela turma
-create table turma(
-    id int auto_increment,
-    nome varchar(32),
+    id_professor int,
+    semestre varchar(32),
+    foreign key (id_professor) references professor(id),
     primary key (id)
 );
 -- Tabela exercícios
 create table exercicios(
     id int auto_increment,
-    titulo varchar(1000),
-    proposito varchar(100),
-    imagem varchar(32),
+    titulo varchar(100),
+    descrição varchar(1000),
+    foto varchar(32),
     primary key(id)
 );
--- Tabela prova
-create table prova(
+-- Tabela da lista de exercícios
+create table lista(
     id int auto_increment,
-    titulo varchar(1000),
-    proposito varchar(100),
-    imagem varchar(32),
+    nome varchar (32),
+    descricao varchar (300),
+    tempo datetime,
     primary key(id)
 );
--- Tabela semestre
-create table semestre(
-    id int auto_increment,
-    nome varchar(32),
-    primary key(id)
+-- Tabela de resposta
+create table resposta(
+    id_aluno int,
+    id_exercicios int,
+    resposta varchar (300),
+    foto varchar (32),
+    foreign key (id_aluno) references aluno(id),
+    foreign key (id_exercicios) references exercicios(id),
+    primary key(id_aluno, id_exercicios)
+);
+-- Tabela da lista de exercicios
+create table lista_exercicios(
+    id_lista int,
+    id_exercicios int,
+    foreign key (id_lista) references lista(id),
+    foreign key (id_exercicios) references exercicios(id),
+    primary key(id_lista, id_exercicios)
+);
+-- Tabela de relacao com a lista de exercicios com a sala
+create table sala_lista(
+    id_sala int,
+    id_lista int,
+    foreign key (id_sala) references sala(id),
+    foreign key (id_lista) references lista(id),
+    primary key (id_sala, id_lista)
+);
+
+-- Tabela de relação dos alunos com as salas
+create table cursa(
+    id_sala int,
+    id_aluno int,
+    foreign key (id_sala) references sala(id),
+    foreign key (id_aluno) references aluno(id),
+    primary key (id_sala, id_aluno)
 );
 -- Inserir dados na tabela instituição
 insert into instituicao set
@@ -78,3 +104,29 @@ insert into instituicao set
     cep='60410-426',
     numero='1703',
     telefone='(85) 34012500';
+-- -- Tabela semestre
+-- create table semestre(
+--     id int auto_increment,
+--     nome varchar(32),
+--     primary key(id)
+-- );
+-- -- Tabela prova
+-- create table prova(
+--     id int auto_increment,
+--     titulo varchar(1000),
+--     proposito varchar(100),
+--     imagem varchar(32),
+--     primary key(id)
+-- );
+-- Tabela disciplina
+-- create table disciplina(
+--     id int auto_increment,
+--     nome varchar(32),
+--     primary key (id)
+-- );
+-- -- Tabela turma
+-- create table turma(
+--     id int auto_increment,
+--     nome varchar(32),
+--     primary key (id)
+-- );
