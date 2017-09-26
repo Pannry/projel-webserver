@@ -17,14 +17,32 @@
         <!-- Content -->
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 
+
+
             <h1> Turmas </h1>
 
+            <hr>
+            
+            <div class="row">
+                <div class="col-md-2">
+                    <a class="btn btn-success "href="/professor/profile/turmas/criar">Criar turma</a>
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-danger "href="#">Excluir turma</a>
+                </div>
+            </div>
+            <br>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Selecione a turma</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                </select>
+                <div class="row ml-1">
+                    <p class="col-md-3 mt-1">
+                        <label for="selecionarTurma">Selecione uma turma: </label>
+                    </p>
+                    <select class="custom-select col-md-6" id="selecionarTurma">
+                        <option selected>Escolha...</option>
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
             </div>
         </main>
 

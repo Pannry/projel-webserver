@@ -2,6 +2,7 @@
     <html lang="en">
 
     <head>
+        <!--Head properties -->        
         <% include ../../partials/head.ejs%>
     </head>
 
@@ -13,34 +14,12 @@
         <!-- Sidebar Menu -->
         <% include ../../partials/sidebar-menu.ejs %>
 
+        <!-- Show Perfil -->
+        <% include ../../partials/show-profile.ejs %>
 
-        <!-- Content -->
-        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-            <div class="row">
-                <div class="col-md-10">
-                    <h1>Perfil</h1>
-                </div>
-                <div class="col-md-2">
-                    <a class="btn btn-warning "href="/logout">Logout</a>
-                </div>
-            </div>
-
-            <div class="row text-center placeholders">
-                <div class="offset-md-3 col-md-6 col-sm-3 placeholder">
-                    <label for="nome" class="col-sm-2 col-form-label">Nome do prof:</label>
-                    <input type="text" readonly class="form-control-plaintext" id="nome" value="<%= user.nome %>">
-                </div>
-            </div>
-            <div class="row text-center placeholders">
-                <div class="offset-md-3 col-md-6 col-sm-3 placeholder">
-                    <label for="email" class="col-sm-2 col-form-label">Email:</label>
-                    <input type="text" readonly class="form-control-plaintext" id="email" value="<%= user.email %>">
-                </div>
-            </div>
-
-        </main>
-
+        <!--Scripts -->
         <% include ../../partials/scripts.ejs /%>
+        
     </body>
 
 </html>

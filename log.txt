@@ -1,5 +1,4 @@
 Problemas Conhecidos:
-    - Tentar logar com uma conta n existente buga tudo,
 
     - É possivel criar conta repetidas
 

@@ -3,27 +3,57 @@
 
 
         <% if (accountType === "aluno" ) { %>
+
+            <% let paths = [
+                "/profile",
+                "/profile/turmas",
+                "/profile/notas"
+            ] 
+            %>
             
             <li class="nav-item"> 
-                <a <% if (page_name === "/profile") { %>class="nav-link active" <% } %> class="nav-link" href="/profile">Perfil</a> 
+                <a 
+                    <% if (page_name === paths[0]) { %>class="nav-link active" <% } %> 
+                    class="nav-link" href="/profile">Perfil
+                </a> 
             </li>
+
             <li class="nav-item"> 
-                <a <% if (page_name === "/profile/turmas") { %>class="nav-link active" <% } %> class="nav-link" href="/profile/turmas">Turmas</a> 
+                <a 
+                    <% if (page_name === paths[1]) { %>class="nav-link active" <% } %> 
+                    class="nav-link" href="/profile/turmas">Turmas
+                </a> 
             </li>
+
             <li class="nav-item"> 
-                <a <% if (page_name === "/profile/notas") { %>class="nav-link active" <% } %> class="nav-link" href="/profile/notas">Notas</a> 
+                <a 
+                    <% if (page_name === paths[2]) { %>class="nav-link active" <% } %> 
+                    class="nav-link" href="/profile/notas">Notas
+                </a> 
             </li>
 
         <% } else if (accountType === "professor") { %>
-            
+
+            <% let paths = [
+                "/professor/profile",
+                "/professor/profile/turmas",
+                "/professor/profile/turmas/criar"
+            ] 
+            %>
+
             <li class="nav-item"> 
-                <a <% if (page_name === "/professor/profile") { %>class="nav-link active" <% } %> class="nav-link" href="/professor/profile">Perfil</a> 
+                <a 
+                    <% if(page_name === paths[0]){%>class="nav-link active"<% } %> 
+                    class="nav-link" href="/professor/profile">Perfil
+                </a>
+
             </li>
+
             <li class="nav-item"> 
-                <a <% if (page_name === "/professor/profile/turmas") { %>class="nav-link active" <% } %> class="nav-link" href="/professor/profile/turmas">Turmas</a> 
-            </li>
-            <li class="nav-item"> 
-                <a <% if (page_name === "/professor/profile/turmas/criar") { %>class="nav-link active" <% } %> class="nav-link" href="/professor/profile/turmas/criar">Criar Turma</a> 
+                <a 
+                    <%if(page_name === paths[1] || page_name === paths[2]){ %>class="nav-link active"<% } %>
+                    class="nav-link" href="/professor/profile/turmas">Turmas
+                </a> 
             </li>
 
         <% } %>
