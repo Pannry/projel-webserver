@@ -17,13 +17,30 @@
         <!-- Content -->
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 
-            <h1> Turmas </h1>
+            <h1> Criando Turma: </h1>
 
-            <div class="form-group">
-                <div class="col-md-3 col-md-6">
-                    <input type="submit" value="Criar" class="btn btn-warning btn-lg">
+            <form class="" action="/professor/profile/turmas/criar" method="post">
+                <br>
+                <div class="row">
+                    <div class="offset-md-3 col-md-6 col-sm-12">
+                        <label for="nome" class="font-weight-bold">Nome:</label>
+                        <input type="text" name="nome" value="" class="form-control" placeholder="Engenharia Elétrica">
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="offset-md-3 col-md-6 col-sm-12">
+                        <label for="semestre" class="font-weight-bold">Semestre:</label>
+                        <input type="text" name="semestre" value="" class="form-control" placeholder="20??.?">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="offset-md-3 col-md-6">
+                        <input type="submit" value="Criar" class="btn btn-warning btn-lg">
+                    </div>
+                </div>
+            </form>
+
         </main>
 
         <% include ../../partials/scripts.ejs /%>

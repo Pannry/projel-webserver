@@ -6,21 +6,27 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-    
-                <% if( accountType == "professor" ) { %>
-
-                    <a class="nav-link"href="/professor/profile">Home</a>
-                
-                <% } else if (accountType == "aluno") { %>
-                
-                    <a class="nav-link" href="/profile">Home</a>
-                
-                <% } else if (accountType == "") { %>
-                
-                <% } %>
-    
+            
+            <li class="nav-item active">                            
+                <a class="nav-link"href="/professor">(Temporario)</a>
             </li>
+    
+            <% if( accountType == "professor" ) { %>
+            
+                <li class="nav-item active">                            
+                    <a class="nav-link"href="/professor/profile">Home</a>
+                </li>
+
+            <% } else if (accountType == "aluno") { %>
+            
+                <li class="nav-item active">                            
+                    <a class="nav-link" href="/profile">Home</a>
+                </li>
+            
+            <% } else if (accountType == "") { %>
+
+            <% } %>
+
         </ul>
     </div>
 </nav>

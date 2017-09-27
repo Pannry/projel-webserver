@@ -99,8 +99,25 @@ module.exports = function(app) {
             res.render('professor/perfil/criarTurma', {
                 user: req.user,
                 page_name: req.path,
-                accountType: req.user.tipo
+                accountType: req.user.tipo,
+                accountId: req.user.id
             });
+        }
+    });
+    app.post('/professor/profile/turmas/criar', checkAuth, function(req, res) {
+        if (req.user.tipo == 'professor') {
+            var turma = req.body;
+            var id = req.user.id;
+            turma.id_professor = id;
+
+            var conexaoDb = app.infra.banco.dbConnection();
+            var salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
+    
+            salaDAO.addSala(turma, function(err, resultado) {
+                res.redirect('/professor/profile/turmas/criar');
+            });
+    
+            conexaoDb.end();
         }
     });
 

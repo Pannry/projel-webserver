@@ -38,7 +38,7 @@ create table professor(
 );
 -- Tabela da sala
 create table sala(
-    id int,
+    id int auto_increment,
     nome varchar(32),
     id_professor int,
     semestre varchar(32),
