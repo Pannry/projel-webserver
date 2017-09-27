@@ -9,8 +9,6 @@ function SalaDao(conexaoDb) {
 SalaDao.prototype.addSala = function (entrada, callback) {
     console.log( entrada );
     this._conexaoDb.query(
-        'INSERT INTO sala SET ?',
-        [entrada.nome, entrada.semestre, entrada.id_professor],
-        callback
+        'INSERT INTO sala SET ?', entrada, callback
     );
 }

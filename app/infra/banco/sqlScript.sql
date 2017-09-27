@@ -104,29 +104,3 @@ insert into instituicao set
     cep='60410-426',
     numero='1703',
     telefone='(85) 34012500';
--- -- Tabela semestre
--- create table semestre(
---     id int auto_increment,
---     nome varchar(32),
---     primary key(id)
--- );
--- -- Tabela prova
--- create table prova(
---     id int auto_increment,
---     titulo varchar(1000),
---     proposito varchar(100),
---     imagem varchar(32),
---     primary key(id)
--- );
--- Tabela disciplina
--- create table disciplina(
---     id int auto_increment,
---     nome varchar(32),
---     primary key (id)
--- );
--- -- Tabela turma
--- create table turma(
---     id int auto_increment,
---     nome varchar(32),
---     primary key (id)
--- );

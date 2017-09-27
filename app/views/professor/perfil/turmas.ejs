@@ -3,6 +3,7 @@
 
     <head>
         <% include ../../partials/head.ejs %>
+        <!-- <style> *{border: 1px solid red;} </style> -->
     </head>
 
     <body>
@@ -32,18 +33,33 @@
                 </div>
             </div>
             <br>
+
             <div class="form-group">
                 <div class="row ml-1">
                     <p class="col-md-3 mt-1">
                         <label for="selecionarTurma">Selecione uma turma: </label>
                     </p>
-                    <select class="custom-select col-md-6" id="selecionarTurma">
-                        <option selected>Escolha...</option>
-                        <option>1</option>
-                        <option>2</option>
-                    </select>
+                </div>
+                
+                <div class="list-group">
+
+                    <!-- elemento 1 -->
+                    <div class="row align-items-center ml-2">
+                        <button type="button" class="btn btn-default col-md-4">Engenharia Elétrica 2017.1 </button>
+                        <button type="button" class="btn btn-info col-md-1">Editar</button>
+                        <button type="button" class="btn btn-warning col-md-1">Excluir</button>
+                    </div>
+
+                    <!-- elemento 1 -->
+                    <div class="row align-items-center ml-2">
+                        <button type="button" class="btn btn-default col-md-4">Engenharia Elétrica 2017.2 </button>
+                        <button type="button" class="btn btn-info col-md-1">Editar</button>
+                        <button type="button" class="btn btn-warning col-md-1">Excluir</button>
+                    </div>
+
                 </div>
             </div>
+
         </main>
 
         <% include ../../partials/scripts.ejs /%>

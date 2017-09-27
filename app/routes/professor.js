@@ -113,7 +113,8 @@ module.exports = function(app) {
             var conexaoDb = app.infra.banco.dbConnection();
             var salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
     
-            salaDAO.addSala(turma, function(err, resultado) {
+            salaDAO.addSala(turma, function (err, resultado) {
+                console.log( err );
                 res.redirect('/professor/profile/turmas/criar');
             });
     
