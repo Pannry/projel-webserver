@@ -27,7 +27,7 @@ module.exports = function(app) {
         var conexaoDb = app.infra.banco.dbConnection();
         var instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
 
-        instituicaoDAO.lista(function(exception, resultado) {
+        instituicaoDAO.listaInstituicao(function(exception, resultado) {
             res.render('professor/signup', {
                 listaDeInstituicao: resultado
             });
@@ -86,12 +86,19 @@ module.exports = function(app) {
 
     app.get('/professor/profile/turmas', checkAuth, function(req, res) {
         if (req.user.tipo == 'professor') {
-            res.render('professor/perfil/turmas', {
-                user: req.user,
-                page_name: req.path,
-                accountType: req.user.tipo
+            var conexaoDb = app.infra.banco.dbConnection();
+            var salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
+    
+            salaDAO.listaSala(req.user.id, function(exception, resultado) {
+                res.render('professor/perfil/turmas', {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo,
+                    listaSala: resultado,
+                });
             });
 
+            conexaoDb.end();            
         }
     });
     app.get('/professor/profile/turmas/criar', checkAuth, function(req, res) {

@@ -12,3 +12,7 @@ SalaDao.prototype.addSala = function (entrada, callback) {
         'INSERT INTO sala SET ?', entrada, callback
     );
 }
+
+SalaDao.prototype.listaSala = function(id, callback) {
+    this._conexaoDb.query('SELECT * FROM sala WHERE id_professor = ?', id, callback);
+}

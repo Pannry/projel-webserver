@@ -23,7 +23,7 @@ module.exports = function(app) {
         var conexaoDb = app.infra.banco.dbConnection();
         var instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
 
-        instituicaoDAO.lista(function(exception, resultado) {
+        instituicaoDAO.listaInstituicao(function(exception, resultado) {
             res.render('aluno/signup', {
                 listaDeInstituicao: resultado
             });
@@ -76,11 +76,20 @@ module.exports = function(app) {
 
     app.get('/profile/turmas', checkAuthentication, function(req, res) {
         if (req.user.tipo == 'aluno') {
-            res.render('aluno/perfil/turmas', {
-                user: req.user,
-                page_name: req.path,
-                accountType: req.user.tipo
+
+            var conexaoDb = app.infra.banco.dbConnection();
+            var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
+    
+            usuarioDAO.listaProfessor(function(exception, resultado) {
+                res.render('aluno/perfil/turmas', {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo,
+                    listaProf: resultado
+                });
             });
+    
+            conexaoDb.end();
         }
     });
 

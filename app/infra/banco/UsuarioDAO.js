@@ -44,3 +44,7 @@ UsuarioDAO.prototype.buscarProfessor = function (usuario, callback) {
 UsuarioDAO.prototype.buscarIdProfessor = function (id, callback) {
     this._conexaoDb.query('SELECT * FROM professor WHERE id = ?', id, callback);
 }
+
+UsuarioDAO.prototype.listaProfessor = function (callback) {
+    this._conexaoDb.query('SELECT * FROM professor', callback);
+}
