@@ -1,10 +1,11 @@
 var express = require('express');
-var load = require('express-load');
+var consign = require('consign');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');
+var middlewareErro = require('../app/middlewares/erro');
 
 module.exports = function() {
     var app = express();
@@ -36,14 +37,12 @@ module.exports = function() {
 
     app.set('passport', passport);
 
-    load('routes', { cwd: 'app' })
+    consign({cwd: 'app'})
+        .include('routes')
         .then('infra')
         .into(app);
 
-    // // Handle 404
-    // app.use(function (req, res) {
-    //     res.status(404).render('misc/404');
-    // });
+    middlewareErro(app);
 
     // // Handle 500
     // app.use(function (error, req, res, next) {

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head.ejs %>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <% include ../partials/navbar-dashboard.ejs %>
+
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Projel</h1>
+                <p class="lead text-muted"> Crie aqui sua conta ou entre nela.</p>
+                <p>
+                    <a href="/aluno/signup" class="btn btn-primary">Criar Conta</a>
+                    <a href="/aluno/login" class="btn btn-secondary">Entrar</a>
+                </p>
+            </div>
+        </section>
+
+        <div class="container">
+
+            <!-- SOBRE -->
+            <div class="row">
+                <div class="col-md-12 alert alert-light">
+                    <h2 class="featurette-heading">Desculpe!</h2>
+                    <p>A página que você tentou acessar não foi encontrada no nosso servidor.</p>
+                </div>
+            </div>
+
+            <br>
+            <hr><br>
+
+            <!-- FOOTER -->
+            <footer class="text-muted">
+                <br><br>
+                <p class="float-right"> <a href="#">TOPO</a> </p>
+                <p>Projel - 2017</p>
+                <br><br>
+            </footer>
+
+        </div>
+
+
+        <!-- Scripts -->
+        <% include ../partials/scripts.ejs %>
+</body>
+
+</html>
