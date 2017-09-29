@@ -24,37 +24,43 @@
             <div class="form-group">
                 <label for="selecionarProfessor">Selecione o Professor</label>
                 <select class="form-control" id="selecionarProfessor" onchange="myFunc()">
-                        <option> Escolha... </option>                            
+                        <option value="0"> Escolha... </option>                            
                     <% for (var i = 0; i < listaProf.length; i++){%>
                         <option value="<%= listaProf[i].id %>"> Professor: <%= listaProf[i].nome %> </option>
                     <% } %>
                 </select>
-                
                 <br>
                 
-                <a id="myAnchor" class="btn btn-info disabled">Abrir lista de turmas</a>
+                <a class="collapse" id="myAnchor" >Abrir lista de Turmas</a>
                 
                 <script>
                 function myFunc() {
-
-                    if ( x !== 'Escolha...') var x = document.getElementById("selecionarProfessor").value;
-
-                    var anchor = document.getElementById("myAnchor");
-                    var att = document.createAttribute("href");
-                    att.value = "/profile/turmas/lista";
-
-                    var c = document.createAttribute("class");
-                    c.value = "btn btn-info";
                     
+                    var dropDown = document.getElementById("selecionarProfessor");
+                    if ( dropDown.value !== '0') {
+    
+                        var anchor = document.getElementById("myAnchor");
+                        
+                        var link = document.createAttribute("href");
+                        link.value = "/profile/turmas/" + dropDown.value;
 
-                    anchor.setAttributeNode(att, c);
+                        var anchorClass = document.createAttribute("class");
+                        anchorClass.value = "btn btn-info";
+                        
+                        anchor.setAttributeNode(anchorClass);
+                        anchor.setAttributeNode(link);
+                    }
                 }
                 </script>
             </div>
 
+            <br>
 
-        </div>
-    </main>
+            <h4>Lista de turmas:</h4>
+
+            <!-- TODO "cursa" -->
+
+        </main>
 
         <% include ../../partials/scripts.ejs /%>
     </body>

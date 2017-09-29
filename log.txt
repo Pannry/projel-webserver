@@ -1,3 +1,6 @@
+TODO:
+    - implementar o banco cursa
+
 Problemas Conhecidos:
 
     - É possivel criar conta repetidas

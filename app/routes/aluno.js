@@ -80,18 +80,43 @@ module.exports = function(app) {
             var conexaoDb = app.infra.banco.dbConnection();
             var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
     
-            usuarioDAO.listaProfessor(function(exception, resultado) {
-                res.render('aluno/perfil/turmas', {
-                    user: req.user,
-                    page_name: req.path,
-                    accountType: req.user.tipo,
-                    listaProf: resultado
-                });
+            usuarioDAO.listaProfessor(function (exception, resultado) {
+                
+                    res.render('aluno/perfil/turmas', {
+                        user: req.user,
+                        page_name: req.path,
+                        accountType: req.user.tipo,
+                        listaProf: resultado
+                    });
             });
     
             conexaoDb.end();
         }
     });
+
+    app.get('/profile/turmas/:id', checkAuthentication, function (req, res) {
+        if (req.user.tipo == 'aluno') {
+
+            idDoProfessor = req.params.id;
+
+            var conexaoDb = app.infra.banco.dbConnection();
+            var salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
+
+            salaDAO.listaSala(idDoProfessor, function (err, resultado) {
+                res.render('aluno/perfil/turmas_professor', {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo,
+                    listaSala: resultado
+                })
+            });
+
+        } else {
+            res.status(403);
+        }
+
+    });
+    
 
     app.get('/profile/notas', checkAuthentication, function(req, res) {
         if (req.user.tipo == 'aluno') {
@@ -103,6 +128,7 @@ module.exports = function(app) {
         }
     });
 
+
 }
 
 function checkAuthentication(req, res, next) {
@@ -113,3 +139,4 @@ function checkAuthentication(req, res, next) {
     }
 
 }
+
