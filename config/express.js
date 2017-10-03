@@ -38,8 +38,9 @@ module.exports = function() {
     app.set('passport', passport);
 
     consign({cwd: 'app'})
-        .include('routes')
+        .include('controllers')
         .then('infra')
+        .then('routes')
         .into(app);
 
     middlewareErro(app);
