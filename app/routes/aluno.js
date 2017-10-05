@@ -40,7 +40,6 @@ module.exports = function (app) {
 
     app.get('/profile/turmas/:id', checkAuthentication, alunoController.turmasProfessor);
 
-
     app.get('/profile/notas', checkAuthentication, alunoController.notas);
 
 
