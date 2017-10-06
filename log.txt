@@ -6,3 +6,5 @@ Problemas Conhecidos:
     - É possivel criar conta repetidas
 
     - Falta repetir senha no cadastro
+
+    - Aluno está deslogando pelo '/logout' do professor

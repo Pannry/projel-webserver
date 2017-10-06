@@ -1,52 +1,42 @@
-// TODO: Criar cadastro professor,
-// TODO: Criar cadastro conexao com banco de dados para login e cadastro,
-
-
 var bcrypt = require('bcrypt-nodejs');
 
 module.exports = function(app) {
     var passport = app.get('passport');
+    var ProfessorController = app.controllers.ProfessorController;
 
     app.get('/professor', function(req, res) {
-        if (req.user == undefined) {
-            res.render('professor/home', {
-                accountType: ""
-            });
-
-        } else {
-            res.render('professor/home', {
-                accountType: req.user.tipo
-            });
-        }
+        ( req.user == undefined ) ?
+            res.render('professor/home', { accountType: "" }) :
+            res.render('professor/home', { accountType: req.user.tipo });
     })
 
     /**
      * Cadastro
      */
     app.route('/professor/signup')
-        .get( app.controllers.ProfessorController.cadastro.get)
-        .post(app.controllers.ProfessorController.cadastro.post);
+        .get(  ProfessorController.cadastro.get  )
+        .post( ProfessorController.cadastro.post );
 
     /**
      * Login
      */
-    app.get('/professor/login', app.controllers.ProfessorController.login.get);
-    app.post('/professor/login', app.controllers.ProfessorController.login.post);
+    app.get('/professor/login',  ProfessorController.login.get  );
+    app.post('/professor/login', ProfessorController.login.post );
 
     /**
      * Logout
      */
-    app.get('/logout', app.controllers.ProfessorController.logout);
+    app.get('/logout', ProfessorController.logout);
 
     /**
      * profile
      */
-    app.get('/professor/profile', checkAuth, app.controllers.ProfessorController.perfil);
+    app.get('/professor/profile', checkAuth, ProfessorController.perfil);
 
-    app.get('/professor/profile/turmas', checkAuth, app.controllers.ProfessorController.painelDasTurmas);
+    app.get('/professor/profile/turmas', checkAuth, ProfessorController.painelDasTurmas);
 
-    app.get('/professor/profile/turmas/criar', checkAuth, app.controllers.ProfessorController.criarTurmas.get);
-    app.post('/professor/profile/turmas/criar', checkAuth, app.controllers.ProfessorController.criarTurmas.post);
+    app.get('/professor/profile/turmas/criar', checkAuth, ProfessorController.criarTurmas.get);
+    app.post('/professor/profile/turmas/criar', checkAuth, ProfessorController.criarTurmas.post);
 
 }
 

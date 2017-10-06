@@ -5,16 +5,9 @@ module.exports = function (app) {
     var alunoController = app.controllers.AlunoController;
 
     app.get('/', function (req, res) {
-        if (req.user == undefined) {
-            res.render('index', {
-                accountType: ""
-            });
-
-        } else {
-            res.render('index', {
-                accountType: req.user.tipo
-            });
-        }
+        ( req.user == undefined ) ?
+            res.render('index', { accountType: "" }) :
+            res.render('index', { accountType: req.user.tipo })
     });
 
     /**
