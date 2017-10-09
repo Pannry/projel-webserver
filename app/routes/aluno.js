@@ -1,12 +1,12 @@
 var bcrypt = require('bcrypt-nodejs');
 
-module.exports = function (app) {
+module.exports = function(app) {
     var passport = app.get('passport');
     var alunoController = app.controllers.AlunoController;
 
-    app.get('/', function (req, res) {
-        ( req.user == undefined ) ?
-            res.render('index', { accountType: "" }) :
+    app.get('/', function(req, res) {
+        (req.user == undefined) ?
+        res.render('index', { accountType: "" }):
             res.render('index', { accountType: req.user.tipo })
     });
 
@@ -31,7 +31,8 @@ module.exports = function (app) {
 
     app.get('/profile/turmas', checkAuthentication, alunoController.minhasTurmas);
 
-    app.get('/profile/turmas/:id', checkAuthentication, alunoController.turmasProfessor);
+    app.get('/profile/turmas/:id', checkAuthentication, alunoController.turmasProfessor.get);
+    app.post('/profile/turmas/:id', checkAuthentication, alunoController.turmasProfessor.post);
 
     app.get('/profile/notas', checkAuthentication, alunoController.notas);
 
@@ -46,4 +47,3 @@ function checkAuthentication(req, res, next) {
     }
 
 }
-
