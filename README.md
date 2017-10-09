@@ -1,4 +1,4 @@
 # projel-webserver
 web server for projel project
 
-Projeto de servidor para o projel
+Projeto de servidor para o projel feito em node.
