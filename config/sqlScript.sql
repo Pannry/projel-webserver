@@ -92,7 +92,7 @@ create table sala_lista(
 create table cursa(
     id_sala int,
     id_aluno int,
-    boolean aluno_aceito default false,
+    aluno_aceito boolean default false,
     foreign key (id_sala) references sala(id),
     foreign key (id_aluno) references aluno(id),
     primary key (id_sala, id_aluno)
