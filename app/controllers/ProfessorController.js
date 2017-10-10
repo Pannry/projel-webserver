@@ -1,13 +1,13 @@
-module.exports = function (app) {
+module.exports = function(app) {
     let passport = app.get('passport');
     professorController = {};
 
     professorController.cadastro = {
-        get: function (req, res) {
+        get: function(req, res) {
             var conexaoDb = app.infra.banco.dbConnection();
             var instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
 
-            instituicaoDAO.listaInstituicao(function (exception, resultado) {
+            instituicaoDAO.listaInstituicao(function(exception, resultado) {
                 res.render('professor/signup', {
                     listaDeInstituicao: resultado
                 });
@@ -16,7 +16,7 @@ module.exports = function (app) {
             conexaoDb.end();
         },
 
-        post: function (req, res) {
+        post: function(req, res) {
             var usuario = req.body;
 
             // usuario.senha = bcrypt.hashSync(usuario.senha, null, null);
@@ -24,7 +24,7 @@ module.exports = function (app) {
             var conexaoDb = app.infra.banco.dbConnection();
             var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
-            usuarioDAO.salvarProfessor(usuario, function (erro, resultado) {
+            usuarioDAO.salvarProfessor(usuario, function(erro, resultado) {
                 res.redirect('/professor/login');
             });
             conexaoDb.end();
@@ -32,7 +32,7 @@ module.exports = function (app) {
     };
 
     professorController.login = {
-        get: function (req, res) {
+        get: function(req, res) {
             res.render('professor/login', { message: req.flash('loginMessage') });
         },
 
@@ -43,12 +43,12 @@ module.exports = function (app) {
         })
     };
 
-    professorController.logout = function (req, res) {
+    professorController.logout = function(req, res) {
         req.logout();
         res.redirect('/');
     };
 
-    professorController.perfil = function (req, res) {
+    professorController.perfil = function(req, res) {
         if (req.user.tipo == 'professor') {
             res.render('professor/perfil/perfil', {
                 user: req.user,
@@ -58,12 +58,12 @@ module.exports = function (app) {
         }
     };
 
-    professorController.painelDasTurmas = function (req, res) {
+    professorController.painelDasTurmas = function(req, res) {
         if (req.user.tipo == 'professor') {
             var conexaoDb = app.infra.banco.dbConnection();
             var salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
 
-            salaDAO.listaSala(req.user.id, function (exception, resultado) {
+            salaDAO.listaSala(req.user.id, function(exception, resultado) {
                 res.render('professor/perfil/turmas', {
                     user: req.user,
                     page_name: req.path,
@@ -77,7 +77,7 @@ module.exports = function (app) {
     };
 
     professorController.criarTurmas = {
-        get: function (req, res) {
+        get: function(req, res) {
             if (req.user.tipo == 'professor') {
                 res.render('professor/perfil/criarTurma', {
                     user: req.user,
@@ -88,7 +88,7 @@ module.exports = function (app) {
             }
         },
 
-        post: function (req, res) {
+        post: function(req, res) {
             if (req.user.tipo == 'professor') {
                 var turma = req.body;
                 var id = req.user.id;
@@ -97,7 +97,7 @@ module.exports = function (app) {
                 var conexaoDb = app.infra.banco.dbConnection();
                 var salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
 
-                salaDAO.addSala(turma, function (err, resultado) {
+                salaDAO.addSala(turma, function(err, resultado) {
                     res.redirect('/professor/profile/turmas/criar');
                 });
 
@@ -107,11 +107,13 @@ module.exports = function (app) {
     };
 
     professorController.turma = {
-        abrir: function (req, res) {
+        abrir: function(req, res) {
+            console.log(req.body);
             res.send('<h1>Abrir Turma</>');
         },
 
-        editar: function (req, res) {
+        editar: function(req, res) {
+            console.log(req.body);
             res.send('<h1>Editar Turma</>');
         }
     };

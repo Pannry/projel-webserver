@@ -1,71 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <% include ../../partials/head.ejs %>
+<head>
+    <% include ../../partials/head.ejs %>
         <!-- <style> *{border: 1px solid red;} </style> -->
-    </head>
+</head>
 
-    <body>
+<body>
 
-        <!-- Nav dashboard -->
-        <% include ../../partials/navbar-dashboard.ejs %>
-        
+    <!-- Nav dashboard -->
+    <% include ../../partials/navbar-dashboard.ejs %>
+
         <!-- Sidebar Menu -->
         <% include ../../partials/sidebar-menu.ejs %>
 
 
-        <!-- Content -->
-        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+            <!-- Content -->
+            <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 
 
 
-            <h1> Turmas </h1>
+                <h1> Turmas </h1>
 
-            <hr>
-            
-            <div class="row">
-                <div class="col-md-1">
-                    <a class="btn btn-success "href="/professor/profile/turmas/criar">Criar</a>
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-1">
+                        <a class="btn btn-success " href="/professor/profile/turmas/criar">Criar</a>
+                    </div>
                 </div>
-            </div>
-            <br>
+                <br>
 
                 <div class="row ml-1">
                     <p class="col-md-3 mt-1">
                         <label for="selecionarTurma">Selecione uma turma: </label>
                     </p>
                 </div>
-            <div class="form-group">
-                <div class="list-group">
-                            
-                    <!-- elemento 1 -->
-                        <% for (var i = 0; i < listaSala.length; i++){%>
-                            <div class="row align-items-center ml-2 justify-content-between">
-                                
-                                <div class="col-6">
-                                    <li class="list-group-item" value="<%=listaSala[i].id%>">
-                                        <%=listaSala[i].nome%>, 
-                                        <%=listaSala[i].semestre%>
-                                    </li>
-                                </div>
-                                <form id="form" action="#" method="post">
-                                    <div class="col-4">                                        
-                                        <button onclick="document.getElementById('form').setAttribute('action', '/abrirTurma')" type="submit" class="btn btn-info" >Abrir</button>
-                                        <button onclick="document.getElementById('form').setAttribute('action', '/editarTurma')" type="submit" class="btn btn-warning">Editar</button>
+                <div class="form-group">
+                    <div class="list-group">
+
+                        <!-- elemento 1 -->
+                        <form id="form" action="#" method="post">
+
+                            <% for (var i = 0; i < listaSala.length; i++){%>
+                                <div class="row align-items-center ml-2 justify-content-between">
+
+                                    <div class="col-6">
+                                        <li class="list-group-item" value="<%=listaSala[i].id%>">
+                                            <%=listaSala[i].nome%>,
+                                                <%=listaSala[i].semestre%>
+                                        </li>
+                                    </div>
+                                    <div class="col-4">
+                                        <button onclick="pathAbirir('/abrirTurma');" type="submit" class="btn btn-info" name="<%=listaSala[i].id%>" value="Abrir">Abrir</button>
+                                        <button onclick="pathEditar('/editarTurma');" type="submit" class="btn btn-warning" name="<%=listaSala[i].id%>" value="Editar">Editar</button>
                                         <button type="submit" class="btn btn-danger" disabled>Excluir</button>
                                     </div>
-                                </form>
 
-                            </div>
-                        <%}%>
+                                </div>
+                                <%}%>
+                        </form>
 
+                    </div>
                 </div>
-            </div>
 
-        </main>
+            </main>
 
-        <% include ../../partials/scripts.ejs /%>
-    </body>
+            <script>
+                function pathAbirir(path) {
+                    document.getElementById('form').setAttribute('action', path);
+                }
+
+                function pathEditar(path) {
+                    document.getElementById('form').setAttribute('action', path)
+                }
+            </script>
+
+            <% include ../../partials/scripts.ejs /%>
+</body>
 
 </html>
