@@ -96,6 +96,7 @@ module.exports = function(app) {
 
         post: function(req, res) {
             var id_sala = Object.keys(req.body)[0];
+            console.log(req.body);
             var id_aluno = req.user.id;
 
             // TODO terminar implementacao sala
