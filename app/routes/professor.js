@@ -38,6 +38,10 @@ module.exports = function(app) {
     app.get('/professor/profile/turmas/criar', checkAuth, ProfessorController.criarTurmas.get);
     app.post('/professor/profile/turmas/criar', checkAuth, ProfessorController.criarTurmas.post);
 
+    app.post('/abrirTurma', checkAuth, ProfessorController.turma.abrir);
+    app.post('/editarTurma', checkAuth, ProfessorController.turma.editar);
+    // app.post('excluirTurma', checkAuth, ProfessorController.turma.excluir);
+
 }
 
 function checkAuth(req, res, next) {

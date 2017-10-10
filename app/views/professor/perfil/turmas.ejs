@@ -49,11 +49,13 @@
                                         <%=listaSala[i].semestre%>
                                     </li>
                                 </div>
-                                <div class="col-4">                                        
-                                    <button type="button" class="btn btn-info">Abrir</button>
-                                    <button type="button" class="btn btn-warning" disabled>Editar</button>
-                                    <button type="button" class="btn btn-danger" disabled>Excluir</button>
-                                </div>
+                                <form id="form" action="#" method="post">
+                                    <div class="col-4">                                        
+                                        <button onclick="document.getElementById('form').setAttribute('action', '/abrirTurma')" type="submit" class="btn btn-info" >Abrir</button>
+                                        <button onclick="document.getElementById('form').setAttribute('action', '/editarTurma')" type="submit" class="btn btn-warning">Editar</button>
+                                        <button type="submit" class="btn btn-danger" disabled>Excluir</button>
+                                    </div>
+                                </form>
 
                             </div>
                         <%}%>
