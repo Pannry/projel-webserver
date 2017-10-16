@@ -63,7 +63,7 @@ module.exports = function ( app ) {
             var conexaoDb = app.infra.banco.dbConnection();
             var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
-            salaDAO.listaSala( req.user.id, function ( exception, resultado ) {
+            salaDAO.listaSalaProfessor( req.user.id, function ( exception, resultado ) {
                 res.render( 'professor/perfil/turmas', {
                     user: req.user,
                     page_name: req.path,
@@ -122,9 +122,14 @@ module.exports = function ( app ) {
 
                 salaDAO.buscarSala( id, function ( err, resultado ) {
                     if ( !err && resultado.length != 0 ) {
-                        let turma = resultado[ 0 ]
+                        let turma = resultado[ 0 ];
                         if ( turma.id_professor == usuario.id )
-                            res.send( '<h1>Turma - ' + turma.nome + '</>' );
+                            res.render( 'professor/perfil/abrirTurma.ejs', {
+                                user: req.user,
+                                page_name: req.path,
+                                accountType: req.user.tipo,
+                                accountId: req.user.id
+                            } );
                         else
                             res.send( '<h1>Você não é responsável pela - ' + turma.nome + '</>' );
 
@@ -138,4 +143,4 @@ module.exports = function ( app ) {
 
 
     return professorController;
-}
+};
