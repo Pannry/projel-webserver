@@ -120,7 +120,7 @@ module.exports = function ( app ) {
             var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
             salaDAO.alunoEntrarTurma( id_aluno, id_sala, function ( err, resultado ) {
-                res.redirect( '/profile/turmas' );
+                res.redirect( '/profile/minhasTurmas' );
 
             } );
 

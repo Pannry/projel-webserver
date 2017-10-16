@@ -29,15 +29,15 @@ module.exports = function ( app ) {
      */
     app.get( '/profile', checkAuthentication, alunoController.perfil.get );
 
-    app.get( '/profile/turmas',
+    app.get( '/profile/minhasTurmas',
         checkAuthentication,
         alunoController.minhasTurmas.alunoCursa,
         alunoController.minhasTurmas.get );
 
-    app.get( '/profile/turmas/:id', checkAuthentication, alunoController.turmasProfessor.get );
-    app.post( '/profile/turmas/:id', checkAuthentication, alunoController.turmasProfessor.post );
+    app.get( '/profile/minhasTurmas/:id', checkAuthentication, alunoController.turmasProfessor.get );
+    app.post( '/profile/minhasTurmas/:id', checkAuthentication, alunoController.turmasProfessor.post );
 
-    app.get( '/profile/notas', checkAuthentication, alunoController.notas.get );
+    app.get( '/profile/procurarTurmas', checkAuthentication, alunoController.notas.get );
 
 
 };

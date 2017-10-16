@@ -27,9 +27,9 @@
                         <option value="0"> Escolha... </option>
                         <% for (var i = 0; i < listaSalaProfessor.length; i++){%>
                             <option value="<%= listaSalaProfessor[i].id %>"> Professor:
-                                <%= listaSalaProfessor[i].nome %>
+                            <%= listaSalaProfessor[i].nome %>
                             </option>
-                            <% } %>
+                        <% } %>
                     </select>
                     <br>
 
@@ -44,7 +44,7 @@
                                 var anchor = document.getElementById( "myAnchor" );
 
                                 var link = document.createAttribute( "href" );
-                                link.value = "/profile/turmas/" + dropDown.value;
+                                link.value = "/profile/minhasTurmas/" + dropDown.value;
 
                                 var anchorClass = document.createAttribute( "class" );
                                 anchorClass.value = "btn btn-info";
@@ -68,15 +68,15 @@
                             <div class="col-6">
                                 <li class="list-group-item" value="<%=listaSalaAluno[i].id%>">
                                     <%=listaSalaAluno[i].nome%>,
-                                        <%=listaSalaAluno[i].semestre%>
+                                    <%=listaSalaAluno[i].semestre%>
                                 </li>
                             </div>
 
                             <div class="col-4">
-                                <a href="/profile/turmas/<%=listaSalaAluno[i].id%>">
+                                <a href="/profile/minhasTurmas/<%=listaSalaAluno[i].id%>">
                                     <button type="submit" class="btn btn-info">Abrir</button>
                                 </a>
-                                <a href="/professor/turma/editar/:id">
+                                <a href="/professor/minhasTurmas/editar/:id">
                                     <button type="submit" class="btn btn-warning">Editar</button>
                                 </a>
                                 <button type="submit" class="btn btn-danger" disabled>Excluir</button>
@@ -84,7 +84,7 @@
 
 
                         </div>
-                        <%}%>
+                    <%}%>
 
                 </div>
 

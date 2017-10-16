@@ -22,7 +22,7 @@
                         <h1> Selecione a turma: </h1>
                     </div>
                     <div class="col-md-2 ml-auto">
-                        <a href="/profile/turmas">Voltar</a>
+                        <a href="/profile/minhasTurmas">Voltar</a>
                     </div>
 
                 </div>
@@ -30,7 +30,7 @@
                 <hr>
 
                 <!-- Corpo -->
-                <form action="/profile/turmas/:id" method="post">
+                <form action="/profile/minhasTurmas/:id" method="post">
 
                     <% if( listaSala.length !== 0 ){ %>
                         <% for (var i = 0; i < listaSala.length; i++){ %>
@@ -39,7 +39,7 @@
                                 <div class="col-6">
                                     <li class="list-group-item" value="<%=listaSala[i].id%>">
                                         <%= listaSala[i].nome %>,
-                                            <%= listaSala[i].semestre %>
+                                        <%= listaSala[i].semestre %>
                                     </li>
                                 </div>
                                 <div class="col-4">
@@ -49,11 +49,11 @@
                                 </div>
 
                             </div>
-                            <% } %>
+                        <% } %>
 
-                                <% } else {%>
-                                    <p>Esse professor não possui turmas disponíveis.</p>
-                                    <% } %>
+                    <% } else {%>
+                        <p>Esse professor não possui turmas disponíveis.</p>
+                    <% } %>
                 </form>
 
             </main>
