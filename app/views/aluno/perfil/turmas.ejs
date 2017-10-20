@@ -21,43 +21,6 @@
 
                 <hr>
 
-                <div class="form-group">
-                    <label for="selecionarProfessor">Selecione o Professor</label>
-                    <select class="form-control" id="selecionarProfessor" onchange="myFunc()">
-                        <option value="0"> Escolha... </option>
-                        <% for (var i = 0; i < listaSalaProfessor.length; i++){%>
-                            <option value="<%= listaSalaProfessor[i].id %>"> Professor:
-                            <%= listaSalaProfessor[i].nome %>
-                            </option>
-                        <% } %>
-                    </select>
-                    <br>
-
-                    <a class="collapse" id="myAnchor">Abrir lista de Turmas</a>
-
-                    <script>
-                        function myFunc() {
-
-                            var dropDown = document.getElementById( "selecionarProfessor" );
-                            if ( dropDown.value !== '0' ) {
-
-                                var anchor = document.getElementById( "myAnchor" );
-
-                                var link = document.createAttribute( "href" );
-                                link.value = "/profile/minhasTurmas/" + dropDown.value;
-
-                                var anchorClass = document.createAttribute( "class" );
-                                anchorClass.value = "btn btn-info";
-
-                                anchor.setAttributeNode( anchorClass );
-                                anchor.setAttributeNode( link );
-                            }
-                        }
-                    </script>
-                </div>
-
-                <br>
-
                 <h4>Lista de turmas:</h4>
 
                 <div class="list-group">
@@ -73,10 +36,10 @@
                             </div>
 
                             <div class="col-4">
-                                <a href="/profile/minhasTurmas/<%=listaSalaAluno[i].id%>">
+                                <a href="/profile/turmas/<%=listaSalaAluno[i].id%>">
                                     <button type="submit" class="btn btn-info">Abrir</button>
                                 </a>
-                                <a href="/professor/minhasTurmas/editar/:id">
+                                <a href="/profile/turmas/editar/:id">
                                     <button type="submit" class="btn btn-warning">Editar</button>
                                 </a>
                                 <button type="submit" class="btn btn-danger" disabled>Excluir</button>

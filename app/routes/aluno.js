@@ -4,7 +4,17 @@ module.exports = function ( app ) {
     var passport = app.get( 'passport' );
     var alunoController = app.controllers.AlunoController;
 
-    app.get( '/', function ( req, res ) {
+    var paths = [
+        '/',
+        '/aluno/signup',
+        '/aluno/login',
+        '/profile',
+        '/profile/turmas',
+        '/profile/turmas/procurar',
+        '/profile/turmas/professor/:id'
+    ];
+
+    app.get( paths[ 0 ], function ( req, res ) {
         ( req.user == undefined ) ?
             res.render( 'index', { accountType: "" } ) :
             res.render( 'index', { accountType: req.user.tipo } );
@@ -13,7 +23,7 @@ module.exports = function ( app ) {
     /**
      * Cadastro
      */
-    app.route( '/aluno/signup' )
+    app.route( paths[ 1 ] )
         .get( alunoController.cadastro.get )
         .post( alunoController.cadastro.post );
 
@@ -21,23 +31,21 @@ module.exports = function ( app ) {
     /**
      * Login 
      */
-    app.get( '/aluno/login', alunoController.login.get );
-    app.post( '/aluno/login', alunoController.login.post );
+    app.get( paths[ 2 ], alunoController.login.get );
+    app.post( paths[ 2 ], alunoController.login.post );
 
     /**
      * profile
      */
-    app.get( '/profile', checkAuthentication, alunoController.perfil.get );
+    app.get( paths[ 3 ], checkAuthentication, alunoController.perfil.get );
 
-    app.get( '/profile/minhasTurmas',
-        checkAuthentication,
-        alunoController.minhasTurmas.alunoCursa,
-        alunoController.minhasTurmas.get );
+    app.get( paths[ 4 ], checkAuthentication, alunoController.minhasTurmas.get );
 
-    app.get( '/profile/minhasTurmas/:id', checkAuthentication, alunoController.turmasProfessor.get );
-    app.post( '/profile/minhasTurmas/:id', checkAuthentication, alunoController.turmasProfessor.post );
+    app.get( paths[ 5 ], checkAuthentication, alunoController.procurarTurmas.get );
 
-    app.get( '/profile/procurarTurmas', checkAuthentication, alunoController.notas.get );
+    app.get( paths[ 6 ], checkAuthentication, alunoController.turmasProfessor.get );
+    app.post( paths[ 6 ], checkAuthentication, alunoController.turmasProfessor.post );
+
 
 
 };

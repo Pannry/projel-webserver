@@ -5,9 +5,9 @@ insert into aluno set
     senha='a',
     instituicao_id = 1;
 insert into aluno set
-    nome='a',
-    email='a',
-    senha='a',
+    nome='b',
+    email='b',
+    senha='b',
     instituicao_id = 1;
 insert into professor set
     nome='p',
@@ -29,4 +29,3 @@ insert into professor set
     numero=1,
     telefone=1,
     instituicao_id = 1;
-    

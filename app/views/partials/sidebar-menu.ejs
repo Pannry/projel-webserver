@@ -6,8 +6,8 @@
 
             <% let paths = [
                 "/profile",
-                "/profile/minhasTurmas",
-                "/profile/procurarTurmas"
+                "/profile/turmas",
+                "/profile/turmas/procurar"
             ] 
             %>
             
@@ -21,14 +21,14 @@
             <li class="nav-item"> 
                 <a 
                     <% if (page_name === paths[1]) { %>class="nav-link active" <% } %> 
-                    class="nav-link" href="/profile/minhasTurmas">Minhas Turmas
+                    class="nav-link" href="/profile/turmas">Minhas Turmas
                 </a> 
             </li>
 
             <li class="nav-item"> 
                 <a 
                     <% if (page_name === paths[2]) { %>class="nav-link active" <% } %> 
-                    class="nav-link" href="/profile/procurarTurmas">Procurar por Turmas
+                    class="nav-link" href="/profile/turmas/procurar">Procurar por Turmas
                 </a> 
             </li>
 

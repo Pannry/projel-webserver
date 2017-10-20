@@ -2,7 +2,8 @@
     "terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\cmd.exe",
     "editor.tabCompletion": true,
     "editor.formatOnType": true,
-    
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
     "workbench.startupEditor": "newUntitledFile",
     "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
