@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../partials/head.ejs %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+        .green{
+            color: green;
+            font-size: 20px;
+        }        
+        .red{
+            color: red;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Nav dashboard -->
+    <% include ../../partials/navbar-dashboard.ejs %>
+
+    <!-- Sidebar Menu -->
+    <% include ../../partials/sidebar-menu.ejs %>
+
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+        <h1> Turma: [nome da turma] Semestre: [Semestre] </h1>
+        <hr>
+
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/professor/turma/abrir/<%=idSala%>/professor">Área do Professor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/professor/turma/abrir/<%=idSala%>/aluno">Área do Aluno</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card-body">
+                <h4 class="card-title">Alunos inscritos na turma</h4>
+
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-8">
+                                    Fulano 1
+                                </div>
+                                <div class="col-2">
+                                    <i class="fa fa-check green" aria-hidden="true"></i>                             
+                                </div>
+                                <div class="col-2">                                
+                                    <a href="#" ><button type="submit" class="btn-sm">Incluir</button></a>
+                                </div>                                
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-8">
+                                    Fulano 2
+                                </div>
+                                <div class="col-2">
+                                    <i class="fa fa-times red" aria-hidden="true"></i>                             
+                                </div>
+                                <div class="col-2">                                
+                                    <a href="#" ><button type="submit" class="btn-sm">Incluir</button></a>
+                                </div>                                
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-8">
+                                    Fulano 3
+                                </div>
+                                <div class="col-2">
+                                    <i class="fa fa-check green" aria-hidden="true"></i>                             
+                                </div>
+                                <div class="col-2">                                
+                                    <a href="#" ><button type="submit" class="btn-sm">Incluir</button></a>
+                                </div>                                
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+
+    </main>
+
+    <% include ../../partials/scripts.ejs /%>
+</body>
+
+</html>

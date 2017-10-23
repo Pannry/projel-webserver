@@ -111,7 +111,14 @@ module.exports = function ( app ) {
             res.send( '<h1>Abrir Turma</>' );
         },
 
-        abrir: function ( req, res, next ) {
+        listaSala: function ( req, res, next ) {
+            if ( req.user.tipo == 'professor' ) {
+                req.listaSala = req.params.id
+            }
+            next();
+        },
+
+        abrirProfessor: function ( req, res, next ) {
             let id = req.params.id;
             var usuario = req.user;
 
@@ -124,11 +131,42 @@ module.exports = function ( app ) {
                     if ( !err && resultado.length != 0 ) {
                         let turma = resultado[ 0 ];
                         if ( turma.id_professor == usuario.id )
-                            res.render( 'professor/perfil/abrirTurma.ejs', {
+                            res.render( 'professor/perfil/abrirTurmaProfessor.ejs', {
                                 user: req.user,
                                 page_name: req.path,
                                 accountType: req.user.tipo,
-                                accountId: req.user.id
+                                accountId: req.user.id,
+                                idSala: req.listaSala
+                            } );
+                        else
+                            res.send( '<h1>Você não é responsável pela - ' + turma.nome + '</>' );
+
+                    } else
+                        next();
+                } );
+                conexaoDb.end();
+            }
+        },
+
+        abrirAluno: function ( req, res, next ) {
+            let id = req.params.id;
+            var usuario = req.user;
+
+            if ( usuario.tipo === "professor" ) {
+
+                var conexaoDb = app.infra.banco.dbConnection();
+                var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
+
+                salaDAO.buscarSala( id, function ( err, resultado ) {
+                    if ( !err && resultado.length != 0 ) {
+                        let turma = resultado[ 0 ];
+                        if ( turma.id_professor == usuario.id )
+                            res.render( 'professor/perfil/abrirTurmaAluno.ejs', {
+                                user: req.user,
+                                page_name: req.path,
+                                accountType: req.user.tipo,
+                                accountId: req.user.id,
+                                idSala: req.listaSala
                             } );
                         else
                             res.send( '<h1>Você não é responsável pela - ' + turma.nome + '</>' );

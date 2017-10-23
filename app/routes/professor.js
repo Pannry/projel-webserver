@@ -38,7 +38,16 @@ module.exports = function ( app ) {
     app.get( '/professor/profile/turmas/criar', checkAuth, ProfessorController.criarTurmas.get );
     app.post( '/professor/profile/turmas/criar', checkAuth, ProfessorController.criarTurmas.post );
 
-    app.get( '/professor/turma/abrir/:id', checkAuth, ProfessorController.turma.abrir );
+    app.get( '/professor/turma/abrir/:id/professor',
+        checkAuth,
+        ProfessorController.turma.listaSala,
+        ProfessorController.turma.abrirProfessor
+    );
+    app.get( '/professor/turma/abrir/:id/aluno',
+        checkAuth,
+        ProfessorController.turma.listaSala,
+        ProfessorController.turma.abrirAluno
+    );
     app.post( '/professor/turma/editar/:id', checkAuth, ProfessorController.turma.editar );
     // app.post('excluirTurma', checkAuth, ProfessorController.turma.excluir);
 
