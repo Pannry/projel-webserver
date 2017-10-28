@@ -1,6 +1,30 @@
 module.exports = function ( app ) {
     let passport = app.get( 'passport' );
+
+    var render = [
+        'professor/signup',
+        'professor/login',
+        'professor/perfil/perfil',
+        'professor/perfil/turmas/turmas',
+        'professor/perfil/turmas/criarTurma',
+        'professor/perfil/turmas/abrirTurmaProfessor',
+        'professor/perfil/turmas/abrirTurmaAluno',
+        'professor/perfil/exercicios/exercicios',
+        'professor/perfil/exercicios/criarExercicios',
+        'professor/perfil/exercicios/listaExercicios',
+        'professor/perfil/exercicios/criarListaExercicios'
+
+    ];
+
+    var redirect = [
+        '/professor/login',
+        '/professor/profile',
+        '/professor/login',
+        '/professor/profile/turmas'
+    ];
+
     professorController = {};
+
 
     professorController.cadastro = {
         get: function ( req, res ) {
@@ -8,7 +32,7 @@ module.exports = function ( app ) {
             var instituicaoDAO = new app.infra.banco.InstituicaoDAO( conexaoDb );
 
             instituicaoDAO.listaInstituicao( function ( exception, resultado ) {
-                res.render( 'professor/signup', {
+                res.render( render[ 0 ], {
                     listaDeInstituicao: resultado
                 } );
             } );
@@ -25,32 +49,35 @@ module.exports = function ( app ) {
             var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
 
             usuarioDAO.salvarProfessor( usuario, function ( erro, resultado ) {
-                res.redirect( '/professor/login' );
+                res.redirect( redirect[ 0 ] );
             } );
             conexaoDb.end();
         }
     };
 
+
     professorController.login = {
         get: function ( req, res ) {
-            res.render( 'professor/login', { message: req.flash( 'loginMessage' ) } );
+            res.render( render[ 1 ], { message: req.flash( 'loginMessage' ) } );
         },
 
         post: passport.authenticate( 'local-login-professor', {
-            successRedirect: '/professor/profile',
-            failureRedirect: '/professor/login',
+            successRedirect: redirect[ 1 ],
+            failureRedirect: redirect[ 2 ],
             failureFlash: true
         } )
     };
+
 
     professorController.logout = function ( req, res ) {
         req.logout();
         res.redirect( '/' );
     };
 
+
     professorController.perfil = function ( req, res ) {
         if ( req.user.tipo == 'professor' ) {
-            res.render( 'professor/perfil/perfil', {
+            res.render( render[ 2 ], {
                 user: req.user,
                 page_name: req.path,
                 accountType: req.user.tipo
@@ -58,13 +85,14 @@ module.exports = function ( app ) {
         }
     };
 
+
     professorController.painelDasTurmas = function ( req, res ) {
         if ( req.user.tipo == 'professor' ) {
             var conexaoDb = app.infra.banco.dbConnection();
             var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
             salaDAO.listaSalaProfessor( req.user.id, function ( exception, resultado ) {
-                res.render( 'professor/perfil/turmas', {
+                res.render( render[ 3 ], {
                     user: req.user,
                     page_name: req.path,
                     accountType: req.user.tipo,
@@ -76,10 +104,11 @@ module.exports = function ( app ) {
         }
     };
 
+
     professorController.criarTurmas = {
         get: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
-                res.render( 'professor/perfil/criarTurma', {
+                res.render( render[ 4 ], {
                     user: req.user,
                     page_name: req.path,
                     accountType: req.user.tipo,
@@ -98,13 +127,14 @@ module.exports = function ( app ) {
                 var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
                 salaDAO.addSala( turma, function ( err, resultado ) {
-                    res.redirect( '/professor/profile/turmas/criar' );
+                    res.redirect( redirect[ 3 ] );
                 } );
 
                 conexaoDb.end();
             }
         }
     };
+
 
     professorController.turma = {
         editar: function ( req, res ) {
@@ -131,7 +161,7 @@ module.exports = function ( app ) {
                     if ( !err && resultado.length != 0 ) {
                         let turma = resultado[ 0 ];
                         if ( turma.id_professor == usuario.id )
-                            res.render( 'professor/perfil/abrirTurmaProfessor.ejs', {
+                            res.render( render[ 5 ], {
                                 user: req.user,
                                 page_name: req.path,
                                 accountType: req.user.tipo,
@@ -161,7 +191,7 @@ module.exports = function ( app ) {
                     if ( !err && resultado.length != 0 ) {
                         let turma = resultado[ 0 ];
                         if ( turma.id_professor == usuario.id )
-                            res.render( 'professor/perfil/abrirTurmaAluno.ejs', {
+                            res.render( render[ 6 ], {
                                 user: req.user,
                                 page_name: req.path,
                                 accountType: req.user.tipo,
@@ -180,5 +210,47 @@ module.exports = function ( app ) {
     };
 
 
+    professorController.exercicios = {
+        get: function ( req, res ) {
+            res.render( render[ 7 ], {
+                user: req.user,
+                page_name: req.path,
+                accountType: req.user.tipo
+            } );
+        }
+    };
+
+
+    professorController.criarExercicios = {
+        get: function ( req, res ) {
+            res.render( render[ 8 ], {
+                user: req.user,
+                page_name: req.path,
+                accountType: req.user.tipo
+            } );
+        }
+    };
+
+
+    professorController.listaExercicios = {
+        get: function ( req, res ) {
+            res.render( render[ 9 ], {
+                user: req.user,
+                page_name: req.path,
+                accountType: req.user.tipo
+            } );
+        }
+    };
+
+
+    professorController.criarListaExercicios = {
+        get: function ( req, res ) {
+            res.render( render[ 10 ], {
+                user: req.user,
+                page_name: req.path,
+                accountType: req.user.tipo
+            } );
+        }
+    };
     return professorController;
 };

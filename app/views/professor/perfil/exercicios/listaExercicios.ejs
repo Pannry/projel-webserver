@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../../partials/head.ejs %>
+</head>
+
+<body>
+
+    <!-- Nav dashboard -->
+    <% include ../../../partials/navbar-dashboard.ejs %>
+    
+    <!-- Sidebar Menu -->
+    <% include ../../../partials/sidebar-menu.ejs %>
+
+
+    <!-- Content -->
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+
+        <h1> Lista de exercicios: </h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-1">
+                <a class="btn btn-success " href="/professor/profile/exercicios/lista/criar">Criar</a>
+            </div>
+        </div>
+
+
+    </main>
+
+    <% include ../../../partials/scripts.ejs /%>
+    
+</body>
+
+</html>
