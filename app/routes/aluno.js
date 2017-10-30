@@ -5,13 +5,14 @@ module.exports = function ( app ) {
     var alunoController = app.controllers.AlunoController;
 
     var paths = [
-        '/',
-        '/aluno/signup',
-        '/aluno/login',
-        '/profile',
-        '/profile/turmas',
-        '/profile/turmas/procurar',
-        '/profile/turmas/professor/:id'
+/*00*/  '/',
+/*01*/  '/aluno/signup',
+/*02*/  '/aluno/login',
+/*03*/  '/profile',
+/*04*/  '/profile/turmas',
+/*05*/  '/profile/turmas/procurar',
+/*06*/  '/profile/turmas/professor/:id',
+/*07*/  '/profile/update'
     ];
 
     app.get( paths[ 0 ], function ( req, res ) {
@@ -38,6 +39,7 @@ module.exports = function ( app ) {
      * profile
      */
     app.get( paths[ 3 ], checkAuthentication, alunoController.perfil.get );
+    app.get( paths[ 7 ], checkAuthentication, alunoController.perfil.update );
 
     app.get( paths[ 4 ], checkAuthentication, alunoController.minhasTurmas.get );
 

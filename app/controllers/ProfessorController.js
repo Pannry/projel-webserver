@@ -2,25 +2,27 @@ module.exports = function ( app ) {
     let passport = app.get( 'passport' );
 
     var render = [
-        'professor/signup',
-        'professor/login',
-        'professor/perfil/perfil',
-        'professor/perfil/turmas/turmas',
-        'professor/perfil/turmas/criarTurma',
-        'professor/perfil/turmas/abrirTurmaProfessor',
-        'professor/perfil/turmas/abrirTurmaAluno',
-        'professor/perfil/exercicios/exercicios',
-        'professor/perfil/exercicios/criarExercicios',
-        'professor/perfil/exercicios/listaExercicios',
-        'professor/perfil/exercicios/criarListaExercicios'
+/*00*/  'professor/signup',
+/*01*/  'professor/login',
+/*02*/  'professor/perfil/perfil',
+/*03*/  'professor/perfil/turmas/turmas',
+/*04*/  'professor/perfil/turmas/criarTurma',
+/*05*/  'professor/perfil/turmas/abrirTurmaProfessor',
+/*06*/  'professor/perfil/turmas/abrirTurmaAluno',
+/*07*/  'professor/perfil/exercicios/exercicios',
+/*08*/  'professor/perfil/exercicios/criarExercicios',
+/*09*/  'professor/perfil/exercicios/listaExercicios',
+/*10*/  'professor/perfil/exercicios/criarListaExercicios',
+/*11*/  'professor/perfil/atualizarPerfil'
 
     ];
 
     var redirect = [
-        '/professor/login',
-        '/professor/profile',
-        '/professor/login',
-        '/professor/profile/turmas'
+/*00*/  '/professor/login',
+/*01*/  '/professor/profile',
+/*02*/  '/professor/login',
+/*03*/  '/professor/profile/turmas'
+
     ];
 
     professorController = {};
@@ -75,32 +77,46 @@ module.exports = function ( app ) {
     };
 
 
-    professorController.perfil = function ( req, res ) {
-        if ( req.user.tipo == 'professor' ) {
-            res.render( render[ 2 ], {
-                user: req.user,
-                page_name: req.path,
-                accountType: req.user.tipo
-            } );
-        }
+    professorController.perfil = {
+        get: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+                res.render( render[ 2 ], {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo
+                } );
+            }
+        },
+
+        update: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+                res.render( render[ 11 ], {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo
+                } );
+            }
+        },
     };
 
 
-    professorController.painelDasTurmas = function ( req, res ) {
-        if ( req.user.tipo == 'professor' ) {
-            var conexaoDb = app.infra.banco.dbConnection();
-            var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
+    professorController.painelDasTurmas = {
+        get: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+                var conexaoDb = app.infra.banco.dbConnection();
+                var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
-            salaDAO.listaSalaProfessor( req.user.id, function ( exception, resultado ) {
-                res.render( render[ 3 ], {
-                    user: req.user,
-                    page_name: req.path,
-                    accountType: req.user.tipo,
-                    listaSala: resultado,
+                salaDAO.listaSalaProfessor( req.user.id, function ( exception, resultado ) {
+                    res.render( render[ 3 ], {
+                        user: req.user,
+                        page_name: req.path,
+                        accountType: req.user.tipo,
+                        listaSala: resultado,
+                    } );
                 } );
-            } );
 
-            conexaoDb.end();
+                conexaoDb.end();
+            }
         }
     };
 
@@ -143,7 +159,7 @@ module.exports = function ( app ) {
 
         listaSala: function ( req, res, next ) {
             if ( req.user.tipo == 'professor' ) {
-                req.listaSala = req.params.id
+                req.listaSala = req.params.id;
             }
             next();
         },

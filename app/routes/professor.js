@@ -5,21 +5,22 @@ module.exports = function ( app ) {
     var ProfessorController = app.controllers.ProfessorController;
 
     var paths = [
-        '/professor',
-        '/professor/signup',
-        '/professor/login',
-        '/logout',
-        '/professor/profile',
-        '/professor/profile/turmas',
-        '/professor/profile/turmas/criar',
-        '/professor/turma/abrir/:id/professor',
-        '/professor/turma/abrir/:id/aluno',
-        '/professor/turma/editar/:id',
-        '/professor/turma/excluir/:id',
-        '/professor/profile/exercicios',
-        '/professor/profile/exercicios/criar',
-        '/professor/profile/exercicios/lista',
-        '/professor/profile/exercicios/lista/criar'
+ /*00*/ '/professor',
+ /*01*/ '/professor/signup',
+ /*02*/ '/professor/login',
+ /*03*/ '/logout',
+ /*04*/ '/professor/profile',
+ /*05*/ '/professor/profile/turmas',
+ /*06*/ '/professor/profile/turmas/criar',
+ /*07*/ '/professor/turma/abrir/:id/professor',
+ /*08*/ '/professor/turma/abrir/:id/aluno',
+ /*09*/ '/professor/turma/editar/:id',
+ /*10*/ '/professor/turma/excluir/:id',
+ /*11*/ '/professor/profile/exercicios',
+ /*12*/ '/professor/profile/exercicios/criar',
+ /*13*/ '/professor/profile/exercicios/lista',
+ /*14*/ '/professor/profile/exercicios/lista/criar',
+ /*15*/ '/professor/profile/update'
     ];
 
     app.get( paths[ 0 ], function ( req, res ) {
@@ -49,13 +50,14 @@ module.exports = function ( app ) {
     /**
      * profile
      */
-    app.get( paths[ 4 ], checkAuth, ProfessorController.perfil );
+    app.get( paths[ 4 ], checkAuth, ProfessorController.perfil.get );
+    app.get( paths[ 15 ], checkAuth, ProfessorController.perfil.update );
 
 
     /**
      *      Turmas
      */
-    app.get( paths[ 5 ], checkAuth, ProfessorController.painelDasTurmas );
+    app.get( paths[ 5 ], checkAuth, ProfessorController.painelDasTurmas.get );
 
     app.get( paths[ 6 ], checkAuth, ProfessorController.criarTurmas.get );
     app.post( paths[ 6 ], checkAuth, ProfessorController.criarTurmas.post );

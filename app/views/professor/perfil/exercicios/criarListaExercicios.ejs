@@ -20,6 +20,58 @@
         <h1> Criar lista de Exercicios: </h1>
         <hr>
 
+        <form class="" action= {{{{ALTERAR}}}} method="post"><br>
+            
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <label for="titulo" class="font-weight-bold">Titulo da lista:</label>
+                    <input type="text" name="titulo" class="form-control">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <label for="descricao" class="font-weight-bold">Descrição da lista:</label>
+                    <textarea class="form-control" name="descricao" rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <label for="tempo" class="font-weight-bold">Duracao da lista:</label>
+                    <input type="text" name="tempo" class="form-control">
+                </div>
+            </div>
+
+            <!-- Adicionar Exercicios -->
+            <br>
+            <label><h3>Exercicios disponiveis para incluir</h3></label>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="(id)1">
+                    Exercicio 1
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="(id)2">
+                    Exercicio 2
+                </label>
+            </div>
+
+            <br>
+            
+            <div class="row">
+                <div class="col-md-1 mr-1">
+                    <input class="btn btn-info btn-lg" type="submit" value="Criar" >
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-lg btn-info" href="/professor/profile/exercicios/lista">Voltar</a>
+                </div>
+            </div>
+
+        </form>
+
     </main>
 
     <% include ../../../partials/scripts.ejs /%>

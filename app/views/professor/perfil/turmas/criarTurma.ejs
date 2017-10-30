@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <% include ../../../partials/head.ejs %>
-    </head>
+<head>
+    <% include ../../../partials/head.ejs %>
+</head>
 
-    <body>
+<body>
 
-        <!-- Nav dashboard -->
-        <% include ../../../partials/navbar-dashboard.ejs %>
-        
-        <!-- Sidebar Menu -->
-        <% include ../../../partials/sidebar-menu.ejs %>
+    <!-- Nav dashboard -->
+    <% include ../../../partials/navbar-dashboard.ejs %>
+    
+    <!-- Sidebar Menu -->
+    <% include ../../../partials/sidebar-menu.ejs %>
 
 
-        <!-- Content -->
-        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+    <!-- Content -->
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 
-            <h1> Criando Turma: </h1>
+        <h1> Criando Turma: </h1>
 
-            <hr>
+        <hr>
 
-            <form class="" action="/professor/profile/turmas/criar" method="post">
-                <br>
-                <div class="row">
-                    <div class="offset-md-3 col-md-6 col-sm-12">
-                        <label for="nome" class="font-weight-bold">Nome:</label>
-                        <input type="text" name="nome" value="" class="form-control" placeholder="Engenharia Elétrica">
-                    </div>
+        <form class="" action="/professor/profile/turmas/criar" method="post">
+            <br>
+            <div class="row">
+                <div class="offset-md-3 col-md-6 col-sm-12">
+                    <label for="nome" class="font-weight-bold">Nome:</label>
+                    <input type="text" name="nome" value="" class="form-control" placeholder="Engenharia Elétrica">
                 </div>
-                <div class="row">
-                    <div class="offset-md-3 col-md-6 col-sm-12">
-                        <label for="semestre" class="font-weight-bold">Semestre:</label>
-                        <input type="text" name="semestre" value="" class="form-control" placeholder="20??.?">
-                    </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-3 col-md-6 col-sm-12">
+                    <label for="semestre" class="font-weight-bold">Semestre:</label>
+                    <input type="text" name="semestre" value="" class="form-control" placeholder="20??.?">
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-1 mr-1">
-                        <input class="btn btn-info btn-lg" type="submit" value="Criar" >
-                    </div>
-                    <div class="col-md-2">
-                        <a class="btn btn-lg btn-info "href="/professor/profile/turmas">Voltar</a>
-                    </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-1 mr-1">
+                    <input class="btn btn-info btn-lg" type="submit" value="Criar" >
                 </div>
-            </form>
+                <div class="col-md-2">
+                    <a class="btn btn-lg btn-info "href="/professor/profile/turmas">Voltar</a>
+                </div>
+            </div>
+        </form>
 
-        </main>
+    </main>
 
-        <% include ../../../partials/scripts.ejs /%>
-    </body>
+    <% include ../../../partials/scripts.ejs /%>
+</body>
 
 </html>

@@ -25,10 +25,11 @@
     <% include ../../../partials/sidebar-menu.ejs %>
 
     <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-        <h1> Turma: [nome da turma] Semestre: [Semestre] </h1>
+        <h1> Turma: ? Semestre: ? (Possivel a mudanças) </h1>
         <hr>
 
         <div class="card">
+
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
@@ -41,55 +42,53 @@
             </div>
 
             <div class="card-body">
-                <h4 class="card-title">Alunos inscritos na turma</h4>
+                <h4 class="card-title">Alunos dessa turma</h4>
+                
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-3"><h6>Nomes</h6></div>
+                                <div class="col-3"><h6>Aluno pertence a turma?</h6></div>
+                                <div class="col-3"><h6>Todos os exercicios foram avaliados?</h6></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
                 <div class="card">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="row">
-                                <div class="col-8">
-                                    Fulano 1
-                                </div>
-                                <div class="col-2">
-                                    <i class="fa fa-check green" aria-hidden="true"></i>                             
-                                </div>
-                                <div class="col-2">                                
-                                    <a href="#" ><button type="submit" class="btn-sm">Incluir</button></a>
-                                </div>                                
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-8">
+                                <div class="col-3">
                                     Fulano 2
                                 </div>
-                                <div class="col-2">
-                                    <i class="fa fa-times red" aria-hidden="true"></i>                             
+                                <div class="col-3">                                
+                                    <a href="#" ><button type="submit" class="btn-sm" disabled>Incluir</button></a>
                                 </div>
-                                <div class="col-2">                                
-                                    <a href="#" ><button type="submit" class="btn-sm">Incluir</button></a>
-                                </div>                                
+                                <div class="col-3">                                
+                                    <a href="#" ><button type="submit" class="btn-sm">Ver Exercicios</button></a>
+                                </div>                            
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-3">
                                     Fulano 3
                                 </div>
-                                <div class="col-2">
-                                    <i class="fa fa-check green" aria-hidden="true"></i>                             
-                                </div>
-                                <div class="col-2">                                
+                                <div class="col-3">                                
                                     <a href="#" ><button type="submit" class="btn-sm">Incluir</button></a>
-                                </div>                                
+                                </div>
+                                <div class="col-3">                                
+                                    <a href="#" ><button type="submit" class="btn-sm" disabled>Ver Exercicios</button></a>
+                                </div>                            
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-
+            
         </div>
-
 
     </main>
 

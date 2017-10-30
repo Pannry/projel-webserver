@@ -2,18 +2,19 @@ module.exports = function ( app ) {
     var passport = app.get( 'passport' );
 
     var paths = [
-        'aluno/signup',
-        'aluno/login',
-        'aluno/perfil/perfil',
-        'aluno/perfil/turmas',
-        'aluno/perfil/turmasProfessor',
-        'aluno/perfil/turmasProcurar'
+/*00*/  'aluno/signup',
+/*01*/  'aluno/login',
+/*02*/  'aluno/perfil/perfil',
+/*03*/  'aluno/perfil/turmas',
+/*04*/  'aluno/perfil/turmasProfessor',
+/*05*/  'aluno/perfil/turmasProcurar',
+/*06*/  'aluno/perfil/atualizarPerfil'
     ];
     var redirect = [
-        '/aluno/login',
-        '/profile',
-        '/aluno/login',
-        '/profile/turmas'
+/*00*/  '/aluno/login',
+/*01*/  '/profile',
+/*02*/  '/aluno/login',
+/*03*/  '/profile/turmas'
     ];
 
     alunoController = {};
@@ -67,6 +68,15 @@ module.exports = function ( app ) {
         get: function ( req, res ) {
             if ( req.user.tipo == "aluno" ) {
                 res.render( paths[ 2 ], {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo
+                } );
+            }
+        },
+        update: function ( req, res ) {
+            if ( req.user.tipo == "aluno" ) {
+                res.render( paths[ 6 ], {
                     user: req.user,
                     page_name: req.path,
                     accountType: req.user.tipo
