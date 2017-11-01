@@ -21,7 +21,8 @@ module.exports = function ( app ) {
 /*00*/  '/professor/login',
 /*01*/  '/professor/profile',
 /*02*/  '/professor/login',
-/*03*/  '/professor/profile/turmas'
+/*03*/  '/professor/profile/turmas',
+/*04*/  '/professor/profile/exercicios'
 
     ];
 
@@ -235,29 +236,6 @@ module.exports = function ( app ) {
             } );
         }
     };
-
-
-    professorController.criarExercicios = {
-        get: function ( req, res ) {
-            res.render( render[ 8 ], {
-                user: req.user,
-                page_name: req.path,
-                accountType: req.user.tipo
-            } );
-        }
-    };
-
-
-    professorController.listaExercicios = {
-        get: function ( req, res ) {
-            res.render( render[ 9 ], {
-                user: req.user,
-                page_name: req.path,
-                accountType: req.user.tipo
-            } );
-        }
-    };
-
 
     professorController.criarListaExercicios = {
         get: function ( req, res ) {

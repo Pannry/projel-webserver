@@ -38,7 +38,8 @@
                 "/professor/profile",
                 "/professor/profile/turmas",
                 "/professor/profile/exercicios",
-                "/professor/profile/exercicios/lista"
+                "/professor/profile/exercicios/lista",
+                "/logout"
             ] 
             %>
 
@@ -68,6 +69,19 @@
                 <a 
                     <% if ( page_name === paths[3] ) { %> class="nav-link active" <% } %>
                     class="nav-link" href="/professor/profile/exercicios/lista">Lista de exercícios
+                </a> 
+            </li>
+
+            <li>
+                <hr>
+            </li>
+            
+            <li class="nav-item"> 
+                <a 
+                    <% if ( page_name === paths[4] ) { %> class="nav-link active" <% } %>
+                    class="nav-link" href="/logout">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    Logout
                 </a> 
             </li>
 

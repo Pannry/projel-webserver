@@ -1,22 +1,5 @@
 module.exports = function ( app ) {
     var passport = app.get( 'passport' );
-
-    var paths = [
-/*00*/  'aluno/signup',
-/*01*/  'aluno/login',
-/*02*/  'aluno/perfil/perfil',
-/*03*/  'aluno/perfil/turmas',
-/*04*/  'aluno/perfil/turmasProfessor',
-/*05*/  'aluno/perfil/turmasProcurar',
-/*06*/  'aluno/perfil/atualizarPerfil'
-    ];
-    var redirect = [
-/*00*/  '/aluno/login',
-/*01*/  '/profile',
-/*02*/  '/aluno/login',
-/*03*/  '/profile/turmas'
-    ];
-
     alunoController = {};
 
     /**
@@ -28,7 +11,7 @@ module.exports = function ( app ) {
             var instituicaoDAO = new app.infra.banco.InstituicaoDAO( conexaoDb );
 
             instituicaoDAO.listaInstituicao( function ( exception, resultado ) {
-                res.render( paths[ 0 ], {
+                res.render( 'aluno/signup', {
                     listaDeInstituicao: resultado
                 } );
             } );
@@ -43,7 +26,7 @@ module.exports = function ( app ) {
             var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
 
             usuarioDAO.salvarAluno( usuario, function ( erro, resultado ) {
-                res.redirect( redirect[ 0 ] );
+                res.redirect( '/aluno/login' );
             } );
             conexaoDb.end();
         }
@@ -54,12 +37,12 @@ module.exports = function ( app ) {
      */
     alunoController.login = {
         get: function ( req, res ) {
-            res.render( paths[ 1 ], { message: req.flash( 'loginMessage' ) } );
+            res.render( 'aluno/login', { message: req.flash( 'loginMessage' ) } );
         },
 
         post: passport.authenticate( 'local-login-aluno', {
-            successRedirect: redirect[ 1 ],
-            failureRedirect: redirect[ 2 ],
+            successRedirect: '/profile',
+            failureRedirect: '/aluno/login',
             failureFlash: true
         } )
     };
@@ -67,7 +50,7 @@ module.exports = function ( app ) {
     alunoController.perfil = {
         get: function ( req, res ) {
             if ( req.user.tipo == "aluno" ) {
-                res.render( paths[ 2 ], {
+                res.render( 'aluno/perfil/perfil', {
                     user: req.user,
                     page_name: req.path,
                     accountType: req.user.tipo
@@ -76,7 +59,7 @@ module.exports = function ( app ) {
         },
         update: function ( req, res ) {
             if ( req.user.tipo == "aluno" ) {
-                res.render( paths[ 6 ], {
+                res.render( 'aluno/perfil/atualizarPerfil', {
                     user: req.user,
                     page_name: req.path,
                     accountType: req.user.tipo
@@ -96,7 +79,7 @@ module.exports = function ( app ) {
                 var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
                 salaDAO.listaSalaAluno( req.user.id, function ( err, resultadoAluno ) {
-                    res.render( paths[ 3 ], {
+                    res.render( 'aluno/perfil/turmas', {
                         user: req.user,
                         page_name: req.path,
                         accountType: req.user.tipo,
@@ -122,7 +105,7 @@ module.exports = function ( app ) {
                 var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
                 salaDAO.listaSalaProfessor( idDoProfessor, function ( err, resultado ) {
-                    res.render( paths[ 4 ], {
+                    res.render( 'aluno/perfil/turmas', {
                         user: req.user,
                         page_name: req.path,
                         accountType: req.user.tipo,
@@ -142,7 +125,7 @@ module.exports = function ( app ) {
             var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
             salaDAO.alunoEntrarTurma( id_aluno, id_sala, function ( err, resultado ) {
-                res.redirect( redirect[ 3 ] );
+                res.redirect( '/profile/turmas' );
 
             } );
 
@@ -158,7 +141,7 @@ module.exports = function ( app ) {
                 var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
 
                 usuarioDAO.listaProfessor( function ( err, resultado ) {
-                    res.render( paths[ 5 ], {
+                    res.render( 'aluno/perfil/turmasProcurar', {
                         user: req.user,
                         page_name: req.path,
                         accountType: req.user.tipo,

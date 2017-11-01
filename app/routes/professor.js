@@ -39,8 +39,9 @@ module.exports = function ( app ) {
     /**
      * Login
      */
-    app.get( paths[ 2 ], ProfessorController.login.get );
-    app.post( paths[ 2 ], ProfessorController.login.post );
+    app.route( paths[ 2 ] )
+        .get( ProfessorController.login.get )
+        .post( ProfessorController.login.post );
 
     /**
      * Logout
@@ -59,8 +60,9 @@ module.exports = function ( app ) {
      */
     app.get( paths[ 5 ], checkAuth, ProfessorController.painelDasTurmas.get );
 
-    app.get( paths[ 6 ], checkAuth, ProfessorController.criarTurmas.get );
-    app.post( paths[ 6 ], checkAuth, ProfessorController.criarTurmas.post );
+    app.route( paths[ 6 ] )
+        .get( checkAuth, ProfessorController.criarTurmas.get )
+        .post( checkAuth, ProfessorController.criarTurmas.post );
 
     app.get( paths[ 7 ], checkAuth,
         ProfessorController.turma.listaSala,
@@ -78,7 +80,10 @@ module.exports = function ( app ) {
      *      Exercicios
      */
     app.get( paths[ 11 ], checkAuth, ProfessorController.exercicios.get );
-    app.get( paths[ 12 ], checkAuth, ProfessorController.criarExercicios.get );
+
+    app.route( paths[ 12 ] )
+        .get( checkAuth, ProfessorController.criarExercicios.get )
+        .post( checkAuth, ProfessorController.criarExercicios.post );
 
     app.get( paths[ 13 ], checkAuth, ProfessorController.listaExercicios.get );
     app.get( paths[ 14 ], checkAuth, ProfessorController.criarListaExercicios.get );
