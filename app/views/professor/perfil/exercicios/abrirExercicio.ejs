@@ -9,28 +9,33 @@
 
     <!-- Nav dashboard -->
     <% include ../../../partials/navbar-dashboard.ejs %>
-    
+
     <!-- Sidebar Menu -->
     <% include ../../../partials/sidebar-menu.ejs %>
 
-
-    <!-- Content -->
     <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-
-        <h1> Lista de exercicios: </h1>
+        <h1> Exercicio: <%= questao[0].titulo%> </h1>
         <hr>
 
-        <div class="row">
-            <div class="col-md-1">
-                <a class="btn btn-success " href="/professor/exercicios/lista/criar">Criar</a>
+        <div class="row ml-2">
+            <div class="col-12">
+                <h4>
+                    Descrição do exercicio:
+                </h4>
+                <br>
             </div>
-        </div>
 
+            <div class="col-12">
+                <h5>
+                    <%= questao[0].descricao%>
+                </h5>
+            </div>
+
+        </div>
 
     </main>
 
     <% include ../../../partials/scripts.ejs /%>
-    
 </body>
 
 </html>

@@ -1,33 +1,7 @@
 module.exports = function ( app ) {
     let passport = app.get( 'passport' );
 
-    var render = [
-/*00*/  'professor/signup',
-/*01*/  'professor/login',
-/*02*/  'professor/perfil/perfil',
-/*03*/  'professor/perfil/turmas/turmas',
-/*04*/  'professor/perfil/turmas/criarTurma',
-/*05*/  'professor/perfil/turmas/abrirTurmaProfessor',
-/*06*/  'professor/perfil/turmas/abrirTurmaAluno',
-/*07*/  'professor/perfil/exercicios/exercicios',
-/*08*/  'professor/perfil/exercicios/criarExercicios',
-/*09*/  'professor/perfil/exercicios/listaExercicios',
-/*10*/  'professor/perfil/exercicios/criarListaExercicios',
-/*11*/  'professor/perfil/atualizarPerfil'
-
-    ];
-
-    var redirect = [
-/*00*/  '/professor/login',
-/*01*/  '/professor/profile',
-/*02*/  '/professor/login',
-/*03*/  '/professor/profile/turmas',
-/*04*/  '/professor/profile/exercicios'
-
-    ];
-
     professorController = {};
-
 
     professorController.cadastro = {
         get: function ( req, res ) {
@@ -35,7 +9,7 @@ module.exports = function ( app ) {
             var instituicaoDAO = new app.infra.banco.InstituicaoDAO( conexaoDb );
 
             instituicaoDAO.listaInstituicao( function ( exception, resultado ) {
-                res.render( render[ 0 ], {
+                res.render( 'professor/signup', {
                     listaDeInstituicao: resultado
                 } );
             } );
@@ -52,7 +26,7 @@ module.exports = function ( app ) {
             var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
 
             usuarioDAO.salvarProfessor( usuario, function ( erro, resultado ) {
-                res.redirect( redirect[ 0 ] );
+                res.redirect( '/professor/login' );
             } );
             conexaoDb.end();
         }
@@ -61,12 +35,12 @@ module.exports = function ( app ) {
 
     professorController.login = {
         get: function ( req, res ) {
-            res.render( render[ 1 ], { message: req.flash( 'loginMessage' ) } );
+            res.render( 'professor/login', { message: req.flash( 'loginMessage' ) } );
         },
 
         post: passport.authenticate( 'local-login-professor', {
-            successRedirect: redirect[ 1 ],
-            failureRedirect: redirect[ 2 ],
+            successRedirect: '/professor/profile',
+            failureRedirect: '/professor/login',
             failureFlash: true
         } )
     };
@@ -81,7 +55,7 @@ module.exports = function ( app ) {
     professorController.perfil = {
         get: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
-                res.render( render[ 2 ], {
+                res.render( 'professor/perfil/perfil', {
                     user: req.user,
                     page_name: req.path,
                     accountType: req.user.tipo
@@ -91,7 +65,7 @@ module.exports = function ( app ) {
 
         update: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
-                res.render( render[ 11 ], {
+                res.render( 'professor/perfil/atualizarPerfil', {
                     user: req.user,
                     page_name: req.path,
                     accountType: req.user.tipo
@@ -108,7 +82,7 @@ module.exports = function ( app ) {
                 var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
                 salaDAO.listaSalaProfessor( req.user.id, function ( exception, resultado ) {
-                    res.render( render[ 3 ], {
+                    res.render( 'professor/perfil/turmas/turmas', {
                         user: req.user,
                         page_name: req.path,
                         accountType: req.user.tipo,
@@ -125,7 +99,7 @@ module.exports = function ( app ) {
     professorController.criarTurmas = {
         get: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
-                res.render( render[ 4 ], {
+                res.render( 'professor/perfil/turmas/criarTurma', {
                     user: req.user,
                     page_name: req.path,
                     accountType: req.user.tipo,
@@ -144,7 +118,7 @@ module.exports = function ( app ) {
                 var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
                 salaDAO.addSala( turma, function ( err, resultado ) {
-                    res.redirect( redirect[ 3 ] );
+                    res.redirect( '/professor/profile/turmas' );
                 } );
 
                 conexaoDb.end();
@@ -178,7 +152,7 @@ module.exports = function ( app ) {
                     if ( !err && resultado.length != 0 ) {
                         let turma = resultado[ 0 ];
                         if ( turma.id_professor == usuario.id )
-                            res.render( render[ 5 ], {
+                            res.render( 'professor/perfil/turmas/abrirTurmaProfessor', {
                                 user: req.user,
                                 page_name: req.path,
                                 accountType: req.user.tipo,
@@ -208,8 +182,8 @@ module.exports = function ( app ) {
                     if ( !err && resultado.length != 0 ) {
                         let turma = resultado[ 0 ];
                         if ( turma.id_professor == usuario.id )
-                            res.render( render[ 6 ], {
-                                user: req.user,
+                            res.render( 'professor/perfil/turmas/abrirTurmaAluno', {
+                                user: usuario,
                                 page_name: req.path,
                                 accountType: req.user.tipo,
                                 accountId: req.user.id,
@@ -226,25 +200,5 @@ module.exports = function ( app ) {
         }
     };
 
-
-    professorController.exercicios = {
-        get: function ( req, res ) {
-            res.render( render[ 7 ], {
-                user: req.user,
-                page_name: req.path,
-                accountType: req.user.tipo
-            } );
-        }
-    };
-
-    professorController.criarListaExercicios = {
-        get: function ( req, res ) {
-            res.render( render[ 10 ], {
-                user: req.user,
-                page_name: req.path,
-                accountType: req.user.tipo
-            } );
-        }
-    };
     return professorController;
 };
