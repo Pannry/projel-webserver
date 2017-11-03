@@ -2,16 +2,16 @@
 <html lang="en">
 
     <head>
-        <% include ../../partials/head.ejs %>
+        <% include ../../../partials/head.ejs %>
     </head>
 
     <body>
 
         <!-- Nav dashboard -->
-        <% include ../../partials/navbar-dashboard.ejs %>
+        <% include ../../../partials/navbar-dashboard.ejs %>
         
         <!-- Sidebar Menu -->
-        <% include ../../partials/sidebar-menu.ejs %>
+        <% include ../../../partials/sidebar-menu.ejs %>
 
 
         <!-- Content -->
@@ -42,7 +42,7 @@
                                 var anchor = document.getElementById( "myAnchor" );
 
                                 var link = document.createAttribute( "href" );
-                                link.value = "/profile/turmas/professor/" + dropDown.value;
+                                link.value = "/turmas/professor/" + dropDown.value;
 
                                 var anchorClass = document.createAttribute( "class" );
                                 anchorClass.value = "btn btn-info";
@@ -55,7 +55,7 @@
                 </div>
         </main>
 
-        <% include ../../partials/scripts.ejs /%>
+        <% include ../../../partials/scripts.ejs /%>
     </body>
 
 </html>

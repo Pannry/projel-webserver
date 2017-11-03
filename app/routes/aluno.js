@@ -32,13 +32,25 @@ module.exports = function ( app ) {
     app.get( '/profile', checkAuthentication, alunoController.perfil.get );
     app.get( '/profile/update', checkAuthentication, alunoController.perfil.update );
 
+    /**
+     * Turmas
+     */
+
     app.get( '/profile/turmas', checkAuthentication, alunoController.minhasTurmas.get );
+
+    app.get( '/turmas/abrir/:id', checkAuthentication, alunoController.abrirTurma.get );
+
+    /**
+     * Procurar Turmas
+     */
 
     app.get( '/profile/turmas/procurar', checkAuthentication, alunoController.procurarTurmas.get );
 
-    app.route( '/profile/turmas/professor/:id' )
+    app.route( '/turmas/professor/:id' )
         .get( checkAuthentication, alunoController.turmasProfessor.get )
         .post( checkAuthentication, alunoController.turmasProfessor.post );
+
+
 
 
 

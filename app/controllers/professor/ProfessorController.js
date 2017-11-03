@@ -157,7 +157,8 @@ module.exports = function ( app ) {
                                 page_name: req.path,
                                 accountType: req.user.tipo,
                                 accountId: req.user.id,
-                                idSala: req.listaSala
+                                idSala: req.listaSala,
+                                infoProfessor: resultado
                             } );
                         else
                             res.send( '<h1>Você não é responsável pela - ' + turma.nome + '</>' );
@@ -187,7 +188,8 @@ module.exports = function ( app ) {
                                 page_name: req.path,
                                 accountType: req.user.tipo,
                                 accountId: req.user.id,
-                                idSala: req.listaSala
+                                idSala: req.listaSala,
+                                infoProfessor: resultado
                             } );
                         else
                             res.send( '<h1>Você não é responsável pela - ' + turma.nome + '</>' );

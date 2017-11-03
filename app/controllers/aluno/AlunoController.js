@@ -79,7 +79,7 @@ module.exports = function ( app ) {
                 var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
                 salaDAO.listaSalaAluno( req.user.id, function ( err, resultadoAluno ) {
-                    res.render( 'aluno/perfil/turmas', {
+                    res.render( 'aluno/perfil/turmas/minhasTurmas', {
                         user: req.user,
                         page_name: req.path,
                         accountType: req.user.tipo,
@@ -95,6 +95,42 @@ module.exports = function ( app ) {
         }
     };
 
+
+    alunoController.abrirTurma = {
+        get: function ( req, res ) {
+            if ( req.user.tipo == 'aluno' ) {
+                res.render( 'aluno/perfil/turmas/abrirTurma', {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo,
+                } );
+            }
+        }
+    };
+
+
+    alunoController.procurarTurmas = {
+        get: function ( req, res ) {
+            if ( req.user.tipo == 'aluno' ) {
+
+                var conexaoDb = app.infra.banco.dbConnection();
+                var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
+
+                usuarioDAO.listaProfessor( function ( err, resultado ) {
+                    res.render( 'aluno/perfil/turmas/procurarTurmas', {
+                        user: req.user,
+                        page_name: req.path,
+                        accountType: req.user.tipo,
+                        listaSalaProfessor: resultado
+                    } );
+                } );
+
+                conexaoDb.end();
+            }
+        }
+    };
+
+
     alunoController.turmasProfessor = {
         get: function ( req, res ) {
             if ( req.user.tipo == 'aluno' ) {
@@ -105,11 +141,11 @@ module.exports = function ( app ) {
                 var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
                 salaDAO.listaSalaProfessor( idDoProfessor, function ( err, resultado ) {
-                    res.render( 'aluno/perfil/turmas', {
+                    res.render( 'aluno/perfil/turmas/professorTurmas', {
                         user: req.user,
                         page_name: req.path,
                         accountType: req.user.tipo,
-                        listaSala: resultado
+                        listaSalaAluno: resultado
                     } );
                 } );
 
@@ -133,26 +169,6 @@ module.exports = function ( app ) {
         }
     };
 
-    alunoController.procurarTurmas = {
-        get: function ( req, res ) {
-            if ( req.user.tipo == 'aluno' ) {
-
-                var conexaoDb = app.infra.banco.dbConnection();
-                var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
-
-                usuarioDAO.listaProfessor( function ( err, resultado ) {
-                    res.render( 'aluno/perfil/turmasProcurar', {
-                        user: req.user,
-                        page_name: req.path,
-                        accountType: req.user.tipo,
-                        listaSalaProfessor: resultado
-                    } );
-                } );
-
-                conexaoDb.end();
-            }
-        }
-    };
 
     return alunoController;
 
