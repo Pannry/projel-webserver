@@ -27,4 +27,9 @@ ExerciciosDao.prototype.abrirExercicio = function ( id_questao, callback ) {
 ExerciciosDao.prototype.criarListaExercicios = function ( entrada, callback ) {
     this._conexaoDb.query( 'INSERT INTO lista SET ?', entrada, callback );
 }
-
+ExerciciosDao.prototype.mostrarListaExercicios = function ( entrada, callback ) {
+    this._conexaoDb.query( 'SELECT * FROM lista WHERE id_professor = ?', entrada, callback );
+}
+ExerciciosDao.prototype.abrirLista = function ( entrada, callback ) {
+    this._conexaoDb.query( 'SELECT * FROM lista WHERE id_professor = ? AND id = ?', [ entrada.id_professor, entrada.id ], callback );
+}

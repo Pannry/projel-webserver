@@ -3,6 +3,10 @@ module.exports = function ( app ) {
 
     exercicioController = {};
 
+    /**
+     *      Exercicios
+     */
+
     exercicioController.exercicios = {
         get: function ( req, res, next ) {
 
@@ -88,26 +92,37 @@ module.exports = function ( app ) {
         }
     };
 
-    exercicioController.listaExercicios = {
+    /**
+     *      Listas
+     */
+
+    exercicioController.lista = {
         get: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
 
-            var conexaoDb = app.infra.banco.dbConnection();
-            var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+                id_professor = req.user.id
 
-            // ExerciciosDao.criarListaExercicios( entrada, function ( err, resultado ) {
-            res.render( 'professor/perfil/exercicios/listaExercicios', {
-                user: req.user,
-                page_name: req.path,
-                accountType: req.user.tipo
-            } );
-            // } );
-            // conexaoDb.end();
+                var conexaoDb = app.infra.banco.dbConnection();
+                var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+
+                ExerciciosDao.mostrarListaExercicios( id_professor, function ( err, resultado ) {
+                    res.render( 'professor/perfil/exercicios/lista', {
+                        user: req.user,
+                        page_name: req.path,
+                        accountType: req.user.tipo,
+                        lista: resultado
+
+                    } );
+                } );
+                conexaoDb.end();
+            }
         }
     };
 
-    exercicioController.criarListaExercicios = {
+
+    exercicioController.criarLista = {
         get: function ( req, res ) {
-            res.render( 'professor/perfil/exercicios/criarListaExercicios', {
+            res.render( 'professor/perfil/exercicios/criarLista', {
                 user: req.user,
                 page_name: req.path,
                 accountType: req.user.tipo
@@ -130,6 +145,73 @@ module.exports = function ( app ) {
                     console.log( err );
                     next();
                 }
+            } );
+            conexaoDb.end();
+        }
+    };
+
+
+    exercicioController.adicionarExercicioNaLista = {
+        get: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+
+                id_professor = req.user.id
+
+                var conexaoDb = app.infra.banco.dbConnection();
+                var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+
+                ExerciciosDao.mostrarListaExercicios( id_professor, function ( err, resultado ) {
+                    res.render( 'professor/perfil/exercicios/adicionarExercicios', {
+                        user: req.user,
+                        page_name: req.path,
+                        accountType: req.user.tipo,
+                        lista: resultado
+                    } );
+                } );
+                conexaoDb.end();
+            }
+        },
+        post: function ( req, res ) {
+
+            let entrada = {
+                id_professor: req.user.id,
+                id: req.params.id
+            };
+
+            var conexaoDb = app.infra.banco.dbConnection();
+            var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+
+            ExerciciosDao.adicionarExercicioLista( entrada, function ( err, resultado ) {
+                res.render( 'professor/perfil/exercicios/abrirLista', {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo,
+                    lista: resultado
+                } );
+            } );
+            conexaoDb.end();
+        }
+    };
+
+
+    exercicioController.abrirLista = {
+        get: function ( req, res ) {
+
+            let entrada = {
+                id_professor: req.user.id,
+                id: req.params.id
+            };
+
+            var conexaoDb = app.infra.banco.dbConnection();
+            var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+
+            ExerciciosDao.abrirLista( entrada, function ( err, resultado ) {
+                res.render( 'professor/perfil/exercicios/abrirLista', {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo,
+                    lista: resultado
+                } );
             } );
             conexaoDb.end();
         }

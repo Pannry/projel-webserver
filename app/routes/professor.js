@@ -69,10 +69,22 @@ module.exports = function ( app ) {
         .get( checkAuth, ExercicioController.criarExercicios.get )
         .post( checkAuth, ExercicioController.criarExercicios.post );
 
-    app.get( '/professor/profile/exercicios/lista', checkAuth, ExercicioController.listaExercicios.get );
+    /**
+     *      Lista
+     */
+
+    app.get( '/professor/profile/exercicios/lista', checkAuth, ExercicioController.lista.get );
+
     app.route( '/professor/exercicios/lista/criar' )
-        .get( checkAuth, ExercicioController.criarListaExercicios.get )
-        .post( checkAuth, ExercicioController.criarListaExercicios.post );
+        .get( checkAuth, ExercicioController.criarLista.get )
+        .post( checkAuth, ExercicioController.criarLista.post );
+
+    app.route( '/professor/exercicios/lista/abrir/:id' )
+        .get( checkAuth, ExercicioController.abrirLista.get );
+
+    app.route( '/professor/exercicios/lista/abrir/:id/editar' )
+        .get( checkAuth, ExercicioController.adicionarExercicioNaLista.get );
+
 
 }
 
