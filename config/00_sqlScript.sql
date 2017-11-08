@@ -58,9 +58,11 @@ create table exercicios(
 -- Tabela da lista de exercícios
 create table lista(
     id int auto_increment,
+    id_professor int,
     titulo varchar (32),
     descricao varchar (300),
     tempo datetime,
+    foreign key (id_professor) references professor(id),
     primary key(id)
 );
 -- Tabela de resposta

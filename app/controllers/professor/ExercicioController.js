@@ -90,11 +90,18 @@ module.exports = function ( app ) {
 
     exercicioController.listaExercicios = {
         get: function ( req, res ) {
+
+            var conexaoDb = app.infra.banco.dbConnection();
+            var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+
+            // ExerciciosDao.criarListaExercicios( entrada, function ( err, resultado ) {
             res.render( 'professor/perfil/exercicios/listaExercicios', {
                 user: req.user,
                 page_name: req.path,
                 accountType: req.user.tipo
             } );
+            // } );
+            // conexaoDb.end();
         }
     };
 
@@ -105,6 +112,26 @@ module.exports = function ( app ) {
                 page_name: req.path,
                 accountType: req.user.tipo
             } );
+        },
+        post: function ( req, res ) {
+            let entrada = {
+                id_professor: req.user.id,
+                titulo: req.body.titulo,
+                descricao: req.body.descricao,
+                tempo: 0
+            }
+            var conexaoDb = app.infra.banco.dbConnection();
+            var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+
+            ExerciciosDao.criarListaExercicios( entrada, function ( err, resultado ) {
+                if ( !err )
+                    res.redirect( '/professor/profile/exercicios/lista' );
+                else {
+                    console.log( err );
+                    next();
+                }
+            } );
+            conexaoDb.end();
         }
     };
 

@@ -20,7 +20,7 @@
         <h1> Criar lista de Exercicios: </h1>
         <hr>
 
-        <form class="" action= {{{{ALTERAR}}}} method="post"><br>
+        <form class="" action="/professor/exercicios/lista/criar" method="post"><br>
             
             <div class="row">
                 <div class="col-md-8 col-sm-12">
@@ -39,24 +39,8 @@
             <div class="row">
                 <div class="col-md-8 col-sm-12">
                     <label for="tempo" class="font-weight-bold">Duracao da lista:</label>
-                    <input type="text" name="tempo" class="form-control">
+                    <input type="text" name="tempo" class="form-control " disabled >
                 </div>
-            </div>
-
-            <!-- Adicionar Exercicios -->
-            <br>
-            <label><h3>Exercicios disponiveis para incluir</h3></label>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="(id)1">
-                    Exercicio 1
-                </label>
-            </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="(id)2">
-                    Exercicio 2
-                </label>
             </div>
 
             <br>

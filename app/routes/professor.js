@@ -70,7 +70,9 @@ module.exports = function ( app ) {
         .post( checkAuth, ExercicioController.criarExercicios.post );
 
     app.get( '/professor/profile/exercicios/lista', checkAuth, ExercicioController.listaExercicios.get );
-    app.get( '/professor/exercicios/lista/criar', checkAuth, ExercicioController.criarListaExercicios.get );
+    app.route( '/professor/exercicios/lista/criar' )
+        .get( checkAuth, ExercicioController.criarListaExercicios.get )
+        .post( checkAuth, ExercicioController.criarListaExercicios.post );
 
 }
 
