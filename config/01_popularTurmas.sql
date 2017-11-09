@@ -1,4 +1,3 @@
---Script SQL que deve ser usada apenas para testes
 insert into aluno set
     nome='a',
     email='a',

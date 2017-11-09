@@ -49,7 +49,7 @@ create table sala(
 create table exercicios(
     id int auto_increment,
     titulo varchar(100),
-    descricao varchar(1000),
+    descricao varchar(1500),
     foto varchar(32),
     id_professor int,
     foreign key (id_professor) references professor(id),
@@ -60,7 +60,7 @@ create table lista(
     id int auto_increment,
     id_professor int,
     titulo varchar (32),
-    descricao varchar (300),
+    descricao varchar (1500),
     tempo datetime,
     foreign key (id_professor) references professor(id),
     primary key(id)

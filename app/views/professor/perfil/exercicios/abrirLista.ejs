@@ -20,16 +20,17 @@
         <hr>
         
             <div class="card">
+
+
                 
                 <div class="card-header">
                     <h5><p><%= lista[0].titulo%></p></h5>
-                    <h5><p>Tempo restante: <%= lista[0].tempo%></p></h5>
                 </div>
 
-                <div class="card-body">
-                    <h5><p><%= lista[0].descricao%></p></h5>
-
-                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><h5><p>Tempo restante: <%= lista[0].tempo%></p></h5></li>
+                    <li class="list-group-item"><h5><p><%= lista[0].descricao%></p></h5></li>
+                </ul>
 
             </div>
 
