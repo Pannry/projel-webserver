@@ -33,3 +33,11 @@ ExerciciosDao.prototype.mostrarListaExercicios = function ( entrada, callback ) 
 ExerciciosDao.prototype.abrirLista = function ( entrada, callback ) {
     this._conexaoDb.query( 'SELECT * FROM lista WHERE id_professor = ? AND id = ?', [ entrada.id_professor, entrada.id ], callback );
 }
+ExerciciosDao.prototype.adicionarExercicioLista = function ( entrada, callback ) {
+    this._conexaoDb.query( 'INSERT INTO lista_exercicios SET ?', entrada, callback );
+}
+ExerciciosDao.prototype.mostrarExerciciosLista = function ( entrada, callback ) {
+    this._conexaoDb.query(
+        'SELECT * FROM lista_exercicios, exercicios WHERE ?' +
+        'AND lista_exercicios.id_exercicios = exercicios.id', entrada, callback );
+}

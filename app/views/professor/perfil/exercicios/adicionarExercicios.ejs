@@ -27,33 +27,32 @@
             </p>
         </div>
 
-        <div class="form-group">
-            <div class="list-group">
-
+        <div class="list-group">
+            <form action="/professor/exercicios/lista/abrir/<%=id_lista%>/editar" method="post">
                 <!-- elemento 1 -->
                 <% for (var i = 0; i < lista.length; i++ ){%>
                     <li class="list-group-item col-md-10 col-sm-12 " value="<%=lista[i].id%>">
 
-                        <div class="row">
-                            <div class="col-7">
-                                <%=lista[i].titulo%>
-                            </div>
-
+                        <div class="row form-check">
                             <div class="col-5">
-                                <a href="/professor/exercicios/abrir/<%=lista[i].id%>">
-                                    <button type="submit" class="btn btn-info">Abrir</button>
-                                </a>
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" value="<%= lista[i].id%>" name="options">
+                                    <%= lista[i].titulo%>
+                                </label>
                             </div>
                         </div>
+
                     </li>
                 <% } %>
 
-                </div>
-            </div>
+                <br>
+                <div class="col-1"><input class="btn btn-info btn" type="submit" value="Adicionar"></div>
+            </form>    
+        </div>
 
     </main>
 
-    <% include ../../../partials/scripts.ejs /%>
+    <% include ../../../partials/scripts.ejs %>
     
 </body>
 

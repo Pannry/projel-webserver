@@ -20,8 +20,6 @@
         <hr>
         
             <div class="card">
-
-
                 
                 <div class="card-header">
                     <h5><p><%= lista[0].titulo%></p></h5>
@@ -33,6 +31,23 @@
                 </ul>
 
             </div>
+            <br>
+            <div class="card">
+                
+                <div class="card-header">
+                    <h5><p> Exercicios: </p></h5>
+                </div>
+
+                <ul class="list-group list-group-flush">
+                    <% for(var i = 0; i < exercicios.length; i++ ) { %>
+                        <a href="/professor/exercicios/abrir/<%= exercicios[i].id_exercicios%>" class="list-group-item list-group-item-action">
+                            <h5><p> <%= exercicios[i].titulo%> </p></h5>
+                        </a>
+                    <% } %>    
+                </ul>
+
+            </div>
+            <br><br>
 
     </main>
 
