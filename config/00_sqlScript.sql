@@ -61,7 +61,6 @@ create table lista(
     id_professor int,
     titulo varchar (32),
     descricao varchar (1500),
-    tempo datetime,
     foreign key (id_professor) references professor(id),
     primary key(id)
 );

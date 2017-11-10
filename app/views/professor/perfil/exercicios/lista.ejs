@@ -40,16 +40,13 @@
                     <li class="list-group-item col-md-10 col-sm-12 " value="<%=lista[i].id%>">
 
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-8">
                                 <%=lista[i].titulo%>
                             </div>
 
-                            <div class="col-6">
-                                <a href="/professor/exercicios/lista/abrir/<%=lista[i].id%>">
+                            <div class="col-4">
+                                <a href="/professor/exercicios/lista/abrir/<%=lista[i].id%>/info">
                                     <button type="submit" class="btn btn-info">Abrir Lista</button>
-                                </a>
-                                <a href="/professor/exercicios/lista/abrir/<%=lista[i].id%>/editar">
-                                    <button type="submit" class="btn btn-warning">Adicionar Exercicios / Editar</button>
                                 </a>
                                 <a href="#">
                                     <button type="submit" class="btn btn-danger" disabled>Excluir</button>

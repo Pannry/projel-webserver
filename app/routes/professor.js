@@ -79,11 +79,11 @@ module.exports = function ( app ) {
         .get( checkAuth, ExercicioController.criarLista.get )
         .post( checkAuth, ExercicioController.criarLista.post );
 
-    app.route( '/professor/exercicios/lista/abrir/:id' ).get(
-        checkAuth,
-        ExercicioController.abrirLista.mostrarInformacoes,
-        ExercicioController.abrirLista.mostrarQuestoes
-    );
+    app.route( '/professor/exercicios/lista/abrir/:id/info' )
+        .get( checkAuth, ExercicioController.abrirLista.mostrarInformacoes );
+
+    app.route( '/professor/exercicios/lista/abrir/:id/questoes' )
+        .get( checkAuth, ExercicioController.abrirLista.mostrarQuestoes )
 
     app.route( '/professor/exercicios/lista/abrir/:id/editar' )
         .get( checkAuth, ExercicioController.adicionarExercicioNaLista.get )
