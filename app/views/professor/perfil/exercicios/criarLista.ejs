@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../../partials/head.ejs %>
+</head>
+
+<body>
+
+    <!-- Nav dashboard -->
+    <% include ../../../partials/navbar-dashboard.ejs %>
+    
+    <!-- Sidebar Menu -->
+    <% include ../../../partials/sidebar-menu.ejs %>
+
+
+    <!-- Content -->
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+
+        <h1> Criar lista de Exercicios: </h1>
+        <hr>
+
+        <form class="" action="/professor/exercicios/lista/criar" method="post"><br>
+            
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <label for="titulo" class="font-weight-bold">Titulo da lista:</label>
+                    <input type="text" name="titulo" class="form-control">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <label for="descricao" class="font-weight-bold">Descreva esta lista em algumas palavras:</label>
+                    <textarea class="form-control" name="descricao" rows="5"></textarea>
+                </div>
+            </div>
+
+            <br>
+            
+            <div class="row">
+                <div class="col-md-1 mr-1">
+                    <input class="btn btn-info" type="submit" value="Criar" >
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-info" href="/professor/profile/exercicios/lista">Voltar</a>
+                </div>
+            </div>
+
+        </form>
+
+    </main>
+
+    <% include ../../../partials/scripts.ejs /%>
+    
+</body>
+
+</html>

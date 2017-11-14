@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../../partials/head.ejs %>
+</head>
+
+<body>
+
+    <!-- Nav dashboard -->
+    <% include ../../../partials/navbar-dashboard.ejs %>
+
+    <!-- Sidebar Menu -->
+    <% include ../../../partials/sidebar-menu.ejs %>
+
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+        <h1> Exercicio: <%= questao[0].titulo%> </h1>
+        <hr>
+        
+            <div class="card">
+                
+                <div class="card-header">
+                    <h5><p><%= questao[0].titulo%></p></h5>
+                </div>
+
+                <div class="card-body">
+                    <h5><p><%= questao[0].descricao%></p></h5>
+                </div>
+
+            </div>
+
+    </main>
+
+    <% include ../../../partials/scripts.ejs /%>
+</body>
+
+</html>

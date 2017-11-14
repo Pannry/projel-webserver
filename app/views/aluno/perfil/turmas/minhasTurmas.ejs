@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../../partials/head.ejs %>
+</head>
+
+<body>
+
+    <!-- Nav dashboard -->
+    <% include ../../../partials/navbar-dashboard.ejs %>
+
+    <!-- Sidebar Menu -->
+    <% include ../../../partials/sidebar-menu.ejs %>
+
+
+    <!-- Content -->
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+
+        <h1> Turmas </h1>
+
+        <hr>
+
+        <h4>Lista de turmas:</h4>
+
+        <div class="list-group">
+
+            <% for (var i = 0; i < listaSalaAluno.length; i++){%>
+                <div class="row align-items-center ml-2 justify-content-between">
+
+                    <div class="col-6">
+                        <li class="list-group-item" value="<%=listaSalaAluno[i].id%>">
+                            <%=listaSalaAluno[i].nome%>,
+                            <%=listaSalaAluno[i].semestre%>
+                        </li>
+                    </div>
+
+                    <div class="col-4">
+                        <a href="/turmas/abrir/<%=listaSalaAluno[i].id%>">
+                            <button type="submit" class="btn btn-info">Entrar</button>
+                        </a>
+                    </div>
+
+                </div>
+            <%}%>
+
+        </div>
+
+    </main>
+
+    <% include ../../../partials/scripts.ejs /%>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../../partials/head.ejs %>
+</head>
+
+<body>
+
+    <!-- Nav dashboard -->
+    <% include ../../../partials/navbar-dashboard.ejs %>
+    
+    <!-- Sidebar Menu -->
+    <% include ../../../partials/sidebar-menu.ejs %>
+
+
+    <!-- Content -->
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+
+        <h1> Lista de exercicios: </h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-1">
+                <a class="btn btn-success " href="/professor/exercicios/lista/criar">Criar</a>
+            </div>
+        </div>
+
+        <div class="row ml-1">
+            <p class="col-md-3 mt-1">
+                <label for="selecionarTurma">Suas Listas criadas: </label>
+            </p>
+        </div>
+
+        <div class="form-group">
+            <div class="list-group">
+
+                <!-- elemento 1 -->
+                <% for (var i = 0; i < lista.length; i++ ) { %>
+                    <li class="list-group-item col-md-10 col-sm-12 " value="<%=lista[i].id%>">
+
+                        <div class="row">
+                            <div class="col-8">
+                                <%=lista[i].titulo%>
+                            </div>
+
+                            <div class="col-4">
+                                <a href="/professor/exercicios/lista/abrir/<%=lista[i].id%>/info">
+                                    <button type="submit" class="btn btn-info">Abrir Lista</button>
+                                </a>
+                                <a href="#">
+                                    <button type="submit" class="btn btn-danger" disabled>Excluir</button>
+                                </a>
+                            </div>
+
+                        </div>
+                    </li>
+                <% } %>
+
+            </div>
+        </div>
+    </main>
+
+    <% include ../../../partials/scripts.ejs /%>
+    
+</body>
+
+</html>

@@ -1,6 +1,8 @@
 TODO:
     - implementar o banco cursa
 
+    - Todos os campos filtrar
+
 Problemas Conhecidos:
 
     - É possivel criar conta repetidas
@@ -8,3 +10,8 @@ Problemas Conhecidos:
     - Falta repetir senha no cadastro
 
     - Aluno está deslogando pelo '/logout' do professor
+
+    - Só pode adicionar uma exercicios a lista uma vez, senao da problema
+
+    - As vezes, abrir uma lista gera um erro 500, mas é tão ocasional que nao
+    consigo reproduzir o erro para trata-lo

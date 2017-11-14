@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../../partials/head.ejs %>
+</head>
+
+<body>
+
+    <!-- Nav dashboard -->
+    <% include ../../../partials/navbar-dashboard.ejs %>
+
+    <!-- Sidebar Menu -->
+    <% include ../../../partials/sidebar-menu.ejs %>
+
+
+    <!-- Content -->
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+
+        <div class="row">
+            <div class="mr-auto col-md-6">
+                <h1> Selecione a turma: </h1>
+            </div>
+            <div class="col-md-2 ml-auto">
+                <a href="/profile/turmas">Voltar</a>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- Corpo -->
+        <form action="/turmas/professor/:id" method="post">
+
+            <% if( listaSalaAluno.length !== 0 ){ %>
+                <% for (var i = 0; i < listaSalaAluno.length; i++){ %>
+                    <div class="row align-items-center ml-2 justify-content-between">
+
+                        <div class="col-6">
+                            <li class="list-group-item" value="<%=listaSalaAluno[i].id%>">
+                                <%= listaSalaAluno[i].nome %>,
+                                <%= listaSalaAluno[i].semestre %>
+                            </li>
+                        </div>
+                        <div class="col-4">
+                            <input class="btn btn-info" type="submit" name="<%=listaSalaAluno[i].id%>" value="Entrar"></input>
+                            <button type="button" class="btn btn-warning" disabled>Editar</button>
+                            <button type="button" class="btn btn-danger" disabled>Excluir</button>
+                        </div>
+
+                    </div>
+                <% } %>
+
+            <% } else {%>
+                <p>Esse professor não possui turmas disponíveis.</p>
+            <% } %>
+        </form>
+
+    </main>
+
+    <% include ../../../partials/scripts.ejs /%>
+</body>
+
+</html>

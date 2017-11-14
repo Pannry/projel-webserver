@@ -49,16 +49,19 @@ create table sala(
 create table exercicios(
     id int auto_increment,
     titulo varchar(100),
-    descrição varchar(1000),
+    descricao varchar(1500),
     foto varchar(32),
+    id_professor int,
+    foreign key (id_professor) references professor(id),
     primary key(id)
 );
 -- Tabela da lista de exercícios
 create table lista(
     id int auto_increment,
-    nome varchar (32),
-    descricao varchar (300),
-    tempo datetime,
+    id_professor int,
+    titulo varchar (32),
+    descricao varchar (1500),
+    foreign key (id_professor) references professor(id),
     primary key(id)
 );
 -- Tabela de resposta

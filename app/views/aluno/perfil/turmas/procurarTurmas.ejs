@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <% include ../../../partials/head.ejs %>
+    </head>
+
+    <body>
+
+        <!-- Nav dashboard -->
+        <% include ../../../partials/navbar-dashboard.ejs %>
+        
+        <!-- Sidebar Menu -->
+        <% include ../../../partials/sidebar-menu.ejs %>
+
+
+        <!-- Content -->
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+
+            <h1> Turmas </h1>
+
+                <div class="form-group">
+                    <label for="selecionarProfessor">Selecione o Professor</label>
+                    <select class="form-control" id="selecionarProfessor" onchange="myFunc()">
+                        <option value="0"> Escolha... </option>
+                        <% for (var i = 0; i < listaSalaProfessor.length; i++){%>
+                            <option value="<%= listaSalaProfessor[i].id %>"> Professor:
+                            <%= listaSalaProfessor[i].nome %>
+                            </option>
+                        <% } %>
+                    </select>
+                    <br>
+
+                    <a class="collapse" id="myAnchor">Abrir lista de Turmas</a>
+
+                    <script>
+                        function myFunc() {
+
+                            var dropDown = document.getElementById( "selecionarProfessor" );
+                            if ( dropDown.value !== '0' ) {
+
+                                var anchor = document.getElementById( "myAnchor" );
+
+                                var link = document.createAttribute( "href" );
+                                link.value = "/turmas/professor/" + dropDown.value;
+
+                                var anchorClass = document.createAttribute( "class" );
+                                anchorClass.value = "btn btn-info";
+
+                                anchor.setAttributeNode( anchorClass );
+                                anchor.setAttributeNode( link );
+                            }
+                        }
+                    </script>
+                </div>
+        </main>
+
+        <% include ../../../partials/scripts.ejs /%>
+    </body>
+
+</html>

@@ -7,7 +7,7 @@
             <% let paths = [
                 "/profile",
                 "/profile/turmas",
-                "/profile/notas"
+                "/profile/turmas/procurar"
             ] 
             %>
             
@@ -21,14 +21,14 @@
             <li class="nav-item"> 
                 <a 
                     <% if (page_name === paths[1]) { %>class="nav-link active" <% } %> 
-                    class="nav-link" href="/profile/turmas">Turmas
+                    class="nav-link" href="/profile/turmas">Minhas Turmas
                 </a> 
             </li>
 
             <li class="nav-item"> 
                 <a 
                     <% if (page_name === paths[2]) { %>class="nav-link active" <% } %> 
-                    class="nav-link" href="/profile/notas">Notas
+                    class="nav-link" href="/profile/turmas/procurar">Procurar por Turmas
                 </a> 
             </li>
 
@@ -37,13 +37,15 @@
             <% let paths = [
                 "/professor/profile",
                 "/professor/profile/turmas",
-                "/professor/profile/turmas/criar"
+                "/professor/profile/exercicios",
+                "/professor/profile/exercicios/lista",
+                "/logout"
             ] 
             %>
 
             <li class="nav-item"> 
                 <a 
-                    <% if(page_name === paths[0]){%>class="nav-link active"<% } %> 
+                    <% if ( page_name === paths[0] ) { %>class="nav-link active"<% } %> 
                     class="nav-link" href="/professor/profile">Perfil
                 </a>
 
@@ -51,8 +53,35 @@
 
             <li class="nav-item"> 
                 <a 
-                    <%if(page_name === paths[1] || page_name === paths[2]){ %>class="nav-link active"<% } %>
+                    <% if ( page_name === paths[1] ) { %> class="nav-link active" <% } %>
                     class="nav-link" href="/professor/profile/turmas">Turmas
+                </a> 
+            </li>
+
+            <li class="nav-item"> 
+                <a 
+                    <% if ( page_name === paths[2] ) { %> class="nav-link active" <% } %>
+                    class="nav-link" href="/professor/profile/exercicios">Exercícios
+                </a> 
+            </li>
+
+            <li class="nav-item"> 
+                <a 
+                    <% if ( page_name === paths[3] ) { %> class="nav-link active" <% } %>
+                    class="nav-link" href="/professor/profile/exercicios/lista">Lista de exercícios
+                </a> 
+            </li>
+
+            <li>
+                <hr>
+            </li>
+            
+            <li class="nav-item"> 
+                <a 
+                    <% if ( page_name === paths[4] ) { %> class="nav-link active" <% } %>
+                    class="nav-link" href="/logout">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    Logout
                 </a> 
             </li>
 
