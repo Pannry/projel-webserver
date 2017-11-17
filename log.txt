@@ -15,3 +15,5 @@ Problemas Conhecidos:
 
     - As vezes, abrir uma lista gera um erro 500, mas é tão ocasional que nao
     consigo reproduzir o erro para trata-lo
+
+    - As senhas não estao criptografadas
