@@ -7,6 +7,10 @@ function ExerciciosDao ( conexaoDb ) {
 }
 
 /**
+ * Professor
+ */
+
+/**
  * Exercicios
  */
 ExerciciosDao.prototype.criarExercicios = function ( exercicio, callback ) {

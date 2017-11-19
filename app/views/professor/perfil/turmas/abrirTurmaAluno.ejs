@@ -17,24 +17,48 @@
         <h1> Turma: <%= infoProfessor[0].nome%>, <%= infoProfessor[0].semestre%> </h1>
         <hr>
 
-        <div class="card text-center">
+        <div class="card">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" href="/professor/turma/abrir/<%=idSala%>/professor">Área do Professor</a>
+                        <a class="nav-link" href="/professor/turma/abrir/<%=idSala%>/professor">Alunos Matriculados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/professor/turma/abrir/<%=idSala%>/aluno">Área do Aluno</a>
+                        <a class="nav-link active" href="/professor/turma/abrir/<%=idSala%>/aluno">Área de Interação</a>
                     </li>
                 </ul>
             </div>
             <div class="card-body">
-                <h4 class="card-title">Download do Programa</h4>
-                <a href="#" class="link">Projel</a>
-                <h4 class="card-title">Lista de Exercicios</h4>
-                <a href="#" class="link">Exercicio 1</a>
-                <a href="#" class="link">Exercicio 1</a>
-                <a href="#" class="link">Exercicio 1</a>
+                <div class="row">
+                    <h4 class="card-title col-md-6 col-xs-12">Download do Programa</h4>
+                    <a href="#" class="btn btn-outline-secondary col-md-3 col-xs-12">Projel</a>
+                </div>
+                <br>
+                <div class="row">
+                    <h4 class="card-title col-md-6 col-xs-12">Lista de Exercícios</h4>
+                    <a href="/professor/turma/abrir/<%=idSala%>/aluno/incluirlista" class="btn btn-outline-secondary col-md-3 col-xs-12">Atribuir listas de exercício</a>
+                </div>
+                <br><br>
+               <div class="row">
+                    <h4 class="card-title col-md-3">Listas</h4>
+                </div>
+
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <% for (var i = 0; i < lista.length; i++) { %>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    
+                                    <div class="col-3"><%= lista[i].nome%></div>
+                                    
+                                </div>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+
+
+
             </div>
         </div>
 

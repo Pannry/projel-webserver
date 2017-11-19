@@ -46,14 +46,25 @@ module.exports = function ( app ) {
         .get( checkAuth, ProfessorController.criarTurmas.get )
         .post( checkAuth, ProfessorController.criarTurmas.post );
 
-    app.get( '/professor/turma/abrir/:id/professor', checkAuth,
-        ProfessorController.turma.listaSala,
-        ProfessorController.turma.abrirProfessor
-    );
-    app.get( '/professor/turma/abrir/:id/aluno', checkAuth,
-        ProfessorController.turma.listaSala,
-        ProfessorController.turma.abrirAluno
-    );
+    app.route( '/professor/turma/abrir/:id/professor' )
+        .get( checkAuth, ProfessorController.turma.listaSala,
+        ProfessorController.turma.abrirProfessor,
+        ProfessorController.turma.abrirProfessorListarAlunos
+        )
+        .post( checkAuth,
+        ProfessorController.turma.autenticarAlunoNaTurma
+
+        )
+
+    app.route( '/professor/turma/abrir/:id/aluno' )
+        .get( checkAuth, ProfessorController.turma.listaSala,
+        ProfessorController.turma.abrirAluno,
+        ProfessorController.turma.abrirListarExercicios );
+
+    app.route( '/professor/turma/abrir/:id/aluno/incluirlista' )
+        .get( checkAuth, ProfessorController.incluirlista.adicionarExerciciosNaTurma )
+        .post( checkAuth, ProfessorController.incluirlista.post );
+
     app.post( '/professor/turma/editar/:id', checkAuth, ProfessorController.turma.editar );
     // app.post('/professor/turma/excluir/:id', checkAuth, ProfessorController.turma.excluir);
 

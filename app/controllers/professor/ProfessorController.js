@@ -152,19 +152,56 @@ module.exports = function ( app ) {
                     if ( !err && resultado.length != 0 ) {
                         let turma = resultado[ 0 ];
                         if ( turma.id_professor == usuario.id )
-                            res.render( 'professor/perfil/turmas/abrirTurmaProfessor', {
-                                user: req.user,
-                                page_name: req.path,
-                                accountType: req.user.tipo,
-                                accountId: req.user.id,
-                                idSala: req.listaSala,
-                                infoProfessor: resultado
-                            } );
+                            req.infoProfessor = resultado;
                         else
                             res.send( '<h1>Você não é responsável pela - ' + turma.nome + '</>' );
+                    }
+                } );
+                conexaoDb.end();
+                next();
+            }
+        },
 
-                    } else
-                        next();
+        abrirProfessorListarAlunos: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+
+                var conexaoDb = app.infra.banco.dbConnection();
+                var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
+
+                let id = req.listaSala;
+
+                salaDAO.listarAlunos( id, function ( err, resultado ) {
+
+                    res.render( 'professor/perfil/turmas/abrirTurmaProfessor', {
+                        user: req.user,
+                        page_name: req.path,
+                        accountType: req.user.tipo,
+                        accountId: req.user.id,
+                        idSala: req.listaSala,
+                        infoProfessor: req.infoProfessor,
+                        listaDeAlunos: resultado
+                    } );
+                } );
+
+                conexaoDb.end();
+
+            }
+
+        },
+
+        autenticarAlunoNaTurma: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+
+                let entrada = {
+                    id_sala: req.params.id,
+                    id_aluno: Object.keys( req.body )[ 0 ]
+                };
+
+                var conexaoDb = app.infra.banco.dbConnection();
+                var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
+
+                salaDAO.autenticarAluno( entrada, function ( err ) {
+                    res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/professor' )
                 } );
                 conexaoDb.end();
             }
@@ -183,24 +220,75 @@ module.exports = function ( app ) {
                     if ( !err && resultado.length != 0 ) {
                         let turma = resultado[ 0 ];
                         if ( turma.id_professor == usuario.id )
-                            res.render( 'professor/perfil/turmas/abrirTurmaAluno', {
-                                user: usuario,
-                                page_name: req.path,
-                                accountType: req.user.tipo,
-                                accountId: req.user.id,
-                                idSala: req.listaSala,
-                                infoProfessor: resultado
-                            } );
+                            req.infoProfessor = resultado;
                         else
                             res.send( '<h1>Você não é responsável pela - ' + turma.nome + '</>' );
+                    }
 
-                    } else
-                        next();
+                } );
+                conexaoDb.end();
+                next();
+            }
+        },
+
+        /*errado, é para ter sido redirecionado para outra pagina*/
+        abrirListarExercicios: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+
+                id_professor = req.user.id;
+
+                var conexaoDb = app.infra.banco.dbConnection();
+                var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+
+                ExerciciosDao.mostrarListaExercicios( id_professor, function ( err, resultado ) {
+                    res.render( 'professor/perfil/turmas/abrirTurmaAluno', {
+                        user: req.user,
+                        page_name: req.path,
+                        accountType: req.user.tipo,
+                        accountId: req.user.id,
+                        idSala: req.listaSala,
+                        infoProfessor: req.infoProfessor,
+                        lista: resultado
+                    } );
                 } );
                 conexaoDb.end();
             }
         }
     };
+
+    professorController.incluirlista = {
+        adicionarExerciciosNaTurma: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+
+                id_professor = req.user.id;
+
+                var conexaoDb = app.infra.banco.dbConnection();
+                var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+
+                //TODO: Mostrar as listas adicionadas na turma
+                ExerciciosDao.__________________( id_professor, function ( err, resultado ) {
+                    res.render( 'professor/perfil/turmas/listarListaParaAdicionar', {
+                        user: req.user,
+                        page_name: req.path,
+                        accountType: req.user.tipo,
+                        idSala: req.params.id,
+                        // lista: resultado
+                    } );
+                } );
+                conexaoDb.end();
+
+            }
+        },
+
+        post: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+                let body = req.body;
+                let id = req.params.id;
+                res.redirect( '/professor/turma/abrir/' + id + '/aluno/incluirlista' )
+                console.log( body );
+            }
+        }
+    }
 
     return professorController;
 };

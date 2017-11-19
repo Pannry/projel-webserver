@@ -32,16 +32,16 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/professor/turma/abrir/<%=idSala%>/professor">Área do Professor</a>
+                        <a class="nav-link active" href="/professor/turma/abrir/<%=idSala%>/professor">Alunos Matriculados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/professor/turma/abrir/<%=idSala%>/aluno">Área do Aluno</a>
+                        <a class="nav-link" href="/professor/turma/abrir/<%=idSala%>/aluno">Área de Interação</a>
                     </li>
                 </ul>
             </div>
 
             <div class="card-body">
-                <h4 class="card-title">Alunos dessa turma</h4>
+                <h4 class="card-title">Alunos desta turma</h4>
                 
                 <div class="card">
                     <ul class="list-group list-group-flush">
@@ -57,54 +57,43 @@
 
                 <div class="card">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                
-                                <div class="col-3">
-                                    Fulano 2
-                                </div>
-                                
-                                <div class="col-3">
-                                    <div class="row">
-                                        <div class="col-2">
-                                            <i class="fa fa-check green" aria-hidden="true"></i>                                
-                                        </div>                                
-                                        <div class="col-10">
-                                            <a href="#" ><button type="submit" class="btn-sm" disabled>Incluir</button></a>
+                        <% for (var i = 0; i < listaDeAlunos.length; i++) { %>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    
+                                    <div class="col-3"><%= listaDeAlunos[i].nome%></div>
+                                    
+                                    <div class="col-3">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <% if(listaDeAlunos[i].aluno_aceito === 0) { %>
+                                                    <i class="fa fa-times red" aria-hidden="true"></i>
+                                                <% } else if(listaDeAlunos[i].aluno_aceito === 1){ %>
+                                                    <i class="fa fa-check green" aria-hidden="true"></i>
+                                                <% } %>
+                                            </div>                                
+                                            <div class="col-10">
+                                                <% if(listaDeAlunos[i].aluno_aceito === 0) { %>
+                                                    <form class="" action="/professor/turma/abrir/<%=idSala%>/professor" method="post">
+                                                        <input class="btn btn-secondary btn-sm" type="submit" value="Incluir aluno" 
+                                                            name="<%= listaDeAlunos[i].id_aluno%>"></input>
+                                                    </form>
+                                                <% } else if(listaDeAlunos[i].aluno_aceito === 1){ %>
+                                                    <input class="btn btn-secondary btn-sm" type="submit" value="Aluno incluso" disabled></input>
+                                                <% } %>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div class="col-3">                                
-                                    <a href="#" ><button type="submit" class="btn-sm">Ver Exercicios</button></a>
-                                </div>
+                                    
+                                    <div class="col-3"> 
+                                        <a href="#">
+                                            <input class="btn btn-secondary btn-sm" type="submit" value="Ver exercícios"></input>
+                                        </a>
+                                    </div>
 
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                
-                                <div class="col-3">
-                                    Fulano 2
                                 </div>
-                                
-                                <div class="col-3">
-                                    <div class="row">                                
-                                        <div class="col-2">
-                                            <i class="fa fa-times red" aria-hidden="true"></i>                                
-                                        </div>                                
-                                        <div class="col-10">
-                                            <a href="#" ><button type="submit" class="btn-sm">Incluir</button></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-3">                                
-                                    <a href="#" ><button type="submit" class="btn-sm" disabled>Ver Exercicios</button></a>
-                                </div>
-                                
-                            </div>
-                        </li>
+                            </li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
