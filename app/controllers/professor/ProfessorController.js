@@ -207,50 +207,40 @@ module.exports = function ( app ) {
             }
         },
 
-        abrirAluno: function ( req, res, next ) {
+        abrirAluno: function ( req, res ) {
             let id = req.params.id;
             var usuario = req.user;
 
             if ( usuario.tipo === "professor" ) {
 
                 var conexaoDb = app.infra.banco.dbConnection();
+
                 var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
-                salaDAO.buscarSala( id, function ( err, resultado ) {
-                    if ( !err && resultado.length != 0 ) {
-                        let turma = resultado[ 0 ];
-                        if ( turma.id_professor == usuario.id )
-                            req.infoProfessor = resultado;
-                        else
-                            res.send( '<h1>Você não é responsável pela - ' + turma.nome + '</>' );
-                    }
+                salaDAO.buscarSala( id, function ( err, saida1 ) {
 
-                } );
-                conexaoDb.end();
-                next();
-            }
-        },
+                    var conexaoDb2 = app.infra.banco.dbConnection();
+                    var exercicioDao = new app.infra.banco.ExerciciosDao( conexaoDb2 );
 
-        /*errado, é para ter sido redirecionado para outra pagina*/
-        abrirListarExercicios: function ( req, res ) {
-            if ( req.user.tipo == 'professor' ) {
+                    exercicioDao.mostrarExerciciosInclusos( id, function ( err2, saida2 ) {
 
-                id_professor = req.user.id;
+                        console.log( '1' );
 
-                var conexaoDb = app.infra.banco.dbConnection();
-                var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
-                ExerciciosDao.mostrarListaExercicios( id_professor, function ( err, resultado ) {
-                    res.render( 'professor/perfil/turmas/abrirTurmaAluno', {
-                        user: req.user,
-                        page_name: req.path,
-                        accountType: req.user.tipo,
-                        accountId: req.user.id,
-                        idSala: req.listaSala,
-                        infoProfessor: req.infoProfessor,
-                        lista: resultado
+                        res.render( 'professor/perfil/turmas/abrirTurmaAluno', {
+                            user: req.user,
+                            page_name: req.path,
+                            accountType: req.user.tipo,
+                            accountId: req.user.id,
+                            idSala: req.params.id,
+                            infoProfessor: saida1,
+                            lista: saida2
+                        } );
+
                     } );
+                    conexaoDb2.end();
                 } );
+
                 conexaoDb.end();
             }
         }
@@ -266,13 +256,14 @@ module.exports = function ( app ) {
                 var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
                 //TODO: Mostrar as listas adicionadas na turma
-                ExerciciosDao.__________________( id_professor, function ( err, resultado ) {
+
+                ExerciciosDao.mostrarListaExercicios( id_professor, function ( err, resultado ) {
                     res.render( 'professor/perfil/turmas/listarListaParaAdicionar', {
                         user: req.user,
                         page_name: req.path,
                         accountType: req.user.tipo,
                         idSala: req.params.id,
-                        // lista: resultado
+                        lista: resultado
                     } );
                 } );
                 conexaoDb.end();
@@ -282,10 +273,28 @@ module.exports = function ( app ) {
 
         post: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
-                let body = req.body;
-                let id = req.params.id;
-                res.redirect( '/professor/turma/abrir/' + id + '/aluno/incluirlista' )
-                console.log( body );
+
+                let entrada = {}
+                entrada.id_sala = req.params.id;
+
+                let checkbox = req.body.options;
+                let vetor = [];
+
+                for ( let i = 0; i < checkbox.length; i++ ) vetor[ i ] = checkbox[ i ];
+
+                var conexaoDb = app.infra.banco.dbConnection();
+                var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+
+                vetor.forEach( element => {
+
+                    entrada.id_lista = element
+                    ExerciciosDao.mostrarListasParaIncluir( entrada, function ( err, resultado ) { } );
+
+                } );
+
+                conexaoDb.end();
+
+                res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/aluno' )
             }
         }
     }

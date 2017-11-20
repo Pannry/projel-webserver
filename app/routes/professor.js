@@ -58,8 +58,7 @@ module.exports = function ( app ) {
 
     app.route( '/professor/turma/abrir/:id/aluno' )
         .get( checkAuth, ProfessorController.turma.listaSala,
-        ProfessorController.turma.abrirAluno,
-        ProfessorController.turma.abrirListarExercicios );
+        ProfessorController.turma.abrirAluno );
 
     app.route( '/professor/turma/abrir/:id/aluno/incluirlista' )
         .get( checkAuth, ProfessorController.incluirlista.adicionarExerciciosNaTurma )
