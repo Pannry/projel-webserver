@@ -17,3 +17,7 @@ Problemas Conhecidos:
     consigo reproduzir o erro para trata-lo
 
     - As senhas não estao criptografadas
+    
+    -Melhorar rotas
+    
+    -melhorar front-end
