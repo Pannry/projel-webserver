@@ -2,8 +2,9 @@ var bcrypt = require( 'bcrypt-nodejs' );
 
 module.exports = function ( app ) {
     var passport = app.get( 'passport' );
-    var ProfessorController = app.controllers.professor.ProfessorController;
-    var ExercicioController = app.controllers.professor.ExercicioController;
+    var Professor = app.controllers.professor.Professor;
+    var Exercicios = app.controllers.professor.Exercicios;
+    var Turmas = app.controllers.professor.Turmas;
 
     app.get( '/professor', function ( req, res ) {
         ( req.user == undefined ) ?
@@ -12,92 +13,80 @@ module.exports = function ( app ) {
     } )
 
     /**
-     * Cadastro
+     *  Professor.js
      */
+
+    // Cadastro
     app.route( '/professor/signup' )
-        .get( ProfessorController.cadastro.get )
-        .post( ProfessorController.cadastro.post );
+        .get( Professor.cadastro.get )
+        .post( Professor.cadastro.post );
 
-    /**
-     * Login
-     */
+    // Login
     app.route( '/professor/login' )
-        .get( ProfessorController.login.get )
-        .post( ProfessorController.login.post );
+        .get( Professor.login.get )
+        .post( Professor.login.post );
 
-    /**
-     * Logout
-     */
-    app.get( '/logout', ProfessorController.logout );
+    // Logout
+    app.get( '/logout', Professor.logout );
 
-    /**
-     * profile
-     */
-    app.get( '/professor/profile', checkAuth, ProfessorController.perfil.get );
-    app.get( '/professor/profile/update', checkAuth, ProfessorController.perfil.update );
+    // profile
+    app.get( '/professor/profile', checkAuth, Professor.perfil.get );
+    app.get( '/professor/profile/update', checkAuth, Professor.perfil.update );
 
 
     /**
-     *      Turmas
+     *      Turmas.js
      */
-    app.get( '/professor/profile/turmas', checkAuth, ProfessorController.painelDasTurmas.get );
+    app.get( '/professor/profile/turmas', checkAuth, Turmas.painelDasTurmas.get );
 
     app.route( '/professor/turmas/criar' )
-        .get( checkAuth, ProfessorController.criarTurmas.get )
-        .post( checkAuth, ProfessorController.criarTurmas.post );
+        .get( checkAuth, Turmas.criarTurmas.get )
+        .post( checkAuth, Turmas.criarTurmas.post );
 
     app.route( '/professor/turma/abrir/:id/professor' )
-        .get( checkAuth, ProfessorController.turma.listaSala,
-        ProfessorController.turma.abrirProfessor,
-        ProfessorController.turma.abrirProfessorListarAlunos
-        )
-        .post( checkAuth,
-        ProfessorController.turma.autenticarAlunoNaTurma
-
-        )
+        .get( checkAuth, Turmas.abrir.professor )
+        .post( checkAuth, Turmas.abrir.autenticarAlunoNaTurma );
 
     app.route( '/professor/turma/abrir/:id/aluno' )
-        .get( checkAuth, ProfessorController.turma.listaSala,
-        ProfessorController.turma.abrirAluno );
+        .get( checkAuth, Turmas.abrir.aluno );
 
     app.route( '/professor/turma/abrir/:id/aluno/incluirlista' )
-        .get( checkAuth, ProfessorController.incluirlista.adicionarExerciciosNaTurma )
-        .post( checkAuth, ProfessorController.incluirlista.post );
+        .get( checkAuth, Turmas.incluirlista.get )
+        .post( checkAuth, Turmas.incluirlista.post );
 
-    app.post( '/professor/turma/editar/:id', checkAuth, ProfessorController.turma.editar );
-    // app.post('/professor/turma/excluir/:id', checkAuth, ProfessorController.turma.excluir);
+    // app.post( '/professor/turma/editar/:id', checkAuth, Turmas.turma.editar );
+    // app.post('/professor/turma/excluir/:id', checkAuth, Turmas.turma.excluir);
 
 
     /**
      *      Exercicios
      */
-    app.get( '/professor/profile/exercicios', checkAuth, ExercicioController.exercicios.get );
 
-    app.get( '/professor/exercicios/abrir/:id', checkAuth, ExercicioController.abrirExercicio.get );
+    // Questões
+    app.get( '/professor/profile/exercicios', checkAuth, Exercicios.exercicios.get );
+
+    app.get( '/professor/exercicios/abrir/:id', checkAuth, Exercicios.abrirExercicio.get );
 
     app.route( '/professor/exercicios/criar' )
-        .get( checkAuth, ExercicioController.criarExercicios.get )
-        .post( checkAuth, ExercicioController.criarExercicios.post );
+        .get( checkAuth, Exercicios.criarExercicios.get )
+        .post( checkAuth, Exercicios.criarExercicios.post );
 
-    /**
-     *      Lista
-     */
-
-    app.get( '/professor/profile/exercicios/lista', checkAuth, ExercicioController.lista.get );
+    // Listas
+    app.get( '/professor/profile/exercicios/lista', checkAuth, Exercicios.lista.get );
 
     app.route( '/professor/exercicios/lista/criar' )
-        .get( checkAuth, ExercicioController.criarLista.get )
-        .post( checkAuth, ExercicioController.criarLista.post );
+        .get( checkAuth, Exercicios.criarLista.get )
+        .post( checkAuth, Exercicios.criarLista.post );
 
     app.route( '/professor/exercicios/lista/abrir/:id/info' )
-        .get( checkAuth, ExercicioController.abrirLista.mostrarInformacoes );
+        .get( checkAuth, Exercicios.abrirLista.mostrarInformacoes );
 
     app.route( '/professor/exercicios/lista/abrir/:id/questoes' )
-        .get( checkAuth, ExercicioController.abrirLista.mostrarQuestoes )
+        .get( checkAuth, Exercicios.abrirLista.mostrarQuestoes )
 
     app.route( '/professor/exercicios/lista/abrir/:id/editar' )
-        .get( checkAuth, ExercicioController.adicionarExercicioNaLista.get )
-        .post( checkAuth, ExercicioController.adicionarExercicioNaLista.post );
+        .get( checkAuth, Exercicios.adicionarExercicioNaLista.get )
+        .post( checkAuth, Exercicios.adicionarExercicioNaLista.post );
 
 
 }

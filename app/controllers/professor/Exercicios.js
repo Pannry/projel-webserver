@@ -1,13 +1,13 @@
 module.exports = function ( app ) {
     let passport = app.get( 'passport' );
 
-    exercicioController = {};
+    Exercicios = {};
 
     /**
      *      Exercicios
      */
 
-    exercicioController.exercicios = {
+    Exercicios.exercicios = {
         get: function ( req, res, next ) {
 
             usuario = req.user;
@@ -33,7 +33,7 @@ module.exports = function ( app ) {
         }
     };
 
-    exercicioController.criarExercicios = {
+    Exercicios.criarExercicios = {
         get: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
                 res.render( 'professor/perfil/exercicios/criarExercicios', {
@@ -70,7 +70,7 @@ module.exports = function ( app ) {
         }
     };
 
-    exercicioController.abrirExercicio = {
+    Exercicios.abrirExercicio = {
         get: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
 
@@ -96,7 +96,7 @@ module.exports = function ( app ) {
      *      Listas
      */
 
-    exercicioController.lista = {
+    Exercicios.lista = {
         get: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
 
@@ -120,7 +120,7 @@ module.exports = function ( app ) {
     };
 
 
-    exercicioController.criarLista = {
+    Exercicios.criarLista = {
         get: function ( req, res ) {
             res.render( 'professor/perfil/exercicios/criarLista', {
                 user: req.user,
@@ -150,7 +150,7 @@ module.exports = function ( app ) {
     };
 
 
-    exercicioController.adicionarExercicioNaLista = {
+    Exercicios.adicionarExercicioNaLista = {
         get: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
 
@@ -189,7 +189,7 @@ module.exports = function ( app ) {
                 var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
                 entrada.id_exercicios = element;
-                ExerciciosDao.adicionarExercicioLista( entrada, function ( err, resultado ) { } );
+                ExerciciosDao.adicionarExercicioLista( entrada, function ( err ) { } );
 
                 conexaoDb.end();
             } );
@@ -199,7 +199,7 @@ module.exports = function ( app ) {
     };
 
 
-    exercicioController.abrirLista = {
+    Exercicios.abrirLista = {
         mostrarInformacoes: function ( req, res ) {
 
             let entrada = {
@@ -243,5 +243,5 @@ module.exports = function ( app ) {
         }
     };
 
-    return exercicioController;
+    return Exercicios;
 }
