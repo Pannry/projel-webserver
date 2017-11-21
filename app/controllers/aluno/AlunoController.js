@@ -117,7 +117,7 @@ module.exports = function ( app ) {
                 var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
 
                 usuarioDAO.listaProfessor( function ( err, resultado ) {
-                    res.render( 'aluno/perfil/turmas/procurarTurmas', {
+                    res.render( 'aluno/perfil/turmas/selecionarProfessor', {
                         user: req.user,
                         page_name: req.path,
                         accountType: req.user.tipo,

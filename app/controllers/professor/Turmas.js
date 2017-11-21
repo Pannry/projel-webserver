@@ -128,7 +128,7 @@ module.exports = function ( app ) {
                     let conexaoDb2 = app.infra.banco.dbConnection();
                     let exercicioDao = new app.infra.banco.ExerciciosDao( conexaoDb2 );
 
-                    exercicioDao.mostrarExerciciosInclusos( entrada, function ( err, saida2 ) {
+                    exercicioDao.mostrarExerciciosInclusos( entrada, ( err, saida2 ) => {
                         ejs.lista = saida2;
 
                         if ( !err && saida1.length != 0 ) {
@@ -158,8 +158,8 @@ module.exports = function ( app ) {
                 var conexaoDb = app.infra.banco.dbConnection();
                 var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
 
-                salaDAO.autenticarAluno( entrada, function ( err ) {
-                    res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/professor' )
+                salaDAO.autenticarAluno( entrada, ( err ) => {
+                    res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/professor' );
                 } );
                 conexaoDb.end();
 
@@ -171,19 +171,22 @@ module.exports = function ( app ) {
         get: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
 
-                id_professor = req.user.id;
+                let id_professor = req.user.id;
+
+                let ejs = {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo,
+                    idSala: req.params.id
+                }
 
                 var conexaoDb = app.infra.banco.dbConnection();
                 var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
-                ExerciciosDao.mostrarListaExercicios( id_professor, function ( err, resultado ) {
-                    res.render( 'professor/perfil/turmas/listarListaParaAdicionar', {
-                        user: req.user,
-                        page_name: req.path,
-                        accountType: req.user.tipo,
-                        idSala: req.params.id,
-                        lista: resultado
-                    } );
+                ExerciciosDao.mostrarListaExercicios( id_professor, ( err, resultado ) => {
+                    ejs.lista = resultado;
+                    res.render( 'professor/perfil/turmas/listarListaParaAdicionar', ejs );
+
                 } );
                 conexaoDb.end();
 
@@ -205,9 +208,8 @@ module.exports = function ( app ) {
                 var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
                 vetor.forEach( element => {
-
                     entrada.id_lista = element
-                    ExerciciosDao.mostrarListasParaIncluir( entrada, function ( err, resultado ) { } );
+                    ExerciciosDao.mostrarListasParaIncluir( entrada, ( err, resultado ) => { } );
 
                 } );
 

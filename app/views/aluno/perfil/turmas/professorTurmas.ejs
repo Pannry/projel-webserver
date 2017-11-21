@@ -34,21 +34,22 @@
 
             <% if( listaSalaAluno.length !== 0 ){ %>
                 <% for (var i = 0; i < listaSalaAluno.length; i++){ %>
-                    <div class="row align-items-center ml-2 justify-content-between">
-
-                        <div class="col-6">
-                            <li class="list-group-item" value="<%=listaSalaAluno[i].id%>">
+                    <li class="list-group-item col-md-10 col-sm-12" value="<%=listaSalaAluno[i].id%>">
+                        
+                        <div class="row">
+                            <div class="col-7">
                                 <%= listaSalaAluno[i].nome %>,
                                 <%= listaSalaAluno[i].semestre %>
-                            </li>
-                        </div>
-                        <div class="col-4">
-                            <input class="btn btn-info" type="submit" name="<%=listaSalaAluno[i].id%>" value="Entrar"></input>
-                            <button type="button" class="btn btn-warning" disabled>Editar</button>
-                            <button type="button" class="btn btn-danger" disabled>Excluir</button>
+                            </div>
+
+                            <div class="col-5">
+                                <input class="btn btn-secondary btn-sm" type="submit" name="<%=listaSalaAluno[i].id%>" value="Entrar"></input>
+                                <button type="button" class="btn btn-info btn-sm" disabled>Editar</button>
+                                <button type="button" class="btn btn-danger btn-sm" disabled>Excluir</button>
+                            </div>
                         </div>
 
-                    </div>
+                    </li>
                 <% } %>
 
             <% } else {%>

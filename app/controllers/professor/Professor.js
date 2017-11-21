@@ -11,7 +11,7 @@ module.exports = function ( app ) {
             let conexaoDb = app.infra.banco.dbConnection();
             let instituicaoDAO = new app.infra.banco.InstituicaoDAO( conexaoDb );
 
-            instituicaoDAO.listaInstituicao( function ( err, resultado ) {
+            instituicaoDAO.listaInstituicao( ( err, resultado ) => {
                 params.listaDeInstituicao = resultado;
                 res.render( 'professor/signup', params );
             } );
@@ -28,7 +28,7 @@ module.exports = function ( app ) {
             let conexaoDb = app.infra.banco.dbConnection();
             let usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
 
-            usuarioDAO.salvarProfessor( entrada, function ( err, resultado ) {
+            usuarioDAO.salvarProfessor( entrada, ( err, resultado ) => {
                 res.redirect( '/professor/login' );
             } );
             conexaoDb.end();

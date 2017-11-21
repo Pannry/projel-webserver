@@ -1,7 +1,9 @@
 var bcrypt = require( 'bcrypt-nodejs' );
 
 module.exports = function ( app ) {
+
     var passport = app.get( 'passport' );
+
     var Professor = app.controllers.professor.Professor;
     var Exercicios = app.controllers.professor.Exercicios;
     var Turmas = app.controllers.professor.Turmas;
@@ -10,7 +12,7 @@ module.exports = function ( app ) {
         ( req.user == undefined ) ?
             res.render( 'professor/home', { accountType: "" } ) :
             res.render( 'professor/home', { accountType: req.user.tipo } );
-    } )
+    } );
 
     /**
      *  Professor.js
@@ -92,10 +94,10 @@ module.exports = function ( app ) {
 }
 
 function checkAuth ( req, res, next ) {
-    if ( req.isAuthenticated() ) {
+    if ( req.isAuthenticated() )
         return next();
-    } else {
+    else
         res.redirect( '/' );
-    }
+
 
 }
