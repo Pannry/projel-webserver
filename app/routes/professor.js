@@ -18,28 +18,29 @@ module.exports = function ( app ) {
      *  Professor.js
      */
 
-    // Cadastro
     app.route( '/professor/signup' )
         .get( Professor.cadastro.get )
         .post( Professor.cadastro.post );
 
-    // Login
     app.route( '/professor/login' )
         .get( Professor.login.get )
         .post( Professor.login.post );
 
-    // Logout
-    app.get( '/logout', Professor.logout );
+    app.route( '/logout' )
+        .get( Professor.logout );
 
-    // profile
-    app.get( '/professor/profile', checkAuth, Professor.perfil.get );
-    app.get( '/professor/profile/update', checkAuth, Professor.perfil.update );
+    app.route( '/professor/profile' )
+        .get( checkAuth, Professor.perfil.get );
+
+    app.route( '/professor/profile/update' )
+        .get( checkAuth, Professor.perfil.update );
 
 
     /**
      *      Turmas.js
      */
-    app.get( '/professor/profile/turmas', checkAuth, Turmas.painelDasTurmas.get );
+    app.route( '/professor/profile/turmas' )
+        .get( checkAuth, Turmas.painelDasTurmas.get );
 
     app.route( '/professor/turmas/criar' )
         .get( checkAuth, Turmas.criarTurmas.get )
@@ -65,16 +66,19 @@ module.exports = function ( app ) {
      */
 
     // Questões
-    app.get( '/professor/profile/exercicios', checkAuth, Exercicios.exercicios.get );
+    app.route( '/professor/profile/exercicios' )
+        .get( checkAuth, Exercicios.exercicios.get );
 
-    app.get( '/professor/exercicios/abrir/:id', checkAuth, Exercicios.abrirExercicio.get );
+    app.route( '/professor/exercicios/abrir/:id' )
+        .get( checkAuth, Exercicios.abrirExercicio.get );
 
     app.route( '/professor/exercicios/criar' )
         .get( checkAuth, Exercicios.criarExercicios.get )
         .post( checkAuth, Exercicios.criarExercicios.post );
 
     // Listas
-    app.get( '/professor/profile/exercicios/lista', checkAuth, Exercicios.lista.get );
+    app.route( '/professor/profile/exercicios/lista' )
+        .get( checkAuth, Exercicios.lista.get );
 
     app.route( '/professor/exercicios/lista/criar' )
         .get( checkAuth, Exercicios.criarLista.get )

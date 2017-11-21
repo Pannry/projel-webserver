@@ -49,7 +49,8 @@ module.exports = function ( app ) {
                 let entrada = {
                     nome: req.body.nome,
                     semestre: req.body.semestre,
-                    id_professor: req.user.id
+                    id_professor: req.user.id,
+                    comentario: ''
                 };
 
                 let conexaoDb = app.infra.banco.dbConnection();

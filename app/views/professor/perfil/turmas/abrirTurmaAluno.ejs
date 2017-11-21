@@ -30,32 +30,43 @@
             </div>
             <div class="card-body">
                 
-                <h4 class="card-title col-md-6 col-xs-12">Download do Programa</h4>
-                <a href="#" class="btn btn-outline-secondary col-md-4 col-xs-12">Projel</a>
+                <div class="row">                
+                    <div class="col-md-5 col-sm-12">                
+                        <h4 class="card-title">Lista de Exercícios</h4>
+                        <a href="/professor/turma/abrir/<%=idSala%>/aluno/incluirlista" class="btn btn-outline-secondary col-md-5 col-sm-12">Atribuir listas</a>
+                    </div>
+                    <div class="col-md-5 col-sm-12">                
+                        <h4 class="card-title">Download do Programa</h4>
+                        <a href="#" class="btn btn-outline-secondary col-md-5">Projel</a>
+                    </div>
+                </div>
                 
                 <br><br>
 
-                <h4 class="card-title col-md-6 col-xs-12">Lista de Exercícios</h4>
-                <a href="/professor/turma/abrir/<%=idSala%>/aluno/incluirlista" class="btn btn-outline-secondary col-md-4 col-xs-12">Atribuir listas de exercício</a>
-                
+                <h4 class="card-title">Adicionar Comentário: </h4>
+                <br>
+                <h4 class="card-title ">( Quadro com comentário ) </h4>
+
                 <br><br>
-               <div class="row">
+                <div class="row">
                     <h4 class="card-title col-md-3">Listas</h4>
                 </div>
 
-                <div class="card">
                     <ul class="list-group list-group-flush">
-                        <% for (var i = 0; i < lista.length; i++) { %>
-                            <li class="list-group-item">
-                                <div class="row">
+                        <% if ( lista.length === 0 ) { %>
+                            <h5>Nenhuma lista disponivel, por favor, adicione alguma agora.</h5>
+                        <% } else { %>
+                            <div class="card">
+                                <% for (var i = 0; i < lista.length; i++) { %>
                                     
-                                    <div class="col-3"><%= lista[i].titulo%></div>
-                                    
-                                </div>
-                            </li>
+                                    <li class="list-group-item"> 
+                                        <div class="row"> <div class="col-3"><%= lista[i].titulo%></div> </div> 
+                                    </li>
+
+                                <% } %>
+                            </div>
                         <% } %>
                     </ul>
-                </div>
 
 
 

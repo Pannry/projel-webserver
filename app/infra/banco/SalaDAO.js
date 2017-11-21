@@ -45,6 +45,6 @@ SalaDao.prototype.listaSalaAluno = function ( id, callback ) {
     this._conexaoDb.query( 'SELECT id_aluno, id_sala, id, nome, semestre FROM cursa, sala WHERE id_aluno = ? AND id_sala = id', id, callback );
 };
 
-SalaDao.prototype.alunoEntrarTurma = function ( id_aluno, id_sala, callback ) {
-    this._conexaoDb.query( 'INSERT INTO cursa (id_aluno, id_sala) VALUES (?, ?)', [ id_aluno, id_sala ], callback );
+SalaDao.prototype.alunoEntrarTurma = function ( entrada, callback ) {
+    this._conexaoDb.query( 'INSERT INTO cursa SET ?', entrada, callback );
 };

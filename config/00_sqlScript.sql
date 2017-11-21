@@ -42,6 +42,7 @@ create table sala(
     nome varchar(32),
     id_professor int,
     semestre varchar(32),
+    comentario varchar(1000),
     foreign key (id_professor) references professor(id),
     primary key (id)
 );

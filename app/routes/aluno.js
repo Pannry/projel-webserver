@@ -2,7 +2,8 @@ var bcrypt = require( 'bcrypt-nodejs' );
 
 module.exports = function ( app ) {
     var passport = app.get( 'passport' );
-    var alunoController = app.controllers.aluno.AlunoController;
+    var Aluno = app.controllers.aluno.Aluno;
+    var Turmas = app.controllers.aluno.Turmas;
 
 
     app.get( '/', function ( req, res ) {
@@ -12,51 +13,41 @@ module.exports = function ( app ) {
     } );
 
     /**
-     * Cadastro
+     *      Aluno.js
      */
     app.route( '/aluno/signup' )
-        .get( alunoController.cadastro.get )
-        .post( alunoController.cadastro.post );
+        .get( Aluno.cadastro.get )
+        .post( Aluno.cadastro.post );
 
-
-    /**
-     * Login 
-     */
     app.route( '/aluno/login' )
-        .get( alunoController.login.get )
-        .post( alunoController.login.post );
+        .get( Aluno.login.get )
+        .post( Aluno.login.post );
+
+    app.route( '/profile' )
+        .get( checkAuth, Aluno.perfil.get );
+
+    app.route( '/profile/update' )
+        .get( checkAuth, Aluno.perfil.update );
+
 
     /**
-     * profile
+     *      Turmas.js
      */
-    app.get( '/profile', checkAuthentication, alunoController.perfil.get );
-    app.get( '/profile/update', checkAuthentication, alunoController.perfil.update );
+    app.route( '/profile/turmas' )
+        .get( checkAuth, Turmas.minhasTurmas.get );
 
-    /**
-     * Turmas
-     */
+    app.route( '/turmas/abrir/:id' )
+        .get( checkAuth, Turmas.abrirTurma.get );
 
-    app.get( '/profile/turmas', checkAuthentication, alunoController.minhasTurmas.get );
-
-    app.get( '/turmas/abrir/:id', checkAuthentication, alunoController.abrirTurma.get );
-
-    /**
-     * Procurar Turmas
-     */
-
-    app.get( '/profile/turmas/procurar', checkAuthentication, alunoController.procurarTurmas.get );
+    app.get( '/profile/turmas/procurar', checkAuth, Turmas.procurarTurmas.get );
 
     app.route( '/turmas/professor/:id' )
-        .get( checkAuthentication, alunoController.turmasProfessor.get )
-        .post( checkAuthentication, alunoController.turmasProfessor.post );
-
-
-
-
+        .get( checkAuth, Turmas.turmasProfessor.get )
+        .post( checkAuth, Turmas.turmasProfessor.post );
 
 };
 
-function checkAuthentication ( req, res, next ) {
+function checkAuth ( req, res, next ) {
     if ( req.isAuthenticated() ) {
         return next();
     } else {
