@@ -75,6 +75,16 @@ create table resposta(
     foreign key (id_exercicios) references exercicios(id),
     primary key(id_aluno, id_exercicios)
 );
+-- Tabela nota
+create table nota(
+    id_aluno int,
+    id_lista int,
+    nota float,
+    primary key(id_aluno, id_lista),
+    foreign key(id_aluno) references aluno(id),
+    foreign key(id_lista) references lista(id)
+);
+
 -- Tabela da lista de exercicios
 create table lista_exercicios(
     id_lista int,
