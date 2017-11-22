@@ -36,14 +36,15 @@ module.exports = function ( app ) {
     app.route( '/profile/turmas' )
         .get( checkAuth, Turmas.minhasTurmas.get );
 
+    app.get( '/profile/turmas/procurar', checkAuth, Turmas.procurarTurmas.get );
+
     app.route( '/turmas/abrir/:id' )
         .get( checkAuth, Turmas.abrirTurma.get );
-
-    app.get( '/profile/turmas/procurar', checkAuth, Turmas.procurarTurmas.get );
 
     app.route( '/turmas/professor/:id' )
         .get( checkAuth, Turmas.turmasProfessor.get )
         .post( checkAuth, Turmas.turmasProfessor.post );
+
 
 };
 

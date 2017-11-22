@@ -30,11 +30,8 @@ SalaDao.prototype.listarAlunos = function ( id, callback ) {
 };
 
 SalaDao.prototype.autenticarAluno = function ( id, callback ) {
-    this._conexaoDb.query( 'UPDATE cursa SET aluno_aceito = 1 WHERE ?', [ id.id_aluno, id.id_sala ], callback );
+    this._conexaoDb.query( 'UPDATE cursa SET aluno_aceito = 1 WHERE cursa.id_aluno = ? and cursa.id_sala = ?', [ id.id_aluno, id.id_sala ], callback );
 };
-
-// Altera o campo aluno aceito
-// update cursa set aluno_aceito = 1 where id_aluno = 3;
 
 
 /**
@@ -47,4 +44,8 @@ SalaDao.prototype.listaSalaAluno = function ( id, callback ) {
 
 SalaDao.prototype.alunoEntrarTurma = function ( entrada, callback ) {
     this._conexaoDb.query( 'INSERT INTO cursa SET ?', entrada, callback );
+};
+
+SalaDao.prototype.verificarAutenticacao = function ( ent, callback ) {
+    this._conexaoDb.query( 'SELECT * FROM cursa WHERE cursa.id_aluno = ? AND cursa.id_sala = ?', [ ent.id_aluno, ent.id_sala ], callback );
 };

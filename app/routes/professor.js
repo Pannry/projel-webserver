@@ -50,6 +50,8 @@ module.exports = function ( app ) {
         .get( checkAuth, Turmas.abrir.professor )
         .post( checkAuth, Turmas.abrir.autenticarAlunoNaTurma );
 
+    // app.route( '/professor/turma/abrir/:id/professor/:id_aluno' ).get().post();
+
     app.route( '/professor/turma/abrir/:id/aluno' )
         .get( checkAuth, Turmas.abrir.aluno );
 

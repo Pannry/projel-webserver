@@ -17,25 +17,44 @@
     <!-- Content -->
     <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 
-        <h1> PEGAR NOME DA TURMA </h1>
+        <h1> <%= sala[0].nome+', '+sala[0].semestre %> </h1>
 
         <hr>
         <div class="card"> 
             
+            <% if(aluno_aceito === 0){ %>
+                <h5>Esperando autorização professor</h5>
+            <% } else if (aluno_aceito === 1){ %>
+                <h5>Você está dentro da turma!</h5>
+            <% } %>
+
             <br>
-            <h2>( VERIFICAR SE O ALUNO FOI ACEITO NA TURMA )</h2>
             
             <br>
             <h4>Observações do professor:</h4>
             <h2>( OBSERVAÇÕES DO PROFESSOR ) </h2>
 
             <br>
-            <h4>Lista de questoes :</h4>
-            <h2>( LISTA DAS QUESTOES, BOTAO DE ABRIR LISTA ) </h2>
+            <div class="row">
+                <h4 class="card-title col-md-3">Listas de questoes :</h4>
+            </div>
 
-            <br>
-            <h4>DENTRO DOS EXERCICIOS :</h4>
-            <h2>( BOTAO DE CRIAR RESPOSTAS ) </h2>
+            <ul class="list-group list-group-flush">
+                <% if ( lista.length === 0 ) { %>
+                    <h5>Nenhuma lista disponivel, por favor, adicione alguma agora.</h5>
+                <% } else { %>
+                    <div class="card">
+                        <% for (var i = 0; i < lista.length; i++) { %>
+                            
+                            <li class="list-group-item"> 
+                                <div class="row"> <div class="col-3"><%= lista[i].titulo%></div> </div> 
+                            </li>
+
+                        <% } %>
+                    </div>
+                <% } %>
+            </ul>
+
             
         </div>
 

@@ -58,3 +58,14 @@ ExerciciosDao.prototype.mostrarExerciciosInclusos = function ( entrada, callback
     this._conexaoDb.query( 'SELECT id_sala, id_lista, id_professor, titulo, descricao ' +
         'FROM sala_lista, lista WHERE sala_lista.id_sala = ? AND sala_lista.id_lista = lista.id', entrada, callback );
 }
+
+
+
+/**
+ *      Aluno
+ */
+
+ExerciciosDao.prototype.mostrarListasAluno = function ( entrada, callback ) {
+    this._conexaoDb.query( 'SELECT id_sala, id_lista, titulo FROM sala_lista, lista ' +
+        'WHERE sala_lista.id_sala = ? AND sala_lista.id_lista = lista.id;', entrada, callback );
+}
