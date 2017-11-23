@@ -14,20 +14,32 @@
     <% include ../../../partials/sidebar-menu.ejs %>
 
     <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-        <h1> Exercicio: <%= questao[0].titulo%> </h1>
+        <h1> Exercicio: </h1>
         <hr>
         
+        <div class="col-md-10">
             <div class="card">
                 
                 <div class="card-header">
-                    <h5><p><%= questao[0].titulo%></p></h5>
+                    <h5><p>TITULO</p></h5>
                 </div>
 
                 <div class="card-body">
-                    <h5><p><%= questao[0].descricao%></p></h5>
+                    <h5><p>DESCRIÇÃO</p></h5>
                 </div>
 
+                <div class="card-body">
+                    <h5><p>RESPOSTA</p></h5>             
+                    <textarea class="form-control col-md-10" id="campoComentario" rows="4" ></textarea>
+                </div>
+
+                <div class="col-md-2">
+                    <button class="btn btn-secondary" >Enviar</button>
+                </div>
+
+                <br>
             </div>
+        </div>
 
     </main>
 

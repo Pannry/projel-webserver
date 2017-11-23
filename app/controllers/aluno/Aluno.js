@@ -1,14 +1,3 @@
-// Modelo de midware
-
-// function ( req, res ) {
-//     if ( req.user.tipo == 'aluno' ) {
-
-//methods...
-
-
-//     } else
-//         res.status( 403 );
-
 module.exports = function ( app ) {
     var passport = app.get( 'passport' );
     Aluno = {};

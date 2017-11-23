@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../../partials/head.ejs %>
+</head>
+
+<body>
+
+    <!-- Nav dashboard -->
+    <% include ../../../partials/navbar-dashboard.ejs %>
+
+    <!-- Sidebar Menu -->
+    <% include ../../../partials/sidebar-menu.ejs %>
+
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+        <h1> Exercicio: </h1>
+        <hr>
+        
+            <div class="col-md-10">
+                <div class="card">
+                    
+                    <div class="card-header">
+                        <h5><p>TITULO</p></h5>
+                    </div>
+
+                    <div class="card-body">
+                        <h5><p>DESCRIÇÃO</p></h5>
+                    </div>
+
+                    <textarea class="form-control col-md-10" id="campoComentario" rows="4" readonly></textarea>
+
+                    <div class="col-md-2">
+                        <a href="/quandooalunoresponderoexercicio">
+                            <button class="btn btn-secondary" >Responder</button>
+                        </a>
+                    </div>
+
+                    <br>
+                </div>
+            </div>
+
+            <br>
+            
+            <div class="col-md-10">
+                <div class="card">
+                    
+                    <div class="card-header">
+                        <h5><p>TITULO</p></h5>
+                    </div>
+
+                    <div class="card-body">
+                        <h5><p>DESCRIÇÃO</p></h5>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button class="btn btn-secondary" >responder</button>
+                    </div>
+
+                    <br>
+                </div>
+            </div>
+
+    </main>
+
+    <% include ../../../partials/scripts.ejs %>
+</body>
+
+</html>

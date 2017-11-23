@@ -42,15 +42,11 @@
                     <% if ( lista.length === 0 ) { %>
                         <h5>Nenhuma lista disponivel, por favor, adicione alguma agora.</h5>
                     <% } else { %>
-                        <div class="card">
-                            <% for (var i = 0; i < lista.length; i++) { %>
-                                <li class="list-group-item"> 
-                                    <div class="row"> 
-                                        <div class="col-3"><%= lista[i].titulo%></div> 
-                                    </div> 
-                                </li>
-                            <% } %>
-                        </div>
+                        <% for (var i = 0; i < lista.length; i++) { %>
+                            <a href="/turmas/abrir/<%= sala[0].id%>/<%= lista[i].id_lista%>/" class="list-group-item list-group-item-action">
+                                <h5><p> <%= lista[i].titulo%> </p></h5>
+                            </a>    
+                        <% } %>
                     <% } %>
                 </ul>
 

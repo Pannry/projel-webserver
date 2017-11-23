@@ -4,6 +4,7 @@ module.exports = function ( app ) {
     var passport = app.get( 'passport' );
     var Aluno = app.controllers.aluno.Aluno;
     var Turmas = app.controllers.aluno.Turmas;
+    var Exercicios = app.controllers.aluno.Exercicios;
 
 
     app.get( '/', function ( req, res ) {
@@ -45,6 +46,14 @@ module.exports = function ( app ) {
         .get( checkAuth, Turmas.turmasProfessor.get )
         .post( checkAuth, Turmas.turmasProfessor.post );
 
+    /**
+     *      Exercicios.js
+     */
+    app.route( '/turmas/abrir/:id_sala/:id_lista' )
+        .get( checkAuth, Exercicios.lista.get );
+
+    app.route( '/quandooalunoresponderoexercicio' )
+        .get( checkAuth, Exercicios.responderExercicio.get );
 
 };
 
