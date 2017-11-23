@@ -47,13 +47,14 @@ module.exports = function ( app ) {
         .post( checkAuth, Turmas.criarTurmas.post );
 
     app.route( '/professor/turma/abrir/:id/professor' )
-        .get( checkAuth, Turmas.abrir.professor )
+        .get( checkAuth, Turmas.abrir.professorGET )
         .post( checkAuth, Turmas.abrir.autenticarAlunoNaTurma );
 
     // app.route( '/professor/turma/abrir/:id/professor/:id_aluno' ).get().post();
 
     app.route( '/professor/turma/abrir/:id/aluno' )
-        .get( checkAuth, Turmas.abrir.aluno );
+        .get( checkAuth, Turmas.abrir.alunoGET )
+        .post( checkAuth, Turmas.abrir.comentario );
 
     app.route( '/professor/turma/abrir/:id/aluno/incluirlista' )
         .get( checkAuth, Turmas.incluirlista.get )

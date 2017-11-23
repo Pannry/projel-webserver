@@ -20,17 +20,24 @@ SalaDao.prototype.listaSalaProfessor = function ( id, callback ) {
 };
 
 SalaDao.prototype.buscarSala = function ( id, callback ) {
-    this._conexaoDb.query( 'select * from sala where id = ?', id, callback );
+    this._conexaoDb.query( 'select * FROM sala WHERE id = ?', id, callback );
 };
 
 SalaDao.prototype.listarAlunos = function ( id, callback ) {
     this._conexaoDb.query( 'SELECT id_aluno, id_sala, aluno_aceito, nome, email, instituicao_id ' +
-        'from cursa, aluno where id_sala = ? and cursa.id_aluno = aluno.id',
+        'FROM cursa, aluno WHERE id_sala = ? AND cursa.id_aluno = aluno.id',
         id, callback );
 };
 
 SalaDao.prototype.autenticarAluno = function ( id, callback ) {
-    this._conexaoDb.query( 'UPDATE cursa SET aluno_aceito = 1 WHERE cursa.id_aluno = ? and cursa.id_sala = ?', [ id.id_aluno, id.id_sala ], callback );
+    this._conexaoDb.query( 'UPDATE cursa SET aluno_aceito = 1 WHERE cursa.id_aluno = ? AND cursa.id_sala = ?', [ id.id_aluno, id.id_sala ], callback );
+};
+
+SalaDao.prototype.modificarComentario = function ( entrada, callback ) {
+    this._conexaoDb.query( 'UPDATE sala SET comentario = ? WHERE id = ?', [ entrada.comentario, entrada.id ], callback );
+};
+SalaDao.prototype.mostrarComentario = function ( entrada, callback ) {
+    this._conexaoDb.query( '', entrada, callback );
 };
 
 

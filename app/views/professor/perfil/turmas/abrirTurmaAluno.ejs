@@ -43,9 +43,14 @@
                 
                 <br><br>
 
-                <h4 class="card-title">Adicionar Comentário: </h4>
-                <br>
-                <h4 class="card-title ">( Quadro com comentário ) </h4>
+                <form class="form-group" action="/professor/turma/abrir/<%=idSala%>/aluno" method="post">
+                    <h4 class="card-title" for="campoComentario"> Adicionar Comentário: </h4>
+                    <textarea class="form-control col-md-10" id="campoComentario" rows="3" readonly><%= infoProfessor[0].comentario%></textarea>
+                    <br>
+                    <textarea class="form-control col-md-10" id="campoComentario" name="comentario" rows="3" ><%= infoProfessor[0].comentario%></textarea>
+                    <br>
+                    <input class="btn btn-outline-secondary col-md-2 col-sm-12" type="submit" value="Salvar">
+                </from>
 
                 <br><br>
                 <div class="row">

@@ -34,22 +34,22 @@ insert into lista set
     descricao='Maecenas varius, lsd',
     id='1';
 insert into lista set
-    titulo='Lista teste 1',
+    titulo='Lista teste 2',
     id_professor = 2,
     descricao='Maecenas varius, lsd',
     id='2';
 insert into lista set
-    titulo='Lista teste 1',
+    titulo='Lista teste 3',
     id_professor = 2,
     descricao='Maecenas varius, lsd',
     id='3';
 insert into lista set
-    titulo='Lista teste 2',
+    titulo='Lista teste 4',
     id_professor = 2,
     descricao='Maecenas varius, lsd',
     id='4';
 insert into lista set
-    titulo='Lista teste 1',
+    titulo='Lista teste 5',
     id_professor = 2,
     descricao='Maecenas varius, lsd',
     id='5';

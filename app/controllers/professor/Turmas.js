@@ -68,7 +68,7 @@ module.exports = function ( app ) {
 
     turmas.abrir = {
 
-        professor: function ( req, res ) {
+        professorGET: function ( req, res ) {
             if ( req.user.tipo === "professor" ) {
 
                 let entrada = req.params.id;
@@ -108,7 +108,7 @@ module.exports = function ( app ) {
             }
         },
 
-        aluno: function ( req, res ) {
+        alunoGET: function ( req, res ) {
 
             if ( req.user.tipo === "professor" ) {
                 let entrada = req.params.id;
@@ -162,6 +162,25 @@ module.exports = function ( app ) {
                 salaDAO.autenticarAluno( entrada, ( err ) => {
                     res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/professor' );
                 } );
+                conexaoDb.end();
+
+            }
+        },
+
+        comentario: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+
+                let entrada = {
+                    id: req.params.id,
+                    comentario: req.body.comentario
+                }
+                var conexaoDb = app.infra.banco.dbConnection();
+                var salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
+
+                salaDAO.modificarComentario( entrada, ( err ) => {
+                    res.redirect( '/professor/turma/abrir/' + entrada.id + '/aluno' );
+                } );
+
                 conexaoDb.end();
 
             }
