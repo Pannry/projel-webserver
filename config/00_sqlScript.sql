@@ -70,7 +70,7 @@ create table resposta(
     id_aluno int,
     id_exercicios int,
     resposta varchar (300),
-    foto varchar (32),
+    pdf_path varchar (100),
     foreign key (id_aluno) references aluno(id),
     foreign key (id_exercicios) references exercicios(id),
     primary key(id_aluno, id_exercicios)
