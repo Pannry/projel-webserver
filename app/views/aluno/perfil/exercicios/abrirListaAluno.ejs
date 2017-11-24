@@ -17,19 +17,20 @@
         <h1> Exercicio: </h1>
         <hr>
         
+        <% for(var i = 0; i < exercicios.length; i++) { %>
             <div class="col-md-10">
                 <div class="card">
                     
                     <div class="card-header">
-                        <h5><p>TITULO</p></h5>
+                        <h5><p><%= exercicios[i].titulo%></p></h5>
                     </div>
 
                     <div class="card-body">
-                        <h5><p>DESCRIÇÃO</p></h5>
+                        <h5><p><%= exercicios[i].descricao%></p></h5>
                     </div>
 
                     <div class="col-md-2">
-                        <a href="/quandooalunoresponderoexercicio">
+                        <a href="/turmas/abrir/<%= sala[0]%>/<%= lista[0]%>/<%= exercicios[i].id_exercicios%>">
                             <button class="btn btn-secondary" >Responder</button>
                         </a>
                     </div>
@@ -39,25 +40,8 @@
             </div>
 
             <br>
-            
-            <div class="col-md-10">
-                <div class="card">
-                    
-                    <div class="card-header">
-                        <h5><p>TITULO</p></h5>
-                    </div>
 
-                    <div class="card-body">
-                        <h5><p>DESCRIÇÃO</p></h5>
-                    </div>
-
-                    <div class="col-md-2">
-                        <button class="btn btn-secondary" >responder</button>
-                    </div>
-
-                    <br>
-                </div>
-            </div>
+        <% } %>
 
     </main>
 

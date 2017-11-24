@@ -21,20 +21,24 @@
             <div class="card">
                 
                 <div class="card-header">
-                    <h5><p>TITULO</p></h5>
+                    <h5><p>PEGAR NOME EXERCICIO</p></h5>
                 </div>
 
                 <div class="card-body">
-                    <h5><p>DESCRIÇÃO</p></h5>
+                    <h5><p>PEGAR DESCRIÇÃO</p></h5>
+
+                    <h5><p>SO DA PARA RESPONDER UMA VEZ, PQ SO TA IMPLEMENTADO O INSERT</p></h5>
+                    <h5><p>PARA ALTERAR RESPOSTA PRECISA DO UPDATE</p></h5>
+                    
                 </div>
 
                 <div class="card-body">
-                    <h5><p>RESPOSTA</p></h5>             
-                    <textarea class="form-control col-md-10" id="campoComentario" rows="4" ></textarea>
-                </div>
-
-                <div class="col-md-2">
-                    <button class="btn btn-secondary" >Enviar</button>
+                    <form class="form-group" action="/turmas/abrir/<%= sala[0]%>/<%= lista[0]%>/<%= exercicio[0]%>" method="post">
+                        <h5><p>RESPOSTA:</p></h5>
+                        <textarea class="form-control col-md-10" name="resposta" rows="15" ><%= resultadoExercicio[0].resposta%></textarea>
+                        <br>
+                        <input class="btn btn-outline-secondary col-md-2 col-sm-12" type="submit" value="Enviar">
+                    </form>
                 </div>
 
                 <br>

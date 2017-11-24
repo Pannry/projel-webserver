@@ -52,8 +52,9 @@ module.exports = function ( app ) {
     app.route( '/turmas/abrir/:id_sala/:id_lista' )
         .get( checkAuth, Exercicios.lista.get );
 
-    app.route( '/quandooalunoresponderoexercicio' )
-        .get( checkAuth, Exercicios.responderExercicio.get );
+    app.route( '/turmas/abrir/:id_sala/:id_lista/:id_exercicio' )
+        .get( checkAuth, Exercicios.responderExercicio.get )
+        .post( checkAuth, Exercicios.responderExercicio.post )
 
 };
 
