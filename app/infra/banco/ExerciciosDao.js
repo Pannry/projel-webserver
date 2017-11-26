@@ -71,14 +71,20 @@ ExerciciosDao.prototype.mostrarListasAluno = function ( entrada, callback ) {
 }
 
 ExerciciosDao.prototype.mostrarExerciciosAluno = function ( entrada, callback ) {
-    this._conexaoDb.query( ' SELECT id_lista, id_exercicios, titulo, descricao, foto, id_professor FROM lista_exercicios, exercicios ' +
+    this._conexaoDb.query( ' SELECT id_lista, id_exercicios, titulo FROM lista_exercicios, exercicios ' +
         'WHERE lista_exercicios.id_lista = ? AND lista_exercicios.id_exercicios = exercicios.id', entrada, callback );
 }
 
-ExerciciosDao.prototype.mostrarExercicioUnicoAluno = function ( entrada, callback ) {
-    this._conexaoDb.query( ' SELECT * FROM resposta WHERE id_exercicios = ?', entrada, callback );
+ExerciciosDao.prototype.abrirRespostaAluno = function ( entrada, callback ) {
+    this._conexaoDb.query( 'SELECT * FROM resposta WHERE id_exercicios = ? AND id_aluno = ?',
+        [ entrada.id_exercicios, entrada.id_aluno ], callback );
+}
+
+ExerciciosDao.prototype.criarResposta = function ( entrada, callback ) {
+    this._conexaoDb.query( 'INSERT INTO resposta SET ?', entrada, callback );
 }
 
 ExerciciosDao.prototype.responderExerciciosAluno = function ( entrada, callback ) {
-    this._conexaoDb.query( 'INSERT INTO resposta SET ?', entrada, callback );
+    this._conexaoDb.query( 'UPDATE resposta SET resposta = ? WHERE id_aluno = ? AND id_exercicios = ? ',
+        [ entrada.resposta, entrada.id_aluno, entrada.id_exercicios ], callback );
 }

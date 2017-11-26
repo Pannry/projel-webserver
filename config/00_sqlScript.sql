@@ -62,6 +62,7 @@ create table lista(
     id_professor int,
     titulo varchar (32),
     descricao varchar (1500),
+    prova boolean default false,    
     foreign key (id_professor) references professor(id),
     primary key(id)
 );
@@ -119,3 +120,112 @@ insert into instituicao set
     cep='60410-426',
     numero='1703',
     telefone='(85) 34012500';
+
+
+insert into aluno set
+    nome='a',
+    email='a',
+    senha='a',
+    instituicao_id = 1;
+insert into aluno set
+    nome='b',
+    email='b',
+    senha='b',
+    instituicao_id = 1;
+insert into professor set
+    nome='p',
+    endereco='p',
+    email='p',
+    senha='p',
+    cpf=1,
+    cep=1,
+    numero=1,
+    telefone=1,
+    instituicao_id = 1;
+insert into professor set
+    nome='q',
+    endereco='q',
+    email='q',
+    senha='q',
+    cpf=1,
+    cep=1,
+    numero=1,
+    telefone=1,
+    instituicao_id = 1;
+
+
+insert into exercicios set
+    titulo='Exercicio teste 1',
+    descricao='Maecenas varius, asd',
+    foto='',
+    id_professor = 2;
+insert into exercicios set
+    titulo='Exercicio teste 2',
+    descricao='Maecenas varius, asd',
+    foto='',
+    id_professor = 2;
+insert into exercicios set
+    titulo='Exercicio teste 3',
+    descricao='Maecenas varius, lsd',
+    foto='',
+    id_professor = 2;
+insert into exercicios set
+    titulo='Exercicio teste 4',
+    descricao='Maecenas varius, asd',
+    foto='',
+    id_professor = 2;
+insert into exercicios set
+    titulo='Exercicio teste 5',
+    descricao='Maecenas varius, asd',
+    foto='',
+    id_professor = 2;
+insert into exercicios set
+    titulo='Exercicio teste 6',
+    descricao='Maecenas varius, lsd',
+    foto='',
+    id_professor = 2;
+insert into lista set
+    titulo='Lista teste 1',
+    id_professor = 2,
+    descricao='Maecenas varius, lsd',
+    id='1';
+insert into lista set
+    titulo='Lista teste 2',
+    id_professor = 2,
+    descricao='Maecenas varius, lsd',
+    id='2';
+
+insert into lista_exercicios set
+    id_lista = 1,
+    id_exercicios = 1;
+insert into lista_exercicios set
+    id_lista = 1,
+    id_exercicios = 2;
+insert into lista_exercicios set
+    id_lista = 1,
+    id_exercicios = 3;
+insert into lista_exercicios set
+    id_lista = 1,
+    id_exercicios = 4;
+insert into lista_exercicios set
+    id_lista = 2,
+    id_exercicios = 5;
+insert into lista_exercicios set
+    id_lista = 2,
+    id_exercicios = 6;
+
+insert into sala set
+    nome = 'Matemática',
+    id_professor = 2,
+    semestre = '2012.1',
+    comentario = '';
+insert into sala set
+    nome = 'Fisica',
+    id_professor = 2,
+    semestre = '2012.2',
+    comentario = '';
+insert into sala set
+    nome = 'Matemática',
+    id_professor = 2,
+    semestre = '2013.1',
+    comentario = '';
