@@ -18,6 +18,8 @@ Problemas Conhecidos:
 
     - As senhas não estao criptografadas
     
-    -Melhorar rotas
+    - Melhorar rotas
     
-    -melhorar front-end
+    - melhorar front-end
+
+    - A mesma lista para o mesmo aluno em diferentes salas compartilham a mesma resposta

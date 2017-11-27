@@ -80,9 +80,11 @@ create table resposta(
 create table nota(
     id_aluno int,
     id_lista int,
+    id_sala int,
     nota float,
-    primary key(id_aluno, id_lista),
+    primary key(id_aluno, id_lista, id_sala),
     foreign key(id_aluno) references aluno(id),
+    foreign key(id_sala) references sala(id),
     foreign key(id_lista) references lista(id)
 );
 

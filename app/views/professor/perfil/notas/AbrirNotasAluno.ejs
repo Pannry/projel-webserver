@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../../partials/head.ejs %>
+        <!-- <style> *{border: 1px solid red;} </style> -->
+</head>
+
+<body>
+
+    <!-- Nav dashboard -->
+    <% include ../../../partials/navbar-dashboard.ejs %>
+
+    <!-- Sidebar Menu -->
+    <% include ../../../partials/sidebar-menu.ejs %>
+
+
+    <!-- Content -->
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+
+        <h1> Atribuir notas </h1>
+
+        <hr>
+            
+        <h4>Listas: </h4>
+        
+        <% for(let i = 0; i < lista.length; i++) { %>
+            <div class="row col-md-11 col-sm-12">
+
+                <form class="col-md-12 row" action="#" method="post">
+                    <li class="list-group-item col-md-7" value="#"><h6><%=lista[i].titulo%></h6></li>
+                    <input type="text" class="form-control col-md-2" placeholder="Digite a Nota">
+                    <input class="col-md-2 btn btn-default" value="Salvar nota" type="submit"></input>
+                </form>
+
+            </div>
+
+        <% } %>
+
+    </main>
+
+    <% include ../../../partials/scripts.ejs /%>
+    
+</body>
+
+</html>

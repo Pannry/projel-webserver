@@ -7,6 +7,7 @@ module.exports = function ( app ) {
     var Professor = app.controllers.professor.Professor;
     var Exercicios = app.controllers.professor.Exercicios;
     var Turmas = app.controllers.professor.Turmas;
+    var Notas = app.controllers.professor.Notas;
 
     app.get( '/professor', function ( req, res ) {
         ( req.user == undefined ) ?
@@ -49,8 +50,6 @@ module.exports = function ( app ) {
     app.route( '/professor/turma/abrir/:id/professor' )
         .get( checkAuth, Turmas.abrir.professorGET )
         .post( checkAuth, Turmas.abrir.autenticarAlunoNaTurma );
-
-    // app.route( '/professor/turma/abrir/:id/professor/:id_aluno' ).get().post();
 
     app.route( '/professor/turma/abrir/:id/aluno' )
         .get( checkAuth, Turmas.abrir.alunoGET )
@@ -96,6 +95,14 @@ module.exports = function ( app ) {
     app.route( '/professor/exercicios/lista/abrir/:id/editar' )
         .get( checkAuth, Exercicios.adicionarExercicioNaLista.get )
         .post( checkAuth, Exercicios.adicionarExercicioNaLista.post );
+
+    /**
+     *      Nota
+     */
+
+    app.route( '/professor/turma/abrir/:id_sala/professor/:id_aluno' )
+        .get( checkAuth, Notas.abrir.professorGET )
+    // .post();
 
 
 }
