@@ -49,7 +49,7 @@ module.exports = function ( app ) {
 
     app.route( '/professor/turma/abrir/:id/professor' )
         .get( checkAuth, Turmas.abrir.professorGET )
-        .post( checkAuth, Turmas.abrir.autenticarAlunoNaTurma );
+        .post( checkAuth, Turmas.abrir.autenticarAlunoNaTurma )
 
     app.route( '/professor/turma/abrir/:id/aluno' )
         .get( checkAuth, Turmas.abrir.alunoGET )
@@ -102,7 +102,9 @@ module.exports = function ( app ) {
 
     app.route( '/professor/turma/abrir/:id_sala/professor/:id_aluno' )
         .get( checkAuth, Notas.abrir.professorGET )
-    // .post();
+
+    app.route( '/professor/turma/abrir/:id_sala/professor/:id_aluno/:id_lista' )
+        .post( checkAuth, Notas.abrir.post );
 
 
 }
