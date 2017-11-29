@@ -28,9 +28,17 @@
             <div class="row col-md-11 col-sm-12">
 
                 <form class="col-md-12 row" action="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>" method="post">
-                    <li class="list-group-item col-md-7" value="#"><h6><%=lista[i].titulo%></h6></li>
-                    <input type="text" class="form-control col-md-2" placeholder="Digite a Nota" name="nota">
-                    <input class="col-md-2 btn btn-default" value="Salvar nota" type="submit"></input>
+                    <li class="list-group-item col-md-5" value="#"><h6><%=lista[i].titulo%></h6></li>
+                    <input type="text" class="form-control col-md-2" placeholder="Nota" name="nota">
+                    <input class="col-md-2 btn btn-default" value="Salvar" type="submit"></input>
+                    <label class="col-md-2 list-group-item">
+                        <%console.log(notas[i])%>    
+                        <% if(notas[i].nota === null){ %>
+                            <h6>Nota: ?</h6>
+                        <%} else {%>
+                            <h6>Nota: <%=notas[i].nota%></h6>
+                        <%}%>
+                    </label>
                 </form>
 
             </div>

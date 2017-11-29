@@ -186,16 +186,35 @@ insert into exercicios set
     descricao='Maecenas varius, lsd',
     foto='',
     id_professor = 2;
+
 insert into lista set
     titulo='Lista teste 1',
     id_professor = 2,
-    descricao='Maecenas varius, lsd',
-    id='1';
+    descricao='Maecenas varius, lsd';
 insert into lista set
     titulo='Lista teste 2',
     id_professor = 2,
-    descricao='Maecenas varius, lsd',
-    id='2';
+    descricao='Maecenas varius, lsd';
+insert into lista set
+    titulo='Lista teste 2',
+    id_professor = 2,
+    descricao='Maecenas varius, lsd';
+insert into lista set
+    titulo='Lista teste 2',
+    id_professor = 2,
+    descricao='Maecenas varius, lsd';
+insert into lista set
+    titulo='Lista teste 2',
+    id_professor = 2,
+    descricao='Maecenas varius, lsd';
+insert into lista set
+    titulo='Lista teste 2',
+    id_professor = 2,
+    descricao='Maecenas varius, lsd';
+insert into lista set
+    titulo='Lista teste 2',
+    id_professor = 2,
+    descricao='Maecenas varius, lsd';
 
 insert into lista_exercicios set
     id_lista = 1,
@@ -214,6 +233,82 @@ insert into lista_exercicios set
     id_exercicios = 5;
 insert into lista_exercicios set
     id_lista = 2,
+    id_exercicios = 6;
+
+insert into lista_exercicios set
+    id_lista = 3,
+    id_exercicios = 1;
+insert into lista_exercicios set
+    id_lista = 3,
+    id_exercicios = 2;
+insert into lista_exercicios set
+    id_lista = 3,
+    id_exercicios = 3;
+insert into lista_exercicios set
+    id_lista = 3,
+    id_exercicios = 4;
+insert into lista_exercicios set
+    id_lista = 3,
+    id_exercicios = 5;
+insert into lista_exercicios set
+    id_lista = 3,
+    id_exercicios = 6;
+
+insert into lista_exercicios set
+    id_lista = 4,
+    id_exercicios = 1;
+insert into lista_exercicios set
+    id_lista = 4,
+    id_exercicios = 2;
+insert into lista_exercicios set
+    id_lista = 4,
+    id_exercicios = 3;
+insert into lista_exercicios set
+    id_lista = 4,
+    id_exercicios = 4;
+insert into lista_exercicios set
+    id_lista = 4,
+    id_exercicios = 5;
+insert into lista_exercicios set
+    id_lista = 4,
+    id_exercicios = 6;
+
+insert into lista_exercicios set
+    id_lista = 5,
+    id_exercicios = 1;
+insert into lista_exercicios set
+    id_lista = 5,
+    id_exercicios = 2;
+insert into lista_exercicios set
+    id_lista = 5,
+    id_exercicios = 3;
+insert into lista_exercicios set
+    id_lista = 5,
+    id_exercicios = 4;
+insert into lista_exercicios set
+    id_lista = 5,
+    id_exercicios = 5;
+insert into lista_exercicios set
+    id_lista = 5,
+    id_exercicios = 6;
+
+insert into lista_exercicios set
+    id_lista = 6,
+    id_exercicios = 1;
+insert into lista_exercicios set
+    id_lista = 6,
+    id_exercicios = 2;
+insert into lista_exercicios set
+    id_lista = 6,
+    id_exercicios = 3;
+insert into lista_exercicios set
+    id_lista = 6,
+    id_exercicios = 4;
+insert into lista_exercicios set
+    id_lista = 6,
+    id_exercicios = 5;
+insert into lista_exercicios set
+    id_lista = 6,
     id_exercicios = 6;
 
 insert into sala set
