@@ -56,12 +56,12 @@ module.exports = function ( app ) {
 
         post: function ( req, res ) {
             if ( req.user.tipo === "professor" ) {
-                entrada = {
+                let entrada = {
                     id_sala: req.params.id_sala,
                     id_aluno: req.params.id_aluno,
                     id_lista: req.params.id_lista
                 }
-                ejs = {
+                let ejs = {
                     sala: req.params.id_sala,
                     aluno: req.params.id_aluno,
                     nota: req.body.nota
@@ -79,6 +79,32 @@ module.exports = function ( app ) {
                 conexaoDb1.end();
 
             };
+        },
+
+        verExerciciosRespondidos: function ( req, res ) {
+            if ( req.user.tipo === "professor" ) {
+                let entrada = {
+                    id_sala: req.params.id_sala,
+                    id_aluno: req.params.id_aluno,
+                    id_lista: req.params.id_lista
+                }
+                let ejs = {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo
+                }
+
+                let conexaoDb = app.infra.banco.dbConnection();
+                let NotasDAO = new app.infra.banco.NotasDAO( conexaoDb );
+
+                NotasDAO.MostrarRespostas( entrada, ( err, resultado ) => {
+                    res.render( 'professor/perfil/notas/mostrarExerciciosLista', ejs );
+                } );
+
+                conexaoDb.end();
+
+            };
+
         }
     }
 

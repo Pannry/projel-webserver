@@ -104,6 +104,7 @@ module.exports = function ( app ) {
         .get( checkAuth, Notas.abrir.professorGET )
 
     app.route( '/professor/turma/abrir/:id_sala/professor/:id_aluno/:id_lista' )
+        .get( checkAuth, Notas.abrir.verExerciciosRespondidos )
         .post( checkAuth, Notas.abrir.post );
 
 

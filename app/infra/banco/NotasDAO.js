@@ -30,3 +30,12 @@ NotasDAO.prototype.atualizarNota = function ( entrada, callback ) {
         'UPDATE nota SET nota = ? WHERE id_aluno = ? AND id_lista = ? AND id_sala = ?',
         [ entrada.nota, entrada.id_aluno, entrada.id_lista, entrada.id_sala ], callback );
 }
+
+NotasDAO.prototype.MostrarRespostas = function ( entrada, callback ) {
+    this._conexaoDb.query(
+        '',
+        [ entrada.nota, entrada.id_aluno, entrada.id_lista, entrada.id_sala ], callback );
+}
+
+
+
