@@ -70,11 +70,13 @@ create table lista(
 create table resposta(
     id_aluno int,
     id_exercicios int,
+    id_sala int,
     resposta varchar (300),
     pdf_path varchar (100),
     foreign key (id_aluno) references aluno(id),
     foreign key (id_exercicios) references exercicios(id),
-    primary key(id_aluno, id_exercicios)
+    foreign key (id_sala) references sala(id)
+    -- primary key(id_aluno, id_exercicios)
 );
 -- Tabela nota
 create table nota(
@@ -123,7 +125,6 @@ insert into instituicao set
     numero='1703',
     telefone='(85) 34012500';
 
-
 insert into aluno set
     nome='a',
     email='a',
@@ -154,7 +155,6 @@ insert into professor set
     numero=1,
     telefone=1,
     instituicao_id = 1;
-
 
 insert into exercicios set
     titulo='Exercicio teste 1',
@@ -196,23 +196,11 @@ insert into lista set
     id_professor = 2,
     descricao='Maecenas varius, lsd';
 insert into lista set
-    titulo='Lista teste 2',
+    titulo='Lista teste 3',
     id_professor = 2,
     descricao='Maecenas varius, lsd';
 insert into lista set
-    titulo='Lista teste 2',
-    id_professor = 2,
-    descricao='Maecenas varius, lsd';
-insert into lista set
-    titulo='Lista teste 2',
-    id_professor = 2,
-    descricao='Maecenas varius, lsd';
-insert into lista set
-    titulo='Lista teste 2',
-    id_professor = 2,
-    descricao='Maecenas varius, lsd';
-insert into lista set
-    titulo='Lista teste 2',
+    titulo='Lista teste 4',
     id_professor = 2,
     descricao='Maecenas varius, lsd';
 
@@ -225,12 +213,7 @@ insert into lista_exercicios set
 insert into lista_exercicios set
     id_lista = 1,
     id_exercicios = 3;
-insert into lista_exercicios set
-    id_lista = 1,
-    id_exercicios = 4;
-insert into lista_exercicios set
-    id_lista = 2,
-    id_exercicios = 5;
+
 insert into lista_exercicios set
     id_lista = 2,
     id_exercicios = 6;
@@ -240,15 +223,6 @@ insert into lista_exercicios set
     id_exercicios = 1;
 insert into lista_exercicios set
     id_lista = 3,
-    id_exercicios = 2;
-insert into lista_exercicios set
-    id_lista = 3,
-    id_exercicios = 3;
-insert into lista_exercicios set
-    id_lista = 3,
-    id_exercicios = 4;
-insert into lista_exercicios set
-    id_lista = 3,
     id_exercicios = 5;
 insert into lista_exercicios set
     id_lista = 3,
@@ -263,53 +237,6 @@ insert into lista_exercicios set
 insert into lista_exercicios set
     id_lista = 4,
     id_exercicios = 3;
-insert into lista_exercicios set
-    id_lista = 4,
-    id_exercicios = 4;
-insert into lista_exercicios set
-    id_lista = 4,
-    id_exercicios = 5;
-insert into lista_exercicios set
-    id_lista = 4,
-    id_exercicios = 6;
-
-insert into lista_exercicios set
-    id_lista = 5,
-    id_exercicios = 1;
-insert into lista_exercicios set
-    id_lista = 5,
-    id_exercicios = 2;
-insert into lista_exercicios set
-    id_lista = 5,
-    id_exercicios = 3;
-insert into lista_exercicios set
-    id_lista = 5,
-    id_exercicios = 4;
-insert into lista_exercicios set
-    id_lista = 5,
-    id_exercicios = 5;
-insert into lista_exercicios set
-    id_lista = 5,
-    id_exercicios = 6;
-
-insert into lista_exercicios set
-    id_lista = 6,
-    id_exercicios = 1;
-insert into lista_exercicios set
-    id_lista = 6,
-    id_exercicios = 2;
-insert into lista_exercicios set
-    id_lista = 6,
-    id_exercicios = 3;
-insert into lista_exercicios set
-    id_lista = 6,
-    id_exercicios = 4;
-insert into lista_exercicios set
-    id_lista = 6,
-    id_exercicios = 5;
-insert into lista_exercicios set
-    id_lista = 6,
-    id_exercicios = 6;
 
 insert into sala set
     nome = 'Matemática',

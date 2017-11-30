@@ -84,9 +84,9 @@ module.exports = function ( app ) {
         verExerciciosRespondidos: function ( req, res ) {
             if ( req.user.tipo === "professor" ) {
                 let entrada = {
-                    id_sala: req.params.id_sala,
                     id_aluno: req.params.id_aluno,
-                    id_lista: req.params.id_lista
+                    id_lista: req.params.id_lista,
+                    id_sala: req.params.id_sala
                 }
                 let ejs = {
                     user: req.user,
@@ -98,6 +98,7 @@ module.exports = function ( app ) {
                 let NotasDAO = new app.infra.banco.NotasDAO( conexaoDb );
 
                 NotasDAO.MostrarRespostas( entrada, ( err, resultado ) => {
+                    ejs.respostas = resultado;
                     res.render( 'professor/perfil/notas/mostrarExerciciosLista', ejs );
                 } );
 

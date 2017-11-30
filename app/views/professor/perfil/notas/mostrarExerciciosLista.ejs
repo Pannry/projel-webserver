@@ -21,9 +21,26 @@
         <h1> Respostas </h1>
 
         <hr>
-        
-        Respostas dos alunos
-        
+
+        <% for( let i = 0; i < respostas.length; i++ ){ %>
+
+            <div class="col-md-10">
+                <div class="card row">
+                    <div class="card-header">
+                        <h4 class="card-title"><%= respostas[i].titulo%></h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><%= respostas[i].resposta%></p>
+                    </div>
+                    <div class="card-body">
+                        [Imagem]
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+        <% } %>
 
     </main>
 

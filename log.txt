@@ -5,21 +5,23 @@ TODO:
 
 Problemas Conhecidos:
 
-    - É possivel criar conta repetidas
+    - É possivel criar conta repetidas.
 
-    - Falta repetir senha no cadastro
+    - Falta repetir senha no cadastro.
 
-    - Aluno está deslogando pelo '/logout' do professor
+    - Aluno está deslogando pelo '/logout' do professor.
 
-    - Só pode adicionar uma exercicios a lista uma vez, senao da problema
+    - Só pode adicionar uma exercicios a lista uma vez, senao da problema.
 
     - As vezes, abrir uma lista gera um erro 500, mas é tão ocasional que nao
-    consigo reproduzir o erro para trata-lo
+    consigo reproduzir o erro para trata-lo.
 
-    - As senhas não estao criptografadas
+    - As senhas não estao criptografadas.
     
-    - Melhorar rotas
+    - Melhorar rotas.
     
-    - melhorar front-end
+    - melhorar front-end.
 
-    - A mesma lista para o mesmo aluno em diferentes salas compartilham a mesma resposta
+    - A mesma lista para o mesmo aluno em diferentes salas compartilham a mesma resposta.
+
+    - Atribuir uma resposta a uma sala. 

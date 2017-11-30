@@ -76,8 +76,8 @@ ExerciciosDao.prototype.mostrarExerciciosAluno = function ( entrada, callback ) 
 }
 
 ExerciciosDao.prototype.abrirRespostaAluno = function ( entrada, callback ) {
-    this._conexaoDb.query( 'SELECT * FROM resposta WHERE id_exercicios = ? AND id_aluno = ?',
-        [ entrada.id_exercicios, entrada.id_aluno ], callback );
+    this._conexaoDb.query( 'SELECT * FROM resposta WHERE id_exercicios = ? AND id_aluno = ? AND id_sala = ?',
+        [ entrada.id_exercicios, entrada.id_aluno, entrada.id_sala ], callback );
 }
 
 ExerciciosDao.prototype.criarResposta = function ( entrada, callback ) {
@@ -85,6 +85,6 @@ ExerciciosDao.prototype.criarResposta = function ( entrada, callback ) {
 }
 
 ExerciciosDao.prototype.responderExerciciosAluno = function ( entrada, callback ) {
-    this._conexaoDb.query( 'UPDATE resposta SET resposta = ? WHERE id_aluno = ? AND id_exercicios = ? ',
-        [ entrada.resposta, entrada.id_aluno, entrada.id_exercicios ], callback );
+    this._conexaoDb.query( 'UPDATE resposta SET resposta = ? WHERE id_aluno = ? AND id_exercicios = ? AND id_sala = ?',
+        [ entrada.resposta, entrada.id_aluno, entrada.id_exercicios, entrada.id_sala ], callback );
 }

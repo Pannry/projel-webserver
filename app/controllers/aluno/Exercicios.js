@@ -41,6 +41,7 @@ module.exports = function ( app ) {
 
                 let entrada = {
                     id_exercicios: req.params.id_exercicio,
+                    id_sala: req.params.id_sala,
                     id_aluno: req.user.id,
                     resposta: '',
                     pdf_path: ''
@@ -92,6 +93,7 @@ module.exports = function ( app ) {
             let entrada = {
                 id_aluno: req.user.id,
                 id_exercicios: req.params.id_exercicio,
+                id_sala: req.params.id_sala,
                 pdf_path: '',
                 resposta: req.body.resposta
             }

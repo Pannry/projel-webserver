@@ -31,11 +31,11 @@ NotasDAO.prototype.atualizarNota = function ( entrada, callback ) {
         [ entrada.nota, entrada.id_aluno, entrada.id_lista, entrada.id_sala ], callback );
 }
 
+// resposta está vinculada ao aluno, e não a sala & aluno.
 NotasDAO.prototype.MostrarRespostas = function ( entrada, callback ) {
     this._conexaoDb.query(
-        '',
-        [ entrada.nota, entrada.id_aluno, entrada.id_lista, entrada.id_sala ], callback );
+        'SELECT resposta.id_aluno, resposta.id_sala, resposta.id_exercicios, pdf_path, titulo, descricao, resposta, foto ' +
+        'FROM resposta, lista_exercicios, exercicios WHERE resposta.id_exercicios = lista_exercicios.id_exercicios ' +
+        'AND exercicios.id = lista_exercicios.id_exercicios AND id_aluno = ? AND id_lista = ? AND id_sala = ?;',
+        [ entrada.id_aluno, entrada.id_lista, entrada.id_sala ], callback );
 }
-
-
-

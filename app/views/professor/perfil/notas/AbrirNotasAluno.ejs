@@ -32,11 +32,11 @@
                     <input type="text" class="form-control col-md-2" placeholder="Nota" name="nota">
                     <input class="col-md-2 btn btn-default" value="Salvar" type="submit"></input>
                     <label class="col-md-2 list-group-item">
-                        <% if(notas[i].nota === null){ %>
+                        <% if(notas[i].nota === null) { %>
                             <h6>Nota: ?</h6>
-                        <%} else {%>
+                        <% } else { %>
                             <h6>Nota: <%=notas[i].nota%></h6>
-                        <%}%>
+                        <% } %>
                     </label>
                 </form>
 
@@ -46,7 +46,7 @@
 
     </main>
 
-    <% include ../../../partials/scripts.ejs /%>
+    <% include ../../../partials/scripts.ejs %>
     
 </body>
 
