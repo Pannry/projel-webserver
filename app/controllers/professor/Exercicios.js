@@ -159,6 +159,9 @@ module.exports = function ( app ) {
                 descricao: req.body.descricao
             }
 
+            // console.log( req.body.tipoDeLista );
+            console.log( req.body );
+
             let conexaoDb = app.infra.banco.dbConnection();
             let ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
