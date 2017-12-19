@@ -156,11 +156,9 @@ module.exports = function ( app ) {
             let entrada = {
                 id_professor: req.user.id,
                 titulo: req.body.titulo,
-                descricao: req.body.descricao
+                descricao: req.body.descricao,
+                tipo: req.body.tipoDeLista
             }
-
-            // console.log( req.body.tipoDeLista );
-            console.log( req.body );
 
             let conexaoDb = app.infra.banco.dbConnection();
             let ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );

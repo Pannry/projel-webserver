@@ -62,7 +62,16 @@ create table lista(
     id_professor int,
     titulo varchar (32),
     descricao varchar (1500),
-    prova boolean default false,    
+    tipo varchar (32),    
+    foreign key (id_professor) references professor(id),
+    primary key(id)
+);
+create table conteudo(
+    id int auto_increment,
+    id_professor int,
+    titulo varchar (32),
+    descricao varchar (1500),
+    download varchar (32),    
     foreign key (id_professor) references professor(id),
     primary key(id)
 );
@@ -190,19 +199,23 @@ insert into exercicios set
 insert into lista set
     titulo='Lista teste 1',
     id_professor = 2,
-    descricao='Maecenas varius, lsd';
+    descricao='Maecenas varius, lsd',
+    tipo = 'lista';
 insert into lista set
     titulo='Lista teste 2',
     id_professor = 2,
-    descricao='Maecenas varius, lsd';
+    descricao='Maecenas varius, lsd',
+    tipo = 'lista';
 insert into lista set
     titulo='Lista teste 3',
     id_professor = 2,
-    descricao='Maecenas varius, lsd';
+    descricao='Maecenas varius, lsd',
+    tipo = 'prova';
 insert into lista set
     titulo='Lista teste 4',
     id_professor = 2,
-    descricao='Maecenas varius, lsd';
+    descricao='Maecenas varius, lsd',
+    tipo = 'prova';
 
 insert into lista_exercicios set
     id_lista = 1,

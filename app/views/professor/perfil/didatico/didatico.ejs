@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../../partials/head.ejs %>
+</head>
+
+<body>
+
+    <!-- Nav dashboard -->
+    <% include ../../../partials/navbar-dashboard.ejs %>
+    
+    <!-- Sidebar Menu -->
+    <% include ../../../partials/sidebar-menu.ejs %>
+
+
+    <!-- Content -->
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+
+        <h1> Exercícios: </h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-1">
+                <a class="btn btn-success " href="#">Criar</a>
+            </div>
+        </div>
+        <br>
+        
+        <div class="row ml-1">
+            <p class="col-md-3 mt-1">
+                <label for="selecionarTurma">Suas aulas criadas: </label>
+            </p>
+        </div>
+
+        <div class="form-group">
+            <div class="list-group">
+
+                <!-- elemento 1 -->
+                <% for (var i = 0; i < listaExercicios.length; i++ ){%>
+                    <li class="list-group-item col-md-10 col-sm-12 " value="#">
+
+                        <div class="row">
+                            <div class="col-7">
+                                Titulo Aleatorio
+                            </div>
+
+                            <div class="col-5">
+                                <a href="#">
+                                    <button type="submit" class="btn btn-secondary btn-sm">Abrir</button>
+                                </a>
+                                <a href="#">
+                                    <button type="submit" class="btn btn-info btn-sm" disabled>Editar</button>
+                                </a>
+                                <a href="#">
+                                    <button type="submit" class="btn btn-danger btn-sm" disabled>Excluir</button>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                <% } %>
+
+            </div>
+        </div>
+
+    </main>
+
+    <% include ../../../partials/scripts.ejs /%>
+    
+</body>
+
+</html>
