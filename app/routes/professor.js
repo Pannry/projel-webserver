@@ -8,6 +8,7 @@ module.exports = function ( app ) {
     var Exercicios = app.controllers.professor.Exercicios;
     var Turmas = app.controllers.professor.Turmas;
     var Notas = app.controllers.professor.Notas;
+    var Didatico = app.controllers.professor.Didatico;
 
     app.get( '/professor', function ( req, res ) {
         ( req.user == undefined ) ?
@@ -106,6 +107,17 @@ module.exports = function ( app ) {
     app.route( '/professor/turma/abrir/:id_sala/professor/:id_aluno/:id_lista' )
         .get( checkAuth, Notas.abrir.verExerciciosRespondidos )
         .post( checkAuth, Notas.abrir.post );
+
+
+    /**
+     *      MATERIAL DIDATICO
+     */
+
+    app.route( '/professor/profile/didatico' )
+        .get( checkAuth, Didatico.painelDidatico.get )
+
+    app.route( '/professor/profile/didatico/criar' )
+        .get( checkAuth, Didatico.criarDidatico.get )
 
 
 }

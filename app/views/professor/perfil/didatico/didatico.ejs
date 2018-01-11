@@ -17,19 +17,19 @@
     <!-- Content -->
     <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 
-        <h1> Exercícios: </h1>
+        <h1> Material Didático: </h1>
         <hr>
 
         <div class="row">
             <div class="col-md-1">
-                <a class="btn btn-success " href="#">Criar</a>
+                <a class="btn btn-success " href="/professor/profile/didatico/criar">Criar</a>
             </div>
         </div>
         <br>
         
         <div class="row ml-1">
             <p class="col-md-3 mt-1">
-                <label for="selecionarTurma">Suas aulas criadas: </label>
+                <label for="selecionarTurma">Conteúdo: </label>
             </p>
         </div>
 
@@ -37,9 +37,7 @@
             <div class="list-group">
 
                 <!-- elemento 1 -->
-                <% for (var i = 0; i < listaExercicios.length; i++ ){%>
                     <li class="list-group-item col-md-10 col-sm-12 " value="#">
-
                         <div class="row">
                             <div class="col-7">
                                 Titulo Aleatorio
@@ -58,8 +56,6 @@
                             </div>
                         </div>
                     </li>
-                <% } %>
-
             </div>
         </div>
 

@@ -9,60 +9,60 @@
 
     <!-- Nav dashboard -->
     <% include ../../../partials/navbar-dashboard.ejs %>
-    
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+
+        <!-- Sidebar Menu -->
+        <% include ../../../partials/sidebar-menu.ejs %>
 
 
-    <!-- Content -->
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+            <!-- Content -->
+            <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 
-        <h1> Criar material didático: </h1>
-        <hr>
+                <h1> Criar material didático: </h1>
+                <hr>
 
-        <form class="" action="#" method="post">
-            <br>
-            
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="titulo" class="font-weight-bold">Titulo:</label>
-                    <input type="text" name="titulo" class="form-control">
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="descricao" class="font-weight-bold">Descrição da explicação:</label>
-                    <textarea class="form-control" name="descricao" rows="5"></textarea>
-                </div>
-            </div>
+                <form class="" action="#" method="post">
+                    <br>
 
-            <br>
-            
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="foto" class="font-weight-bold">Download:</label>                
-                    <input type="file" class="form-control-file" name="foto">
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12">
+                            <label for="titulo" class="font-weight-bold">Titulo:</label>
+                            <input type="text" name="titulo" class="form-control">
+                        </div>
+                    </div>
 
-            <br>
-            
-            <div class="row">
-                <div class="col-md-1 mr-1">
-                    <input class="btn btn-info" type="submit" value="Criar" >
-                </div>
-                <div class="col-md-2">
-                    <a class="btn btn-info" href="/professor/profile/exercicios">Voltar</a>
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12">
+                            <label for="descricao" class="font-weight-bold">Descrição da explicação:</label>
+                            <textarea class="form-control" name="descricao" rows="5"></textarea>
+                        </div>
+                    </div>
 
-        </form>
+                    <br>
 
-    </main>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12">
+                            <label for="foto" class="font-weight-bold">Download:</label>
+                            <input type="file" class="form-control-file" name="foto">
+                        </div>
+                    </div>
 
-    <% include ../../../partials/scripts.ejs /%>
-    
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-1 mr-1">
+                            <input class="btn btn-info" type="submit" value="Criar">
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-info" href="/professor/profile/exercicios">Voltar</a>
+                        </div>
+                    </div>
+
+                </form>
+
+            </main>
+
+            <% include ../../../partials/scripts.ejs %>
+
 </body>
 
 </html>
