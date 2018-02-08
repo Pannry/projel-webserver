@@ -21,8 +21,8 @@ ExerciciosDao.prototype.listarExercicios = function ( id_professor, callback ) {
     this._conexaoDb.query( 'SELECT * FROM exercicios WHERE id_professor = ?', id_professor, callback );
 }
 
-ExerciciosDao.prototype.abrirExercicio = function ( id_questao, callback ) {
-    this._conexaoDb.query( 'SELECT * FROM exercicios WHERE id = ?', id_questao, callback );
+ExerciciosDao.prototype.abrirExercicio = function ( id, callback ) {
+    this._conexaoDb.query( 'SELECT * FROM exercicios WHERE id = ? AND id_professor = ?', [ id.id, id.id_professor ], callback );
 }
 
 /**

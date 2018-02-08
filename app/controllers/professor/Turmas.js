@@ -96,7 +96,7 @@ module.exports = function ( app ) {
                             if ( saida1[ 0 ].id_professor == req.user.id )
                                 res.render( 'professor/perfil/turmas/abrirTurmaProfessor', ejs );
                             else
-                                res.send( '<h1>Você não é responsável pela - ' + saida1[ 0 ].nome + '</>' );
+                                res.render( 'erro/403', ejs );
                         }
 
                     } );
@@ -136,7 +136,7 @@ module.exports = function ( app ) {
                             if ( saida1[ 0 ].id_professor == req.user.id )
                                 res.render( 'professor/perfil/turmas/abrirTurmaAluno', ejs );
                             else
-                                res.send( '<h1>Você não é responsável pela - ' + saida1[ 0 ].nome + '</>' );
+                                res.render( 'erro/403', ejs );
                         }
 
                     } );

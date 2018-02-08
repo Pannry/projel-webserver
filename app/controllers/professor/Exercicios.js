@@ -84,7 +84,10 @@ module.exports = function ( app ) {
         get: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
 
-                let entrada = req.params.id;
+                let entrada = {
+                    id: req.params.id,
+                    id_professor: req.user.id
+                }
 
                 let ejs = {
                     user: req.user,
@@ -96,8 +99,12 @@ module.exports = function ( app ) {
                 let ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
                 ExerciciosDao.abrirExercicio( entrada, ( err, resultado ) => {
-                    ejs.questao = resultado;
-                    res.render( 'professor/perfil/exercicios/abrirExercicio', ejs );
+                    if ( resultado.length == 0 ) res.render( 'erro/403', ejs );
+                    else {
+                        ejs.questao = resultado;
+                        res.render( 'professor/perfil/exercicios/abrirExercicio', ejs );
+                    }
+
 
                 } );
                 conexaoDb.end();
@@ -249,8 +256,11 @@ module.exports = function ( app ) {
             let ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
             ExerciciosDao.abrirLista( entrada, ( err, resultado ) => {
-                ejs.lista = resultado;
-                res.render( 'professor/perfil/exercicios/abrirListaInfo', ejs );
+                if ( resultado.length == 0 ) res.render( 'erro/403', ejs );
+                else {
+                    ejs.lista = resultado;
+                    res.render( 'professor/perfil/exercicios/abrirListaInfo', ejs );
+                }
 
             } );
 

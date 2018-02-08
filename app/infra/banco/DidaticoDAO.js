@@ -18,6 +18,6 @@ DidaticoDAO.prototype.listarDidatico = function ( id_professor, callback ) {
     this._conexaoDb.query( 'SELECT * FROM didatico WHERE id_professor = ?', id_professor, callback );
 }
 
-DidaticoDAO.prototype.abrirDidatico = function ( id_questao, callback ) {
-    this._conexaoDb.query( 'SELECT * FROM didatico WHERE id = ?', id_questao, callback );
+DidaticoDAO.prototype.abrirDidatico = function ( id, callback ) {
+    this._conexaoDb.query( 'SELECT * FROM didatico WHERE id = ? AND id_professor = ?', [ id.id, id.id_professor ], callback );
 }

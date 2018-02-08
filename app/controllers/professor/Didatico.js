@@ -78,7 +78,10 @@ module.exports = function ( app ) {
         get: function ( req, res ) {
             if ( req.user.tipo === "professor" ) {
 
-                let entrada = req.user.id;
+                let entrada = {
+                    id: req.params.id,
+                    id_professor: req.user.id
+                }
 
                 let ejs = {
                     user: req.user,
@@ -90,8 +93,11 @@ module.exports = function ( app ) {
                 let DidaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
 
                 DidaticoDAO.abrirDidatico( entrada, ( err, resultado ) => {
-                    ejs.conteudo = resultado;
-                    res.render( 'professor/perfil/didatico/abrirDidatico', ejs );
+                    if ( resultado.length == 0 ) res.render( 'erro/403', ejs );
+                    else {
+                        ejs.conteudo = resultado;
+                        res.render( 'professor/perfil/didatico/abrirDidatico', ejs );
+                    }
 
                 } );
                 conexaoDb.end();
