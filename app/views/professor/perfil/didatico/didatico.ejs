@@ -37,14 +37,16 @@
             <div class="list-group">
 
                 <!-- elemento 1 -->
-                    <li class="list-group-item col-md-10 col-sm-12 " value="#">
+                <% for (var i = 0; i < listaDidatico.length; i++ ){%>
+                    <li class="list-group-item col-md-10 col-sm-12 " value="<%=listaDidatico[i].id%>">
+
                         <div class="row">
                             <div class="col-7">
-                                Titulo Aleatorio
+                                <%=listaDidatico[i].titulo%>
                             </div>
 
                             <div class="col-5">
-                                <a href="#">
+                                <a href="/professor/didatico/abrir/<%=listaDidatico[i].id%>">
                                     <button type="submit" class="btn btn-secondary btn-sm">Abrir</button>
                                 </a>
                                 <a href="#">
@@ -56,6 +58,7 @@
                             </div>
                         </div>
                     </li>
+                <% } %>
             </div>
         </div>
 

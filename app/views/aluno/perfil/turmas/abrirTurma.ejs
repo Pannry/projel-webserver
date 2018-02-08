@@ -26,35 +26,41 @@
                 <% if(aluno_aceito === 0){ %>
                     <h5>Esperando autorização professor</h5>
                 <% } else if (aluno_aceito === 1){ %>
-                    <h5>Você está dentro da turma!</h5>
-                <% } %>
+                    <h4>Observações do professor:</h4>
+                    <textarea class="form-control col-md-10" id="campoComentario" rows="4" readonly><%= sala[0].comentario %></textarea>
+                    <br>
+                    
+                    <h4>Listas de exercícios:</h4>
 
-                <br>
-
-                <h4>Observações do professor:</h4>
-                <textarea class="form-control col-md-10" id="campoComentario" rows="4" readonly><%= sala[0].comentario %></textarea>
-                
-                <br>
-                
-                <h4>Listas de questoes:</h4>
-
-                <ul class="list-group list-group-flush">
-                    <% if ( lista.length === 0 ) { %>
-                        <h5>Nenhuma lista disponivel, por favor, adicione alguma agora.</h5>
-                    <% } else { %>
-                        <% for (var i = 0; i < lista.length; i++) { %>
-                            <a href="/turmas/abrir/<%= sala[0].id%>/<%= lista[i].id_lista%>/" class="list-group-item list-group-item-action">
-                                <h5><p> <%= lista[i].titulo%> </p></h5>
-                            </a>    
+                    <ul class="list-group list-group-flush">
+                        <% if ( lista.length === 0 ) { %>
+                            <h5>Nenhuma lista disponivel.</h5>
+                        <% } else { %>
+                            <% for (var i = 0; i < lista.length; i++) { %>
+                                <a href="/turmas/abrir/<%= sala[0].id%>/<%= lista[i].id_lista%>/" class="list-group-item list-group-item-action">
+                                    <h5><p> <%= lista[i].titulo%> </p></h5>
+                                </a>    
+                            <% } %>
                         <% } %>
-                    <% } %>
-                </ul>
+                    </ul>
+                    <br>
+                    
+                    <h4>Materiais didáticos:</h4>
 
+                    <ul class="list-group list-group-flush">
+                        <% if ( lista.length === 0 ) { %>
+                            <h5>Não implementado ainda.</h5>
+                        <% } else { %>
+                            <h5>Não implementado ainda.</h5>
+                        <% } %>
+                    </ul>
+
+                <% } %>
             </div>
         </div>        
     </main>
 
-    <% include ../../../partials/scripts.ejs /%>
+    <% include ../../../partials/scripts.ejs %>
 </body>
 
 </html>

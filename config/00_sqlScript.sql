@@ -66,7 +66,7 @@ create table lista(
     foreign key (id_professor) references professor(id),
     primary key(id)
 );
-create table conteudo(
+create table didatico(
     id int auto_increment,
     id_professor int,
     titulo varchar (32),

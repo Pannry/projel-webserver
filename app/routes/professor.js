@@ -108,16 +108,19 @@ module.exports = function ( app ) {
         .get( checkAuth, Notas.abrir.verExerciciosRespondidos )
         .post( checkAuth, Notas.abrir.post );
 
-
     /**
      *      MATERIAL DIDATICO
      */
 
     app.route( '/professor/profile/didatico' )
-        .get( checkAuth, Didatico.painelDidatico.get )
+        .get( checkAuth, Didatico.painelDidatico.get );
 
     app.route( '/professor/profile/didatico/criar' )
         .get( checkAuth, Didatico.criarDidatico.get )
+        .post( checkAuth, Didatico.criarDidatico.post );
+
+    app.route( '/professor/didatico/abrir/:id' )
+        .get( checkAuth, Didatico.abrirDidatico.get );
 
 
 }

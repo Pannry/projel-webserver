@@ -53,26 +53,36 @@
                 </form>
 
                 <br><br>
+                <!-- Listas de exercícios -->
                 <div class="row">
-                    <h4 class="card-title col-md-3">Listas</h4>
+                    <h4 class="card-title col-md-5">Listas de exercícios</h4>
                 </div>
 
-                    <ul class="list-group list-group-flush">
-                        <% if ( lista.length === 0 ) { %>
-                            <h5>Nenhuma lista disponivel, por favor, adicione alguma agora.</h5>
-                        <% } else { %>
-                            <div class="card">
-                                <% for (var i = 0; i < lista.length; i++) { %>
-                                    
-                                    <li class="list-group-item"> 
-                                        <div class="row"> <div class="col-3"><%= lista[i].titulo%></div> </div> 
-                                    </li>
+                <ul class="list-group list-group-flush">
+                    <% if ( lista.length === 0 ) { %>
+                        <h5>Nenhuma lista disponivel, por favor, adicione alguma agora.</h5>
+                    <% } else { %>
+                        <div class="card">
+                            <% for (var i = 0; i < lista.length; i++) { %>
+                                
+                                <li class="list-group-item"> 
+                                    <div class="row"> <div class="col-3"><%= lista[i].titulo%></div> </div> 
+                                </li>
 
-                                <% } %>
-                            </div>
-                        <% } %>
-                    </ul>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </ul>
 
+                <br><br>
+                <!-- Material didático-->
+                <div class="row">
+                    <h4 class="card-title col-md-5">Materiais didáticos</h4>
+                </div>
+                
+                <ul class="list-group list-group-flush">
+                    <h5>Não implementado ainda.</h5>
+                </ul>
 
 
             </div>
