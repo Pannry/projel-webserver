@@ -28,6 +28,26 @@
                 </div>
 
             </div>
+            <br>
+            <div class="card">
+                
+                <div class="card-header">
+                    <h5><p>Material para download</p></h5>
+                </div>
+
+                <div class="card-body">
+                    <% for (let i = 0; i < paths.length; i++ ) { %>
+                    <!-- FIXME: verificar precendencia deste codigo-->
+                    <a href="/professor/didatico/abrir/download/<%= paths[i].file_name%>" class="list-group-item list-group-item-action">
+                        <div class="row">
+                            <div class="col-md-1"><i class="fa fa-download" aria-hidden="true"></i></div>
+                            <div class="col-md-10"><p><%= paths[i].file_name %></p></div>
+                        </div>
+                    </a>
+                    <% } %>
+                </div>
+
+            </div>
 
     </main>
 

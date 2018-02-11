@@ -53,17 +53,33 @@ module.exports = function ( app ) {
                     id_professor: req.user.id,
                     titulo: req.body.titulo,
                     descricao: req.body.descricao,
-                    download: ''
+
                 };
 
                 let conexaoDb = app.infra.banco.dbConnection();
                 let DidaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
 
-                DidaticoDAO.criarDidatico( entrada, ( err ) => {
-                    if ( !err )
-                        res.redirect( '/professor/profile/didatico' );
-                    else
-                        next();
+                DidaticoDAO.criarDidatico( entrada, ( err, results ) => {
+
+                    let conexaoDb2 = app.infra.banco.dbConnection();
+                    let DidaticoDAO2 = new app.infra.banco.DidaticoDAO( conexaoDb2 );
+
+                    req.files.forEach( element => {
+                        console.log( element );
+
+                        let entrada2 = {
+                            id: results.insertId, // retorna a PRIMARY KEY do INSERT anterior
+                            file_name: element.filename,
+                            file_path: element.path
+                        }
+                        DidaticoDAO2.adicionarMaterial( entrada2, ( err ) => { } );
+                    } );
+
+                    conexaoDb2.end();
+
+                    res.redirect( '/professor/profile/didatico' );
+
+
                 } );
 
                 conexaoDb.end();
@@ -95,13 +111,38 @@ module.exports = function ( app ) {
                 DidaticoDAO.abrirDidatico( entrada, ( err, resultado ) => {
                     if ( resultado.length == 0 ) res.render( 'erro/403', ejs );
                     else {
-                        ejs.conteudo = resultado;
-                        res.render( 'professor/perfil/didatico/abrirDidatico', ejs );
-                    }
 
+                        ejs.conteudo = resultado;
+                        let entrada2 = resultado[ 0 ].id;
+
+                        let conexaoDb2 = app.infra.banco.dbConnection();
+                        let DidaticoDAO2 = new app.infra.banco.DidaticoDAO( conexaoDb2 );
+
+                        DidaticoDAO2.arquivosDownload( entrada2, ( err, resultado2 ) => {
+                            if ( err ) console.log( err );
+                            ejs.paths = resultado2;
+                            res.render( 'professor/perfil/didatico/abrirDidatico', ejs );
+                        } );
+                        conexaoDb2.end();
+
+                    }
                 } );
                 conexaoDb.end();
 
+            };
+        }
+    }
+
+    // FIXME: 
+    /*
+        [] deletar coluna file_path
+        [] mais algumas coisas q n lembro.....
+    */
+    Didatico.downloadDidatico = {
+        get: function ( req, res ) {
+            if ( req.user.tipo === "professor" ) {
+                console.log( req.params );
+                res.download( 'app/uploads/' + req.params.path );
             };
         }
     }

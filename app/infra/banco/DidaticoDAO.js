@@ -21,3 +21,9 @@ DidaticoDAO.prototype.listarDidatico = function ( id_professor, callback ) {
 DidaticoDAO.prototype.abrirDidatico = function ( id, callback ) {
     this._conexaoDb.query( 'SELECT * FROM didatico WHERE id = ? AND id_professor = ?', [ id.id, id.id_professor ], callback );
 }
+DidaticoDAO.prototype.adicionarMaterial = function ( id, callback ) {
+    this._conexaoDb.query( 'INSERT INTO didatico_material set ?', id, callback );
+}
+DidaticoDAO.prototype.arquivosDownload = function ( id, callback ) {
+    this._conexaoDb.query( ' SELECT file_name, file_path FROM didatico_material WHERE id = ?', id, callback );
+}

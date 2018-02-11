@@ -60,7 +60,10 @@ module.exports = function ( app ) {
                     id_professor: req.user.id,
                     titulo: req.body.titulo,
                     descricao: req.body.descricao,
-                    foto: ''
+                    /* FIXME: alteração de  foto: '' para file_path: ''
+                        Ver se altera em alguma coisa no funcionamento do codigo
+                    */
+                    file_path: ''
                 };
 
                 let conexaoDb = app.infra.banco.dbConnection();

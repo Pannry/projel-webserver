@@ -71,10 +71,16 @@ create table didatico(
     id_professor int,
     titulo varchar (50),
     descricao varchar (1500),
-    file_path varchar (100),    
     foreign key (id_professor) references professor(id),
     primary key(id)
 );
+create table didatico_material(
+    id int auto_increment,
+    file_name varchar (100),
+    file_path varchar (100),    
+    foreign key (id) references didatico(id)
+);
+
 -- Tabela de resposta
 create table resposta(
     id_aluno int,

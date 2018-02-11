@@ -1,5 +1,16 @@
 var bcrypt = require( 'bcrypt-nodejs' );
 
+var multer = require( 'multer' );
+
+var storage = multer.diskStorage( {
+    destination: 'app/uploads/',
+    filename: function ( req, file, cb ) {
+        cb( null, Date.now().toString().substring( 5, 13 ) + '_' + file.originalname )
+    }
+} );
+
+const upload = multer( { storage: storage } );
+
 module.exports = function ( app ) {
 
     var passport = app.get( 'passport' );
@@ -117,10 +128,14 @@ module.exports = function ( app ) {
 
     app.route( '/professor/profile/didatico/criar' )
         .get( checkAuth, Didatico.criarDidatico.get )
-        .post( checkAuth, Didatico.criarDidatico.post );
+        .post( checkAuth, upload.array( 'fileUpload', 5 ), Didatico.criarDidatico.post );
 
-    app.route( '/professor/didatico/abrir/:id' )
+    // FIXME:
+    app.route( '/professor/didatico/abrir/download/:path' )
+        .get( checkAuth, Didatico.downloadDidatico.get );
+    app.route( '/professor/didatico/abrir/:id/' )
         .get( checkAuth, Didatico.abrirDidatico.get );
+
 
 
 }

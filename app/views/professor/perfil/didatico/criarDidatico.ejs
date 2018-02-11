@@ -20,7 +20,7 @@
         <h1> Criar material didático: </h1>
         <hr>
 
-        <form class="" action="#" method="post">
+        <form action="/professor/profile/didatico/criar" method="post" enctype="multipart/form-data" >
             <br>
 
             <div class="row">
@@ -41,8 +41,8 @@
 
             <div class="row">
                 <div class="col-md-8 col-sm-12">
-                    <label for="foto" class="font-weight-bold">Download:</label>
-                    <input type="file" class="form-control-file" name="foto">
+                    <label for="fileUpload" class="font-weight-bold">Upload do material (Até 5 arquivos):</label>
+                    <input type="file" class="form-control-file" name="fileUpload" multiple="multiple">
                 </div>
             </div>
 
