@@ -25,3 +25,5 @@ Problemas Conhecidos:
     - A mesma lista para o mesmo aluno em diferentes salas compartilham a mesma resposta.
 
     - Atribuir uma resposta a uma sala. 
+
+    - nao é possivel criar uma lista com zero exercicios, da problema

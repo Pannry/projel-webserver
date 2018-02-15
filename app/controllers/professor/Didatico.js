@@ -65,13 +65,12 @@ module.exports = function ( app ) {
                     let DidaticoDAO2 = new app.infra.banco.DidaticoDAO( conexaoDb2 );
 
                     req.files.forEach( element => {
-                        console.log( element );
 
                         let entrada2 = {
                             id: results.insertId, // retorna a PRIMARY KEY do INSERT anterior
-                            file_name: element.filename,
-                            file_path: element.path
+                            file_name: element.filename
                         }
+
                         DidaticoDAO2.adicionarMaterial( entrada2, ( err ) => { } );
                     } );
 
@@ -119,7 +118,6 @@ module.exports = function ( app ) {
                         let DidaticoDAO2 = new app.infra.banco.DidaticoDAO( conexaoDb2 );
 
                         DidaticoDAO2.arquivosDownload( entrada2, ( err, resultado2 ) => {
-                            if ( err ) console.log( err );
                             ejs.paths = resultado2;
                             res.render( 'professor/perfil/didatico/abrirDidatico', ejs );
                         } );
@@ -133,16 +131,35 @@ module.exports = function ( app ) {
         }
     }
 
-    // FIXME: 
-    /*
-        [] deletar coluna file_path
-        [] mais algumas coisas q n lembro.....
-    */
     Didatico.downloadDidatico = {
         get: function ( req, res ) {
             if ( req.user.tipo === "professor" ) {
-                console.log( req.params );
-                res.download( 'app/uploads/' + req.params.path );
+
+                entrada = {
+                    id_professor: req.user.id,
+                    id: req.params.id,
+                    file_name: req.params.path
+                }
+
+                let ejs = {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo
+                }
+
+                let conexaoDb = app.infra.banco.dbConnection();
+                let DidaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
+
+                DidaticoDAO.fazerDownload( entrada, ( err, resultado ) => {
+                    console.log( resultado );
+                    if ( resultado.length == 0 )
+                        res.render( 'erro/403', ejs );
+                    else
+                        res.download( 'app/uploads/' + resultado[ 0 ].file_name );
+                } );
+                conexaoDb.end();
+
+
             };
         }
     }

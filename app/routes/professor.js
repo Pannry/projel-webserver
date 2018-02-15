@@ -130,8 +130,7 @@ module.exports = function ( app ) {
         .get( checkAuth, Didatico.criarDidatico.get )
         .post( checkAuth, upload.array( 'fileUpload', 5 ), Didatico.criarDidatico.post );
 
-    // FIXME:
-    app.route( '/professor/didatico/abrir/download/:path' )
+    app.route( '/professor/didatico/abrir/:id/download/:path' )
         .get( checkAuth, Didatico.downloadDidatico.get );
     app.route( '/professor/didatico/abrir/:id/' )
         .get( checkAuth, Didatico.abrirDidatico.get );
