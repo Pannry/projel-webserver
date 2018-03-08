@@ -88,7 +88,8 @@ module.exports = function ( app ) {
 
     app.route( '/professor/exercicios/criar' )
         .get( checkAuth, Exercicios.criarExercicios.get )
-        .post( checkAuth, Exercicios.criarExercicios.post );
+        .post( checkAuth, upload.array( 'fileUpload', 5 ), Exercicios.criarExercicios.post );
+
 
     // Listas
     app.route( '/professor/profile/exercicios/lista' )
@@ -132,6 +133,7 @@ module.exports = function ( app ) {
 
     app.route( '/professor/didatico/abrir/:id/download/:path' )
         .get( checkAuth, Didatico.downloadDidatico.get );
+
     app.route( '/professor/didatico/abrir/:id/' )
         .get( checkAuth, Didatico.abrirDidatico.get );
 
