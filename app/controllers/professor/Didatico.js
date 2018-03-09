@@ -53,36 +53,26 @@ module.exports = function ( app ) {
                     id_professor: req.user.id,
                     titulo: req.body.titulo,
                     descricao: req.body.descricao,
-
                 };
 
                 let conexaoDb = app.infra.banco.dbConnection();
                 let DidaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
 
                 DidaticoDAO.criarDidatico( entrada, ( err, results ) => {
-
                     let conexaoDb2 = app.infra.banco.dbConnection();
                     let DidaticoDAO2 = new app.infra.banco.DidaticoDAO( conexaoDb2 );
-
                     req.files.forEach( element => {
-
                         let entrada2 = {
                             id: results.insertId, // retorna a PRIMARY KEY do INSERT anterior
                             file_name: element.filename
                         }
-
                         DidaticoDAO2.adicionarMaterial( entrada2, ( err ) => { } );
                     } );
 
                     conexaoDb2.end();
-
                     res.redirect( '/professor/profile/didatico' );
-
-
                 } );
-
                 conexaoDb.end();
-
             };
         }
     }
@@ -151,7 +141,6 @@ module.exports = function ( app ) {
                 let DidaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
 
                 DidaticoDAO.fazerDownload( entrada, ( err, resultado ) => {
-                    console.log( resultado );
                     if ( resultado.length == 0 )
                         res.render( 'erro/403', ejs );
                     else

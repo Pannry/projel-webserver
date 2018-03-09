@@ -39,43 +39,38 @@ module.exports = function ( app ) {
 
     Exercicios.criarExercicios = {
         get: function ( req, res ) {
-
             if ( req.user.tipo == 'professor' ) {
-
                 let ejs = {
                     user: req.user,
                     page_name: req.path,
                     accountType: req.user.tipo
                 }
-
                 res.render( 'professor/perfil/exercicios/criarExercicios', ejs );
-
             };
         },
 
         post: function ( req, res, next ) {
             if ( req.user.tipo == 'professor' ) {
-
                 let entrada = {
                     id_professor: req.user.id,
                     titulo: req.body.titulo,
                     descricao: req.body.descricao,
-                    /* FIXME: alteração de  foto: '' para file_path: ''
-                        Ver se altera em alguma coisa no funcionamento do codigo
-                    */
-                    file_path: ''
                 };
 
                 let conexaoDb = app.infra.banco.dbConnection();
                 let ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+                ExerciciosDao.criarExercicios( entrada, ( err, results ) => {
 
-                ExerciciosDao.criarExercicios( entrada, ( err ) => {
+                    //FIXME: Terminar a implementação do download baseado no Didatico
+                    //let conexaoDb2 = app.infra.banco.dbConnection();
+                    //let ExerciciosDao2 = new app.infra.banco.ExerciciosDao( conexaoDb2 );
+                    //conexaoDb.end();
+
 
                     if ( !err )
                         res.redirect( '/professor/profile/exercicios' );
                     else
                         next();
-
                 } );
                 conexaoDb.end();
 
