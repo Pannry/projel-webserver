@@ -51,6 +51,7 @@ module.exports = function ( app ) {
 
         post: function ( req, res, next ) {
             if ( req.user.tipo == 'professor' ) {
+
                 let entrada = {
                     id_professor: req.user.id,
                     titulo: req.body.titulo,
@@ -59,13 +60,20 @@ module.exports = function ( app ) {
 
                 let conexaoDb = app.infra.banco.dbConnection();
                 let ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+
                 ExerciciosDao.criarExercicios( entrada, ( err, results ) => {
+                    let conexaoDb2 = app.infra.banco.dbConnection();
+                    let ExerciciosDao2 = new app.infra.banco.ExerciciosDao( conexaoDb2 );
 
-                    //FIXME: Terminar a implementação do download baseado no Didatico
-                    //let conexaoDb2 = app.infra.banco.dbConnection();
-                    //let ExerciciosDao2 = new app.infra.banco.ExerciciosDao( conexaoDb2 );
-                    //conexaoDb.end();
+                    req.files.forEach( element => {
+                        let entrada2 = {
+                            id: results.insertId, // retorna a PRIMARY KEY do INSERT anterior
+                            file_name: element.filename
+                        }
+                        ExerciciosDao2.adicionarMaterial( entrada2, ( err ) => { } );
+                    } );
 
+                    conexaoDb2.end();
 
                     if ( !err )
                         res.redirect( '/professor/profile/exercicios' );
@@ -81,9 +89,51 @@ module.exports = function ( app ) {
     Exercicios.abrirExercicio = {
         get: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
+                let entrada = {
+                    id: req.params.id,
+                    id_professor: req.user.id
+                }
+                let ejs = {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo
+                }
+                let conexaoDb = app.infra.banco.dbConnection();
+                let ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+
+                ExerciciosDao.abrirExercicio( entrada, ( err, resultado ) => {
+                    if ( resultado.length == 0 ) res.render( 'erro/403', ejs );
+                    else {
+                        ejs.questao = resultado;
+                        let entrada2 = resultado[ 0 ].id;
+
+                        let conexaoDb2 = app.infra.banco.dbConnection();
+                        let ExerciciosDao2 = new app.infra.banco.ExerciciosDao( conexaoDb2 );
+
+                        ExerciciosDao2.arquivosDownload( entrada2, ( err, resultado2 ) => {
+                            ejs.paths = resultado2;
+                            res.render( 'professor/perfil/exercicios/abrirExercicio', ejs );
+                        } );
+                        conexaoDb2.end();
+
+
+                    }
+
+
+                } );
+                conexaoDb.end();
+
+            };
+        }
+    };
+
+    Exercicios.downloadExercicios = {
+        get: function ( req, res ) {
+            if ( req.user.tipo === "professor" ) {
 
                 let entrada = {
                     id: req.params.id,
+                    file_name: req.params.path,
                     id_professor: req.user.id
                 }
 
@@ -96,20 +146,20 @@ module.exports = function ( app ) {
                 let conexaoDb = app.infra.banco.dbConnection();
                 let ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
-                ExerciciosDao.abrirExercicio( entrada, ( err, resultado ) => {
-                    if ( resultado.length == 0 ) res.render( 'erro/403', ejs );
+                ExerciciosDao.fazerDownload( entrada, ( err, resultado ) => {
+                    console.log( resultado );
+                    if ( resultado.length == 0 )
+                        res.render( 'erro/403', ejs );
                     else {
-                        ejs.questao = resultado;
-                        res.render( 'professor/perfil/exercicios/abrirExercicio', ejs );
+                        res.download( 'app/uploads/' + resultado[ 0 ].file_name );
                     }
-
-
                 } );
                 conexaoDb.end();
 
+
             };
         }
-    };
+    }
 
     /**
      *      Listas

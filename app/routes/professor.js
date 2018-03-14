@@ -90,6 +90,9 @@ module.exports = function ( app ) {
         .get( checkAuth, Exercicios.criarExercicios.get )
         .post( checkAuth, upload.array( 'fileUpload', 5 ), Exercicios.criarExercicios.post );
 
+    app.route( '/professor/exercicios/abrir/:id/download/:path' )
+        .get( checkAuth, Exercicios.downloadExercicios.get );
+
 
     // Listas
     app.route( '/professor/profile/exercicios/lista' )

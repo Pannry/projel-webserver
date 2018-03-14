@@ -59,7 +59,19 @@ ExerciciosDao.prototype.mostrarExerciciosInclusos = function ( entrada, callback
         'FROM sala_lista, lista WHERE sala_lista.id_sala = ? AND sala_lista.id_lista = lista.id', entrada, callback );
 }
 
+ExerciciosDao.prototype.adicionarMaterial = function ( entrada, callback ) {
+    this._conexaoDb.query( 'INSERT INTO exercicios_material set ?', entrada, callback );
+}
 
+ExerciciosDao.prototype.arquivosDownload = function ( id, callback ) {
+    this._conexaoDb.query( 'SELECT file_name FROM exercicios_material WHERE id = ?', id, callback );
+}
+
+ExerciciosDao.prototype.fazerDownload = function ( id, callback ) {
+    this._conexaoDb.query( 'select exercicios.id_professor, exercicios.id, exercicios_material.file_name from ' +
+        'exercicios, exercicios_material where exercicios.id = ? and exercicios_material.file_name = ? and exercicios.id_professor = ?',
+        [ id.id, id.file_name, id.id_professor ], callback );
+}
 
 /**
  *      Aluno

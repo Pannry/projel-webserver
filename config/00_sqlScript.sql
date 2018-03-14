@@ -173,4 +173,3 @@ insert into professor set
     numero=1,
     telefone=1,
     instituicao_id = 1;
-
