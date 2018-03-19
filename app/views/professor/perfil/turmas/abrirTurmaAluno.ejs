@@ -31,12 +31,16 @@
             <div class="card-body">
                 
                 <div class="row">                
-                    <div class="col-md-5 col-sm-12">                
-                        <h4 class="card-title">Lista de Exercícios</h4>
-                        <a href="/professor/turma/abrir/<%=idSala%>/aluno/incluirlista" class="btn btn-outline-secondary col-md-5 col-sm-12">Atribuir listas</a>
+                    <div class="col-md-4 col-sm-12">                
+                        <h4 class="card-title">Lista de exercícios</h4>
+                        <a href="/professor/turma/abrir/<%=idSala%>/aluno/incluirlista" class="btn btn-outline-secondary col-md-5 col-sm-12">Lista</a>
                     </div>
-                    <div class="col-md-5 col-sm-12">                
-                        <h4 class="card-title">Download do Programa</h4>
+                    <div class="col-md-4 col-sm-12">                
+                        <h4 class="card-title">Lista de materiais didáticos</h4>
+                        <a href="/professor/turma/abrir/<%=idSala%>/aluno/incluirDidatico" class="btn btn-outline-secondary col-md-5 col-sm-12">Lista</a>
+                    </div>
+                    <div class="col-md-4 col-sm-12">                
+                        <h4 class="card-title">Download do programa</h4>
                         <a href="#" class="btn btn-outline-secondary col-md-5">Projel</a>
                     </div>
                 </div>
@@ -45,9 +49,7 @@
 
                 <form class="form-group" action="/professor/turma/abrir/<%=idSala%>/aluno" method="post">
                     <h4 class="card-title" for="campoComentario"> Adicionar Comentário: </h4>
-                    <textarea class="form-control col-md-10" id="campoComentario" rows="3" readonly><%= infoProfessor[0].comentario%></textarea>
-                    <br>
-                    <textarea class="form-control col-md-10" id="campoComentario" name="comentario" rows="3" ><%= infoProfessor[0].comentario%></textarea>
+                    <textarea class="form-control col-md-10" id="campoComentario" name="comentario" rows="6" ><%= infoProfessor[0].comentario%></textarea>
                     <br>
                     <input class="btn btn-outline-secondary col-md-2 col-sm-12" type="submit" value="Salvar">
                 </form>

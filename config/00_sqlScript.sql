@@ -124,6 +124,13 @@ create table sala_lista(
     foreign key (id_lista) references lista(id),
     primary key (id_sala, id_lista)
 );
+create table sala_didatico(
+    id_sala int,
+    id_didatico int,
+    foreign key (id_sala) references sala(id),
+    foreign key (id_didatico) references didatico(id),
+    primary key (id_sala, id_didatico)
+);
 
 -- Tabela de relação dos alunos com as salas
 create table cursa(

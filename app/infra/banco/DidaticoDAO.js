@@ -35,3 +35,12 @@ DidaticoDAO.prototype.fazerDownload = function ( id, callback ) {
         'didatico, didatico_material where didatico.id = ? and didatico_material.file_name = ? and didatico.id_professor = ?',
         [ id.id, id.file_name, id.id_professor ], callback );
 }
+
+DidaticoDAO.prototype.mostrarListaDidaticos = function ( entrada, callback ) {
+    this._conexaoDb.query( 'SELECT * FROM didatico WHERE id_professor = ?', entrada, callback );
+}
+
+DidaticoDAO.prototype.mostrarDidaticosInclusos = function ( id, callback ) {
+    this._conexaoDb.query( 'query', id, callback );
+}
+

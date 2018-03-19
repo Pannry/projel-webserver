@@ -132,6 +132,12 @@ module.exports = function ( app ) {
                     exercicioDao.mostrarExerciciosInclusos( entrada, ( err, saida2 ) => {
                         ejs.lista = saida2;
 
+                        // let conexaoDb3 = app.infra.banco.dbConnection();
+                        // let didaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb3 );
+
+                        // didaticoDAO.mostrarDidaticosInclusos( entrada, ( err, saida3 ) => {
+
+
                         if ( !err && saida1.length != 0 ) {
                             if ( saida1[ 0 ].id_professor == req.user.id )
                                 res.render( 'professor/perfil/turmas/abrirTurmaAluno', ejs );
@@ -139,9 +145,10 @@ module.exports = function ( app ) {
                                 res.render( 'erro/403', ejs );
                         }
 
+                        // } );
+                        // conexaoDb3.end();
                     } );
                     conexaoDb2.end();
-
                 } );
                 conexaoDb1.end();
 
@@ -238,6 +245,39 @@ module.exports = function ( app ) {
                 res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/aluno' )
             }
         }
+    }
+
+    turmas.incluirDidatico = {
+        get: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+
+                let id_professor = req.user.id;
+
+                let ejs = {
+                    user: req.user,
+                    page_name: req.path,
+                    accountType: req.user.tipo,
+                    idSala: req.params.id
+                }
+
+                var conexaoDb = app.infra.banco.dbConnection();
+                var DidaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
+
+                DidaticoDAO.mostrarListaDidaticos( id_professor, ( err, resultado ) => {
+                    ejs.lista = resultado;
+                    res.render( 'professor/perfil/turmas/listarDidaticoParaAdicionar', ejs );
+
+                } );
+                conexaoDb.end();
+
+            }
+        },
+        post: function ( req, res ) {
+            if ( req.user.tipo == 'professor' ) {
+
+            }
+        }
+
     }
 
     return turmas;

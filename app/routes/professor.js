@@ -71,6 +71,10 @@ module.exports = function ( app ) {
         .get( checkAuth, Turmas.incluirlista.get )
         .post( checkAuth, Turmas.incluirlista.post );
 
+    app.route( '/professor/turma/abrir/:id/aluno/incluirDidatico' )
+        .get( checkAuth, Turmas.incluirDidatico.get )
+        .post( checkAuth, Turmas.incluirDidatico.post );
+
     // app.post( '/professor/turma/editar/:id', checkAuth, Turmas.turma.editar );
     // app.post('/professor/turma/excluir/:id', checkAuth, Turmas.turma.excluir);
 
