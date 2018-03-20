@@ -40,6 +40,11 @@ DidaticoDAO.prototype.mostrarListaDidaticos = function ( entrada, callback ) {
     this._conexaoDb.query( 'SELECT * FROM didatico WHERE id_professor = ?', entrada, callback );
 }
 
+DidaticoDAO.prototype.didaticoParaIncluir = function ( entrada, callback ) {
+    console.log( entrada );
+    this._conexaoDb.query( 'INSERT INTO sala_didatico SET ?', entrada, callback );
+}
+
 DidaticoDAO.prototype.mostrarDidaticosInclusos = function ( id, callback ) {
     this._conexaoDb.query( 'query', id, callback );
 }

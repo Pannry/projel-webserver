@@ -229,7 +229,8 @@ module.exports = function ( app ) {
                 let checkbox = req.body.options;
                 let vetor = [];
 
-                for ( let i = 0; i < checkbox.length; i++ ) vetor[ i ] = checkbox[ i ];
+                for ( let i = 0; i < checkbox.length; i++ )
+                    vetor[ i ] = checkbox[ i ];
 
                 var conexaoDb = app.infra.banco.dbConnection();
                 var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
@@ -261,9 +262,9 @@ module.exports = function ( app ) {
                 }
 
                 var conexaoDb = app.infra.banco.dbConnection();
-                var DidaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
+                var didaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
 
-                DidaticoDAO.mostrarListaDidaticos( id_professor, ( err, resultado ) => {
+                didaticoDAO.mostrarListaDidaticos( id_professor, ( err, resultado ) => {
                     ejs.lista = resultado;
                     res.render( 'professor/perfil/turmas/listarDidaticoParaAdicionar', ejs );
 
@@ -274,7 +275,30 @@ module.exports = function ( app ) {
         },
         post: function ( req, res ) {
             if ( req.user.tipo == 'professor' ) {
+                let entrada = {}
+                entrada.id_sala = req.params.id;
 
+                let checkbox = req.body.options;
+                let vetor = [];
+
+                for ( let i = 0; i < checkbox.length; i++ )
+                    vetor[ i ] = checkbox[ i ];
+
+                console.log( vetor );
+                var conexaoDb = app.infra.banco.dbConnection();
+                var didaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
+
+                vetor.forEach( element => {
+                    entrada.id_didatico = element
+                    didaticoDAO.didaticoParaIncluir( entrada, ( err, resultado ) => { } );
+
+                } );
+
+                conexaoDb.end();
+
+                res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/aluno' )
+
+                // TODO: Ja esta incluindo no banco, falta mostrar em turmas, na conta professor
             }
         }
 

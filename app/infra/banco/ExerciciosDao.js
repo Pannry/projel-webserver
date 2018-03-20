@@ -50,7 +50,7 @@ ExerciciosDao.prototype.adicionarExercicioLista = function ( entrada, callback )
     this._conexaoDb.query( 'INSERT INTO lista_exercicios SET ?', entrada, callback );
 }
 
-ExerciciosDao.prototype.mostrarListasParaIncluir = function ( entrada, callback ) {
+ExerciciosDao.prototype.ListasParaIncluir = function ( entrada, callback ) {
     this._conexaoDb.query( 'INSERT INTO sala_lista SET ?', entrada, callback );
 }
 
