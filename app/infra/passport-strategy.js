@@ -1,98 +1,101 @@
-var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcrypt-nodejs');
+module.exports = function ( app ) {
+    var LocalStrategy = require( 'passport-local' ).Strategy;
+    var bcrypt = require( 'bcrypt' );
+    var passport = app.get( 'passport' );
 
-
-module.exports = function(app) {
-    var passport = app.get('passport');
-
-    passport.serializeUser(function(user, done) {
+    passport.serializeUser( function ( user, done ) {
         var chave = {
             id: user.id,
             tipo: user.tipo
         }
-        done(null, chave);
-    });
+        done( null, chave );
+    } );
 
-    passport.deserializeUser(function(usuario, done) {
+    passport.deserializeUser( function ( usuario, done ) {
 
         var conexaoDb = app.infra.banco.dbConnection();
-        var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
+        var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
 
-        if (usuario.tipo === 'aluno') {
-            usuarioDAO.buscarIdAluno(usuario.id, function(err, usuario) {
-                usuario[0].tipo = 'aluno';
-                done(err, usuario[0]);
-            });
-        } else if (usuario.tipo === 'professor') {
-            usuarioDAO.buscarIdProfessor(usuario.id, function(err, usuario) {
-                usuario[0].tipo = 'professor';
-                done(err, usuario[0]);
-            });
+        if ( usuario.tipo === 'aluno' ) {
+            usuarioDAO.buscarIdAluno( usuario.id, function ( err, usuario ) {
+                usuario[ 0 ].tipo = 'aluno';
+                done( err, usuario[ 0 ] );
+            } );
+        } else if ( usuario.tipo === 'professor' ) {
+            usuarioDAO.buscarIdProfessor( usuario.id, function ( err, usuario ) {
+                usuario[ 0 ].tipo = 'professor';
+                done( err, usuario[ 0 ] );
+            } );
         }
 
         conexaoDb.end();
-    });
+    } );
 
     /**
      * Login do Aluno
      */
-    passport.use('local-login-aluno', new LocalStrategy({
+    passport.use( 'local-login-aluno', new LocalStrategy( {
         usernameField: 'email',
         passwordField: 'senha',
         passReqToCallback: true
-    }, function(req, username, password, done) {
+    }, function ( req, username, password, done ) {
 
         var conexaoDb = app.infra.banco.dbConnection();
-        var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
-        // password = bcrypt.hashSync(password, null, null);
-        var usuario = {
+        var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
+
+        var entrada = {
             email: username,
             senha: password
         };
 
-        usuarioDAO.buscarAluno(usuario,
-            function(err, usuario) {
-                if (err)
-                    return done(err);
-                if (!usuario.length)
-                    return done(null, false, req.flash('loginMessage', 'Aluno não encontrado, tente novamente.'));
-                usuario[0].tipo = "aluno";
-                return done(null, usuario[0]);
-            }
-        );
+        usuarioDAO.buscarAluno( entrada, ( err, usuario ) => {
+
+            if ( err )
+                return done( err );
+            if ( !usuario.length )
+                return done( null, false, req.flash( 'loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.' ) );
+            if ( !bcrypt.compareSync( entrada.senha, usuario[ 0 ].senha ) )
+                return done( null, false, req.flash( 'loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.' ) );
+
+            usuario[ 0 ].tipo = "aluno";
+            return done( null, usuario[ 0 ] );
+        } );
+
         conexaoDb.end();
-    }));
+    } ) );
 
     /**
      * Login do professor
      */
-    passport.use('local-login-professor', new LocalStrategy({
+    passport.use( 'local-login-professor', new LocalStrategy( {
         usernameField: 'email',
         passwordField: 'senha',
         passReqToCallback: true
-    }, function(req, username, password, done) {
+    }, function ( req, username, password, done ) {
 
         var conexaoDb = app.infra.banco.dbConnection();
-        var usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
-        // password = bcrypt.hashSync(password, null, null);
-        var usuario = {
+        var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
+
+        var entrada = {
             email: username,
             senha: password
         };
 
-        usuarioDAO.buscarProfessor(usuario,
-            function(err, usuario) {
-                if (err)
-                    return done(err);
-                if (!usuario.length)
-                    return done(null, false, req.flash('loginMessage', 'Professor não encontrado, tente novamente.'));
+        usuarioDAO.buscarProfessor( entrada, ( err, usuario ) => {
+            console.log( usuario );
+            if ( err )
+                return done( err );
+            if ( !usuario.length )
+                return done( null, false, req.flash( 'loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.' ) );
+            if ( !bcrypt.compareSync( entrada.senha, usuario[ 0 ].senha ) )
+                return done( null, false, req.flash( 'loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.' ) );
 
-                usuario[0].tipo = 'professor';
-                return done(null, usuario[0]);
-            }
-        );
+            usuario[ 0 ].tipo = 'professor';
+            return done( null, usuario[ 0 ] );
+        } );
+
         conexaoDb.end();
-    }));
+    } ) );
 }
 
 // sites relacionados com multiplas 'local-strategy' 

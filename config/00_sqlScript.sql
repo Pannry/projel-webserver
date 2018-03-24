@@ -17,7 +17,7 @@ create table aluno(
     id int auto_increment primary key,
     nome varchar(32) NOT NULL,
     email varchar(32) NOT NULL,
-    senha varchar(64) NOT NULL,
+    senha varchar(128) NOT NULL,
     instituicao_id int,
     foreign key (instituicao_id) references instituicao(id)
 );
@@ -27,7 +27,7 @@ create table professor(
     nome varchar(32) NOT NULL,
     endereco varchar(64),
     email varchar(32) NOT NULL,
-    senha varchar(64) NOT NULL,
+    senha varchar(128) NOT NULL,
     cpf int,
     cep int,
     numero int,

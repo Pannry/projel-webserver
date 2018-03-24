@@ -41,11 +41,11 @@ DidaticoDAO.prototype.mostrarListaDidaticos = function ( entrada, callback ) {
 }
 
 DidaticoDAO.prototype.didaticoParaIncluir = function ( entrada, callback ) {
-    console.log( entrada );
     this._conexaoDb.query( 'INSERT INTO sala_didatico SET ?', entrada, callback );
 }
 
-DidaticoDAO.prototype.mostrarDidaticosInclusos = function ( id, callback ) {
-    this._conexaoDb.query( 'query', id, callback );
+DidaticoDAO.prototype.mostrarDidaticosInclusos = function ( entrada, callback ) {
+    this._conexaoDb.query( 'SELECT id_sala, id_didatico, titulo FROM sala_didatico, didatico ' +
+        'WHERE sala_didatico.id_sala = ? AND sala_didatico.id_didatico = didatico.id', entrada, callback );
 }
 

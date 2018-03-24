@@ -1,5 +1,3 @@
-var bcrypt = require( 'bcrypt-nodejs' );
-
 var multer = require( 'multer' );
 
 var storage = multer.diskStorage( {

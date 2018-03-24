@@ -132,21 +132,21 @@ module.exports = function ( app ) {
                     exercicioDao.mostrarExerciciosInclusos( entrada, ( err, saida2 ) => {
                         ejs.lista = saida2;
 
-                        // let conexaoDb3 = app.infra.banco.dbConnection();
-                        // let didaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb3 );
+                        let conexaoDb3 = app.infra.banco.dbConnection();
+                        let didaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb3 );
 
-                        // didaticoDAO.mostrarDidaticosInclusos( entrada, ( err, saida3 ) => {
+                        didaticoDAO.mostrarDidaticosInclusos( entrada, ( err, saida3 ) => {
+                            ejs.didatico = saida3;
 
+                            if ( !err && saida1.length != 0 ) {
+                                if ( saida1[ 0 ].id_professor == req.user.id )
+                                    res.render( 'professor/perfil/turmas/abrirTurmaAluno', ejs );
+                                else
+                                    res.render( 'erro/403', ejs );
+                            }
 
-                        if ( !err && saida1.length != 0 ) {
-                            if ( saida1[ 0 ].id_professor == req.user.id )
-                                res.render( 'professor/perfil/turmas/abrirTurmaAluno', ejs );
-                            else
-                                res.render( 'erro/403', ejs );
-                        }
-
-                        // } );
-                        // conexaoDb3.end();
+                        } );
+                        conexaoDb3.end();
                     } );
                     conexaoDb2.end();
                 } );
@@ -236,8 +236,8 @@ module.exports = function ( app ) {
                 var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
                 vetor.forEach( element => {
-                    entrada.id_lista = element
-                    ExerciciosDao.mostrarListasParaIncluir( entrada, ( err, resultado ) => { } );
+                    entrada.id_lista = element;
+                    ExerciciosDao.listasParaIncluir( entrada, ( err, resultado ) => { } );
 
                 } );
 
@@ -284,7 +284,6 @@ module.exports = function ( app ) {
                 for ( let i = 0; i < checkbox.length; i++ )
                     vetor[ i ] = checkbox[ i ];
 
-                console.log( vetor );
                 var conexaoDb = app.infra.banco.dbConnection();
                 var didaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
 

@@ -1,5 +1,3 @@
-var bcrypt = require( 'bcrypt-nodejs' );
-
 module.exports = function ( app ) {
     var passport = app.get( 'passport' );
     var Aluno = app.controllers.aluno.Aluno;

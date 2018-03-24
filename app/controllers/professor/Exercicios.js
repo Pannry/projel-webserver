@@ -147,7 +147,6 @@ module.exports = function ( app ) {
                 let ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
                 ExerciciosDao.fazerDownload( entrada, ( err, resultado ) => {
-                    console.log( resultado );
                     if ( resultado.length == 0 )
                         res.render( 'erro/403', ejs );
                     else {

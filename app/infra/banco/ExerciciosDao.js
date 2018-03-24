@@ -50,13 +50,13 @@ ExerciciosDao.prototype.adicionarExercicioLista = function ( entrada, callback )
     this._conexaoDb.query( 'INSERT INTO lista_exercicios SET ?', entrada, callback );
 }
 
-ExerciciosDao.prototype.ListasParaIncluir = function ( entrada, callback ) {
+ExerciciosDao.prototype.listasParaIncluir = function ( entrada, callback ) {
     this._conexaoDb.query( 'INSERT INTO sala_lista SET ?', entrada, callback );
 }
 
 ExerciciosDao.prototype.mostrarExerciciosInclusos = function ( entrada, callback ) {
-    this._conexaoDb.query( 'SELECT id_sala, id_lista, id_professor, titulo, descricao ' +
-        'FROM sala_lista, lista WHERE sala_lista.id_sala = ? AND sala_lista.id_lista = lista.id', entrada, callback );
+    this._conexaoDb.query( 'SELECT id_sala, id_lista, titulo FROM sala_lista, lista ' +
+        'WHERE sala_lista.id_sala = ? AND sala_lista.id_lista = lista.id', entrada, callback );
 }
 
 ExerciciosDao.prototype.adicionarMaterial = function ( entrada, callback ) {

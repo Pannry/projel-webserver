@@ -1,8 +1,5 @@
 TODO:
-    - implementar o banco cursa
-
-    - Todos os campos filtrar
-
+    - template para as entradas dos campos
 Problemas Conhecidos:
 
     - É possivel criar conta repetidas.

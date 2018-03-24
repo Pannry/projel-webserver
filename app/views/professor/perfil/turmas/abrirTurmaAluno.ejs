@@ -83,7 +83,19 @@
                 </div>
                 
                 <ul class="list-group list-group-flush">
-                    <h5>Não implementado ainda.</h5>
+                    <% if ( didatico.length === 0 ) { %>
+                        <h5>Nenhuma material didático disponivel, por favor, adicione algum agora.</h5>
+                    <% } else { %>
+                        <div class="card">
+                            <% for (var i = 0; i < didatico.length; i++) { %>
+                                
+                                <li class="list-group-item"> 
+                                    <div class="row"> <div class="col-3"><%= didatico[i].titulo%></div> </div> 
+                                </li>
+
+                            <% } %>
+                        </div>
+                    <% } %>
                 </ul>
 
 

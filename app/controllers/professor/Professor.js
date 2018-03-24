@@ -1,5 +1,8 @@
+
 module.exports = function ( app ) {
     let passport = app.get( 'passport' );
+    let bcrypt = require( 'bcrypt' );
+    const saltRounds = 7;
 
     Professor = {};
 
@@ -23,7 +26,7 @@ module.exports = function ( app ) {
         post: function ( req, res ) {
             let entrada = req.body;
 
-            // usuario.senha = bcrypt.hashSync(usuario.senha, null, null);
+            entrada.senha = bcrypt.hashSync( entrada.senha, saltRounds );
 
             let conexaoDb = app.infra.banco.dbConnection();
             let usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
