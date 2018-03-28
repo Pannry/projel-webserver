@@ -82,7 +82,6 @@ module.exports = function ( app ) {
         };
 
         usuarioDAO.buscarProfessor( entrada, ( err, usuario ) => {
-            console.log( usuario );
             if ( err )
                 return done( err );
             if ( !usuario.length )

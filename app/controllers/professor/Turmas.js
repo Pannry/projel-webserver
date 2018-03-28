@@ -296,8 +296,6 @@ module.exports = function ( app ) {
                 conexaoDb.end();
 
                 res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/aluno' )
-
-                // TODO: Ja esta incluindo no banco, falta mostrar em turmas, na conta professor
             }
         }
 

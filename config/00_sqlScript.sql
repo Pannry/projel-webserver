@@ -150,6 +150,14 @@ insert into instituicao set
     numero='1703',
     telefone='(85) 34012500';
 
+insert into instituicao set
+    nome='Universidade Estadual do Ceará',
+    cnpj= '07.885.809/0001-97',
+    endereco='Av. Dr. Silas Munguba, Fortaleza CE',
+    cep='60740-000',
+    numero='1700',
+    telefone='(85) 31019610';
+
 insert into aluno set
     nome='a',
     email='a',

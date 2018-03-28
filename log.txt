@@ -2,25 +2,15 @@ TODO:
     - template para as entradas dos campos
 Problemas Conhecidos:
 
-    - É possivel criar conta repetidas.
-
-    - Falta repetir senha no cadastro.
+    - Fazer todas as altenticações em um cadastro: Esqueci a senha, deixar campos obrigatorios,
+    não permitir criar contas com emails já usados, repetir a senha no cadastro
 
     - Aluno está deslogando pelo '/logout' do professor.
 
     - Só pode adicionar uma exercicios a lista uma vez, senao da problema.
 
-    - As vezes, abrir uma lista gera um erro 500, mas é tão ocasional que nao
-    consigo reproduzir o erro para trata-lo.
-
-    - As senhas não estao criptografadas.
-    
     - Melhorar rotas.
     
     - melhorar front-end.
-
-    - A mesma lista para o mesmo aluno em diferentes salas compartilham a mesma resposta.
-
-    - Atribuir uma resposta a uma sala. 
 
     - nao é possivel criar uma lista com zero exercicios, da problema
