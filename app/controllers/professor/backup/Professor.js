@@ -1,4 +1,3 @@
-
 module.exports = function ( app ) {
     let passport = app.get( 'passport' );
     let bcrypt = require( 'bcrypt' );

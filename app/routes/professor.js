@@ -13,7 +13,7 @@ module.exports = function ( app ) {
 
     var passport = app.get( 'passport' );
 
-    var Professor = app.controllers.professor.Professor;
+    var Profile = app.controllers.professor.Profile;
     var Exercicios = app.controllers.professor.Exercicios;
     var Turmas = app.controllers.professor.Turmas;
     var Notas = app.controllers.professor.Notas;
@@ -30,21 +30,21 @@ module.exports = function ( app ) {
      */
 
     app.route( '/professor/signup' )
-        .get( Professor.cadastro.get )
-        .post( Professor.cadastro.post );
+        .get( Profile.cadastro.get )
+        .post( Profile.cadastro.post );
 
     app.route( '/professor/login' )
-        .get( Professor.login.get )
-        .post( Professor.login.post );
+        .get( Profile.login.get )
+        .post( Profile.login.post );
 
     app.route( '/logout' )
-        .get( Professor.logout );
+        .get( Profile.logout.logout );
 
     app.route( '/professor/profile' )
-        .get( checkAuth, Professor.perfil.get );
+        .get( checkAuth, Profile.profile.get );
 
     app.route( '/professor/profile/update' )
-        .get( checkAuth, Professor.perfil.update );
+        .get( checkAuth, Profile.profile.update );
 
 
     /**
