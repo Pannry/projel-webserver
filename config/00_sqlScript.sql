@@ -81,9 +81,8 @@ create table didatico(
 create table didatico_material(
     id int,
     file_name varchar (1000),
-    foreign key (id) references didatico(id)
+    foreign key (id) references didatico(id) ON DELETE CASCADE
 );
-
 -- Tabela de resposta
 create table resposta(
     id_aluno int,
@@ -107,7 +106,6 @@ create table nota(
     foreign key(id_sala) references sala(id),
     foreign key(id_lista) references lista(id)
 );
-
 -- Tabela da lista de exercicios
 create table lista_exercicios(
     id_lista int,
@@ -128,10 +126,9 @@ create table sala_didatico(
     id_sala int,
     id_didatico int,
     foreign key (id_sala) references sala(id),
-    foreign key (id_didatico) references didatico(id),
+    foreign key (id_didatico) references didatico(id) ON DELETE CASCADE,
     primary key (id_sala, id_didatico)
 );
-
 -- Tabela de relação dos alunos com as salas
 create table cursa(
     id_sala int,
@@ -157,34 +154,3 @@ insert into instituicao set
     cep='60740-000',
     numero='1700',
     telefone='(85) 31019610';
-
-insert into aluno set
-    nome='a',
-    email='a',
-    senha='a',
-    instituicao_id = 1;
-insert into aluno set
-    nome='b',
-    email='b',
-    senha='b',
-    instituicao_id = 1;
-insert into professor set
-    nome='p',
-    endereco='p',
-    email='p',
-    senha='p',
-    cpf=1,
-    cep=1,
-    numero=1,
-    telefone=1,
-    instituicao_id = 1;
-insert into professor set
-    nome='q',
-    endereco='q',
-    email='q',
-    senha='q',
-    cpf=1,
-    cep=1,
-    numero=1,
-    telefone=1,
-    instituicao_id = 1;

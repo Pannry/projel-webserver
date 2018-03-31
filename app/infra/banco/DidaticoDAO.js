@@ -49,3 +49,10 @@ DidaticoDAO.prototype.mostrarDidaticosInclusos = function ( entrada, callback ) 
         'WHERE sala_didatico.id_sala = ? AND sala_didatico.id_didatico = didatico.id', entrada, callback );
 }
 
+
+/**
+ * Exclusao de material didatico
+ */
+DidaticoDAO.prototype.excluirDidatico = function ( entrada, callback ) {
+    this._conexaoDb.query( 'delete from didatico where id= ?', entrada, callback );
+}

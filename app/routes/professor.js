@@ -131,9 +131,8 @@ module.exports = function ( app ) {
     app.route( '/professor/profile/didatico' )
         .get( checkAuth, Didatico.DidaticoPainel.get );
 
-    // TODO: Começar a implementação da exclusao do didatico
-    app.route( '/professor/didatico/excluir/:id/' )
-        .get( checkAuth, Didatico.DidaticoExcluir );
+    app.route( '/professor/didatico/excluir/:id' )
+        .get( checkAuth, Didatico.DidaticoExcluir.delete );
 
     app.route( '/professor/profile/didatico/criar' )
         .get( checkAuth, Didatico.DidaticoCriar.get )
