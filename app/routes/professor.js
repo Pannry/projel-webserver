@@ -28,7 +28,6 @@ module.exports = function ( app ) {
     /**
      *  Professor.js
      */
-
     app.route( '/professor/signup' )
         .get( Profile.cadastro.get )
         .post( Profile.cadastro.post );
@@ -132,6 +131,10 @@ module.exports = function ( app ) {
     app.route( '/professor/profile/didatico' )
         .get( checkAuth, Didatico.DidaticoPainel.get );
 
+    // TODO: Começar a implementação da exclusao do didatico
+    app.route( '/professor/didatico/excluir/:id/' )
+        .get( checkAuth, Didatico.DidaticoExcluir );
+
     app.route( '/professor/profile/didatico/criar' )
         .get( checkAuth, Didatico.DidaticoCriar.get )
         .post( checkAuth, upload.array( 'fileUpload', 5 ), Didatico.DidaticoCriar.post );
@@ -141,7 +144,6 @@ module.exports = function ( app ) {
 
     app.route( '/professor/didatico/abrir/:id/' )
         .get( checkAuth, Didatico.DidaticoAbrir.get );
-
 
 
 }
