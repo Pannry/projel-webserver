@@ -37,7 +37,7 @@ module.exports = function () {
 
     app.set( 'passport', passport );
 
-    consign( { cwd: 'app' } )
+    consign( { cwd: 'app', verbose: false } )
         .include( 'controllers' )
         .then( 'infra' )
         .then( 'routes' )

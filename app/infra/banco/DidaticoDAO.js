@@ -14,6 +14,10 @@ DidaticoDAO.prototype.criarDidatico = function ( entrada, callback ) {
     this._conexaoDb.query( 'INSERT INTO didatico SET ?', entrada, callback );
 }
 
+DidaticoDAO.prototype.excluirDidatico = function ( entrada, callback ) {
+    this._conexaoDb.query( 'delete from didatico where id= ?', entrada, callback );
+}
+
 DidaticoDAO.prototype.listarDidatico = function ( id_professor, callback ) {
     this._conexaoDb.query( 'SELECT * FROM didatico WHERE id_professor = ?', id_professor, callback );
 }
@@ -48,4 +52,3 @@ DidaticoDAO.prototype.mostrarDidaticosInclusos = function ( entrada, callback ) 
     this._conexaoDb.query( 'SELECT id_sala, id_didatico, titulo FROM sala_didatico, didatico ' +
         'WHERE sala_didatico.id_sala = ? AND sala_didatico.id_didatico = didatico.id', entrada, callback );
 }
-

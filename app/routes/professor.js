@@ -13,9 +13,9 @@ module.exports = function ( app ) {
 
     var passport = app.get( 'passport' );
 
-    var Professor = app.controllers.professor.Professor;
-    var Exercicios = app.controllers.professor.Exercicios;
+    var Profile = app.controllers.professor.Profile;
     var Turmas = app.controllers.professor.Turmas;
+    var Exercicios = app.controllers.professor.Exercicios;
     var Notas = app.controllers.professor.Notas;
     var Didatico = app.controllers.professor.Didatico;
 
@@ -28,50 +28,50 @@ module.exports = function ( app ) {
     /**
      *  Professor.js
      */
-
     app.route( '/professor/signup' )
-        .get( Professor.cadastro.get )
-        .post( Professor.cadastro.post );
+        .get( Profile.cadastro.get )
+        .post( Profile.cadastro.post );
 
     app.route( '/professor/login' )
-        .get( Professor.login.get )
-        .post( Professor.login.post );
+        .get( Profile.login.get )
+        .post( Profile.login.post );
 
     app.route( '/logout' )
-        .get( Professor.logout );
+        .get( Profile.logout.logout );
 
     app.route( '/professor/profile' )
-        .get( checkAuth, Professor.perfil.get );
+        .get( checkAuth, Profile.profile.get );
 
     app.route( '/professor/profile/update' )
-        .get( checkAuth, Professor.perfil.update );
+        .get( checkAuth, Profile.profile.update );
 
 
     /**
      *      Turmas.js
      */
+
     app.route( '/professor/profile/turmas' )
-        .get( checkAuth, Turmas.painelDasTurmas.get );
+        .get( checkAuth, Turmas.TurmaPainel.get );
 
     app.route( '/professor/turmas/criar' )
-        .get( checkAuth, Turmas.criarTurmas.get )
-        .post( checkAuth, Turmas.criarTurmas.post );
+        .get( checkAuth, Turmas.TurmaCriar.get )
+        .post( checkAuth, Turmas.TurmaCriar.post );
 
     app.route( '/professor/turma/abrir/:id/professor' )
-        .get( checkAuth, Turmas.abrir.professorGET )
-        .post( checkAuth, Turmas.abrir.autenticarAlunoNaTurma )
+        .get( checkAuth, Turmas.TurmaAbrir.professorGET )
+        .post( checkAuth, Turmas.TurmaAbrir.autenticarAlunoNaTurma )
 
     app.route( '/professor/turma/abrir/:id/aluno' )
-        .get( checkAuth, Turmas.abrir.alunoGET )
-        .post( checkAuth, Turmas.abrir.comentario );
+        .get( checkAuth, Turmas.TurmaAbrir.alunoGET )
+        .post( checkAuth, Turmas.TurmaAbrir.comentario );
 
     app.route( '/professor/turma/abrir/:id/aluno/incluirlista' )
-        .get( checkAuth, Turmas.incluirlista.get )
-        .post( checkAuth, Turmas.incluirlista.post );
+        .get( checkAuth, Turmas.TurmaIncluirLista.get )
+        .post( checkAuth, Turmas.TurmaIncluirLista.post );
 
     app.route( '/professor/turma/abrir/:id/aluno/incluirDidatico' )
-        .get( checkAuth, Turmas.incluirDidatico.get )
-        .post( checkAuth, Turmas.incluirDidatico.post );
+        .get( checkAuth, Turmas.TurmaIncluirDidatico.get )
+        .post( checkAuth, Turmas.TurmaIncluirDidatico.post );
 
     // app.post( '/professor/turma/editar/:id', checkAuth, Turmas.turma.editar );
     // app.post('/professor/turma/excluir/:id', checkAuth, Turmas.turma.excluir);
@@ -83,65 +83,72 @@ module.exports = function ( app ) {
 
     // Questões
     app.route( '/professor/profile/exercicios' )
-        .get( checkAuth, Exercicios.exercicios.get );
+        .get( checkAuth, Exercicios.Exercicios.get );
 
     app.route( '/professor/exercicios/abrir/:id' )
-        .get( checkAuth, Exercicios.abrirExercicio.get );
+        .get( checkAuth, Exercicios.ExerciciosAbrir.get );
+
+    app.route( '/professor/exercicios/excluir/:id' )
+        .get( checkAuth, Exercicios.ExerciciosExcluir.delete );
 
     app.route( '/professor/exercicios/criar' )
-        .get( checkAuth, Exercicios.criarExercicios.get )
-        .post( checkAuth, upload.array( 'fileUpload', 5 ), Exercicios.criarExercicios.post );
+        .get( checkAuth, Exercicios.ExerciciosCriar.get )
+        .post( checkAuth, upload.array( 'fileUpload', 5 ), Exercicios.ExerciciosCriar.post );
 
     app.route( '/professor/exercicios/abrir/:id/download/:path' )
-        .get( checkAuth, Exercicios.downloadExercicios.get );
+        .get( checkAuth, Exercicios.ExerciciosDownload.get );
 
 
     // Listas
     app.route( '/professor/profile/exercicios/lista' )
-        .get( checkAuth, Exercicios.lista.get );
+        .get( checkAuth, Exercicios.Listas.get );
 
     app.route( '/professor/exercicios/lista/criar' )
-        .get( checkAuth, Exercicios.criarLista.get )
-        .post( checkAuth, Exercicios.criarLista.post );
+        .get( checkAuth, Exercicios.ListasCriar.get )
+        .post( checkAuth, Exercicios.ListasCriar.post );
+
+    app.route( '/professor/exercicios/lista/excluir/:id' )
+        .get( checkAuth, Exercicios.ListasExcluir.delete );
 
     app.route( '/professor/exercicios/lista/abrir/:id/info' )
-        .get( checkAuth, Exercicios.abrirLista.mostrarInformacoes );
+        .get( checkAuth, Exercicios.ListasAbrir.mostrarInformacoes );
 
     app.route( '/professor/exercicios/lista/abrir/:id/questoes' )
-        .get( checkAuth, Exercicios.abrirLista.mostrarQuestoes )
+        .get( checkAuth, Exercicios.ListasAbrir.mostrarQuestoes )
 
     app.route( '/professor/exercicios/lista/abrir/:id/editar' )
-        .get( checkAuth, Exercicios.adicionarExercicioNaLista.get )
-        .post( checkAuth, Exercicios.adicionarExercicioNaLista.post );
+        .get( checkAuth, Exercicios.ListasAdicionarExercicios.get )
+        .post( checkAuth, Exercicios.ListasAdicionarExercicios.post );
 
     /**
      *      Nota
      */
-
     app.route( '/professor/turma/abrir/:id_sala/professor/:id_aluno' )
-        .get( checkAuth, Notas.abrir.professorGET )
+        .get( checkAuth, Notas.Notas.professorGET )
 
     app.route( '/professor/turma/abrir/:id_sala/professor/:id_aluno/:id_lista' )
-        .get( checkAuth, Notas.abrir.verExerciciosRespondidos )
-        .post( checkAuth, Notas.abrir.post );
+        .get( checkAuth, Notas.Notas.verRespostas )
+        .post( checkAuth, Notas.Notas.post );
 
     /**
      *      MATERIAL DIDATICO
      */
 
     app.route( '/professor/profile/didatico' )
-        .get( checkAuth, Didatico.painelDidatico.get );
+        .get( checkAuth, Didatico.DidaticoPainel.get );
+
+    app.route( '/professor/didatico/excluir/:id' )
+        .get( checkAuth, Didatico.DidaticoExcluir.delete );
 
     app.route( '/professor/profile/didatico/criar' )
-        .get( checkAuth, Didatico.criarDidatico.get )
-        .post( checkAuth, upload.array( 'fileUpload', 5 ), Didatico.criarDidatico.post );
+        .get( checkAuth, Didatico.DidaticoCriar.get )
+        .post( checkAuth, upload.array( 'fileUpload', 5 ), Didatico.DidaticoCriar.post );
 
     app.route( '/professor/didatico/abrir/:id/download/:path' )
-        .get( checkAuth, Didatico.downloadDidatico.get );
+        .get( checkAuth, Didatico.DidaticoDownload.get );
 
     app.route( '/professor/didatico/abrir/:id/' )
-        .get( checkAuth, Didatico.abrirDidatico.get );
-
+        .get( checkAuth, Didatico.DidaticoAbrir.get );
 
 
 }
@@ -151,6 +158,4 @@ function checkAuth ( req, res, next ) {
         return next();
     else
         res.redirect( '/' );
-
-
 }

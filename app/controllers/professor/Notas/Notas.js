@@ -3,7 +3,7 @@ module.exports = function ( app ) {
 
     notas = {};
 
-    notas.abrir = {
+    notas = {
 
         professorGET: function ( req, res ) {
             if ( req.user.tipo === "professor" ) {
@@ -81,7 +81,7 @@ module.exports = function ( app ) {
             };
         },
 
-        verExerciciosRespondidos: function ( req, res ) {
+        verRespostas: function ( req, res ) {
             if ( req.user.tipo === "professor" ) {
                 let entrada = {
                     id_aluno: req.params.id_aluno,
