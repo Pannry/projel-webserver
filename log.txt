@@ -1,13 +1,17 @@
 TODO:
     - template para as entradas dos campos
 Problemas Conhecidos:
-
-    - Fazer todas as altenticações em um cadastro: Esqueci a senha, deixar campos obrigatorios,
+    
+    - Fazer com q o bcrypt fique asincrono
+    
+    - Fazer todas as autenticações em um cadastro: Esqueci a senha, deixar campos obrigatorios,
     não permitir criar contas com emails já usados, repetir a senha no cadastro
 
     - Aluno está deslogando pelo '/logout' do professor.
 
     - Só pode adicionar uma exercicios a lista uma vez, senao da problema.
+    
+    - Da um erro quando crio uma lista e nao coloco nenhum exercicio
 
     - Melhorar rotas.
     
