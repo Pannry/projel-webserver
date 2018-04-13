@@ -58,7 +58,19 @@ create table exercicios(
 create table exercicios_material(
     id int,
     file_name varchar (1000),  
-    foreign key (id) references exercicios(id)
+    foreign key (id) references exercicios(id) ON DELETE CASCADE
+);
+-- Tabela de resposta
+create table resposta(
+    id_aluno int,
+    id_exercicios int,
+    id_sala int,
+    resposta varchar (300),
+    pdf_path varchar (100),
+    foreign key (id_aluno) references aluno(id),
+    foreign key (id_exercicios) references exercicios(id) ON DELETE CASCADE,
+    foreign key (id_sala) references sala(id)
+    -- primary key(id_aluno, id_exercicios)
 );
 -- Tabela da lista de exercícios
 create table lista(
@@ -69,6 +81,33 @@ create table lista(
     tipo varchar (32),    
     foreign key (id_professor) references professor(id),
     primary key(id)
+);
+-- Tabela da lista de exercicios
+create table lista_exercicios(
+    id_lista int,
+    id_exercicios int,
+    foreign key (id_lista) references lista(id) ON DELETE CASCADE,
+    foreign key (id_exercicios) references exercicios(id) ON DELETE CASCADE,
+    primary key(id_lista, id_exercicios)
+);
+-- Tabela nota
+create table nota(
+    id_aluno int,
+    id_lista int,
+    id_sala int,
+    nota float,
+    primary key(id_aluno, id_lista, id_sala),
+    foreign key(id_aluno) references aluno(id),
+    foreign key(id_sala) references sala(id),
+    foreign key(id_lista) references lista(id) ON DELETE CASCADE
+);
+-- Tabela de relacao com a lista de exercicios com a sala
+create table sala_lista(
+    id_sala int,
+    id_lista int,
+    foreign key (id_sala) references sala(id),
+    foreign key (id_lista) references lista(id) ON DELETE CASCADE,
+    primary key (id_sala, id_lista)
 );
 create table didatico(
     id int auto_increment,
@@ -82,45 +121,6 @@ create table didatico_material(
     id int,
     file_name varchar (1000),
     foreign key (id) references didatico(id) ON DELETE CASCADE
-);
--- Tabela de resposta
-create table resposta(
-    id_aluno int,
-    id_exercicios int,
-    id_sala int,
-    resposta varchar (300),
-    pdf_path varchar (100),
-    foreign key (id_aluno) references aluno(id),
-    foreign key (id_exercicios) references exercicios(id),
-    foreign key (id_sala) references sala(id)
-    -- primary key(id_aluno, id_exercicios)
-);
--- Tabela nota
-create table nota(
-    id_aluno int,
-    id_lista int,
-    id_sala int,
-    nota float,
-    primary key(id_aluno, id_lista, id_sala),
-    foreign key(id_aluno) references aluno(id),
-    foreign key(id_sala) references sala(id),
-    foreign key(id_lista) references lista(id)
-);
--- Tabela da lista de exercicios
-create table lista_exercicios(
-    id_lista int,
-    id_exercicios int,
-    foreign key (id_lista) references lista(id),
-    foreign key (id_exercicios) references exercicios(id),
-    primary key(id_lista, id_exercicios)
-);
--- Tabela de relacao com a lista de exercicios com a sala
-create table sala_lista(
-    id_sala int,
-    id_lista int,
-    foreign key (id_sala) references sala(id),
-    foreign key (id_lista) references lista(id),
-    primary key (id_sala, id_lista)
 );
 create table sala_didatico(
     id_sala int,

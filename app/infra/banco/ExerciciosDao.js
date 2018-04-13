@@ -17,6 +17,10 @@ ExerciciosDao.prototype.criarExercicios = function ( exercicio, callback ) {
     this._conexaoDb.query( 'INSERT INTO exercicios SET ?', exercicio, callback );
 }
 
+ExerciciosDao.prototype.excluirExercicio = function ( exercicio, callback ) {
+    this._conexaoDb.query( 'DELETE FROM exercicios WHERE id= ?', exercicio, callback );
+}
+
 ExerciciosDao.prototype.listarExercicios = function ( id_professor, callback ) {
     this._conexaoDb.query( 'SELECT * FROM exercicios WHERE id_professor = ?', id_professor, callback );
 }
@@ -35,6 +39,10 @@ ExerciciosDao.prototype.criarListaExercicios = function ( entrada, callback ) {
 
 ExerciciosDao.prototype.mostrarListaExercicios = function ( entrada, callback ) {
     this._conexaoDb.query( 'SELECT * FROM lista WHERE id_professor = ?', entrada, callback );
+}
+
+ExerciciosDao.prototype.excluirLista = function ( entrada, callback ) {
+    this._conexaoDb.query( 'DELETE FROM lista WHERE id= ?', entrada, callback );
 }
 
 ExerciciosDao.prototype.abrirLista = function ( entrada, callback ) {

@@ -88,6 +88,9 @@ module.exports = function ( app ) {
     app.route( '/professor/exercicios/abrir/:id' )
         .get( checkAuth, Exercicios.ExerciciosAbrir.get );
 
+    app.route( '/professor/exercicios/excluir/:id' )
+        .get( checkAuth, Exercicios.ExerciciosExcluir.delete );
+
     app.route( '/professor/exercicios/criar' )
         .get( checkAuth, Exercicios.ExerciciosCriar.get )
         .post( checkAuth, upload.array( 'fileUpload', 5 ), Exercicios.ExerciciosCriar.post );
@@ -103,6 +106,9 @@ module.exports = function ( app ) {
     app.route( '/professor/exercicios/lista/criar' )
         .get( checkAuth, Exercicios.ListasCriar.get )
         .post( checkAuth, Exercicios.ListasCriar.post );
+
+    app.route( '/professor/exercicios/lista/excluir/:id' )
+        .get( checkAuth, Exercicios.ListasExcluir.delete );
 
     app.route( '/professor/exercicios/lista/abrir/:id/info' )
         .get( checkAuth, Exercicios.ListasAbrir.mostrarInformacoes );
