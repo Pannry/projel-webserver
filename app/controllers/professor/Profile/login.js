@@ -1,10 +1,8 @@
 module.exports = function ( app ) {
     let passport = app.get( 'passport' );
 
-    Professor = {};
-
     Professor = {
-        get: function ( req, res ) {
+        get: ( req, res ) => {
             res.render( 'professor/login', { message: req.flash( 'loginMessage' ) } );
         },
 

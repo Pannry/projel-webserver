@@ -1,11 +1,8 @@
 module.exports = function ( app ) {
-    let passport = app.get( 'passport' );
     const fs = require( 'fs' );
 
-    Exercicios = {};
-
     Exercicios = {
-        delete: function ( req, res ) {
+        delete: ( req, res ) => {
             if ( req.user.tipo == 'professor' ) {
                 let entrada = req.params.id;
 

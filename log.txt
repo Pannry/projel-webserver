@@ -7,7 +7,7 @@ Problemas Conhecidos:
     - Fazer todas as autenticações em um cadastro: Esqueci a senha, deixar campos obrigatorios,
     não permitir criar contas com emails já usados, repetir a senha no cadastro
 
-    - Aluno está deslogando pelo '/logout' do professor.
+    - Aluno está deslogando pelo '/logout' do professor. Criar o /logout do aluno
 
     - Só pode adicionar uma exercicios a lista uma vez, senao da problema.
     

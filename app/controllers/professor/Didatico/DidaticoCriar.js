@@ -1,10 +1,6 @@
 module.exports = function ( app ) {
-    let passport = app.get( 'passport' );
-
-    Didatico = {};
-
     Didatico = {
-        get: function ( req, res ) {
+        get: ( req, res ) => {
             if ( req.user.tipo === "professor" ) {
                 let ejs = {
                     user: req.user,
@@ -15,7 +11,7 @@ module.exports = function ( app ) {
             };
         },
 
-        post: function ( req, res, next ) {
+        post: ( req, res, next ) => {
             if ( req.user.tipo === "professor" ) {
 
                 let entrada = {

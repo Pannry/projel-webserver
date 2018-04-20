@@ -1,11 +1,6 @@
 module.exports = function ( app ) {
-    let passport = app.get( 'passport' );
-
-    notas = {};
-
     notas = {
-
-        professorGET: function ( req, res ) {
+        professorGET: ( req, res ) => {
             if ( req.user.tipo === "professor" ) {
 
                 let entrada = {
@@ -54,7 +49,7 @@ module.exports = function ( app ) {
             };
         },
 
-        post: function ( req, res ) {
+        post: ( req, res ) => {
             if ( req.user.tipo === "professor" ) {
                 let entrada = {
                     id_sala: req.params.id_sala,
@@ -81,7 +76,7 @@ module.exports = function ( app ) {
             };
         },
 
-        verRespostas: function ( req, res ) {
+        verRespostas: ( req, res ) => {
             if ( req.user.tipo === "professor" ) {
                 let entrada = {
                     id_aluno: req.params.id_aluno,
@@ -101,13 +96,9 @@ module.exports = function ( app ) {
                     ejs.respostas = resultado;
                     res.render( 'professor/perfil/notas/mostrarExerciciosLista', ejs );
                 } );
-
                 conexaoDb.end();
-
             };
-
         }
     }
-
     return notas;
 };

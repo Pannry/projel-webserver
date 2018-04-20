@@ -1,10 +1,6 @@
 module.exports = function ( app ) {
-    let passport = app.get( 'passport' );
-
-    Exercicios = {};
-
     Exercicios = {
-        get: function ( req, res ) {
+        get: ( req, res ) => {
             if ( req.user.tipo == 'professor' ) {
 
                 let ejs = {
@@ -17,7 +13,7 @@ module.exports = function ( app ) {
 
             }
         },
-        post: function ( req, res ) {
+        post: ( req, res ) => {
 
             let entrada = {
                 id_professor: req.user.id,

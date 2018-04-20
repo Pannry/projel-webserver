@@ -1,12 +1,9 @@
 module.exports = function ( app ) {
-    let passport = app.get( 'passport' );
     let bcrypt = require( 'bcrypt' );
     const saltRounds = 7;
 
-    Professor = {};
-
     Professor = {
-        get: function ( req, res ) {
+        get: ( req, res ) => {
 
             let params = {}
 
@@ -22,7 +19,7 @@ module.exports = function ( app ) {
 
         },
 
-        post: function ( req, res ) {
+        post: ( req, res ) => {
             let entrada = req.body;
 
             entrada.senha = bcrypt.hashSync( entrada.senha, saltRounds );

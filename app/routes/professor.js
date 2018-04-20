@@ -36,7 +36,7 @@ module.exports = function ( app ) {
         .get( Profile.login.get )
         .post( Profile.login.post );
 
-    app.route( '/logout' )
+    app.route( '/professor/logout' )
         .get( Profile.logout.logout );
 
     app.route( '/professor/profile' )

@@ -1,11 +1,7 @@
 module.exports = function ( app ) {
-    let passport = app.get( 'passport' );
-
-    turmas = {};
-
     turmas = {
 
-        professorGET: function ( req, res ) {
+        professorGET: ( req, res ) => {
             if ( req.user.tipo === "professor" ) {
 
                 let entrada = req.params.id;
@@ -45,7 +41,7 @@ module.exports = function ( app ) {
             }
         },
 
-        alunoGET: function ( req, res ) {
+        alunoGET: ( req, res ) => {
 
             if ( req.user.tipo === "professor" ) {
                 let entrada = req.params.id;
@@ -92,7 +88,7 @@ module.exports = function ( app ) {
             }
         },
 
-        autenticarAlunoNaTurma: function ( req, res ) {
+        autenticarAlunoNaTurma: ( req, res ) => {
             if ( req.user.tipo == 'professor' ) {
 
                 let entrada = {
@@ -111,7 +107,7 @@ module.exports = function ( app ) {
             }
         },
 
-        comentario: function ( req, res ) {
+        comentario: ( req, res ) => {
             if ( req.user.tipo == 'professor' ) {
 
                 let entrada = {

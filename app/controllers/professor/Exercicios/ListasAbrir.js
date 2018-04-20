@@ -1,10 +1,6 @@
 module.exports = function ( app ) {
-    let passport = app.get( 'passport' );
-
-    Exercicios = {};
-
     Exercicios = {
-        mostrarInformacoes: function ( req, res ) {
+        mostrarInformacoes: ( req, res ) => {
 
             let entrada = {
                 id_professor: req.user.id,
@@ -33,7 +29,7 @@ module.exports = function ( app ) {
             conexaoDb.end();
         },
 
-        mostrarQuestoes: function ( req, res ) {
+        mostrarQuestoes: ( req, res ) => {
 
             let entrada = {
                 id_lista: req.params.id

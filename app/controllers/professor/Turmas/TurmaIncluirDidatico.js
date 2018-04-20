@@ -1,10 +1,6 @@
 module.exports = function ( app ) {
-    let passport = app.get( 'passport' );
-
-    turmas = {};
-
     turmas = {
-        get: function ( req, res ) {
+        get: ( req, res ) => {
             if ( req.user.tipo == 'professor' ) {
 
                 let id_professor = req.user.id;
@@ -28,7 +24,7 @@ module.exports = function ( app ) {
 
             }
         },
-        post: function ( req, res ) {
+        post: ( req, res ) => {
             if ( req.user.tipo == 'professor' ) {
                 let entrada = {}
                 entrada.id_sala = req.params.id;
