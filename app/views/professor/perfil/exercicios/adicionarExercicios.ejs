@@ -30,20 +30,26 @@
         <div class="list-group">
             <form action="/professor/exercicios/lista/abrir/<%=id_lista%>/editar" method="post">
                 <!-- elemento 1 -->
-                <% for (var i = 0; i < lista.length; i++ ){%>
-                    <li class="list-group-item col-md-10 col-sm-12 " value="<%=lista[i].id%>">
+                <% if (lista.length){ %>
+                    <% for (var i = 0; i < lista.length; i++ ){%>
+                        <li class="list-group-item col-md-10 col-sm-12 " value="<%=lista[i].id%>">
 
-                        <div class="row form-check">
-                            <div class="col-5">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" value="<%= lista[i].id%>" name="options">
-                                    <%= lista[i].titulo%>
-                                </label>
+                            <div class="row form-check">
+                                <div class="col-5">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" value="<%= lista[i].id%>" name="options">
+                                        <%= lista[i].titulo%>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
 
-                    </li>
+                        </li>
+                    <% } %>
+                <% } else { %>
+                    <h2>Você ainda não criou nenhum exercicios</h2>
                 <% } %>
+                
+                
 
                 <br>
                 <div class="col-1"><input class="btn btn-info btn" type="submit" value="Adicionar"></div>

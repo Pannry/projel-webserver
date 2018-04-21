@@ -20,7 +20,6 @@ module.exports = function ( app ) {
                     let ExerciciosDao2 = new app.infra.banco.ExerciciosDao( conexaoDb2 );
 
                     ExerciciosDao2.excluirExercicio( entrada, ( err, results ) => {
-                        console.log( entrada, results );
                         res.redirect( '/professor/profile/exercicios' );
                     } );
                     conexaoDb2.end();
