@@ -26,27 +26,28 @@ module.exports = function ( app ) {
         },
         post: ( req, res ) => {
             if ( req.user.tipo == 'professor' ) {
-                let entrada = {}
-                entrada.id_sala = req.params.id;
+                let entrada = {
+                    id_sala: req.params.id,
+                }
 
                 let checkbox = req.body.options;
-                let vetor = [];
+                let materiais = [];
 
-                for ( let i = 0; i < checkbox.length; i++ )
-                    vetor[ i ] = checkbox[ i ];
+                if ( !Array.isArray( checkbox ) )
+                    materiais = Array.of( checkbox );
+                else
+                    materiais = checkbox;
 
                 var conexaoDb = app.infra.banco.dbConnection();
                 var didaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
 
-                vetor.forEach( element => {
+                materiais.forEach( element => {
                     entrada.id_didatico = element
                     didaticoDAO.didaticoParaIncluir( entrada, ( err, resultado ) => { } );
-
                 } );
-
                 conexaoDb.end();
 
-                res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/aluno' )
+                res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/aluno' );
             }
         }
 

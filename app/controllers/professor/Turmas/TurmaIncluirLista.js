@@ -27,28 +27,28 @@ module.exports = function ( app ) {
 
         post: ( req, res ) => {
             if ( req.user.tipo == 'professor' ) {
-
-                let entrada = {}
-                entrada.id_sala = req.params.id;
+                let entrada = {
+                    id_sala: req.params.id,
+                }
 
                 let checkbox = req.body.options;
-                let vetor = [];
+                let listas = [];
 
-                for ( let i = 0; i < checkbox.length; i++ )
-                    vetor[ i ] = checkbox[ i ];
+                if ( !Array.isArray( checkbox ) )
+                    listas = Array.of( checkbox );
+                else
+                    listas = checkbox;
 
                 var conexaoDb = app.infra.banco.dbConnection();
                 var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
 
-                vetor.forEach( element => {
+                listas.forEach( element => {
                     entrada.id_lista = element;
                     ExerciciosDao.listasParaIncluir( entrada, ( err, resultado ) => { } );
-
                 } );
-
                 conexaoDb.end();
 
-                res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/aluno' )
+                res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/aluno' );
             }
         }
     }
