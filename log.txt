@@ -1,7 +1,3 @@
-TODO:
-    - template para as entradas dos campos
-Problemas Conhecidos:
-
     08/2017: Inicio do Projeto
     09/2017: implementacao do login/cadastro
     11/2017: Criação das funções básicas da aplicação: (Turmas, exercicios, listas) 
@@ -12,9 +8,33 @@ Problemas Conhecidos:
     02/2018: Material didatico implementado, falta correções
     03/2018: Upload de arquivos e encriptação das senhas
     04/2018: Excluir em exercicios e lista concluido
-    04/2018: Da um erro quando crio uma lista e nao coloco nenhum exercicio
+    04/2018: Excluir turmas concluido
 
-    - Notas feito na gambiarra, refazer quando possivel (Não sei se já resolvi esse problema)
+    */* Lado do professor */*
+
+    /*
+    Plano atual:
+        - atualizar perfil
+        - Excluir turma
+        - O acesso em atribuir notas n funciona
+    */
+
+    */* Lado do aluno */*
+
+    /*
+    Plano atual:
+        - atualizar perfil
+        - O acesso em atribuir notas n funciona
+        - implementar material didatico
+        - responder questoes está com problemas
+        - reimplementar o logout
+    */
+
+    Problemas Conhecidos:
+
+    - template para as entradas dos campos 
+
+    - Notas feito na gambiarra, refazer quando possivel
     
     - Só pode adicionar uma exercicios a lista uma vez, senao da problema. 
     
@@ -22,8 +42,6 @@ Problemas Conhecidos:
     
     - Fazer todas as autenticações em um cadastro: Esqueci a senha, deixar campos obrigatorios,
     não permitir criar contas com emails já usados, repetir a senha no cadastro
-
-    - Aluno está deslogando pelo '/logout' do professor. Criar o /logout do aluno
 
     - Melhorar rotas.
     

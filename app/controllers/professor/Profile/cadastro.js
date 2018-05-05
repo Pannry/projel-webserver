@@ -1,35 +1,35 @@
-module.exports = function ( app ) {
-    let bcrypt = require( 'bcrypt' );
+module.exports = function (app) {
+    let bcrypt = require('bcrypt');
     const saltRounds = 7;
 
     Professor = {
-        get: ( req, res ) => {
+        get: (req, res) => {
 
             let params = {}
 
             let conexaoDb = app.infra.banco.dbConnection();
-            let instituicaoDAO = new app.infra.banco.InstituicaoDAO( conexaoDb );
+            let instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
 
-            instituicaoDAO.listaInstituicao( ( err, resultado ) => {
+            instituicaoDAO.listaInstituicao((err, resultado) => {
                 params.listaDeInstituicao = resultado;
-                res.render( 'professor/signup', params );
-            } );
+                res.render('professor/signup', params);
+            });
 
             conexaoDb.end();
 
         },
 
-        post: ( req, res ) => {
+        post: (req, res) => {
             let entrada = req.body;
 
-            entrada.senha = bcrypt.hashSync( entrada.senha, saltRounds );
+            entrada.senha = bcrypt.hashSync(entrada.senha, saltRounds);
 
             let conexaoDb = app.infra.banco.dbConnection();
-            let usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
+            let usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
-            usuarioDAO.salvarProfessor( entrada, ( err, resultado ) => {
-                res.redirect( '/professor/login' );
-            } );
+            usuarioDAO.salvarProfessor(entrada, (err, resultado) => {
+                res.redirect('/professor/login');
+            });
             conexaoDb.end();
         }
     };

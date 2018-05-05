@@ -69,8 +69,7 @@ create table resposta(
     pdf_path varchar (100),
     foreign key (id_aluno) references aluno(id),
     foreign key (id_exercicios) references exercicios(id) ON DELETE CASCADE,
-    foreign key (id_sala) references sala(id)
-    -- primary key(id_aluno, id_exercicios)
+    foreign key (id_sala) references sala(id) ON DELETE CASCADE
 );
 -- Tabela da lista de exercícios
 create table lista(
@@ -98,14 +97,14 @@ create table nota(
     nota float,
     primary key(id_aluno, id_lista, id_sala),
     foreign key(id_aluno) references aluno(id),
-    foreign key(id_sala) references sala(id),
+    foreign key(id_sala) references sala(id) ON DELETE CASCADE,
     foreign key(id_lista) references lista(id) ON DELETE CASCADE
 );
 -- Tabela de relacao com a lista de exercicios com a sala
 create table sala_lista(
     id_sala int,
     id_lista int,
-    foreign key (id_sala) references sala(id),
+    foreign key (id_sala) references sala(id) ON DELETE CASCADE,
     foreign key (id_lista) references lista(id) ON DELETE CASCADE,
     primary key (id_sala, id_lista)
 );
@@ -125,7 +124,7 @@ create table didatico_material(
 create table sala_didatico(
     id_sala int,
     id_didatico int,
-    foreign key (id_sala) references sala(id),
+    foreign key (id_sala) references sala(id) ON DELETE CASCADE,
     foreign key (id_didatico) references didatico(id) ON DELETE CASCADE,
     primary key (id_sala, id_didatico)
 );
@@ -134,7 +133,7 @@ create table cursa(
     id_sala int,
     id_aluno int,
     aluno_aceito boolean default false,
-    foreign key (id_sala) references sala(id),
+    foreign key (id_sala) references sala(id) ON DELETE CASCADE,
     foreign key (id_aluno) references aluno(id),
     primary key (id_sala, id_aluno)
 );
