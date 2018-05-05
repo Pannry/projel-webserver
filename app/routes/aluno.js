@@ -33,16 +33,17 @@ module.exports = function (app) {
      *      Turmas.js
      */
     app.route('/profile/turmas')
-        .get(checkAuth, Turmas.minhasTurmas.get);
+        .get(checkAuth, Turmas.painelTurmas.get);
 
-    app.get('/profile/turmas/procurar', checkAuth, Turmas.procurarTurmas.get);
+    app.route('/profile/turmas/procurar')
+        .get(checkAuth, Turmas.procurarTurmas.get);
 
     app.route('/turmas/abrir/:id')
-        .get(checkAuth, Turmas.abrirTurma.get);
+        .get(checkAuth, Turmas.abrirTurmas.get);
 
     app.route('/turmas/professor/:id')
-        .get(checkAuth, Turmas.turmasProfessor.get)
-        .post(checkAuth, Turmas.turmasProfessor.post);
+        .get(checkAuth, Turmas.professorTurmas.get)
+        .post(checkAuth, Turmas.professorTurmas.post);
 
     /**
      *      Exercicios.js
