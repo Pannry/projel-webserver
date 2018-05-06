@@ -1,56 +1,55 @@
-module.exports = function ( app ) {
-    turmas = {
-        get: ( req, res ) => {
-            if ( req.user.tipo == 'professor' ) {
+module.exports = (app) => {
+  const turmas = {
 
-                let id_professor = req.user.id;
+    get: (req, res) => {
+      if (req.user.tipo === 'professor') {
+        const idProfessor = req.user.id;
 
-                let ejs = {
-                    user: req.user,
-                    page_name: req.path,
-                    accountType: req.user.tipo,
-                    idSala: req.params.id
-                }
+        const ejs = {
+          user: req.user,
+          page_name: req.path,
+          accountType: req.user.tipo,
+          idSala: req.params.id,
+        };
 
-                var conexaoDb = app.infra.banco.dbConnection();
-                var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
+        const conexaoDb = app.infra.banco.dbConnection();
+        const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
 
-                ExerciciosDao.mostrarListaExercicios( id_professor, ( err, resultado ) => {
-                    ejs.lista = resultado;
-                    res.render( 'professor/perfil/turmas/listarListaParaAdicionar', ejs );
+        ExerciciosDao.mostrarListaExercicios(idProfessor, (err, resultado) => {
+          if (err) throw err;
+          ejs.lista = resultado;
+          res.render('professor/perfil/turmas/listarListaParaAdicionar', ejs);
+        });
+        conexaoDb.end();
+      }
+    },
 
-                } );
-                conexaoDb.end();
+    post: (req, res) => {
+      if (req.user.tipo === 'professor') {
+        const entrada = {
+          id_sala: req.params.id,
+        };
 
-            }
-        },
+        const checkbox = req.body.options;
+        let listas = [];
 
-        post: ( req, res ) => {
-            if ( req.user.tipo == 'professor' ) {
-                let entrada = {
-                    id_sala: req.params.id,
-                }
+        if (!Array.isArray(checkbox)) listas = Array.of(checkbox);
+        else listas = checkbox;
 
-                let checkbox = req.body.options;
-                let listas = [];
+        if (checkbox !== undefined) {
+          const conexaoDb = app.infra.banco.dbConnection();
+          const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
 
-                if ( !Array.isArray( checkbox ) )
-                    listas = Array.of( checkbox );
-                else
-                    listas = checkbox;
-
-                var conexaoDb = app.infra.banco.dbConnection();
-                var ExerciciosDao = new app.infra.banco.ExerciciosDao( conexaoDb );
-
-                listas.forEach( element => {
-                    entrada.id_lista = element;
-                    ExerciciosDao.listasParaIncluir( entrada, ( err, resultado ) => { } );
-                } );
-                conexaoDb.end();
-
-                res.redirect( '/professor/turma/abrir/' + entrada.id_sala + '/aluno' );
-            }
+          listas.forEach((element) => {
+            entrada.id_lista = element;
+            ExerciciosDao.listasParaIncluir(entrada, (err) => { if (err) throw err; });
+          });
+          conexaoDb.end();
         }
-    }
-    return turmas;
+
+        res.redirect(`/professor/turma/abrir/${entrada.id_sala}/aluno`);
+      }
+    },
+  };
+  return turmas;
 };

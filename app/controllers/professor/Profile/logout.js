@@ -1,8 +1,10 @@
-module.exports = function ( app ) {
-    Professor.logout = ( req, res ) => {
-        req.logout();
-        res.redirect( '/' );
-    };
+module.exports = () => {
+  const Professor = {
+    logout: (req, res) => {
+      req.logout();
+      res.redirect('/');
+    },
+  };
 
-    return Professor;
+  return Professor;
 };

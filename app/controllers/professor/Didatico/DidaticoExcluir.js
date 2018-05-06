@@ -1,36 +1,34 @@
-module.exports = function ( app ) {
-    const fs = require( 'fs' );
+const fs = require('fs');
 
-    Didatico = {
-        delete: ( req, res ) => {
-            if ( req.user.tipo === "professor" ) {
-                let entrada = req.params.id;
+module.exports = (app) => {
+  const Professor = {
+    delete: (req, res) => {
+      if (req.user.tipo === 'professor') {
+        const entrada = req.params.id;
 
-                let conexaoDb = app.infra.banco.dbConnection();
-                let DidaticoDAO = new app.infra.banco.DidaticoDAO( conexaoDb );
+        const conexaoDb = app.infra.banco.dbConnection();
+        const DidaticoDAO = new app.infra.banco.DidaticoDAO(conexaoDb);
 
-                DidaticoDAO.arquivosDownload( entrada, ( err, results ) => {
+        DidaticoDAO.arquivosDownload(entrada, (err, results) => {
+          if (err) throw err;
+          results.forEach((file) => {
+            const path = 'app/uploads/';
+            fs.unlink(path + file.file_name, () => { });
+          });
 
-                    results.forEach( file => {
-                        let path = 'app/uploads/';
-                        fs.unlink( path + file.file_name, ( err ) => { } );
-                    } );
+          const conexaoDb2 = app.infra.banco.dbConnection();
+          const DidaticoDAO2 = new app.infra.banco.DidaticoDAO(conexaoDb2);
 
-                    let conexaoDb2 = app.infra.banco.dbConnection();
-                    let DidaticoDAO2 = new app.infra.banco.DidaticoDAO( conexaoDb2 );
+          DidaticoDAO2.excluirDidatico(entrada, (err2) => {
+            if (err2) throw err2;
+            res.redirect('/professor/profile/didatico');
+          });
+          conexaoDb2.end();
+        });
+        conexaoDb.end();
+      }
+    },
+  };
 
-                    DidaticoDAO2.excluirDidatico( entrada, ( err, results ) => {
-                        res.redirect( '/professor/profile/didatico' );
-                    } );
-                    conexaoDb2.end();
-
-                } );
-                conexaoDb.end();
-
-
-            };
-        }
-    }
-
-    return Didatico;
+  return Professor;
 };

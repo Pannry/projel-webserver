@@ -1,0 +1,23 @@
+{
+    "extends": "airbnb-base",
+    "rules": {
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowTernary": true
+            }
+        ],
+        "no-underscore-dangle": [
+            "error",
+            {
+                "allow": [
+                    "_conexaoDb"
+                ]
+            }
+        ],
+        "func-names": [
+            "error",
+            "never"
+        ]
+    }
+}

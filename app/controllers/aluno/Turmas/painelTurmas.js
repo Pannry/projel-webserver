@@ -1,20 +1,19 @@
-module.exports = function (app) {
-  Aluno = {
+module.exports = (app) => {
+  const Aluno = {
     get: (req, res) => {
-      if (req.user.tipo == 'aluno') {
+      if (req.user.tipo === 'aluno') {
+        const entrada = req.user.id;
 
-        let entrada = req.user.id;
-
-        let ejs = {
+        const ejs = {
           user: req.user,
           page_name: req.path,
           accountType: req.user.tipo,
         };
 
-        let conexaoDb = app.infra.banco.dbConnection();
-        let salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
+        const conexaoDb = app.infra.banco.dbConnection();
+        const salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
 
-        salaDAO.listaSalaAluno(entrada, function (err, resultadoAluno) {
+        salaDAO.listaSalaAluno(entrada, (err, resultadoAluno) => {
           ejs.listaSalaAluno = resultadoAluno;
           res.render('aluno/perfil/turmas/minhasTurmas', ejs);
         });
@@ -25,7 +24,7 @@ module.exports = function (app) {
 
     post: (req, res) => {
       res.send('<h1>Turma Aluno</h1>');
-    }
+    },
   };
   return Aluno;
-}
+};

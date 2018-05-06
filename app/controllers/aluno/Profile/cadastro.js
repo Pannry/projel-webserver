@@ -1,14 +1,14 @@
-module.exports = function (app) {
-  let bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
+
+module.exports = (app) => {
   const saltRounds = 7;
 
-  Aluno = {
+  const Aluno = {
     get: (req, res) => {
+      const ejs = {};
 
-      let ejs = {};
-
-      let conexaoDb = app.infra.banco.dbConnection();
-      let instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
+      const conexaoDb = app.infra.banco.dbConnection();
+      const instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
 
       instituicaoDAO.listaInstituicao((err, resultado) => {
         ejs.listaDeInstituicao = resultado;
@@ -19,18 +19,19 @@ module.exports = function (app) {
     },
 
     post: (req, res) => {
-      let entrada = req.body;
+      const entrada = req.body;
 
       entrada.senha = bcrypt.hashSync(entrada.senha, saltRounds);
 
-      let conexaoDb = app.infra.banco.dbConnection();
-      let usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
+      const conexaoDb = app.infra.banco.dbConnection();
+      const usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
       usuarioDAO.salvarAluno(entrada, (err) => {
+        if (err) console.error(err);
         res.redirect('/aluno/login');
       });
       conexaoDb.end();
-    }
+    },
   };
   return Aluno;
-}
+};

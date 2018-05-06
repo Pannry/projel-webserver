@@ -1,20 +1,22 @@
 module.exports = (app) => {
-  const Exercicios = {
+  const turmas = {
+
     delete: (req, res) => {
       if (req.user.tipo === 'professor') {
         const entrada = req.params.id;
 
         const conexaoDb = app.infra.banco.dbConnection();
-        const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
+        const SalaDAO = new app.infra.banco.SalaDAO(conexaoDb);
 
-        ExerciciosDao.excluirLista(entrada, (err) => {
+        SalaDAO.excluirSala(entrada, (err) => {
           if (err) throw err;
-          res.redirect('/professor/profile/exercicios/lista');
+          res.redirect('/professor/profile/turmas');
         });
         conexaoDb.end();
       }
     },
+
   };
 
-  return Exercicios;
+  return turmas;
 };

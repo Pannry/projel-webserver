@@ -1,103 +1,103 @@
-module.exports = function ( app ) {
-    var LocalStrategy = require( 'passport-local' ).Strategy;
-    var bcrypt = require( 'bcrypt' );
-    var passport = app.get( 'passport' );
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 
-    passport.serializeUser( function ( user, done ) {
-        var chave = {
-            id: user.id,
-            tipo: user.tipo
-        }
-        done( null, chave );
-    } );
+module.exports = (app) => {
+  const passport = app.get('passport');
 
-    passport.deserializeUser( function ( usuario, done ) {
+  passport.serializeUser((user, done) => {
+    const chave = {
+      id: user.id,
+      tipo: user.tipo,
+    };
+    done(null, chave);
+  });
 
-        var conexaoDb = app.infra.banco.dbConnection();
-        var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
+  passport.deserializeUser((usuario, done) => {
+    const conexaoDb = app.infra.banco.dbConnection();
+    const usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
-        if ( usuario.tipo === 'aluno' ) {
-            usuarioDAO.buscarIdAluno( usuario.id, function ( err, usuario ) {
-                usuario[ 0 ].tipo = 'aluno';
-                done( err, usuario[ 0 ] );
-            } );
-        } else if ( usuario.tipo === 'professor' ) {
-            usuarioDAO.buscarIdProfessor( usuario.id, function ( err, usuario ) {
-                usuario[ 0 ].tipo = 'professor';
-                done( err, usuario[ 0 ] );
-            } );
-        }
+    if (usuario.tipo === 'aluno') {
+      usuarioDAO.buscarIdAluno(usuario.id, (err, userType) => {
+        const user = userType;
+        user[0].tipo = 'aluno';
+        done(err, user[0]);
+      });
+    } else if (usuario.tipo === 'professor') {
+      usuarioDAO.buscarIdProfessor(usuario.id, (err, userType) => {
+        const user = userType;
+        user[0].tipo = 'professor';
+        done(err, user[0]);
+      });
+    }
 
-        conexaoDb.end();
-    } );
+    conexaoDb.end();
+  });
 
-    /**
-     * Login do Aluno
-     */
-    passport.use( 'local-login-aluno', new LocalStrategy( {
-        usernameField: 'email',
-        passwordField: 'senha',
-        passReqToCallback: true
-    }, function ( req, username, password, done ) {
+  /**
+   * Login do Aluno
+   */
+  passport.use('local-login-aluno', new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'senha',
+      passReqToCallback: true,
+    },
+    ((req, username, password, done) => {
+      const conexaoDb = app.infra.banco.dbConnection();
+      const usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
-        var conexaoDb = app.infra.banco.dbConnection();
-        var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
+      const entrada = {
+        email: username,
+        senha: password,
+      };
 
-        var entrada = {
-            email: username,
-            senha: password
-        };
+      usuarioDAO.buscarAluno(entrada, (err, usuario) => {
+        if (err) { return done(err); }
+        if (!usuario.length) { return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.')); }
+        if (!bcrypt.compareSync(entrada.senha, usuario[0].senha)) { return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.')); }
+        const user = usuario;
+        user[0].tipo = 'aluno';
+        return done(null, user[0]);
+      });
 
-        usuarioDAO.buscarAluno( entrada, ( err, usuario ) => {
+      conexaoDb.end();
+    }),
+  ));
 
-            if ( err )
-                return done( err );
-            if ( !usuario.length )
-                return done( null, false, req.flash( 'loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.' ) );
-            if ( !bcrypt.compareSync( entrada.senha, usuario[ 0 ].senha ) )
-                return done( null, false, req.flash( 'loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.' ) );
+  /**
+   * Login do professor
+   */
+  passport.use('local-login-professor', new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'senha',
+      passReqToCallback: true,
+    },
+    ((req, username, password, done) => {
+      const conexaoDb = app.infra.banco.dbConnection();
+      const usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
-            usuario[ 0 ].tipo = "aluno";
-            return done( null, usuario[ 0 ] );
-        } );
+      const entrada = {
+        email: username,
+        senha: password,
+      };
 
-        conexaoDb.end();
-    } ) );
+      usuarioDAO.buscarProfessor(entrada, (err, usuario) => {
+        if (err) { return done(err); }
+        if (!usuario.length) { return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.')); }
+        if (!bcrypt.compareSync(entrada.senha, usuario[0].senha)) { return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.')); }
 
-    /**
-     * Login do professor
-     */
-    passport.use( 'local-login-professor', new LocalStrategy( {
-        usernameField: 'email',
-        passwordField: 'senha',
-        passReqToCallback: true
-    }, function ( req, username, password, done ) {
+        const user = usuario;
+        user[0].tipo = 'professor';
+        return done(null, user[0]);
+      });
 
-        var conexaoDb = app.infra.banco.dbConnection();
-        var usuarioDAO = new app.infra.banco.UsuarioDAO( conexaoDb );
+      conexaoDb.end();
+    }),
+  ));
+};
 
-        var entrada = {
-            email: username,
-            senha: password
-        };
-
-        usuarioDAO.buscarProfessor( entrada, ( err, usuario ) => {
-            if ( err )
-                return done( err );
-            if ( !usuario.length )
-                return done( null, false, req.flash( 'loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.' ) );
-            if ( !bcrypt.compareSync( entrada.senha, usuario[ 0 ].senha ) )
-                return done( null, false, req.flash( 'loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.' ) );
-
-            usuario[ 0 ].tipo = 'professor';
-            return done( null, usuario[ 0 ] );
-        } );
-
-        conexaoDb.end();
-    } ) );
-}
-
-// sites relacionados com multiplas 'local-strategy' 
+// sites relacionados com multiplas 'local-strategy'
 
 // https://stackoverflow.com/questions/40411236/authorization-for-multiple-local-strategies-in-passportjs-using-mongodb-and-node
 // https://stackoverflow.com/questions/36102524/passport-js-multiple-local-strategies-and-req-user

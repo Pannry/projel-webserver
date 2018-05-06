@@ -1,39 +1,39 @@
-module.exports = function ( app ) {
-    turmas = {
-        get: ( req, res ) => {
-            if ( req.user.tipo == 'professor' ) {
+module.exports = (app) => {
+  const turmas = {
 
-                let ejs = {
-                    user: req.user,
-                    page_name: req.path,
-                    accountType: req.user.tipo,
-                }
+    get: (req, res) => {
+      if (req.user.tipo === 'professor') {
+        const ejs = {
+          user: req.user,
+          page_name: req.path,
+          accountType: req.user.tipo,
+        };
 
-                res.render( 'professor/perfil/turmas/criarTurma', ejs );
-            }
-        },
+        res.render('professor/perfil/turmas/criarTurma', ejs);
+      }
+    },
 
-        post: ( req, res ) => {
-            if ( req.user.tipo == 'professor' ) {
+    post: (req, res) => {
+      if (req.user.tipo === 'professor') {
+        const entrada = {
+          nome: req.body.nome,
+          semestre: req.body.semestre,
+          id_professor: req.user.id,
+          comentario: '',
+        };
 
-                let entrada = {
-                    nome: req.body.nome,
-                    semestre: req.body.semestre,
-                    id_professor: req.user.id,
-                    comentario: ''
-                };
+        const conexaoDb = app.infra.banco.dbConnection();
+        const salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
 
-                let conexaoDb = app.infra.banco.dbConnection();
-                let salaDAO = new app.infra.banco.SalaDAO( conexaoDb );
+        salaDAO.addSala(entrada, (err) => {
+          if (err) throw err;
+          res.redirect('/professor/profile/turmas');
+        });
 
-                salaDAO.addSala( entrada, ( err ) => {
-                    res.redirect( '/professor/profile/turmas' );
-                } );
+        conexaoDb.end();
+      }
+    },
+  };
 
-                conexaoDb.end();
-            }
-        }
-    };
-
-    return turmas;
+  return turmas;
 };

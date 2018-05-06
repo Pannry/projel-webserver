@@ -1,17 +1,16 @@
-module.exports = function (app) {
-  Aluno = {
+module.exports = (app) => {
+  const Aluno = {
     get: (req, res) => {
-      if (req.user.tipo == 'aluno') {
-
-        let entrada = req.params.id;
-        let ejs = {
+      if (req.user.tipo === 'aluno') {
+        const entrada = req.params.id;
+        const ejs = {
           user: req.user,
           page_name: req.path,
           accountType: req.user.tipo,
-        }
+        };
 
-        let conexaoDb = app.infra.banco.dbConnection();
-        let salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
+        const conexaoDb = app.infra.banco.dbConnection();
+        const salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
 
         salaDAO.listaSalaProfessor(entrada, (err, resultado) => {
           ejs.listaSalaAluno = resultado;
@@ -23,27 +22,23 @@ module.exports = function (app) {
     },
 
     post: (req, res) => {
-      if (req.user.tipo == 'aluno') {
-
-        let entrada = {
+      if (req.user.tipo === 'aluno') {
+        const entrada = {
           id_sala: Object.keys(req.body)[0],
-          id_aluno: req.user.id
-        }
+          id_aluno: req.user.id,
+        };
 
-        var conexaoDb = app.infra.banco.dbConnection();
-        var salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
+        const conexaoDb = app.infra.banco.dbConnection();
+        const salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
 
-        salaDAO.alunoEntrarTurma(entrada, (err) => {
+        salaDAO.alunoEntrarTurma(entrada, () => {
           res.redirect('/profile/turmas');
-
         });
 
         conexaoDb.end();
-
-      } else
-        res.status(403);
-    }
+      } else { res.status(403); }
+    },
   };
 
   return Aluno;
-}
+};

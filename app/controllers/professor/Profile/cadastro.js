@@ -1,37 +1,37 @@
-module.exports = function (app) {
-    let bcrypt = require('bcrypt');
-    const saltRounds = 7;
+const bcrypt = require('bcrypt');
 
-    Professor = {
-        get: (req, res) => {
+const saltRounds = 7;
+module.exports = (app) => {
+  const Professor = {
+    get: (req, res) => {
+      const params = {};
 
-            let params = {}
+      const conexaoDb = app.infra.banco.dbConnection();
+      const instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
 
-            let conexaoDb = app.infra.banco.dbConnection();
-            let instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
+      instituicaoDAO.listaInstituicao((err, resultado) => {
+        if (err) throw err;
+        params.listaDeInstituicao = resultado;
+        res.render('professor/signup', params);
+      });
 
-            instituicaoDAO.listaInstituicao((err, resultado) => {
-                params.listaDeInstituicao = resultado;
-                res.render('professor/signup', params);
-            });
+      conexaoDb.end();
+    },
 
-            conexaoDb.end();
+    post: (req, res) => {
+      const entrada = req.body;
 
-        },
+      entrada.senha = bcrypt.hashSync(entrada.senha, saltRounds);
 
-        post: (req, res) => {
-            let entrada = req.body;
+      const conexaoDb = app.infra.banco.dbConnection();
+      const usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
-            entrada.senha = bcrypt.hashSync(entrada.senha, saltRounds);
-
-            let conexaoDb = app.infra.banco.dbConnection();
-            let usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
-
-            usuarioDAO.salvarProfessor(entrada, (err, resultado) => {
-                res.redirect('/professor/login');
-            });
-            conexaoDb.end();
-        }
-    };
-    return Professor;
+      usuarioDAO.salvarProfessor(entrada, (err) => {
+        if (err) throw err;
+        res.redirect('/professor/login');
+      });
+      conexaoDb.end();
+    },
+  };
+  return Professor;
 };
