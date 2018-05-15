@@ -17,6 +17,16 @@
         - atualizar perfil
         - Excluir turma
         - O acesso em atribuir notas n funciona
+        
+    http://localhost:3000/professor/turma/abrir/1/aluno:
+        - (BUG)carreguei 4 listas de exercicios diferentes, mas apenas 
+        uma apareceu. Precisou recarregar a pagina para aparecer
+        as 4 listas
+
+    http://localhost:3000/professor/turma/abrir/1/professor/1
+        - (Erro) "Cannot read property 'nota' of undefined"
+        Nao foi possivel criar todas as notas a tempo de renderizar
+        o HTML
     */
 
     */* Lado do aluno */*
