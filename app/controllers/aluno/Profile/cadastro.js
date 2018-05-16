@@ -27,7 +27,7 @@ module.exports = (app) => {
       const usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
       usuarioDAO.salvarAluno(entrada, (err) => {
-        if (err) console.error(err);
+        if (err) throw (err);
         res.redirect('/aluno/login');
       });
       conexaoDb.end();

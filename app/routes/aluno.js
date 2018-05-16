@@ -53,7 +53,7 @@ module.exports = (app) => {
 
   // Exercicios.js
 
-  app.route('/turmas/listas/abrir/:id_sala/:id_lista')
+  app.route('/turmas/abrir/listas/:id_sala/:id_lista')
     .get(checkAuth, Exercicios.listaExercicios.get);
 
   app.route('/turmas/abrir/:id_sala/:id_lista/:id_exercicio')

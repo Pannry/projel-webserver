@@ -15,14 +15,44 @@ module.exports = (app) => {
           id_lista: req.params.id_lista,
         };
 
-        const conexaoDb = app.infra.banco.dbConnection();
-        const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
+        const firstMethod = function () {
+          const promise = new Promise((resolve) => {
+            const conexaoDb = app.infra.banco.dbConnection();
+            const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
 
-        ExerciciosDao.mostrarExerciciosAluno(entrada.id_lista, (err, resultado) => {
-          ejs.exercicios = resultado;
+            ExerciciosDao.mostrarExerciciosAluno(entrada.id_lista, (err, resultado) => {
+              ejs.exercicios = resultado;
+              resolve();
+            });
+            conexaoDb.end();
+          });
+          return promise;
+        };
+
+        const secondMethod = function () {
+          const promise = new Promise((resolve) => {
+            const conexaoDb = app.infra.banco.dbConnection();
+            const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
+
+            ExerciciosDao.mostrarListaInfo(entrada.id_lista, (err, resultado) => {
+              if (err) throw (err);
+              ejs.listaInfo = resultado;
+              resolve();
+            });
+            conexaoDb.end();
+          });
+          return promise;
+        };
+
+        const thirdMethod = function () {
+          console.log(ejs);
           res.render('aluno/perfil/exercicios/abrirListaAluno', ejs);
-        });
-        conexaoDb.end();
+        };
+
+        firstMethod()
+          .then(secondMethod)
+          .then(thirdMethod)
+          .catch((err) => { throw (err); });
       } else res.status(403);
     },
   };

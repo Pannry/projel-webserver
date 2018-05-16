@@ -81,12 +81,16 @@ ExerciciosDao.prototype.fazerDownload = function (id, callback) {
 ExerciciosDao.prototype.mostrarListasAluno = function (entrada, callback) {
   this._conexaoDb.query('SELECT id_sala, id_lista, titulo FROM sala_lista, lista ' +
     'WHERE sala_lista.id_sala = ? AND sala_lista.id_lista = lista.id;', entrada, callback);
-};
+}; // ok
 
 ExerciciosDao.prototype.mostrarExerciciosAluno = function (entrada, callback) {
   this._conexaoDb.query('SELECT id_lista, id_exercicios, titulo FROM lista_exercicios, exercicios ' +
     'WHERE lista_exercicios.id_lista = ? AND lista_exercicios.id_exercicios = exercicios.id', entrada, callback);
-};
+}; // ok
+
+ExerciciosDao.prototype.mostrarListaInfo = function (entrada, callback) {
+  this._conexaoDb.query('SELECT * FROM projel.lista where id = ?', entrada, callback);
+}; // ok
 
 ExerciciosDao.prototype.abrirRespostaAluno = function (entrada, callback) {
   this._conexaoDb.query(

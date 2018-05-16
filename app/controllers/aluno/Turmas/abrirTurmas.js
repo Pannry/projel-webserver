@@ -90,7 +90,7 @@ module.exports = (app) => {
           .then(thirdMethod)
           .then(fourthMethod)
           .then(fifthMethod)
-          .catch((err) => { console.log(err); });
+          .catch((err) => { throw (err); });
       }
     },
   };

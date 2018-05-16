@@ -21,10 +21,6 @@ module.exports = (app) => {
         conexaoDb.end();
       }
     },
-
-    post: (req, res) => {
-      res.send('<h1>Turma Aluno</h1>');
-    },
   };
   return Aluno;
 };

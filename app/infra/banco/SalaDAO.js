@@ -10,14 +10,6 @@ SalaDao.prototype.addSala = function (entrada, callback) {
   this._conexaoDb.query('INSERT INTO sala SET ?', entrada, callback);
 };
 
-SalaDao.prototype.listaSalaProfessor = function (id, callback) {
-  this._conexaoDb.query('SELECT * FROM sala WHERE id_professor = ?', id, callback);
-};
-
-SalaDao.prototype.buscarSala = function (id, callback) {
-  this._conexaoDb.query('select * FROM sala WHERE id = ?', id, callback);
-};
-
 SalaDao.prototype.listarAlunos = function (id, callback) {
   this._conexaoDb.query(
     'SELECT id_aluno, id_sala, aluno_aceito, nome, email, instituicao_id ' +
@@ -46,12 +38,20 @@ SalaDao.prototype.excluirSala = function (entrada, callback) {
 
 SalaDao.prototype.listaSalaAluno = function (id, callback) {
   this._conexaoDb.query('SELECT id_aluno, id_sala, id, nome, semestre FROM cursa, sala WHERE id_aluno = ? AND id_sala = id', id, callback);
-};
+}; // ok
+
+SalaDao.prototype.listaSalaProfessor = function (id, callback) {
+  this._conexaoDb.query('SELECT * FROM sala WHERE id_professor = ?', id, callback);
+}; // ok
 
 SalaDao.prototype.alunoEntrarTurma = function (entrada, callback) {
   this._conexaoDb.query('INSERT INTO cursa SET ?', entrada, callback);
-};
+}; // ok
 
 SalaDao.prototype.verificarAutenticacao = function (ent, callback) {
   this._conexaoDb.query('SELECT * FROM cursa WHERE cursa.id_aluno = ? AND cursa.id_sala = ?', [ent.id_aluno, ent.id], callback);
+}; // ok
+
+SalaDao.prototype.buscarSala = function (id, callback) {
+  this._conexaoDb.query('select * FROM sala WHERE id = ?', id, callback);
 };

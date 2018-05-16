@@ -56,4 +56,4 @@ DidaticoDAO.prototype.mostrarDidaticosInclusos = function (entrada, callback) {
 DidaticoDAO.prototype.mostrarDidaticosAluno = function (entrada, callback) {
   this._conexaoDb.query('SELECT id_sala, id_didatico, titulo FROM didatico, sala_didatico ' +
     'WHERE sala_didatico.id_sala = ? AND sala_didatico.id_didatico = didatico.id', entrada, callback);
-};
+}; // ok
