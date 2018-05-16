@@ -84,7 +84,7 @@ ExerciciosDao.prototype.mostrarListasAluno = function (entrada, callback) {
 };
 
 ExerciciosDao.prototype.mostrarExerciciosAluno = function (entrada, callback) {
-  this._conexaoDb.query(' SELECT id_lista, id_exercicios, titulo FROM lista_exercicios, exercicios ' +
+  this._conexaoDb.query('SELECT id_lista, id_exercicios, titulo FROM lista_exercicios, exercicios ' +
     'WHERE lista_exercicios.id_lista = ? AND lista_exercicios.id_exercicios = exercicios.id', entrada, callback);
 };
 

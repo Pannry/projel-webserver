@@ -2,65 +2,66 @@
 <html lang="en">
 
 <head>
-    <% include ../../../partials/head.ejs %>
+  <% include ../../../partials/head.ejs %>
 </head>
 
 <body>
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
+  <!-- Nav dashboard -->
+  <% include ../../../partials/navbar-dashboard.ejs %>
 
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+  <!-- Sidebar Menu -->
+  <% include ../../../partials/sidebar-menu.ejs %>
 
 
-    <!-- Content -->
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-        
-        <h1> <%= sala[0].nome+', '+sala[0].semestre %> </h1>
-        <hr>
+  <!-- Content -->
+  <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 
-        <div class="card">
-            <div class="card-body">
+    <h1> <%= sala[0].nome+', '+sala[0].semestre %> </h1>
+    <hr>
 
-                <% if(aluno_aceito === 0){ %>
-                    <h5>Esperando autorização professor</h5>
-                <% } else if (aluno_aceito === 1){ %>
-                    <h4>Observações do professor:</h4>
-                    <textarea class="form-control col-md-10" id="campoComentario" rows="4" readonly><%= sala[0].comentario %></textarea>
-                    <br>
-                    
-                    <h4>Listas de exercícios:</h4>
+    <div class="card">
+      <div class="card-body">
 
-                    <ul class="list-group list-group-flush">
-                        <% if ( lista.length === 0 ) { %>
-                            <h5>Nenhuma lista disponivel.</h5>
-                        <% } else { %>
-                            <% for (var i = 0; i < lista.length; i++) { %>
-                                <a href="/turmas/abrir/<%= sala[0].id%>/<%= lista[i].id_lista%>/" class="list-group-item list-group-item-action">
-                                    <h5><p> <%= lista[i].titulo%> </p></h5>
-                                </a>    
-                            <% } %>
-                        <% } %>
-                    </ul>
-                    <br>
-                    
-                    <h4>Materiais didáticos:</h4>
+      <% if(aluno_aceito === 0){ %>
+        <h5>Esperando autorização professor</h5>
+      <% } else if (aluno_aceito === 1){ %>
+        <h4>Observações do professor:</h4>
+        <textarea class="form-control col-md-10" id="campoComentario" rows="4" readonly><%= sala[0].comentario %></textarea>
+        <br>
 
-                    <ul class="list-group list-group-flush">
-                        <% if ( lista.length === 0 ) { %>
-                            <h5>Não implementado ainda.</h5>
-                        <% } else { %>
-                            <h5>Não implementado ainda.</h5>
-                        <% } %>
-                    </ul>
+        <h4>Listas de exercícios:</h4>
 
-                <% } %>
-            </div>
-        </div>        
-    </main>
+        <ul class="list-group list-group-flush">
+          <% if ( lista.length === 0 ) { %>
+            <h5>Nenhuma lista disponivel.</h5>
+          <% } else { %>
+            <% for (var i = 0; i < lista.length; i++) { %>
+              <a href="/turmas/abrir/listas/<%= sala[0].id%>/<%= lista[i].id_lista%>/" class="list-group-item list-group-item-action"> <h5> <p> <%= lista[i].titulo %> </p> </h5> </a>
+            <% } %>
+          <% } %>
+        </ul>
 
-    <% include ../../../partials/scripts.ejs %>
+        <br>
+
+        <h4>Materiais didáticos:</h4>
+
+        <ul class="list-group list-group-flush">
+          <% if ( lista.length === 0 ) { %>
+            <h5>Nenhuma material disponível.</h5>
+          <% } else { %>
+            <% for (var i = 0; i < didatico.length; i++) { %>
+              <a href="/turmas/didaticos/abrir/<%= sala[0].id%>/<%= lista[i].id_lista%>/" class="list-group-item list-group-item-action"> <h5> <p> <%= lista[i].titulo %> </p> </h5> </a>
+            <% } %>
+          <% } %>
+        </ul>
+
+      <% } %>
+      </div>
+    </div>
+  </main>
+
+  <% include ../../../partials/scripts.ejs %>
 </body>
 
 </html>

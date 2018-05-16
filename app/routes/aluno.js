@@ -8,6 +8,7 @@ module.exports = (app) => {
   const { Profile } = app.controllers.aluno;
   const { Turmas } = app.controllers.aluno;
   const { Exercicios } = app.controllers.aluno;
+  const { Didaticos } = app.controllers.aluno;
 
 
   app.get('/', (req, res) => {
@@ -52,10 +53,15 @@ module.exports = (app) => {
 
   // Exercicios.js
 
-  app.route('/turmas/abrir/:id_sala/:id_lista')
+  app.route('/turmas/listas/abrir/:id_sala/:id_lista')
     .get(checkAuth, Exercicios.listaExercicios.get);
 
   app.route('/turmas/abrir/:id_sala/:id_lista/:id_exercicio')
     .get(checkAuth, Exercicios.responderExercicios.get)
     .post(checkAuth, Exercicios.responderExercicios.post);
+
+  // didatico.js
+
+  app.route('/turmas/didaticos/abrir/:id_sala/:id_lista')
+    .get(checkAuth, Didaticos.listaDidaticos.get);
 };

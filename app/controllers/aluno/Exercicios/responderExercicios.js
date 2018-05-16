@@ -70,7 +70,7 @@ module.exports = (app) => {
       const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
 
       ExerciciosDao.responderExerciciosAluno(entrada, (err) => {
-        if (err) console.error(err);
+        if (err) throw (err);
         res.redirect(`/turmas/abrir/${ejs.sala}/${ejs.lista}`);
       });
 

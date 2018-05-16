@@ -19,7 +19,7 @@
         - O acesso em atribuir notas n funciona
         
     http://localhost:3000/professor/turma/abrir/1/aluno:
-        - (BUG)carreguei 4 listas de exercicios diferentes, mas apenas 
+        - (BUG) carreguei 4 listas de exercicios diferentes, mas apenas 
         uma apareceu. Precisou recarregar a pagina para aparecer
         as 4 listas
 

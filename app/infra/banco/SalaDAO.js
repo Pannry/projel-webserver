@@ -53,5 +53,5 @@ SalaDao.prototype.alunoEntrarTurma = function (entrada, callback) {
 };
 
 SalaDao.prototype.verificarAutenticacao = function (ent, callback) {
-  this._conexaoDb.query('SELECT * FROM cursa WHERE cursa.id_aluno = ? AND cursa.id_sala = ?', [ent.id_aluno, ent.id_sala], callback);
+  this._conexaoDb.query('SELECT * FROM cursa WHERE cursa.id_aluno = ? AND cursa.id_sala = ?', [ent.id_aluno, ent.id], callback);
 };

@@ -29,9 +29,8 @@ module.exports = (app) => {
       res.render('professor/home', { accountType: req.user.tipo });
   });
 
-  /**
-     *  Professor.js
-     */
+  // Professor.js
+
   app.route('/professor/signup')
     .get(Profile.cadastro.get)
     .post(Profile.cadastro.post);
@@ -50,9 +49,7 @@ module.exports = (app) => {
     .get(checkAuth, Profile.profile.update);
 
 
-  /**
-     *      Turmas.js
-     */
+  // Turmas.js
 
   app.route('/professor/profile/turmas')
     .get(checkAuth, Turmas.TurmaPainel.get);
