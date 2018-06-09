@@ -18,6 +18,10 @@
         "func-names": [
             "error",
             "never"
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
         ]
     }
 }

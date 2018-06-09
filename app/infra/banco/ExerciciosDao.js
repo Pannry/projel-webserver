@@ -21,7 +21,7 @@ ExerciciosDao.prototype.listarExercicios = function (idProfessor, callback) {
 };
 
 ExerciciosDao.prototype.abrirExercicio = function (id, callback) {
-  this._conexaoDb.query('SELECT * FROM exercicios WHERE id = ? AND id_professor = ?', [id.id, id.id_professor], callback);
+  this._conexaoDb.query('SELECT * FROM exercicios WHERE id = ?', [id.id_exercicios, id.id_professor], callback);
 };
 
 // Lista de Exercicios
@@ -80,7 +80,7 @@ ExerciciosDao.prototype.fazerDownload = function (id, callback) {
 
 ExerciciosDao.prototype.mostrarListasAluno = function (entrada, callback) {
   this._conexaoDb.query('SELECT id_sala, id_lista, titulo FROM sala_lista, lista ' +
-    'WHERE sala_lista.id_sala = ? AND sala_lista.id_lista = lista.id;', entrada, callback);
+    'WHERE sala_lista.id_sala = ? AND sala_lista.id_lista = lista.id', entrada, callback);
 }; // ok
 
 ExerciciosDao.prototype.mostrarExerciciosAluno = function (entrada, callback) {

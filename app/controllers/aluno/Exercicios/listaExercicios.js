@@ -45,7 +45,6 @@ module.exports = (app) => {
         };
 
         const thirdMethod = function () {
-          console.log(ejs);
           res.render('aluno/perfil/exercicios/abrirListaAluno', ejs);
         };
 
