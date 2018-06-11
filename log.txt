@@ -9,15 +9,14 @@
     03/2018: Upload de arquivos e encriptação das senhas
     04/2018: Excluir em exercicios e lista concluido
     04/2018: Excluir turmas concluido
-    05/2018: Visualização de exercicios/material didatico concluido (aluno)
 
     */* Lado do professor */*
 
     /*
     Plano atual:
         - atualizar perfil
+        - Excluir turma
         - O acesso em atribuir notas n funciona
-        - Abrir os exercicios está dando problema
         
     http://localhost:3000/professor/turma/abrir/1/aluno:
         - (BUG) carreguei 4 listas de exercicios diferentes, mas apenas 
@@ -39,7 +38,6 @@
         - implementar material didatico
         - responder questoes está com problemas
         - reimplementar o logout
-        - implementar o Download de exercicios/didatico
     */
 
     Problemas Conhecidos:

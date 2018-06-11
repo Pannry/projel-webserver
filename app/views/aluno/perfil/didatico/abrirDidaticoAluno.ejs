@@ -1,3 +1,53 @@
-<h1>
-  HI!!
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../../partials/head.ejs %>
+        <style>
+        .green{
+            color: green;
+            font-size: 20px;
+        }        
+        .red{
+            color: red;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Nav dashboard -->
+    <% include ../../../partials/navbar-dashboard.ejs %>
+
+    <!-- Sidebar Menu -->
+    <% include ../../../partials/sidebar-menu.ejs %>
+
+    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+        <h1> Questões: </h1>
+        <hr>
+        
+        <div class="col-md-10">
+            <div class="card">
+                
+                <div class="card-header">
+                    <h5><p><%= didatico[0].titulo%></p></h5>
+                </div>
+
+                <div class="card-body">
+                    <h5><p><%= didatico[0].descricao%></p></h5>
+                </div>
+
+                <div class="card-body">
+                    (Download)
+                </div>
+
+                <br>
+            </div>
+        </div>
+    </main>
+
+    <% include ../../../partials/scripts.ejs %>
+</body>
+
+</html>

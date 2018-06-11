@@ -8,19 +8,19 @@ module.exports = (app) => {
           page_name: req.path,
           accountType: req.user.tipo,
           sala: req.params.id_sala,
-          lista: req.params.id_lista,
+          didatico: req.params.id_didatico,
         };
 
         const entrada = {
-          id_lista: req.params.id_lista,
+          id_didatico: req.params.id_didatico,
         };
 
         const conexaoDb = app.infra.banco.dbConnection();
         const DidaticoDAO = new app.infra.banco.DidaticoDAO(conexaoDb);
 
-        DidaticoDAO.mostrarDidaticosAluno(entrada.id_lista, (err, resultado) => {
-          ejs.exercicios = resultado;
-          console.log(resultado);
+        DidaticoDAO.abrirDidaticoAluno(entrada.id_didatico, (err, resultado) => {
+          if (err) throw (err);
+          ejs.didatico = resultado;
           res.render('aluno/perfil/didatico/abrirDidaticoAluno', ejs);
         });
         conexaoDb.end();

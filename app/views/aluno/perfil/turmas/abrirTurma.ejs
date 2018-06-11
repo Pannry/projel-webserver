@@ -47,11 +47,11 @@
         <h4>Materiais didáticos:</h4>
 
         <ul class="list-group list-group-flush">
-          <% if ( lista.length === 0 ) { %>
+          <% if ( didatico.length === 0 ) { %>
             <h5>Nenhuma material disponível.</h5>
           <% } else { %>
             <% for (var i = 0; i < didatico.length; i++) { %>
-              <a href="/turmas/didaticos/abrir/<%= sala[0].id%>/<%= lista[i].id_lista%>/" class="list-group-item list-group-item-action"> <h5> <p> <%= lista[i].titulo %> </p> </h5> </a>
+              <a href="/turmas/didaticos/abrir/<%= sala[0].id%>/<%= didatico[i].id_didatico%>/" class="list-group-item list-group-item-action"> <h5> <p> <%= didatico[i].titulo %> </p> </h5> </a>
             <% } %>
           <% } %>
         </ul>
