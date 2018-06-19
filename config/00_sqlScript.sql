@@ -66,7 +66,7 @@ create table resposta(
     id_exercicios int,
     id_sala int,
     resposta varchar (300),
-    pdf_path varchar (100),
+    file_name varchar (100),
     foreign key (id_aluno) references aluno(id),
     foreign key (id_exercicios) references exercicios(id) ON DELETE CASCADE,
     foreign key (id_sala) references sala(id) ON DELETE CASCADE

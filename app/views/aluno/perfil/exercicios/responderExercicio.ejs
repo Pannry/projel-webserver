@@ -21,13 +21,29 @@
             <div class="card">
                 
                 <div class="card-header">
-                    
                     <h5><p><%= exercicio[0].titulo%></p></h5>
                 </div>
 
                 <div class="card-body">
+                    <h5><p>Descrição:</p></h5>                    
                     <h5><p><%= exercicio[0].descricao%></p></h5>
+                </div>
 
+                <div class="card-body">
+                    <% if( !(file_name.length === 0) ) {%>
+                        <h5><p>Conteúdo para download:</p></h5>                    
+                        <% for( let i = 0; i < file_name.length; i++)  {%>
+                            <a href="/exercicios/download/<%= exercicio[0].id%>/<%= file_name[i].file_name%>" class="list-group-item list-group-item-action">
+                                <div class="row">
+                                    <div class="col-md-1"><i class="fa fa-download" aria-hidden="true"></i></div>
+                                    <div class="col-md-10"><p><%= file_name[i].file_name %></p></div>
+                                </div>
+                            </a>
+                        <% } %>
+                        
+                    <% } else { %>
+                        <!-- Nenhum arquivos para download -->
+                    <% } %>
                 </div>
 
                 <div class="card-body">

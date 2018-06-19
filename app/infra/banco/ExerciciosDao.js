@@ -109,3 +109,11 @@ ExerciciosDao.prototype.responderExerciciosAluno = function (entrada, callback) 
     [entrada.resposta, entrada.id_aluno, entrada.id_exercicios, entrada.id_sala], callback,
   );
 };
+
+ExerciciosDao.prototype.fazerDownloadAluno = function (id, callback) {
+  this._conexaoDb.query(
+    'SELECT exercicios.id, exercicios_material.file_name from exercicios, exercicios_material ' +
+    'where exercicios.id = exercicios_material.id and exercicios.id = ? and file_name = ?',
+    [id.id_exercicio, id.file_name], callback,
+  );
+};

@@ -95,7 +95,7 @@ module.exports = (app) => {
     .post(checkAuth, upload.array('fileUpload', 5), Exercicios.ExerciciosCriar.post);
 
   app.route('/professor/exercicios/abrir/:id/download/:path')
-    .get(checkAuth, Exercicios.ExerciciosDownload.get);
+    .get(checkAuth, Exercicios.ExerciciosDownloadProfessor.get);
 
 
   // Listas

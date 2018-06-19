@@ -54,11 +54,14 @@ module.exports = (app) => {
   // Exercicios.js
 
   app.route('/turmas/abrir/listas/:id_sala/:id_lista')
-    .get(checkAuth, Exercicios.listaExercicios.get);
+    .get(checkAuth, Exercicios.ListaAbrir.get);
 
   app.route('/turmas/abrir/:id_sala/:id_lista/:id_exercicio')
-    .get(checkAuth, Exercicios.responderExercicios.get)
-    .post(checkAuth, Exercicios.responderExercicios.post);
+    .get(checkAuth, Exercicios.ExerciciosResponder.get)
+    .post(checkAuth, Exercicios.ExerciciosResponder.post);
+
+  app.route('/exercicios/download/:id_exercicio/:file_name')
+    .get(checkAuth, Exercicios.ExerciciosDownloadAluno.get);
 
   // didatico.js
 

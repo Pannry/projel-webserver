@@ -3,7 +3,7 @@ module.exports = (app) => {
     get: (req, res) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
-          id: req.params.id,
+          id_exercicios: req.params.id,
           id_professor: req.user.id,
         };
         const ejs = {
@@ -14,12 +14,12 @@ module.exports = (app) => {
         const conexaoDb = app.infra.banco.dbConnection();
         const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
 
+        console.log(entrada);
         ExerciciosDao.abrirExercicio(entrada, (err, resultado) => {
           if (err) throw err;
           if (resultado.length === 0) res.render('erro/403', ejs);
           else {
             ejs.questao = resultado;
-            console.log(ejs);
             const entrada2 = resultado[0].id;
 
             const conexaoDb2 = app.infra.banco.dbConnection();
