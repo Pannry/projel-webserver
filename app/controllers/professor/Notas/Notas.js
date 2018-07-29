@@ -18,33 +18,53 @@ module.exports = (app) => {
         const conexaoDb1 = app.infra.banco.dbConnection();
         const NotasDAO1 = new app.infra.banco.NotasDAO(conexaoDb1);
 
-        NotasDAO1.selecionarListas(entrada.id_sala, (err, resultado1) => {
-          if (err) throw err;
-          ejs.lista = resultado1;
+        const firstMethod = function () {
+          const promise = new Promise((resolve) => {
+            NotasDAO1.selecionarListas(entrada.id_sala, (err, resultado1) => {
+              if (err) throw err;
+              ejs.lista = resultado1;
 
-          ejs.lista.forEach((element) => {
-            const criarNotas = entrada;
-            criarNotas.id_lista = element.id_lista;
+              ejs.lista.forEach((element) => {
+                const criarNotas = entrada;
+                criarNotas.id_lista = element.id_lista;
 
-            const conexaoDb3 = app.infra.banco.dbConnection();
-            const NotasDAO3 = new app.infra.banco.NotasDAO(conexaoDb3);
+                const conexaoDb3 = app.infra.banco.dbConnection();
+                const NotasDAO3 = new app.infra.banco.NotasDAO(conexaoDb3);
 
-            NotasDAO3.criarNotaAlunoSala(criarNotas, () => { });
-
-            conexaoDb3.end();
+                NotasDAO3.criarNotaAlunoSala(criarNotas, () => { });
+                resolve();
+                conexaoDb3.end();
+              });
+            });
+            conexaoDb1.end();
           });
+          return promise;
+        };
 
-          const conexaoDb2 = app.infra.banco.dbConnection();
-          const NotasDAO2 = new app.infra.banco.NotasDAO(conexaoDb2);
+        const secondMethod = function () {
+          const promise = new Promise((resolve) => {
+            const conexaoDb2 = app.infra.banco.dbConnection();
+            const NotasDAO2 = new app.infra.banco.NotasDAO(conexaoDb2);
 
-          NotasDAO2.mostrarNotaAlunoSala(entrada, (err2, resultado2) => {
-            if (err2) throw err2;
-            ejs.notas = resultado2;
-            res.render('professor/perfil/notas/AbrirNotasAluno', ejs);
+            NotasDAO2.mostrarNotaAlunoSala(entrada, (err2, resultado2) => {
+              if (err2) throw err2;
+              ejs.notas = resultado2;
+              resolve();
+              res.render('professor/perfil/notas/AbrirNotasAluno', ejs);
+            });
+            conexaoDb2.end();
           });
-          conexaoDb2.end();
-        });
-        conexaoDb1.end();
+          return promise;
+        };
+
+        const thirdMethod = function () {
+          res.render('professor/perfil/notas/AbrirNotasAluno', ejs);
+        };
+
+        firstMethod()
+          .then(secondMethod)
+          .then(thirdMethod)
+          .catch((err) => { throw (err); });
       }
     },
 
