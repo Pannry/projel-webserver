@@ -34,6 +34,8 @@ module.exports = (app) => {
   app.route('/profile/update')
     .get(checkAuth, Profile.profile.update);
 
+  app.route('/logout')
+    .get(Profile.logout.logout);
 
   /**
      *      Turmas.js

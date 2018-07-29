@@ -1,8 +1,6 @@
 const bcrypt = require('bcrypt');
 
 module.exports = (app) => {
-  const saltRounds = 7;
-
   const Aluno = {
     get: (req, res) => {
       const ejs = {};
@@ -21,16 +19,21 @@ module.exports = (app) => {
     post: (req, res) => {
       const entrada = req.body;
 
-      entrada.senha = bcrypt.hashSync(entrada.senha, saltRounds);
+      bcrypt.genSalt((err, salt) => {
+        bcrypt.hash(entrada.senha, salt, (err1, hash) => {
+          if (err1) throw (err1);
+          entrada.senha = hash;
 
-      const conexaoDb = app.infra.banco.dbConnection();
-      const usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
+          const conexaoDb = app.infra.banco.dbConnection();
+          const usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
 
-      usuarioDAO.salvarAluno(entrada, (err) => {
-        if (err) throw (err);
-        res.redirect('/aluno/login');
+          usuarioDAO.salvarAluno(entrada, (err2) => {
+            if (err2) throw (err2);
+            res.redirect('/aluno/login');
+          });
+          conexaoDb.end();
+        });
       });
-      conexaoDb.end();
     },
   };
   return Aluno;

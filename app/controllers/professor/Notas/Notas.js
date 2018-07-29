@@ -24,6 +24,7 @@ module.exports = (app) => {
               if (err) throw err;
               ejs.lista = resultado1;
 
+              // TODO: N faço ideia de como arrumar isso...
               ejs.lista.forEach((element) => {
                 const criarNotas = entrada;
                 criarNotas.id_lista = element.id_lista;
@@ -32,9 +33,10 @@ module.exports = (app) => {
                 const NotasDAO3 = new app.infra.banco.NotasDAO(conexaoDb3);
 
                 NotasDAO3.criarNotaAlunoSala(criarNotas, () => { });
-                resolve();
                 conexaoDb3.end();
               });
+
+              resolve();
             });
             conexaoDb1.end();
           });
@@ -50,7 +52,6 @@ module.exports = (app) => {
               if (err2) throw err2;
               ejs.notas = resultado2;
               resolve();
-              res.render('professor/perfil/notas/AbrirNotasAluno', ejs);
             });
             conexaoDb2.end();
           });
