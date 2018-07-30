@@ -1,9 +1,10 @@
-const bcrypt = require('bcrypt');
-
 module.exports = (app) => {
+  const passport = app.get('passport');
   const Professor = {
     get: (req, res) => {
-      const params = {};
+      const params = {
+        message: req.flash('signupMessage'),
+      };
 
       const conexaoDb = app.infra.banco.dbConnection();
       const instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
@@ -17,24 +18,11 @@ module.exports = (app) => {
       conexaoDb.end();
     },
 
-    post: (req, res) => {
-      const entrada = req.body;
-      bcrypt.genSalt((err, salt) => {
-        bcrypt.hash(entrada.senha, salt, (err1, hash) => {
-          if (err) throw err1;
-          entrada.senha = hash;
-
-          const conexaoDb = app.infra.banco.dbConnection();
-          const usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
-
-          usuarioDAO.salvarProfessor(entrada, (err2) => {
-            if (err2) throw err2;
-            res.redirect('/professor/login');
-          });
-          conexaoDb.end();
-        });
-      });
-    },
+    post: passport.authenticate('local-signup-professor', {
+      successRedirect: '/professor/profile',
+      failureRedirect: '/professor/signup',
+      failureFlash: true,
+    }),
   };
   return Professor;
 };

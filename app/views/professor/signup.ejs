@@ -14,6 +14,10 @@
                 <h2>Cadastro - Professor</h2>
             </div>
         </div>
+    
+        <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+        <% } %>
 
         <!-- Formulario de cadastro  -->
         <form class="" action="/professor/signup" method="post">

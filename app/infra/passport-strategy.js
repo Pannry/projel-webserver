@@ -77,7 +77,6 @@ module.exports = (app) => {
       passReqToCallback: true,
     },
     (req, username, password, done) => {
-
       const entrada = {
         email: username,
         senha: password,
@@ -144,9 +143,15 @@ module.exports = (app) => {
       };
 
       usuarioDAO.buscarProfessor(entrada, (err, usuario) => {
-        if (err) { return done(err); }
-        if (!usuario.length) { return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.')); }
-        if (!bcrypt.compareSync(entrada.senha, usuario[0].senha)) { return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.')); }
+        if (err) {
+          return done(err);
+        }
+        if (!usuario.length) {
+          return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.'));
+        }
+        if (!bcrypt.compareSync(entrada.senha, usuario[0].senha)) {
+          return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.'));
+        }
 
         const user = usuario;
         user[0].tipo = 'professor';
@@ -158,7 +163,64 @@ module.exports = (app) => {
   ));
 
   // Cadastro
-  // sdad
+  passport.use('local-signup-professor', new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'senha',
+      passReqToCallback: true,
+    },
+    (req, username, password, done) => {
+      const entrada = {
+        email: username,
+        senha: password,
+      };
+
+      const newUser = {
+        email: username,
+        instituicao_id: req.body.instituicao_id,
+        nome: req.body.nome,
+        endereco: req.body.endereco,
+        cpf: req.body.cpf,
+        cep: req.body.cep,
+        numero: req.body.numero,
+        telefone: req.body.telefone,
+      };
+
+      const user = {};
+
+      const connDB = app.infra.banco.dbConnection();
+      const UsuarioDAO = new app.infra.banco.UsuarioDAO(connDB);
+
+      UsuarioDAO.buscarProfessor(entrada, (err, saida) => {
+        if (err) return done(err);
+        if (saida.length) {
+          return done(null, false, req.flash('signupMessage', 'Email não disponivel'));
+        }
+        if (!saida.length) {
+          bcrypt.genSalt((err1, salt) => {
+            bcrypt.hash(entrada.senha, salt, (err2, hash) => {
+              newUser.senha = hash;
+
+              const connDB2 = app.infra.banco.dbConnection();
+              const UsuarioDAO2 = new app.infra.banco.UsuarioDAO(connDB2);
+
+              UsuarioDAO2.salvarProfessor(newUser, (err3, insertion) => {
+                if (err3) {
+                  return done(null, false, req.flash('signupMessage', 'Algum campo foi digitado invalidamente'));
+                }
+                user.id = insertion.insertId;
+                user.tipo = 'professor';
+                return done(null, user);
+              });
+              connDB2.end();
+            });
+          });
+        }
+        return null;
+      });
+      connDB.end();
+    },
+  ));
 };
 
 // sites relacionados com multiplas 'local-strategy'
