@@ -17,6 +17,10 @@
             </div>
         </div>
 
+        <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+
         <!-- Formulario de cadastro  -->
         <form class="" action="/aluno/signup" method="post">
             <br>

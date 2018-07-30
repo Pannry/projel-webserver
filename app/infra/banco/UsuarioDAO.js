@@ -14,7 +14,7 @@ UsuarioDAO.prototype.salvarAluno = function (usuario, callback) {
 UsuarioDAO.prototype.buscarAluno = function (usuario, callback) {
   this._conexaoDb.query(
     'SELECT * FROM aluno WHERE email = ?',
-    [usuario.email, usuario.senha], callback,
+    [usuario.email], callback,
   );
 };
 

@@ -1,9 +1,10 @@
-const bcrypt = require('bcrypt');
-
 module.exports = (app) => {
+  const passport = app.get('passport');
   const Aluno = {
     get: (req, res) => {
-      const ejs = {};
+      const ejs = {
+        message: req.flash('signupMessage'),
+      };
 
       const conexaoDb = app.infra.banco.dbConnection();
       const instituicaoDAO = new app.infra.banco.InstituicaoDAO(conexaoDb);
@@ -16,25 +17,11 @@ module.exports = (app) => {
       conexaoDb.end();
     },
 
-    post: (req, res) => {
-      const entrada = req.body;
-
-      bcrypt.genSalt((err, salt) => {
-        bcrypt.hash(entrada.senha, salt, (err1, hash) => {
-          if (err1) throw (err1);
-          entrada.senha = hash;
-
-          const conexaoDb = app.infra.banco.dbConnection();
-          const usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
-
-          usuarioDAO.salvarAluno(entrada, (err2) => {
-            if (err2) throw (err2);
-            res.redirect('/aluno/login');
-          });
-          conexaoDb.end();
-        });
-      });
-    },
+    post: passport.authenticate('local-signup-aluno', {
+      successRedirect: '/profile',
+      failureRedirect: '/aluno/signup',
+      failureFlash: true,
+    }),
   };
   return Aluno;
 };
