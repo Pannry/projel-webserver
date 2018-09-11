@@ -1,55 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <% include ../../partials/head.ejs%>
+  <% include ../../partials/head %>
 </head>
 
 <body>
 
-    <!-- Nav dashboard -->
-    <% include ../../partials/navbar-dashboard.ejs %>
+  <div class="wrapper">
+    <!-- TITULO DO MENU LATERAL -->
+    <nav id="sidebar" class="bg-dark">
+      <div class="sidebar-header bg-dark">
+        <h3>Sistema</h3>
+      </div>
 
-    <!-- Sidebar Menu -->
-    <% include ../../partials/sidebar-menu.ejs %>
+      <!-- OPÇÔES DO MENU LATERAL -->
+      <% include ../../partials/sidebar-menu-user %>
 
-    <!-- Show Perfil -->
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+    </nav>
 
-        <h1>Área do Aluno</h1>                    
-        <hr>
-       
+    <div id="content">
+
+      <!-- CONFIGURACOES DO MENU LATERAL, NAO PRECISA ALTERAR -->
+      <% include ../../partials/sidebar-config %>
+
+      <!-- INICIO DO CONTEUDO CENTRAL -->
+      <div class="card">
         <div class="row">
-            <div class="col-1"></div>
-            <div class="col-md-3"><label for="nome" class="col-form-label">Nome:</label></div>
-            <div class="col-md-4 mr-auto">
-                <input type="text" readonly class="form-control-plaintext" id="nome" value="<%= user.nome %>">
+          <div class="col-md"></div>
+          <div class="col-md-10">
+            <div class="card-body">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <h4>Nome</h4>
+                  <label>
+                    <%= user.nome %></label>
+                </li>
+                <li class="list-group-item">
+                  <h4>Email</h4>
+                  <label>
+                    <%= user.email %></label>
+                </li>
+                <li class="list-group-item">
+                  <label>
+                    <a href="/profile/update">
+                      <button type="submit" class="btn btn-secondary btn-sm mt-2 mb-2">Atualizar Perfil</button>
+                    </a>
+                  </label>
+                </li>
+              </ul>
             </div>
+          </div>
+          <div class="col-md"></div>
         </div>
+      </div>
+      <!-- FIM DO CONTEUDO CENTRAL -->
 
-        <div class="row">
-            <div class="col-1"></div>        
-            <div class="col-md-3"><label for="email" class="col-form-label">Email:</label></div>
-            <div class="col-md-4 mr-auto">
-                <input type="text" readonly class="form-control-plaintext" id="email" value="<%= user.email %>">
-            </div>
-        </div>
+    </div>
+  </div>
 
-        <br><br>
+  <% include ../../partials/scripts %>
 
-        <div class="row">
-            <div class="col-1"></div>    
-            <a class="col-2" href="/profile/update">
-                <button type="submit" class="btn btn-info btn-sm">Atualizar Perfil</button>
-            </a>
-        </div>
-
-
-    </main>
-
-    <!--Scripts -->
-    <% include ../../partials/scripts.ejs %>
-        
 </body>
 
 </html>

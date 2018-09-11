@@ -5,7 +5,10 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
+
 const middlewareErro = require('../app/middlewares/erro');
+const pool = require('../app/middlewares/poolConnection');
+const connMiddleware = require('../app/middlewares/connectionMiddleware');
 
 module.exports = () => {
   const app = express();
@@ -36,6 +39,8 @@ module.exports = () => {
   app.use(flash());
 
   app.set('passport', passport);
+
+  app.use(connMiddleware(pool));
 
   consign({ cwd: 'app', verbose: false })
     .include('controllers')

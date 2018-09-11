@@ -1,32 +1,51 @@
 <!DOCTYPE html>
-    <html lang="en">
+<html>
 
 <head>
-    <!--Head properties -->        
-    <% include ../../partials/head.ejs%>
+  <% include ../../partials/head %>
 </head>
 
 <body>
-    
-    <!-- Nav dashboard -->
 
-    <% include ../../partials/navbar-dashboard.ejs %>
+  <div class="wrapper">
+    <!-- TITULO DO MENU LATERAL -->
+    <nav id="sidebar" class="bg-dark">
+      <div class="sidebar-header bg-dark">
+        <h3>Sistema</h3>
+      </div>
 
-    <!-- Sidebar Menu -->
-    <% include ../../partials/sidebar-menu.ejs %>
+      <!-- OPÇÔES DO MENU LATERAL -->
+      <% include ../../partials/sidebar-menu-user %>
 
-    <!-- update Perfil -->
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+    </nav>
 
-        <h1> Atualizar informações: </h1>
-        <hr>
-        
-        <h1> Nao Implementado </h1>
+    <div id="content">
 
-    </main>
-    <!--Scripts -->
-    <% include ../../partials/scripts.ejs /%>
-    
+      <!-- CONFIGURACOES DO MENU LATERAL, NAO PRECISA ALTERAR -->
+      <% include ../../partials/sidebar-config %>
+
+      <!-- INICIO DO CONTEUDO CENTRAL -->
+      <div class="card">
+        <div class="row">
+          <div class="col-md"></div>
+          <div class="col-md-10">
+            <div class="card-body">
+              <!-- content -->
+              <h3>Atualizar Perfil</h3>
+              ...
+              <!-- end content -->
+            </div>
+          </div>
+          <div class="col-md"></div>
+        </div>
+      </div>
+      <!-- FIM DO CONTEUDO CENTRAL -->
+
+    </div>
+  </div>
+
+  <% include ../../partials/scripts %>
+
 </body>
 
 </html>

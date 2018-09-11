@@ -2,51 +2,65 @@
 <html lang="en">
 
 <head>
-    <% include ../../../partials/head.ejs %>
+  <% include ../../../partials/head %>
 </head>
 
 <body>
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
+  <div class="wrapper">
+    <!-- TITULO DO MENU LATERAL -->
+    <nav id="sidebar" class="bg-dark">
+      <div class="sidebar-header bg-dark">
+        <h3>Sistema</h3>
+      </div>
 
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+      <!-- OPÇÔES DO MENU LATERAL -->
+      <% include ../../../partials/sidebar-menu-user %>
 
+    </nav>
 
-    <!-- Content -->
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+    <div id="content">
 
-        <h1> Turmas </h1>
+      <!-- CONFIGURACOES DO MENU LATERAL, NAO PRECISA ALTERAR -->
+      <% include ../../../partials/sidebar-config %>
 
-        <hr>
-
-        <h4>Lista de turmas:</h4>
-
-        <div class="list-group">
-
-            <% for (var i = 0; i < listaSalaAluno.length; i++){%>
+      <!-- INICIO DO CONTEUDO CENTRAL -->
+      <div class="card">
+        <div class="row">
+          <div class="col-md"></div>
+          <div class="col-md-10">
+            <div class="card-body">
+              <!-- content -->
+              <h4>Lista de turmas:</h4>
+              <div class="list-group">
+                <% for (var i = 0; i < listaSalaAluno.length; i++){%>
                 <li class="list-group-item col-md-10 col-sm-12" value="<%=listaSalaAluno[i].id%>">
-                    <div class="row">
-                        <div class="col-7">
-                            <%=listaSalaAluno[i].nome%>,
-                            <%=listaSalaAluno[i].semestre%>
-                        </div>
-
-                        <div class="col-5">
-                            <a href="/turmas/abrir/<%=listaSalaAluno[i].id%>">
-                                <button type="submit" class="btn btn-secondary btn-sm">Entrar</button>
-                            </a>
-                        </div>
+                  <div class="row">
+                    <div class="col-7">
+                      <%=listaSalaAluno[i].nome%>,
+                      <%=listaSalaAluno[i].semestre%>
                     </div>
+                    <div class="col-5">
+                      <a href="/turmas/abrir/<%=listaSalaAluno[i].id%>">
+                        <button type="submit" class="btn btn-secondary btn-sm">Entrar</button>
+                      </a>
+                    </div>
+                  </div>
                 </li>
-            <% } %>
-
+                <% } %>
+              </div>
+              <!-- end content -->
+            </div>
+          </div>
+          <div class="col-md"></div>
         </div>
+      </div>
+      <!-- FIM DO CONTEUDO CENTRAL -->
 
-    </main>
+    </div>
+  </div>
 
-    <% include ../../../partials/scripts.ejs %>
+  <% include ../../../partials/scripts.ejs %>
 </body>
 
 </html>
