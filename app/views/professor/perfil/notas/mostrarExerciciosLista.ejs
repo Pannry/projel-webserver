@@ -1,48 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/professor-top %>
+<div class="card-body">
 
-<head>
-    <% include ../../../partials/head.ejs %>
-        <!-- <style> *{border: 1px solid red;} </style> -->
-</head>
+  <h3> Respostas </h3>
 
-<body>
+  <hr>
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
+  <% for( let i = 0; i < respostas.length; i++ ){ %>
 
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+  <div class="col-md-10">
+    <div class="card row">
+      <div class="card-header">
+        <h4 class="card-title">
+          <%= respostas[i].titulo%>
+        </h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          <%= respostas[i].resposta%>
+        </p>
+      </div>
+    </div>
+  </div>
 
+  <br>
 
-    <!-- Content -->
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+  <% } %>
 
-        <h1> Respostas </h1>
-
-        <hr>
-
-        <% for( let i = 0; i < respostas.length; i++ ){ %>
-
-            <div class="col-md-10">
-                <div class="card row">
-                    <div class="card-header">
-                        <h4 class="card-title"><%= respostas[i].titulo%></h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text"><%= respostas[i].resposta%></p>
-                    </div>
-                </div>
-            </div>
-
-            <br>
-
-        <% } %>
-
-    </main>
-
-    <% include ../../../partials/scripts.ejs /%>
-    
-</body>
-
-</html>
+</div>
+<% include ../../../partials/professor-bottom %>

@@ -1,78 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/professor-top %>
+<div class="card-body">
 
-<head>
-    <% include ../../../partials/head.ejs %>
-</head>
+  <h3> Criar lista de Exercicios: </h3>
+  <hr>
 
-<body>
+  <form class="" action="/professor/exercicios/lista/criar" method="post"><br>
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
-    
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <label for="titulo" class="font-weight-bold">1) Titulo da lista:</label>
+        <input type="text" name="titulo" class="form-control">
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <label for="descricao" class="font-weight-bold">2) Descreva esta lista em algumas palavras:</label>
+        <textarea class="form-control" name="descricao" rows="5"></textarea>
+      </div>
+    </div>
 
-    <!-- Content -->
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-
-        <h1> Criar lista de Exercicios: </h1>
-        <hr>
-
-        <form class="" action="/professor/exercicios/lista/criar" method="post"><br>
-            
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="titulo" class="font-weight-bold">1) Titulo da lista:</label>
-                    <input type="text" name="titulo" class="form-control">
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="descricao" class="font-weight-bold">2) Descreva esta lista em algumas palavras:</label>
-                    <textarea class="form-control" name="descricao" rows="5"></textarea>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="descricao" class="font-weight-bold">3) Tipo de lista:</label>
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <label for="descricao" class="font-weight-bold">3) Tipo de lista:</label>
 
 
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="tipoDeLista" value="lista" checked> Lista de exercícios
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="tipoDeLista" value="prova"> Prova
-                        </label>
-                    </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="tipoDeLista" value="lista" checked> Lista de exercícios
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="tipoDeLista" value="prova"> Prova
+          </label>
+        </div>
 
 
-                </div>
-            </div>
+      </div>
+    </div>
 
-            <br>
-            
-            <div class="row">
-                <div class="col-md-1 mr-1">
-                    <input class="btn btn-info" type="submit" value="Criar" >
-                </div>
-                <div class="col-md-2">
-                    <a class="btn btn-info" href="/professor/profile/exercicios/lista">Voltar</a>
-                </div>
-            </div>
+    <br>
 
-        </form>
+    <div class="row">
+      <div class="col-md-1 mr-1">
+        <input class="btn btn-info" type="submit" value="Criar">
+      </div>
+      <div class="col-md-2">
+        <a class="btn btn-info" href="/professor/profile/exercicios/lista">Voltar</a>
+      </div>
+    </div>
 
-    </main>
-
-    <% include ../../../partials/scripts.ejs /%>
-    
-</body>
-
-</html>
+  </form>
+</div>
+<% include ../../../partials/professor-bottom %>

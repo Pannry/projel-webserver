@@ -1,56 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/professor-top %>
+<div class="card-body">
 
-<head>
-    <% include ../../../partials/head.ejs %>
-</head>
+  <h3> Material didático: </h3>
+  <hr>
+  <br>
 
-<body>
+  <div class="row ml-1">
+    <p class="col-md-10 mt-1">
+      <label class="font-weight-bold">Escolha com cuidado as listas que serão inclusas na turma:</label>
+    </p>
+  </div>
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
+  <div class="list-group">
+    <form action="/professor/turma/abrir/<%=idSala%>/aluno/incluirDidatico" method="post">
+      <!-- elemento 1 -->
+      <% for (var i = 0; i < lista.length; i++ ){%>
+      <li class="list-group-item col-md-10 col-sm-12 " value="<%=lista[i].id%>">
 
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
-
-   <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-
-        <h1> Material didático: </h1>
-        <hr>
-        <br>
-        
-        <div class="row ml-1">
-            <p class="col-md-10 mt-1">
-                <label class="font-weight-bold">Escolha com cuidado as listas que serão inclusas na turma:</label>
-            </p>
+        <div class="row form-check">
+          <div class="col-5">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="<%= lista[i].id%>" name="options">
+              <%= lista[i].titulo%>
+            </label>
+          </div>
         </div>
 
-        <div class="list-group">
-            <form action="/professor/turma/abrir/<%=idSala%>/aluno/incluirDidatico" method="post">
-                <!-- elemento 1 -->
-                <% for (var i = 0; i < lista.length; i++ ){%>
-                    <li class="list-group-item col-md-10 col-sm-12 " value="<%=lista[i].id%>">
+      </li>
+      <% } %>
 
-                        <div class="row form-check">
-                            <div class="col-5">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" value="<%= lista[i].id%>" name="options">
-                                    <%= lista[i].titulo%>
-                                </label>
-                            </div>
-                        </div>
+      <br>
+      <div class="col-1"><input class="btn btn-info btn" type="submit" value="Adicionar"></div>
+    </form>
+  </div>
 
-                    </li>
-                <% } %>
-
-                <br>
-                <div class="col-1"><input class="btn btn-info btn" type="submit" value="Adicionar"></div>
-            </form>    
-        </div>
-
-    </main>
-
-    <% include ../../../partials/scripts.ejs %>
-</body>
-
-</html>
+</div>
+<% include ../../../partials/professor-bottom %>

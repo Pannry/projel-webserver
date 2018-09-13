@@ -1,65 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/professor-top %>
+<div class="card-body">
 
-<head>
-    <% include ../../../partials/head.ejs %>
-</head>
+  <h3> Exercícios: </h3>
+  <hr>
+  <br>
 
-<body>
+  <div class="row ml-1">
+    <p class="col-md-10 mt-1">
+      <label class="font-weight-bold">Escolha com cuidado as questões que serão inclusas na lista, operação disponivel
+        apenas uma vez:</label>
+    </p>
+  </div>
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
-    
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+  <div class="list-group">
+    <form action="/professor/exercicios/lista/abrir/<%=id_lista%>/editar" method="post">
+      <!-- elemento 1 -->
+      <% if (lista.length){ %>
+      <% for (var i = 0; i < lista.length; i++ ){%>
+      <li class="list-group-item col-md-10 col-sm-12 " value="<%=lista[i].id%>">
 
-
-    <!-- Content -->
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-
-        <h1> Exercícios: </h1>
-        <hr>
-        <br>
-        
-        <div class="row ml-1">
-            <p class="col-md-10 mt-1">
-                <label class="font-weight-bold">Escolha com cuidado as questões que serão inclusas na lista, operação disponivel apenas uma vez:</label>
-            </p>
+        <div class="row form-check">
+          <div class="col-5">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="<%= lista[i].id%>" name="options">
+              <%= lista[i].titulo%>
+            </label>
+          </div>
         </div>
 
-        <div class="list-group">
-            <form action="/professor/exercicios/lista/abrir/<%=id_lista%>/editar" method="post">
-                <!-- elemento 1 -->
-                <% if (lista.length){ %>
-                    <% for (var i = 0; i < lista.length; i++ ){%>
-                        <li class="list-group-item col-md-10 col-sm-12 " value="<%=lista[i].id%>">
+      </li>
+      <% } %>
+      <% } else { %>
+      <h2>Você ainda não criou nenhum exercicios</h2>
+      <% } %>
 
-                            <div class="row form-check">
-                                <div class="col-5">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="<%= lista[i].id%>" name="options">
-                                        <%= lista[i].titulo%>
-                                    </label>
-                                </div>
-                            </div>
 
-                        </li>
-                    <% } %>
-                <% } else { %>
-                    <h2>Você ainda não criou nenhum exercicios</h2>
-                <% } %>
-                
-                
 
-                <br>
-                <div class="col-1"><input class="btn btn-info btn" type="submit" value="Adicionar"></div>
-            </form>    
-        </div>
-
-    </main>
-
-    <% include ../../../partials/scripts.ejs %>
-    
-</body>
-
-</html>
+      <br>
+      <div class="col-1"><input class="btn btn-info btn" type="submit" value="Adicionar"></div>
+    </form>
+  </div>
+</div>
+<% include ../../../partials/professor-bottom %>

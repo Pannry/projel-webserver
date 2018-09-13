@@ -1,59 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../partials/professor-top %>
+<div class="card-body">
 
-<head>
-    <!--Head properties -->        
-    <% include ../../partials/head.ejs%>
-</head>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <h4>Nome</h4>
+      <label>
+        <%= user.nome %></label>
+    </li>
+    <li class="list-group-item">
+      <h4>Email</h4>
+      <label>
+        <%= user.email %></label>
+    </li>
+    <li class="list-group-item">
+      <label>
+        <a href="/professor/profile/update">
+          <button type="submit" class="btn btn-secondary btn-sm mt-2 mb-2">Atualizar Perfil</button>
+        </a>
+      </label>
+    </li>
+  </ul>
 
-<body>
-
-    <!-- Nav dashboard -->
-    <% include ../../partials/navbar-dashboard.ejs %>
-
-    <!-- Sidebar Menu -->
-    <% include ../../partials/sidebar-menu.ejs %>
-
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-
-        <h1>Área do Professor</h1>                    
-
-        <hr>
-
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-md-3">
-                <label for="nome" class="col-form-label">Nome:</label>
-            </div>
-            <div class="col-md-4 mr-auto">
-                <input type="text" readonly class="form-control-plaintext" id="nome" value="<%= user.nome %>">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-1"></div>        
-            <div class="col-md-3">
-                <label for="email" class="col-form-label">Email:</label>
-            </div>
-            <div class="col-md-4 mr-auto">
-                <input type="text" readonly class="form-control-plaintext" id="email" value="<%= user.email %>">
-            </div>
-        </div>
-        
-        <br><br>
-
-        <div class="row">
-            <div class="col-1"></div>
-            <a class="col-2" href="/professor/profile/update">
-                <button type="submit" class="btn btn-info">Atualizar Perfil</button>
-            </a>
-        </div>
-
-    </main>
-
-    <!--Scripts -->
-    <% include ../../partials/scripts.ejs /%>
-    
-</body>
-
-</html>
+</div>
+<% include ../../partials/professor-bottom %>

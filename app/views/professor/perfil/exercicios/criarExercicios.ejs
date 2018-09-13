@@ -1,68 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/professor-top %>
+<div class="card-body">
 
-<head>
-    <% include ../../../partials/head.ejs %>
-</head>
+  <h3> Criar Exercicios: </h3>
+  <hr>
 
-<body>
+  <form class="" action="/professor/exercicios/criar" method="post" enctype="multipart/form-data">
+    <br>
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
-    
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <label for="titulo" class="font-weight-bold">Titulo do execicio:</label>
+        <input type="text" name="titulo" class="form-control">
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <label for="descricao" class="font-weight-bold">Descrição do execicio:</label>
+        <textarea class="form-control" name="descricao" rows="5"></textarea>
+      </div>
+    </div>
 
-    <!-- Content -->
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+    <br>
 
-        <h1> Criar Exercicios: </h1>
-        <hr>
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <label for="fileUpload" class="font-weight-bold">Upload do material (Até 5 arquivos):</label>
+        <input type="file" class="form-control-file" name="fileUpload" multiple="multiple">
+      </div>
+    </div>
 
-        <form class="" action="/professor/exercicios/criar" method="post" enctype="multipart/form-data">
-            <br>
-            
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="titulo" class="font-weight-bold">Titulo do execicio:</label>
-                    <input type="text" name="titulo" class="form-control">
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="descricao" class="font-weight-bold">Descrição do execicio:</label>
-                    <textarea class="form-control" name="descricao" rows="5"></textarea>
-                </div>
-            </div>
+    <br>
 
-            <br>
-            
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="fileUpload" class="font-weight-bold">Upload do material (Até 5 arquivos):</label>                
-                    <input type="file" class="form-control-file" name="fileUpload" multiple="multiple">
-                </div>
-            </div>
+    <div class="row">
+      <div class="col-md-1 mr-1">
+        <input class="btn btn-info" type="submit" value="Criar">
+      </div>
+      <div class="col-md-2">
+        <a class="btn btn-info" href="/professor/profile/exercicios">Voltar</a>
+      </div>
+    </div>
 
-            <br>
-            
-            <div class="row">
-                <div class="col-md-1 mr-1">
-                    <input class="btn btn-info" type="submit" value="Criar" >
-                </div>
-                <div class="col-md-2">
-                    <a class="btn btn-info" href="/professor/profile/exercicios">Voltar</a>
-                </div>
-            </div>
+  </form>
 
-        </form>
-
-    </main>
-
-    <% include ../../../partials/scripts.ejs /%>
-    
-</body>
-
-</html>
+</div>
+<% include ../../../partials/professor-bottom %>

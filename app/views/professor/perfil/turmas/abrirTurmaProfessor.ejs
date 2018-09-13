@@ -1,111 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/professor-top %>
+<div class="card-body">
 
-<head>
-    <% include ../../../partials/head.ejs %>
-    <style>
-        .green{
-            color: green;
-            font-size: 20px;
-        }        
-        .red{
-            color: red;
-            font-size: 20px;
-        }
-    </style>
-</head>
+  <h3> Turma:
+    <%= infoProfessor[0].nome%>,
+    <%= infoProfessor[0].semestre%>
+  </h3>
+  <hr>
 
-<body>
+  <div class="card">
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="/professor/turma/abrir/<%=idSala%>/professor">Alunos Matriculados</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/professor/turma/abrir/<%=idSala%>/aluno">Área de Interação</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" disabled href="/professor/turma/abrir/<%=idSala%>/aluno">Configurações</a>
+        </li>
+      </ul>
+    </div>
 
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+    <div class="card-body">
+      <h4 class="card-title">Alunos desta turma</h4>
 
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-        <h1> Turma: <%= infoProfessor[0].nome%>, <%= infoProfessor[0].semestre%> </h1>
-        <hr>
-
-        <div class="card">
-
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/professor/turma/abrir/<%=idSala%>/professor">Alunos Matriculados</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/professor/turma/abrir/<%=idSala%>/aluno">Área de Interação</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" disabled href="/professor/turma/abrir/<%=idSala%>/aluno">Configurações</a>
-                    </li>
-                </ul>
+      <div class="card">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-3">
+                <h6>Nomes</h6>
+              </div>
+              <div class="col-3">
+                <h6>Aluno pertence a turma?</h6>
+              </div>
+              <div class="col-3">
+                <h6>Avaliar exercícios:</h6>
+              </div>
             </div>
+          </li>
+        </ul>
+      </div>
 
-            <div class="card-body">
-                <h4 class="card-title">Alunos desta turma</h4>
-                
-                <div class="card">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-3"><h6>Nomes</h6></div>
-                                <div class="col-3"><h6>Aluno pertence a turma?</h6></div>
-                                <div class="col-3"><h6>Avaliar exercícios:</h6></div>
-                            </div>
-                        </li>
-                    </ul>
+      <div class="card">
+        <ul class="list-group list-group-flush">
+          <% for (var i = 0; i < listaDeAlunos.length; i++) { %>
+          <li class="list-group-item">
+            <div class="row">
+
+              <div class="col-3">
+                <%= listaDeAlunos[i].nome%>
+              </div>
+
+              <div class="col-3">
+                <div class="row">
+                  <div class="col-2">
+                    <% if(listaDeAlunos[i].aluno_aceito === 0) { %>
+                    <i class="fa fa-times red" aria-hidden="true"></i>
+                    <% } else if(listaDeAlunos[i].aluno_aceito === 1){ %>
+                    <i class="fa fa-check green" aria-hidden="true"></i>
+                    <% } %>
+                  </div>
+                  <div class="col-10">
+                    <% if(listaDeAlunos[i].aluno_aceito === 0) { %>
+                    <form class="" action="/professor/turma/abrir/<%=idSala%>/professor" method="post">
+                      <input class="btn btn-secondary btn-sm" type="submit" value="Incluir aluno" name="<%= listaDeAlunos[i].id_aluno%>"></input>
+                    </form>
+                    <% } else if(listaDeAlunos[i].aluno_aceito === 1){ %>
+                    <input class="btn btn-secondary btn-sm" type="submit" value="Aluno incluso" disabled></input>
+                    <% } %>
+                  </div>
                 </div>
+              </div>
 
-                <div class="card">
-                    <ul class="list-group list-group-flush">
-                        <% for (var i = 0; i < listaDeAlunos.length; i++) { %>
-                            <li class="list-group-item">
-                                <div class="row">
-                                    
-                                    <div class="col-3"><%= listaDeAlunos[i].nome%></div>
-                                    
-                                    <div class="col-3">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <% if(listaDeAlunos[i].aluno_aceito === 0) { %>
-                                                    <i class="fa fa-times red" aria-hidden="true"></i>
-                                                <% } else if(listaDeAlunos[i].aluno_aceito === 1){ %>
-                                                    <i class="fa fa-check green" aria-hidden="true"></i>
-                                                <% } %>
-                                            </div>                                
-                                            <div class="col-10">
-                                                <% if(listaDeAlunos[i].aluno_aceito === 0) { %>
-                                                    <form class="" action="/professor/turma/abrir/<%=idSala%>/professor" method="post">
-                                                        <input class="btn btn-secondary btn-sm" type="submit" value="Incluir aluno" 
-                                                            name="<%= listaDeAlunos[i].id_aluno%>"></input>
-                                                    </form>
-                                                <% } else if(listaDeAlunos[i].aluno_aceito === 1){ %>
-                                                    <input class="btn btn-secondary btn-sm" type="submit" value="Aluno incluso" disabled></input>
-                                                <% } %>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-3"> 
-                                        <a href="/professor/turma/abrir/<%=idSala%>/professor/<%=listaDeAlunos[i].id_aluno%>">
-                                            <input class="btn btn-secondary btn-sm" type="submit" value="Ver exercícios"></input>
-                                        </a>
-                                    </div>
+              <div class="col-3">
+                <a href="/professor/turma/abrir/<%=idSala%>/professor/<%=listaDeAlunos[i].id_aluno%>">
+                  <input class="btn btn-secondary btn-sm" type="submit" value="Ver exercícios"></input>
+                </a>
+              </div>
 
-                                </div>
-                            </li>
-                        <% } %>
-                    </ul>
-                </div>
             </div>
-            
-        </div>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
 
-    </main>
-
-    <% include ../../../partials/scripts.ejs /%>
-</body>
-
-</html>
+  </div>
+</div>
+<% include ../../../partials/professor-bottom %>

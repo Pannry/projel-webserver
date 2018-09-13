@@ -1,53 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/professor-top %>
+<div class="card-body">
 
-<head>
-    <% include ../../../partials/head.ejs %>
-        <!-- <style> *{border: 1px solid red;} </style> -->
-</head>
+  <h3> Atribuir notas </h3>
 
-<body>
+  <hr>
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
+  <h4>Listas: (!)</h4>
 
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+  <% for(let i = 0; i < lista.length; i++) { %>
+  <div class="row col-md-11 col-sm-12">
 
-
-    <!-- Content -->
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-
-        <h1> Atribuir notas </h1>
-
-        <hr>
-            
-        <h4>Listas: (!)</h4>
-        
-        <% for(let i = 0; i < lista.length; i++) { %>
-            <div class="row col-md-11 col-sm-12">
-
-                <form class="col-md-12 row" action="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>" method="post">
-                    <a href="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>" class="list-group-item col-md-5"><h6><%=lista[i].titulo%></h6></a>
-                    <input type="text" class="form-control col-md-2" placeholder="Nota" name="nota">
-                    <input class="col-md-2 btn btn-default" value="Salvar" type="submit"></input>
-                    <label class="col-md-2 list-group-item">
-                        <% if(notas[i].nota === null) { %>
-                            <h6>Nota: ?</h6>
-                        <% } else { %>
-                            <h6>Nota: <%=notas[i].nota%></h6>
-                        <% } %>
-                    </label>
-                </form>
-
-            </div>
-            <br>
+    <form class="col-md-12 row" action="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>"
+      method="post">
+      <a href="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>" class="list-group-item col-md-5">
+        <h6>
+          <%=lista[i].titulo%>
+        </h6>
+      </a>
+      <input type="text" class="form-control col-md-2" placeholder="Nota" name="nota">
+      <input class="col-md-2 btn btn-default" value="Salvar" type="submit"></input>
+      <label class="col-md-2 list-group-item">
+        <% if(notas[i].nota === null) { %>
+        <h6>Nota: ?</h6>
+        <% } else { %>
+        <h6>Nota:
+          <%=notas[i].nota%>
+        </h6>
         <% } %>
+      </label>
+    </form>
 
-    </main>
+  </div>
+  <br>
+  <% } %>
 
-    <% include ../../../partials/scripts.ejs %>
-    
-</body>
-
-</html>
+</div>
+<% include ../../../partials/professor-bottom %>

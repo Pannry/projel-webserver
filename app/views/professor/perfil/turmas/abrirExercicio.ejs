@@ -1,37 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/professor-top %>
+<div class="card-body">
+  <h3> Exercicio: </h3>
+  <hr>
 
-<head>
-    <% include ../../../partials/head.ejs %>
-</head>
+  <div class="card">
 
-<body>
+    <div class="card-header">
+      <h5>
+        <p>
+          <%= questao[0].titulo%>
+        </p>
+      </h5>
+    </div>
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
+    <div class="card-body">
+      <h5>
+        <p>
+          <%= questao[0].descricao%>
+        </p>
+      </h5>
+    </div>
 
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+  </div>
 
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-        <h1> Exercicio: </h1>
-        <hr>
-        
-            <div class="card">
-                
-                <div class="card-header">
-                    <h5><p><%= questao[0].titulo%></p></h5>
-                </div>
-
-                <div class="card-body">
-                    <h5><p><%= questao[0].descricao%></p></h5>
-                </div>
-
-            </div>
-
-    </main>
-
-    <% include ../../../partials/scripts.ejs %>
-</body>
-
-</html>
+</div>
+<% include ../../../partials/professor-bottom %>

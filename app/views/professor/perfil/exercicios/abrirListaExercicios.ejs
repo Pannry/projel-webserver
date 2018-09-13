@@ -1,53 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/professor-top %>
+<div class="card-body">
 
-<head>
-    <!--Head properties -->        
-    <% include ../../../partials/head.ejs%>
-</head>
+  <h3> Detalhes da lista </h3>
+  <hr>
 
-<body>
-
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
-
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
-
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-
-        <h1> Detalhes da lista </h1>
-        <hr>
-        
-        <div class="card mr-md-5">
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/professor/exercicios/lista/abrir/<%= id%>/info">Informações da lista</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/professor/exercicios/lista/abrir/<%= id%>/questoes">Questões desta lista</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-body">
-                <h4><p>Exercicios: </p></h4>
-                <% for(var i = 0; i < exercicios.length; i++ ) { %>
-                    <a href="/professor/exercicios/abrir/<%= exercicios[i].id_exercicios%>" class="list-group-item list-group-item-action">
-                        <h5><p> <%= exercicios[i].titulo%> </p></h5>
-                    </a>
-                <% } %>    
-            </div>
-        </div>
+  <div class="card mr-md-5">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="/professor/exercicios/lista/abrir/<%= id%>/info">Informações da lista</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/professor/exercicios/lista/abrir/<%= id%>/questoes">Questões desta lista</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <h4>
+        <p>Exercicios: </p>
+      </h4>
+      <% for(var i = 0; i < exercicios.length; i++ ) { %>
+      <a href="/professor/exercicios/abrir/<%= exercicios[i].id_exercicios%>" class="list-group-item list-group-item-action">
+        <h5>
+          <p>
+            <%= exercicios[i].titulo%>
+          </p>
+        </h5>
+      </a>
+      <% } %>
+    </div>
+  </div>
 
 
-        <br><br>
-
-    </main>
-
-    <!--Scripts -->
-    <% include ../../../partials/scripts.ejs /%>
-    
-</body>
-
-</html>
+  <br><br>
+</div>
+<% include ../../../partials/professor-bottom %>

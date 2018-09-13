@@ -1,68 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/professor-top %>
+<div class="card-body">
 
-<head>
-    <% include ../../../partials/head.ejs %>
-</head>
+  <h3> Criar material didático: </h3>
+  <hr>
 
-<body>
+  <form action="/professor/profile/didatico/criar" method="post" enctype="multipart/form-data">
+    <br>
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <label for="titulo" class="font-weight-bold">Titulo:</label>
+        <input type="text" name="titulo" class="form-control">
+      </div>
+    </div>
 
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <label for="descricao" class="font-weight-bold">Descrição da explicação:</label>
+        <textarea class="form-control" name="descricao" rows="5"></textarea>
+      </div>
+    </div>
 
+    <br>
 
-    <!-- Content -->
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <label for="fileUpload" class="font-weight-bold">Upload do material (Até 5 arquivos):</label>
+        <input type="file" class="form-control-file" name="fileUpload" multiple="multiple">
+      </div>
+    </div>
 
-        <h1> Criar material didático: </h1>
-        <hr>
+    <br>
 
-        <form action="/professor/profile/didatico/criar" method="post" enctype="multipart/form-data" >
-            <br>
+    <div class="row">
+      <div class="col-md-1 mr-1">
+        <input class="btn btn-info" type="submit" value="Criar">
+      </div>
+      <div class="col-md-2">
+        <a class="btn btn-info" href="/professor/profile/didatico">Voltar</a>
+      </div>
+    </div>
 
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="titulo" class="font-weight-bold">Titulo:</label>
-                    <input type="text" name="titulo" class="form-control">
-                </div>
-            </div>
+  </form>
 
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="descricao" class="font-weight-bold">Descrição da explicação:</label>
-                    <textarea class="form-control" name="descricao" rows="5"></textarea>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="fileUpload" class="font-weight-bold">Upload do material (Até 5 arquivos):</label>
-                    <input type="file" class="form-control-file" name="fileUpload" multiple="multiple">
-                </div>
-            </div>
-
-            <br>
-
-            <div class="row">
-                <div class="col-md-1 mr-1">
-                    <input class="btn btn-info" type="submit" value="Criar">
-                </div>
-                <div class="col-md-2">
-                    <a class="btn btn-info" href="/professor/profile/didatico">Voltar</a>
-                </div>
-            </div>
-
-        </form>
-
-    </main>
-
-    <% include ../../../partials/scripts.ejs %>
-
-</body>
-
-</html>
+</div>
+<% include ../../../partials/professor-bottom %>

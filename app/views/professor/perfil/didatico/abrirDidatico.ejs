@@ -1,56 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/professor-top %>
+<div class="card-body">
 
-<head>
-    <% include ../../../partials/head.ejs %>
-</head>
+  <h3> Conteúdo: </h3>
+  <hr>
 
-<body>
+  <div class="card">
 
-    <!-- Nav dashboard -->
-    <% include ../../../partials/navbar-dashboard.ejs %>
+    <div class="card-header">
+      <h5>
+        <p>
+          <%= conteudo[0].titulo%>
+        </p>
+      </h5>
+    </div>
 
-    <!-- Sidebar Menu -->
-    <% include ../../../partials/sidebar-menu.ejs %>
+    <div class="card-body">
+      <h5>
+        <p>
+          <%= conteudo[0].descricao%>
+        </p>
+      </h5>
+    </div>
 
-    <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-        <h1> Conteúdo: </h1>
-        <hr>
-        
-            <div class="card">
-                
-                <div class="card-header">
-                    <h5><p><%= conteudo[0].titulo%></p></h5>
-                </div>
+  </div>
+  <br>
+  <div class="card">
 
-                <div class="card-body">
-                    <h5><p><%= conteudo[0].descricao%></p></h5>
-                </div>
+    <div class="card-header">
+      <h5>
+        <p>Material para download</p>
+      </h5>
+    </div>
 
-            </div>
-            <br>
-            <div class="card">
-                
-                <div class="card-header">
-                    <h5><p>Material para download</p></h5>
-                </div>
+    <div class="card-body">
+      <% for (let i = 0; i < paths.length; i++ ) { %>
+      <a href="/professor/didatico/abrir/<%= conteudo[0].id%>/download/<%= paths[i].file_name%>" class="list-group-item list-group-item-action">
+        <div class="row">
+          <div class="col-md-1"><i class="fa fa-download" aria-hidden="true"></i></div>
+          <div class="col-md-10">
+            <p>
+              <%= paths[i].file_name %>
+            </p>
+          </div>
+        </div>
+      </a>
+      <% } %>
+    </div>
 
-                <div class="card-body">
-                    <% for (let i = 0; i < paths.length; i++ ) { %>
-                        <a href="/professor/didatico/abrir/<%= conteudo[0].id%>/download/<%= paths[i].file_name%>" class="list-group-item list-group-item-action">
-                            <div class="row">
-                                <div class="col-md-1"><i class="fa fa-download" aria-hidden="true"></i></div>
-                                <div class="col-md-10"><p><%= paths[i].file_name %></p></div>
-                            </div>
-                        </a>
-                    <% } %>
-                </div>
+  </div>
 
-            </div>
-
-    </main>
-
-    <% include ../../../partials/scripts.ejs %>
-</body>
-
-</html>
+</div>
+<% include ../../../partials/professor-bottom %>
