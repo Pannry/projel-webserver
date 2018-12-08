@@ -1,5 +1,3 @@
-const ExerciciosDao = require('../../../middlewares/lista-Exercicios-Dao');
-
 module.exports = () => {
   const Exercicios = {
     get: (req, res, next) => {
@@ -12,11 +10,14 @@ module.exports = () => {
           accountType: req.user.tipo,
         };
 
-        new ExerciciosDao(req.connection)
-          .retornarExercicios(entrada)
-          .then((exercises) => { ejs.listaExercicios = exercises; })
-          .then(() => { res.render('professor/perfil/exercicios/exercicios', ejs); })
-          .catch(next);
+        const conexaoDb = app.infra.banco.dbConnection();
+        const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
+         ExerciciosDao.listarExercicios(entrada, (err, resultado) => {
+          if (err) throw err;
+          ejs.listaExercicios = resultado;
+           if (!err) { res.render('professor/perfil/exercicios/exercicios', ejs); } else { next(); }
+        });
+        conexaoDb.end();
       }
     },
   };
