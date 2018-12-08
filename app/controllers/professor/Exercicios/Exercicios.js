@@ -1,4 +1,4 @@
-module.exports = () => {
+module.exports = (app) => {
   const Exercicios = {
     get: (req, res, next) => {
       if (req.user.tipo === 'professor') {
