@@ -1,33 +1,29 @@
 <% include ../../../partials/professor-top %>
 <div class="card-body">
-  <h3> Exercicio: </h3>
+  <h3> Exercício: </h3>
   <hr>
 
   <div class="card">
 
     <div class="card-header">
       <h5>
-        <p>
-          <%= questao[0].titulo%>
-        </p>
+        <%= questao[0].titulo%>
       </h5>
     </div>
 
     <div class="card-body">
-      <h5>
-        <p>
-          <%= questao[0].descricao%>
-        </p>
-      </h5>
+      <%= questao[0].descricao%>
     </div>
 
   </div>
   <br>
-  <div class="card">
 
+  <% if(paths.length != 0){ %>
+  
+    <div class="card">
     <div class="card-header">
       <h5>
-        <p>Material para download</p>
+        Material para download
       </h5>
     </div>
 
@@ -37,9 +33,7 @@
         <div class="row">
           <div class="col-md-1"><i class="fa fa-download" aria-hidden="true"></i></div>
           <div class="col-md-10">
-            <p>
-              <%= paths[i].file_name %>
-            </p>
+            <%= paths[i].file_name %>
           </div>
         </div>
       </a>
@@ -47,6 +41,7 @@
     </div>
 
   </div>
+  <% } %>
 
 </div>
 <% include ../../../partials/professor-bottom %>

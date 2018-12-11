@@ -10,8 +10,14 @@
     04/2018: Excluir em exercicios e lista concluido
     04/2018: Excluir turmas concluido
 
-    */* Lado do professor */*
+    
 
+    dia 11/12/2018
+    * professor adicionar uma lista de questoes para uma turma, e essa lista 
+      ja está adicionada, da erro de chave no sql
+    * Download de material didatico ainda n está implementado
+
+    */* Lado do professor */*
     /*
     Plano atual:
         - atualizar perfil

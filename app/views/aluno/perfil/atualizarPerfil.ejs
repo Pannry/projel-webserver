@@ -1,51 +1,8 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <% include ../../partials/head %>
-</head>
-
-<body>
-
-  <div class="wrapper">
-    <!-- TITULO DO MENU LATERAL -->
-    <nav id="sidebar" class="bg-dark">
-      <div class="sidebar-header bg-dark">
-        <h3>Sistema</h3>
-      </div>
-
-      <!-- OPÇÔES DO MENU LATERAL -->
-      <% include ../../partials/sidebar-menu-user %>
-
-    </nav>
-
-    <div id="content">
-
-      <!-- CONFIGURACOES DO MENU LATERAL, NAO PRECISA ALTERAR -->
-      <% include ../../partials/sidebar-config %>
-
-      <!-- INICIO DO CONTEUDO CENTRAL -->
-      <div class="card">
-        <div class="row">
-          <div class="col-md"></div>
-          <div class="col-md-10">
-            <div class="card-body">
-              <!-- content -->
-              <h3>Atualizar Perfil</h3>
-              ...
-              <!-- end content -->
-            </div>
-          </div>
-          <div class="col-md"></div>
-        </div>
-      </div>
-      <!-- FIM DO CONTEUDO CENTRAL -->
-
-    </div>
-  </div>
-
-  <% include ../../partials/scripts %>
-
-</body>
-
-</html>
+<% include ../../partials/aluno-top %>
+<div class="card-body">
+  <!-- content -->
+  <h3>Atualizar Perfil</h3>
+  ...
+  <!-- end content -->
+</div>
+<% include ../../partials/aluno-bottom %>

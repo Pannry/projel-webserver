@@ -1,85 +1,43 @@
-<!DOCTYPE html>
-<html>
+<% include ../../../partials/aluno-top %>
+<div class="card-body">
 
-<head>
-  <% include ../../../partials/head %>
-</head>
+  <h3> Turmas </h3>
+  <hr>
 
-<body>
+  <div class="form-group">
+    <label for="selecionarProfessor">Selecione o Professor</label>
+    <select class="form-control" id="selecionarProfessor" onchange="myFunc()">
+      <option value="0"> Escolha... </option>
+      <% for (var i = 0; i < listaSalaProfessor.length; i++){%>
+      <option value="<%= listaSalaProfessor[i].id %>"> Professor:
+        <%= listaSalaProfessor[i].nome %>
+      </option>
+      <% } %>
+    </select>
+    <br>
 
-  <div class="wrapper">
-    <!-- TITULO DO MENU LATERAL -->
-    <nav id="sidebar" class="bg-dark">
-      <div class="sidebar-header bg-dark">
-        <h3>Sistema</h3>
-      </div>
+    <a class="collapse" id="myAnchor">Abrir lista de Turmas</a>
 
-      <!-- OPÇÔES DO MENU LATERAL -->
-      <% include ../../../partials/sidebar-menu-user %>
+    <script>
+      function myFunc() {
 
-    </nav>
+        var dropDown = document.getElementById("selecionarProfessor");
+        if (dropDown.value !== '0') {
 
-    <div id="content">
+          var anchor = document.getElementById("myAnchor");
 
-      <!-- CONFIGURACOES DO MENU LATERAL, NAO PRECISA ALTERAR -->
-      <% include ../../../partials/sidebar-config %>
+          var link = document.createAttribute("href");
+          link.value = "/turmas/professor/" + dropDown.value;
 
-      <!-- INICIO DO CONTEUDO CENTRAL -->
-      <div class="card">
-        <div class="row">
-          <div class="col-md"></div>
-          <div class="col-md-10">
-            <div class="card-body">
+          var anchorClass = document.createAttribute("class");
+          anchorClass.value = "btn btn-secondary btn-sm";
 
-              <h1> Turmas </h1>
-
-              <div class="form-group">
-                <label for="selecionarProfessor">Selecione o Professor</label>
-                <select class="form-control" id="selecionarProfessor" onchange="myFunc()">
-                  <option value="0"> Escolha... </option>
-                  <% for (var i = 0; i < listaSalaProfessor.length; i++){%>
-                  <option value="<%= listaSalaProfessor[i].id %>"> Professor:
-                    <%= listaSalaProfessor[i].nome %>
-                  </option>
-                  <% } %>
-                </select>
-                <br>
-
-                <a class="collapse" id="myAnchor">Abrir lista de Turmas</a>
-
-                <script>
-                  function myFunc() {
-
-                    var dropDown = document.getElementById("selecionarProfessor");
-                    if (dropDown.value !== '0') {
-
-                      var anchor = document.getElementById("myAnchor");
-
-                      var link = document.createAttribute("href");
-                      link.value = "/turmas/professor/" + dropDown.value;
-
-                      var anchorClass = document.createAttribute("class");
-                      anchorClass.value = "btn btn-secondary btn-sm";
-
-                      anchor.setAttributeNode(anchorClass);
-                      anchor.setAttributeNode(link);
-                    }
-                  }
-                </script>
-              </div>
-
-            </div>
-          </div>
-          <div class="col-md"></div>
-        </div>
-      </div>
-      <!-- FIM DO CONTEUDO CENTRAL -->
-
-    </div>
+          anchor.setAttributeNode(anchorClass);
+          anchor.setAttributeNode(link);
+        }
+      }
+    </script>
   </div>
 
-  <% include ../../../partials/scripts %>
-
-</body>
-
-</html>
+</div>
+<% include ../../../partials/aluno-bottom %>

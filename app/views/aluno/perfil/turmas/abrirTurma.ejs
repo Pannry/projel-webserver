@@ -1,104 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/aluno-top %>
+<div class="card-body">
+  <!-- content -->
+  <h3>
+    <%= sala[0].nome+', '+sala[0].semestre %>
+  </h3>
+  <hr>
 
-<head>
-  <% include ../../../partials/head %>
-</head>
+  <div class="card">
+    <div class="card-body">
 
-<body>
+      <% if(aluno_aceito === 0){ %>
+      <h5>Esperando autorização professor</h5>
+      <% } else if (aluno_aceito === 1){ %>
+      <h4>Observações do professor:</h4>
+      <textarea class="form-control col-md-10" id="campoComentario" rows="4" readonly><%= sala[0].comentario %></textarea>
+      <br>
 
-  <div class="wrapper">
-    <!-- TITULO DO MENU LATERAL -->
-    <nav id="sidebar" class="bg-dark">
-      <div class="sidebar-header bg-dark">
-        <h3>Sistema</h3>
-      </div>
+      <h4>Listas de exercícios:</h4>
 
-      <!-- OPÇÔES DO MENU LATERAL -->
-      <% include ../../../partials/sidebar-menu-user %>
+      <ul class="list-group list-group-flush">
+        <% if ( lista.length === 0 ) { %>
+        <h5>Nenhuma lista disponivel.</h5>
+        <% } else { %>
+        <% for (var i = 0; i < lista.length; i++) { %>
+        <a href="/turmas/abrir/listas/<%= sala[0].id%>/<%= lista[i].id_lista%>/" class="list-group-item list-group-item-action">
+          <h5>
+            <%= lista[i].titulo %>
+          </h5>
+        </a>
+        <% } %>
+        <% } %>
+      </ul>
 
-    </nav>
+      <br>
 
-    <div id="content">
+      <h4>Materiais didáticos:</h4>
 
-      <!-- CONFIGURACOES DO MENU LATERAL, NAO PRECISA ALTERAR -->
-      <% include ../../../partials/sidebar-config %>
+      <ul class="list-group list-group-flush">
+        <% if ( didatico.length === 0 ) { %>
+        <h5>Nenhuma material disponível.</h5>
+        <% } else { %>
+        <% for (var i = 0; i < didatico.length; i++) { %>
+        <a href="/turmas/didaticos/abrir/<%= sala[0].id%>/<%= didatico[i].id_didatico%>/" class="list-group-item list-group-item-action">
+          <h5>
+            <%= didatico[i].titulo %>
+          </h5>
+        </a>
+        <% } %>
+        <% } %>
+      </ul>
 
-      <!-- INICIO DO CONTEUDO CENTRAL -->
-      <div class="card">
-        <div class="row">
-          <div class="col-md"></div>
-          <div class="col-md-10">
-            <div class="card-body">
-              <!-- content -->
-              <h1>
-                <%= sala[0].nome+', '+sala[0].semestre %>
-              </h1>
-              <hr>
-
-              <div class="card">
-                <div class="card-body">
-
-                  <% if(aluno_aceito === 0){ %>
-                  <h5>Esperando autorização professor</h5>
-                  <% } else if (aluno_aceito === 1){ %>
-                  <h4>Observações do professor:</h4>
-                  <textarea class="form-control col-md-10" id="campoComentario" rows="4" readonly><%= sala[0].comentario %></textarea>
-                  <br>
-
-                  <h4>Listas de exercícios:</h4>
-
-                  <ul class="list-group list-group-flush">
-                    <% if ( lista.length === 0 ) { %>
-                    <h5>Nenhuma lista disponivel.</h5>
-                    <% } else { %>
-                    <% for (var i = 0; i < lista.length; i++) { %>
-                    <a href="/turmas/abrir/listas/<%= sala[0].id%>/<%= lista[i].id_lista%>/" class="list-group-item list-group-item-action">
-                      <h5>
-                        <p>
-                          <%= lista[i].titulo %>
-                        </p>
-                      </h5>
-                    </a>
-                    <% } %>
-                    <% } %>
-                  </ul>
-
-                  <br>
-
-                  <h4>Materiais didáticos:</h4>
-
-                  <ul class="list-group list-group-flush">
-                    <% if ( didatico.length === 0 ) { %>
-                    <h5>Nenhuma material disponível.</h5>
-                    <% } else { %>
-                    <% for (var i = 0; i < didatico.length; i++) { %>
-                    <a href="/turmas/didaticos/abrir/<%= sala[0].id%>/<%= didatico[i].id_didatico%>/" class="list-group-item list-group-item-action">
-                      <h5>
-                        <p>
-                          <%= didatico[i].titulo %>
-                        </p>
-                      </h5>
-                    </a>
-                    <% } %>
-                    <% } %>
-                  </ul>
-
-                  <% } %>
-                </div>
-              </div>
-              <!-- end content -->
-            </div>
-          </div>
-          <div class="col-md"></div>
-        </div>
-      </div>
-      <!-- FIM DO CONTEUDO CENTRAL -->
-
+      <% } %>
     </div>
   </div>
-
-  <% include ../../../partials/scripts.ejs %>
-</body>
-
-</html>
+  <!-- end content -->
+</div>
+<% include ../../../partials/aluno-bottom %>

@@ -16,15 +16,14 @@
       </ul>
     </div>
     <div class="card-body">
-      <h4>
-        <p>Exercicios: </p>
-      </h4>
+      <h5>
+        Exercicios:
+      </h5>
+      <hr>
       <% for(var i = 0; i < exercicios.length; i++ ) { %>
       <a href="/professor/exercicios/abrir/<%= exercicios[i].id_exercicios%>" class="list-group-item list-group-item-action">
         <h5>
-          <p>
             <%= exercicios[i].titulo%>
-          </p>
         </h5>
       </a>
       <% } %>

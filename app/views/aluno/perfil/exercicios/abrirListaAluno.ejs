@@ -1,91 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/aluno-top %>
+<div class="card-body">
+  <!-- Content -->
 
-<head>
-  <% include ../../../partials/head %>
-  <style>
-    .green {
-      color: green;
-      font-size: 20px;
-    }
+  <h3> Questões: </h3>
+  <hr>
 
-    .red {
-      color: red;
-      font-size: 20px;
-    }
-  </style>
-</head>
+  <div class="row">
+    <div class="col-md-10">
+      <h6>
+        <%=listaInfo[0].titulo%>
+      </h6>
+      <br>
+      <h6>
+        <%=listaInfo[0].descricao%>
+      </h6>
+      <br>
 
-<body>
+      <div class="list-group">
+        <% for(var i = 0; i < exercicios.length; i++) { %>
 
-  <div class="wrapper">
-    <!-- TITULO DO MENU LATERAL -->
-    <nav id="sidebar" class="bg-dark">
-      <div class="sidebar-header bg-dark">
-        <h3>Sistema</h3>
-      </div>
-
-      <!-- OPÇÔES DO MENU LATERAL -->
-      <% include ../../../partials/sidebar-menu-user %>
-
-    </nav>
-
-    <div id="content">
-
-      <!-- CONFIGURACOES DO MENU LATERAL, NAO PRECISA ALTERAR -->
-      <% include ../../../partials/sidebar-config %>
-
-      <!-- INICIO DO CONTEUDO CENTRAL -->
-      <div class="card">
-        <div class="row">
-          <div class="col-md"></div>
-          <div class="col-md-10">
-            <div class="card-body">
-              <!-- Content -->
-
-              <h3> Questões: </h3>
-              <hr>
-
-              <div class="row">
-                <div class="col-md-10">
-                  <h6>
-                    <%=listaInfo[0].titulo%>
-                  </h6>
-                  <br>
-                  <h6>
-                    <%=listaInfo[0].descricao%>
-                  </h6>
-                  <br>
-
-                  <div class="list-group">
-                    <% for(var i = 0; i < exercicios.length; i++) { %>
-
-                    <a href="/turmas/abrir/<%= sala[0]%>/<%= lista[0]%>/<%= exercicios[i].id_exercicios %>" class="list-group-item list-group-item-action">
-                      <div class="row">
-                        <h6 class="col-md-6">
-                          <%= exercicios[i].titulo%>
-                        </h6>
-                      </div>
-                    </a>
-
-                    <% } %>
-                  </div>
-
-                </div>
-              </div>
-
-
-              <!-- end content -->
-            </div>
-            <div class="col-md"></div>
+        <a href="/turmas/abrir/<%= sala[0]%>/<%= lista[0]%>/<%= exercicios[i].id_exercicios %>" class="list-group-item list-group-item-action">
+          <div class="row">
+            <h6 class="col-md-6">
+              <%= exercicios[i].titulo%>
+            </h6>
           </div>
-        </div>
-        <!-- FIM DO CONTEUDO CENTRAL -->
+        </a>
 
+        <% } %>
       </div>
+
     </div>
+  </div>
 
-    <% include ../../../partials/scripts.ejs %>
-</body>
 
-</html>
+  <!-- end content -->
+</div>
+<% include ../../../partials/aluno-bottom %>

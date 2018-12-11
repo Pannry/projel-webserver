@@ -8,27 +8,26 @@
 
     <div class="card-header">
       <h5>
-        <p>
-          <%= conteudo[0].titulo%>
-        </p>
+        <%= conteudo[0].titulo%>
       </h5>
     </div>
 
     <div class="card-body">
       <h5>
-        <p>
-          <%= conteudo[0].descricao%>
-        </p>
+        <%= conteudo[0].descricao%>
       </h5>
     </div>
 
   </div>
   <br>
+
+  <% if(paths.length != 0){ %>
+
   <div class="card">
 
     <div class="card-header">
       <h5>
-        <p>Material para download</p>
+        Material para download
       </h5>
     </div>
 
@@ -48,6 +47,8 @@
     </div>
 
   </div>
+
+  <% } %>
 
 </div>
 <% include ../../../partials/professor-bottom %>

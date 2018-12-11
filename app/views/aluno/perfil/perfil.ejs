@@ -1,66 +1,31 @@
-<!DOCTYPE html>
-<html>
+<% include ../../partials/aluno-top %>
+<div class="card-body">
 
-<head>
-  <% include ../../partials/head %>
-</head>
-
-<body>
-
-  <div class="wrapper">
-    <!-- TITULO DO MENU LATERAL -->
-    <nav id="sidebar" class="bg-dark">
-      <div class="sidebar-header bg-dark">
-        <h3>Sistema</h3>
+    <div class="row">
+      <div class="mr-auto col-md-6">
+        <h3> Perfil: </h3>
+        <hr>
       </div>
-
-      <!-- OPÇÔES DO MENU LATERAL -->
-      <% include ../../partials/sidebar-menu-user %>
-
-    </nav>
-
-    <div id="content">
-
-      <!-- CONFIGURACOES DO MENU LATERAL, NAO PRECISA ALTERAR -->
-      <% include ../../partials/sidebar-config %>
-
-      <!-- INICIO DO CONTEUDO CENTRAL -->
-      <div class="card">
-        <div class="row">
-          <div class="col-md"></div>
-          <div class="col-md-10">
-            <div class="card-body">
-              <ul class="list-group">
-                <li class="list-group-item">
-                  <h4>Nome</h4>
-                  <label>
-                    <%= user.nome %></label>
-                </li>
-                <li class="list-group-item">
-                  <h4>Email</h4>
-                  <label>
-                    <%= user.email %></label>
-                </li>
-                <li class="list-group-item">
-                  <label>
-                    <a href="/profile/update">
-                      <button type="submit" class="btn btn-secondary btn-sm mt-2 mb-2">Atualizar Perfil</button>
-                    </a>
-                  </label>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md"></div>
-        </div>
-      </div>
-      <!-- FIM DO CONTEUDO CENTRAL -->
-
     </div>
+
+    <ul class="list-group">
+      <li class="list-group-item">
+        <h4>Nome</h4>
+        <label>
+          <%= user.nome %></label>
+      </li>
+      <li class="list-group-item">
+        <h4>Email</h4>
+        <label>
+          <%= user.email %></label>
+      </li>
+      <li class="list-group-item">
+        <label>
+          <a href="/profile/update">
+            <button type="submit" class="btn btn-secondary btn-sm mt-2 mb-2">Atualizar Perfil</button>
+          </a>
+        </label>
+      </li>
+    </ul>
   </div>
-
-  <% include ../../partials/scripts %>
-
-</body>
-
-</html>
+  <% include ../../partials/aluno-bottom %>

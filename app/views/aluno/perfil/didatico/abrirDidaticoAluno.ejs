@@ -1,87 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ../../../partials/aluno-top %>
+<div class="card-body">
+  <!-- Content -->
+  <h3> Questões: </h3>
+  <hr>
 
-<head>
-  <% include ../../../partials/head %>
-  <style>
-    .green {
-      color: green;
-      font-size: 20px;
-    }
+  <div class="col-md-10">
+    <div class="card">
 
-    .red {
-      color: red;
-      font-size: 20px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="wrapper">
-    <!-- TITULO DO MENU LATERAL -->
-    <nav id="sidebar" class="bg-dark">
-      <div class="sidebar-header bg-dark">
-        <h3>Sistema</h3>
+      <div class="card-header">
+        <h5>
+          <p>
+            <%= didatico[0].titulo%>
+          </p>
+        </h5>
       </div>
 
-      <!-- OPÇÔES DO MENU LATERAL -->
-      <% include ../../../partials/sidebar-menu-user %>
-
-    </nav>
-
-    <div id="content">
-
-      <!-- CONFIGURACOES DO MENU LATERAL, NAO PRECISA ALTERAR -->
-      <% include ../../../partials/sidebar-config %>
-
-      <!-- INICIO DO CONTEUDO CENTRAL -->
-      <div class="card">
-        <div class="row">
-          <div class="col-md"></div>
-          <div class="col-md-10">
-            <div class="card-body">
-              <!-- Content -->
-              <h1> Questões: </h1>
-              <hr>
-
-              <div class="col-md-10">
-                <div class="card">
-
-                  <div class="card-header">
-                    <h5>
-                      <p>
-                        <%= didatico[0].titulo%>
-                      </p>
-                    </h5>
-                  </div>
-
-                  <div class="card-body">
-                    <h5>
-                      <p>
-                        <%= didatico[0].descricao%>
-                      </p>
-                    </h5>
-                  </div>
-
-                  <div class="card-body">
-                    (Download)
-                  </div>
-
-                  <br>
-                </div>
-              </div>
-              <!-- end content -->
-            </div>
-            <div class="col-md"></div>
-          </div>
-        </div>
-        <!-- FIM DO CONTEUDO CENTRAL -->
-
+      <div class="card-body">
+        <h5>
+          <p>
+            <%= didatico[0].descricao%>
+          </p>
+        </h5>
       </div>
+
+      <div class="card-body">
+        (Download)
+      </div>
+
+      <br>
     </div>
-
-    <% include ../../../partials/scripts.ejs %>
-</body>
-
-</html>
+  </div>
+  <!-- end content -->
+</div>
+<% include ../../../partials/aluno-bottom %>
