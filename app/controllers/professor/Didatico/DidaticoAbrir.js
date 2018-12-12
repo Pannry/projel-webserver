@@ -27,6 +27,7 @@ module.exports = (app) => {
             DidaticoDAO2.arquivosDownload(entrada2, (err2, resultado2) => {
               if (err2) throw err2;
               ejs.paths = resultado2;
+              console.log(resultado2)
               res.render('professor/perfil/didatico/abrirDidatico', ejs);
             });
             conexaoDb2.end();

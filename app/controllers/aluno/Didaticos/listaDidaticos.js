@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  const Exercicios = {
+  const Didatico = {
 
     get(req, res) {
       if (req.user.tipo === 'aluno') {
@@ -21,11 +21,21 @@ module.exports = (app) => {
         DidaticoDAO.abrirDidaticoAluno(entrada.id_didatico, (err, resultado) => {
           if (err) throw (err);
           ejs.didatico = resultado;
-          res.render('aluno/perfil/didatico/abrirDidaticoAluno', ejs);
+          const entrada2 = resultado[0].id;
+
+          const conexaoDb2 = app.infra.banco.dbConnection();
+          const DidaticoDAO2 = new app.infra.banco.DidaticoDAO(conexaoDb2);
+
+          DidaticoDAO2.arquivosDownload(entrada2, (err2, resultado2) => {
+            if (err2) throw err2;
+            ejs.paths = resultado2;
+            res.render('aluno/perfil/didatico/abrirDidaticoAluno', ejs);
+          });
+          conexaoDb2.end();
         });
         conexaoDb.end();
       } else res.status(403);
     },
   };
-  return Exercicios;
+  return Didatico;
 };

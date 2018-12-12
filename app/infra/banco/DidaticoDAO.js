@@ -32,7 +32,7 @@ DidaticoDAO.prototype.arquivosDownload = function (id, callback) {
 
 DidaticoDAO.prototype.fazerDownload = function (id, callback) {
   this._conexaoDb.query(
-    ' select didatico.id_professor, didatico.id, didatico_material.file_name from ' +
+    'select didatico.id_professor, didatico.id, didatico_material.file_name from ' +
     'didatico, didatico_material where didatico.id = ? and didatico_material.file_name = ? and didatico.id_professor = ?',
     [id.id, id.file_name, id.id_professor], callback,
   );
@@ -61,3 +61,8 @@ DidaticoDAO.prototype.mostrarDidaticosAluno = function (entrada, callback) {
 DidaticoDAO.prototype.abrirDidaticoAluno = function (entrada, callback) {
   this._conexaoDb.query('SELECT * FROM didatico WHERE id = ?', entrada, callback);
 }; // ok
+
+DidaticoDAO.prototype.fazerDownloadAluno = function (id, callback) {
+  // TODO: FAZER QUERY
+  this._conexaoDb.query( '', [id.id, id.file_name, id.id_professor], callback,);
+};

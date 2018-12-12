@@ -10,12 +10,14 @@
     04/2018: Excluir em exercicios e lista concluido
     04/2018: Excluir turmas concluido
 
-    
+    dia 12/12/2018
+    * infra/banco/didaticoDAO - FazerDownloadAluno
+        fazer a query SQL para realizar o download corretamente
 
     dia 11/12/2018
     * professor adicionar uma lista de questoes para uma turma, e essa lista 
-      ja está adicionada, da erro de chave no sql
-    * Download de material didatico ainda n está implementado
+        ja está adicionada, da erro de chave no sql
+    * Download de material didatico ainda n está implementado (realizando)
 
     */* Lado do professor */*
     /*
