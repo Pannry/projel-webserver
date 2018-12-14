@@ -65,7 +65,7 @@ module.exports = (app) => {
             const conexaoDb3 = app.infra.banco.dbConnection();
             const didaticoDAO = new app.infra.banco.DidaticoDAO(conexaoDb3);
 
-            didaticoDAO.mostrarDidaticosInclusos(entrada, (err3, saida3) => {
+            didaticoDAO.mostrarDidaticosInclusosNaSala(entrada, (err3, saida3) => {
               if (err3) throw err3;
               ejs.didatico = saida3;
 

@@ -3,8 +3,6 @@ module.exports = (app) => {
     get: (req, res) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
-          id_professor: req.user.id,
-          id: req.params.id,
           file_name: req.params.path,
         };
 
@@ -17,7 +15,7 @@ module.exports = (app) => {
         const conexaoDb = app.infra.banco.dbConnection();
         const DidaticoDAO = new app.infra.banco.DidaticoDAO(conexaoDb);
 
-        DidaticoDAO.fazerDownload(entrada, (err, resultado) => {
+        DidaticoDAO.fazerDownloadDidatico(entrada, (err, resultado) => {
           if (err) throw err;
           if (resultado.length === 0) res.render('erro/403', ejs);
           else res.download(`app/uploads/${resultado[0].file_name}`);
