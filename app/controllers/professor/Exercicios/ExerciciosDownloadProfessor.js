@@ -17,7 +17,7 @@ module.exports = (app) => {
         const conexaoDb = app.infra.banco.dbConnection();
         const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
 
-        ExerciciosDao.fazerDownload(entrada, (err, resultado) => {
+        ExerciciosDao.fazerDownloadExercicio(entrada, (err, resultado) => {
           if (err) throw err;
           if (resultado.length === 0) res.render('erro/403', ejs);
           else res.download(`app/uploads/${resultado[0].file_name}`);

@@ -22,8 +22,8 @@ DidaticoDAO.prototype.excluirDidatico = function (entrada, callback) {
   this._conexaoDb.query('DELETE FROM didatico WHERE id= ?', entrada, callback);
 };
 
-DidaticoDAO.prototype.listarDidatico = function (idProfessor, callback) {
-  this._conexaoDb.query('SELECT * FROM didatico WHERE id_professor = ?', idProfessor, callback);
+DidaticoDAO.prototype.mostrarListaDidaticos = function (entrada, callback) {
+  this._conexaoDb.query('SELECT * FROM didatico WHERE id_professor = ?', entrada, callback);
 };
 
 DidaticoDAO.prototype.abrirDidatico = function (id, callback) {
@@ -32,10 +32,6 @@ DidaticoDAO.prototype.abrirDidatico = function (id, callback) {
 
 DidaticoDAO.prototype.arquivosDownload = function (id, callback) {
   this._conexaoDb.query('SELECT file_name FROM didatico_material WHERE id = ?', id, callback);
-};
-
-DidaticoDAO.prototype.mostrarListaDidaticos = function (entrada, callback) {
-  this._conexaoDb.query('SELECT * FROM didatico WHERE id_professor = ?', entrada, callback);
 };
 
 DidaticoDAO.prototype.fazerDownloadDidatico = function (id, callback) {
