@@ -16,7 +16,6 @@ module.exports = (app) => {
         const DidaticoDAO = new app.infra.banco.DidaticoDAO(conexaoDb);
 
         DidaticoDAO.fazerDownloadDidatico(entrada, (err, resultado) => {
-          console.log(resultado)
           if (err) throw err;
           if (resultado.length === 0) res.render('erro/403', ejs);
           else res.download(`app/uploads/${resultado[0].file_name}`);

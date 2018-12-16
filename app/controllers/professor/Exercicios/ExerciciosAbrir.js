@@ -14,7 +14,6 @@ module.exports = (app) => {
         const conexaoDb = app.infra.banco.dbConnection();
         const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
 
-        console.log(entrada);
         ExerciciosDao.abrirExercicio(entrada, (err, resultado) => {
           if (err) throw err;
           if (resultado.length === 0) res.render('erro/403', ejs);
