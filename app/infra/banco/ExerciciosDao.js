@@ -46,6 +46,10 @@ ExerciciosDao.prototype.excluirLista = function (entrada, callback) {
   this._conexaoDb.query('DELETE FROM lista WHERE id= ?', entrada, callback);
 };
 
+ExerciciosDao.prototype.mostrarListaInfo = function (entrada, callback) {
+  this._conexaoDb.query('SELECT * FROM lista where id = ?', entrada, callback);
+}; 
+
 ExerciciosDao.prototype.mostrarListaExercicios = function (entrada, callback) {
   this._conexaoDb.query('SELECT * FROM lista WHERE id_professor = ?', entrada, callback);
 };
@@ -89,6 +93,8 @@ ExerciciosDao.prototype.mostrarQuestoes = function (entrada, callback) {
   );
 };
 
+
+
 ExerciciosDao.prototype.mostrarExerciciosInclusos = function (entrada, callback) {
   this._conexaoDb.query(
     `SELECT 
@@ -108,6 +114,20 @@ ExerciciosDao.prototype.mostrarExerciciosInclusos = function (entrada, callback)
 ExerciciosDao.prototype.criarResposta = function (entrada, callback) {
   this._conexaoDb.query('INSERT INTO resposta SET ?', entrada, callback);
 };
+
+ExerciciosDao.prototype.abrirRespostaAluno = function (entrada, callback) {
+    this._conexaoDb.query(
+      ` SELECT 
+          * 
+        FROM 
+          resposta 
+        WHERE 
+          id_exercicios = ? 
+          AND id_aluno = ? 
+          AND id_sala = ?`,
+      [entrada.id_exercicios, entrada.id_aluno, entrada.id_sala], callback,
+    );
+  };
 
 ExerciciosDao.prototype.responderExerciciosAluno = function (entrada, callback) {
   this._conexaoDb.query(
