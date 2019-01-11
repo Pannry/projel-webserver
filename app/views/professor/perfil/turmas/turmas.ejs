@@ -13,9 +13,7 @@
   <br>
 
   <div class="row ml-1">
-    <p class="col-md-3 mt-1">
-      <label for="selecionarTurma">Selecione uma turma: </label>
-    </p>
+    <label for="selecionarTurma">Selecione uma turma: </label>
   </div>
 
   <div class="form-group">
@@ -35,9 +33,14 @@
             <a href="/professor/turma/abrir/<%=listaSala[i].id%>/professor">
               <button type="submit" class="btn btn-secondary btn-sm">Abrir</button>
             </a>
-            <a href="/professor/turmas/excluir/<%=listaSala[i].id%>">
-              <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-            </a>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete" 
+              onclick="getSalaValues(<%=listaSala[i].id %>)">
+              Excluir
+            </button>
+
+
 
           </div>
         </div>
@@ -47,6 +50,34 @@
 
     </div>
   </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Você deseja realmente excluir?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <a id="useIdDelete">
+            <button type="submit" class="btn btn-danger">Excluir</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function getSalaValues(id) {
+      href = "/professor/turmas/excluir/" + id;
+      document.getElementById('useIdDelete').setAttribute('href', href);
+    }
+  </script>
 
 </div>
 <% include ../../../partials/professor-bottom %>

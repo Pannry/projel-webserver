@@ -19,9 +19,7 @@
     /*
     Plano atual:
         - atualizar perfil
-        - Excluir turma
-        - O acesso em atribuir notas n funciona
-        
+
     http://localhost:3000/professor/turma/abrir/1/aluno:
         - (BUG) carreguei 4 listas de exercicios diferentes, mas apenas 
         uma apareceu. Precisou recarregar a pagina para aparecer
@@ -52,17 +50,22 @@
     
     - Só pode adicionar uma exercicios a lista uma vez, senao da problema. 
     
-    - Fazer com q o bcrypt fique asincrono
-    
-    - Fazer todas as autenticações em um cadastro: Esqueci a senha, deixar campos obrigatorios,
-    não permitir criar contas com emails já usados, repetir a senha no cadastro
-
-    - Melhorar rotas.
-    
-    - melhorar front-end.
-
     - nao é possivel criar uma lista com zero exercicios, da problema
 
     - TurmaIncluirLista.js e TurmaIncluirDidatico.js: posso criar uma promisse para 
     forçar a espera de todas as inclusões no Banco de Dados, para depois redirecionar
     para a página de painel. 
+
+    UX:
+    - Fazer todas as autenticações em um cadastro: Esqueci a senha, deixar campos obrigatorios,
+    não permitir criar contas com emails já usados, repetir a senha no cadastro
+    
+    - Antes de deletar qualquer coisa, aparecer uma tela confirmando
+
+    RESOLVIDOS
+
+    - Fazer com q o bcrypt fique asincrono
+    - Excluir turma
+    - melhorar front-end.
+    - O acesso em atribuir notas n funciona
+    - Melhorar rotas.
