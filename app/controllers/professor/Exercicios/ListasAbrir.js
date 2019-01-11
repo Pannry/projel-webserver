@@ -43,7 +43,7 @@ module.exports = (app) => {
       const conexaoDb = app.infra.banco.dbConnection();
       const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
 
-      ExerciciosDao.mostrarQuestoes(entrada, (err, resultado) => {
+      ExerciciosDao.mostrarQuestoes(entrada.id_lista, (err, resultado) => {
         if (err) throw err;
         ejs.exercicios = resultado;
         res.render('professor/perfil/exercicios/abrirListaExercicios', ejs);

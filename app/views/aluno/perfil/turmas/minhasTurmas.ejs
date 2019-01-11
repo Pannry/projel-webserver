@@ -3,6 +3,14 @@
   <!-- content -->
   <h3>Lista de turmas:</h3>
   <hr>
+  
+  <!-- breadcrumb -->
+  <nav aria-label="breadcrumb row">
+    <ol class="breadcrumb col-md-10">
+      <li class="breadcrumb-item active"><a href="/profile/turmas">Turmas</a></li>
+    </ol>
+  </nav>
+
   <div class="list-group">
     <% for (var i = 0; i < listaSalaAluno.length; i++){%>
     <li class="list-group-item col-md-10 col-sm-12" value="<%=listaSalaAluno[i].id%>">

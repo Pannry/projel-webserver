@@ -1,3 +1,4 @@
+    RESOLVIDOS
     08/2017: Inicio do Projeto
     09/2017: implementacao do login/cadastro
     11/2017: Criação das funções básicas da aplicação: (Turmas, exercicios, listas) 
@@ -9,17 +10,24 @@
     03/2018: Upload de arquivos e encriptação das senhas
     04/2018: Excluir em exercicios e lista concluido
     04/2018: Excluir turmas concluido
-    12/2018: Download de tudo implementado
+    11/2018: Download de tudo implementado
+    11/2018: Fazer com q o bcrypt fique asincrono
+    11/2018: Excluir turma
+    12/2018: melhorar front-end.
+    12/2018: O acesso em atribuir notas n funciona
+    12/2018: Melhorar rotas.
+
+
+    !! Adicionar Breadcrumb no professor
 
     dia 11/12/2018
-    * professor adicionar uma lista de questoes para uma turma, e essa lista 
-        ja está adicionada, da erro de chave no sql
+    * Se o professor adicionar uma lista de questoes para uma turma, e essa lista ja está adicionada, da erro de chave no sql
 
-    */* Lado do professor */*
-    /*
-    Plano atual:
-        - atualizar perfil
-
+    //// Lado do professor
+    {
+    - atualizar perfil
+    - O acesso em atribuir notas n funciona
+    
     http://localhost:3000/professor/turma/abrir/1/aluno:
         - (BUG) carreguei 4 listas de exercicios diferentes, mas apenas 
         uma apareceu. Precisou recarregar a pagina para aparecer
@@ -29,43 +37,26 @@
         - (Erro) "Cannot read property 'nota' of undefined"
         Nao foi possivel criar todas as notas a tempo de renderizar
         o HTML
-    */
+    }
 
-    */* Lado do aluno */*
-
-    /*
+    //// Lado do aluno
+    {
     Plano atual:
         - atualizar perfil
-        - O acesso em atribuir notas n funciona
-        - implementar material didatico
-        - responder questoes está com problemas
-        - reimplementar o logout
-    */
+    }
 
     Problemas Conhecidos:
 
-    - template para as entradas dos campos 
+    - template para as entradas dos campos de cadastro
 
-    - Notas feito na gambiarra, refazer quando possivel
+    - Notas feito na gambiarra, refazer quando possivel (? analisar)
     
-    - Só pode adicionar uma exercicios a lista uma vez, senao da problema. 
+    - Só pode adicionar uma exercicios a lista uma vez, senao da problema (?analisar)
     
-    - nao é possivel criar uma lista com zero exercicios, da problema
+    - nao é possivel criar uma lista com zero exercicios, da problema (?analisar)
 
     - TurmaIncluirLista.js e TurmaIncluirDidatico.js: posso criar uma promisse para 
     forçar a espera de todas as inclusões no Banco de Dados, para depois redirecionar
     para a página de painel. 
-
-    UX:
-    - Fazer todas as autenticações em um cadastro: Esqueci a senha, deixar campos obrigatorios,
-    não permitir criar contas com emails já usados, repetir a senha no cadastro
     
-    - Antes de deletar qualquer coisa, aparecer uma tela confirmando
-
-    RESOLVIDOS
-
-    - Fazer com q o bcrypt fique asincrono
-    - Excluir turma
-    - melhorar front-end.
-    - O acesso em atribuir notas n funciona
-    - Melhorar rotas.
+    - Ao atribuir uma nota, deve-se aceitar '.' (ponto) e ',' (virgula)

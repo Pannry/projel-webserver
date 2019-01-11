@@ -86,7 +86,7 @@ ExerciciosDao.prototype.mostrarQuestoes = function (entrada, callback) {
     FROM
       lista_exercicios
     INNER JOIN
-      exercicios 
+      exercicios
         ON lista_exercicios.id_exercicios = exercicios.id
         AND lista_exercicios.id_lista = ?`,
     entrada, callback
@@ -165,7 +165,7 @@ ExerciciosDao.prototype.mostrarExerciciosAluno = function (entrada, callback) {
         lista_exercicios
       INNER JOIN
         exercicios
-          ON lista_exercicios.id_exercicios = exercicios.id
+          ON exercicios.id = lista_exercicios.id_exercicios 
           AND lista_exercicios.id_lista = ?`, 
   entrada, callback
   );

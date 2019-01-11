@@ -21,9 +21,10 @@
       </h5>
       <hr>
       <% for(var i = 0; i < exercicios.length; i++ ) { %>
+        
       <a href="/professor/exercicios/abrir/<%= exercicios[i].id_exercicios%>" class="list-group-item list-group-item-action">
         <h5>
-            <%= exercicios[i].titulo%>
+          <%= exercicios[i].titulo%>
         </h5>
       </a>
       <% } %>

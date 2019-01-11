@@ -5,6 +5,16 @@
   <h3> Questões: </h3>
   <hr>
 
+  <!-- breadcrumb -->
+  <nav aria-label="breadcrumb row">
+    <ol class="breadcrumb col-md-10">
+      <li class="breadcrumb-item"><a href="/profile/turmas">Turmas</a></li>
+      <li class="breadcrumb-item"><a href="/turmas/abrir/<%=sala%>">Painel da turma</a></li>
+      <li class="breadcrumb-item active"><a href="/turmas/abrir/listas/<%=sala%>/<%=exercicios[0].id_lista%>">Lista de
+          exercícios</a></li>
+    </ol>
+  </nav>
+
   <div class="row">
     <div class="col-md-10">
       <h6>
@@ -29,10 +39,8 @@
 
         <% } %>
       </div>
-
     </div>
   </div>
-
 
   <!-- end content -->
 </div>
