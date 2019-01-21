@@ -9,7 +9,8 @@
     <ol class="breadcrumb col-md-10">
       <li class="breadcrumb-item"><a href="/profile/turmas">Turmas</a></li>
       <li class="breadcrumb-item"><a href="/turmas/abrir/<%=sala%>">Painel da turma</a></li>
-      <li class="breadcrumb-item active"><a href="/turmas/didaticos/abrir/<%=sala%>/<%=didatico[0].id%>">Material didático</a></li>
+      <li class="breadcrumb-item active"><a href="/turmas/didaticos/abrir/<%=sala%>/<%=didatico[0].id%>">Material
+          didático</a></li>
     </ol>
   </nav>
 
@@ -18,17 +19,13 @@
 
       <div class="card-header">
         <h5>
-          <p>
-            <%= didatico[0].titulo%>
-          </p>
+          <%= didatico[0].titulo%>
         </h5>
       </div>
 
       <div class="card-body">
         <h5>
-          <p>
-            <%= didatico[0].descricao%>
-          </p>
+          <%= didatico[0].descricao%>
         </h5>
       </div>
 
@@ -39,9 +36,9 @@
           <div class="row">
             <div class="col-md-1"><i class="fa fa-download" aria-hidden="true"></i></div>
             <div class="col-md-10">
-              <p>
-                <%= paths[i].file_name %>
-              </p>
+
+              <%= paths[i].file_name %>
+
             </div>
           </div>
         </a>

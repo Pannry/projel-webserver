@@ -2,8 +2,17 @@
 <div class="card-body">
 
   <h3> Respostas </h3>
-
   <hr>
+
+  <!-- breadcrumb -->
+  <nav aria-label="breadcrumb row">
+    <ol class="breadcrumb col-md-10">
+      <li class="breadcrumb-item"><a href="/professor/profile/turmas">Turmas</a></li>
+      <li class="breadcrumb-item"><a href="/professor/turma/abrir/<%=id_sala%>/professor">Alunos Matriculados</a></li>
+      <li class="breadcrumb-item"><a href="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>">Exercícios</a></li>
+      <li class="breadcrumb-item active"><a href="#">Resposta</a></li>
+    </ol>
+  </nav>
 
   <% for( let i = 0; i < respostas.length; i++ ){ %>
 

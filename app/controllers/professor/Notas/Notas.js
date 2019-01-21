@@ -110,6 +110,9 @@ module.exports = (app) => {
           user: req.user,
           page_name: req.path,
           accountType: req.user.tipo,
+          id_sala: req.params.id_sala,
+          id_aluno: req.params.id_aluno,
+          id_lista: req.params.id_lista,
         };
 
         const conexaoDb = app.infra.banco.dbConnection();

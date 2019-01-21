@@ -6,6 +6,14 @@
   </h3>
   <hr>
 
+  <!-- breadcrumb -->
+  <nav aria-label="breadcrumb row">
+    <ol class="breadcrumb col-md-10">
+      <li class="breadcrumb-item"><a href="/professor/profile/turmas">Turmas</a></li>
+      <li class="breadcrumb-item active"><a href="#">Área de Interação</a></li>
+    </ol>
+  </nav>
+
   <div class="card">
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
@@ -14,9 +22,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="/professor/turma/abrir/<%=idSala%>/aluno">Área de Interação</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/professor/turma/abrir/<%=idSala%>/aluno">Configurações</a>
         </li>
       </ul>
     </div>
@@ -54,7 +59,7 @@
 
       <ul class="list-group list-group-flush">
         <% if ( lista.length === 0 ) { %>
-        <h5>Nenhuma lista disponivel, por favor, adicione alguma agora.</h5>
+        <h5>Nenhuma lista disponivel, por favor, adicione alguma.</h5>
         <% } else { %>
         <div class="card">
           <% for (var i = 0; i < lista.length; i++) { %>
@@ -80,7 +85,7 @@
 
       <ul class="list-group list-group-flush">
         <% if ( didatico.length === 0 ) { %>
-        <h5>Nenhuma material didático disponivel, por favor, adicione algum agora.</h5>
+        <h5>Nenhuma material didático disponivel, por favor, adicione algum.</h5>
         <% } else { %>
         <div class="card">
           <% for (var i = 0; i < didatico.length; i++) { %>

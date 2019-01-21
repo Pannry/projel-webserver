@@ -3,6 +3,13 @@
 
   <h3> Detalhes da lista </h3>
   <hr>
+  <!-- breadcrumb -->
+  <nav aria-label="breadcrumb row">
+    <ol class="breadcrumb col-md-10">
+      <li class="breadcrumb-item"><a href="/professor/profile/exercicios/lista">Lista de exercícios</a></li>
+      <li class="breadcrumb-item active"><a href="#">Informações da lista</a></li>
+    </ol>
+  </nav>
 
   <div class="card mr-md-5">
     <div class="card-header">
@@ -21,7 +28,7 @@
       </h5>
       <hr>
       <% for(var i = 0; i < exercicios.length; i++ ) { %>
-        
+
       <a href="/professor/exercicios/abrir/<%= exercicios[i].id_exercicios%>" class="list-group-item list-group-item-action">
         <h5>
           <%= exercicios[i].titulo%>
