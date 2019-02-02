@@ -14,7 +14,7 @@ module.exports = (app) => {
         const conexaoDb = app.infra.banco.dbConnection();
         const salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
 
-        salaDAO.listaSalaProfessor(entrada, (err, resultado) => {
+        salaDAO.salasDoProfessor(entrada, (err, resultado) => {
           if (err) throw err;
           ejs.listaSala = resultado;
           res.render('professor/perfil/turmas/turmas', ejs);

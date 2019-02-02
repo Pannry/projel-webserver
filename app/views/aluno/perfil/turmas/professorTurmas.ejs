@@ -2,38 +2,31 @@
 <div class="card-body">
   <div class="row">
     <div class="mr-auto col-md-6">
-      <h3> Selecione a turma: </h3>
+      <h3> Buscando turma: </h3>
       <hr>
     </div>
 
   </div>
-
-
-
+  <% if(detalhesSala !== undefined){%>
   <!-- Corpo -->
-  <form action="/turmas/professor/:id" method="post">
+  <form action="/turmas/professor/detalhes" method="post">
 
-    <% if( listaSalaAluno.length !== 0 ){ %>
-    <% for (var i = 0; i < listaSalaAluno.length; i++){ %>
-    <li class="list-group-item col-md-10 col-sm-12" value="<%=listaSalaAluno[i].id%>">
+    <h5>
+      Turma: <%= detalhesSala.nome %><br>
+      Semestre: <%= detalhesSala.semestre %>
 
-      <div class="row">
-        <div class="col-7">
-          <%= listaSalaAluno[i].nome %>,
-          <%= listaSalaAluno[i].semestre %>
-        </div>
+    </h5>
+    <br>
+    <input class="btn btn-secondary btn-sm" type="submit" name="<%=detalhesSala.id%>" value="Entrar"></input>
+    <a class="btn btn-secondary btn-sm" href="/profile/turmas/procurar">Voltar</a>
 
-        <div class="col-5">
-          <input class="btn btn-secondary btn-sm" type="submit" name="<%=listaSalaAluno[i].id%>" value="Entrar"></input>
-        </div>
-      </div>
+    <%} else {%>
 
-    </li>
-    <% } %>
+    <p>Turma não encontrada.</p>
+    <a class="btn btn-secondary btn-sm" href="/profile/turmas/procurar">Voltar</a>
 
-    <% } else {%>
-    <p>Esse professor não possui turmas disponíveis.</p>
-    <% } %>
+    <%}%>
+
   </form>
 </div>
 <% include ../../../partials/aluno-bottom %>

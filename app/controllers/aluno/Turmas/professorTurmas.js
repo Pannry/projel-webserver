@@ -2,7 +2,11 @@ module.exports = (app) => {
   const Aluno = {
     get: (req, res) => {
       if (req.user.tipo === 'aluno') {
-        const entrada = req.params.id;
+
+        const entrada = {
+          id_professor: req.query.idProf,
+          cod_sala: req.query.codSala
+        };
         const ejs = {
           user: req.user,
           page_name: req.path,
@@ -13,7 +17,7 @@ module.exports = (app) => {
         const salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
 
         salaDAO.listaSalaProfessor(entrada, (err, resultado) => {
-          ejs.listaSalaAluno = resultado;
+          ejs.detalhesSala = resultado[0];
           res.render('aluno/perfil/turmas/professorTurmas', ejs);
         });
 
@@ -30,7 +34,7 @@ module.exports = (app) => {
 
         const conexaoDb = app.infra.banco.dbConnection();
         const salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
-
+        
         salaDAO.alunoEntrarTurma(entrada, () => {
           res.redirect('/profile/turmas');
         });

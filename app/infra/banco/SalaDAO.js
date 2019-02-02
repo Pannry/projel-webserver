@@ -6,6 +6,15 @@ module.exports = () => SalaDao;
 
 // Professor
 
+SalaDao.prototype.salasDoProfessor = function (id, callback) {
+  this._conexaoDb.query(
+    ` SELECT * 
+      FROM sala 
+      WHERE id_professor = ?`,
+    id, callback
+  );
+};
+
 SalaDao.prototype.addSala = function (entrada, callback) {
   this._conexaoDb.query('INSERT INTO sala SET ?', entrada, callback);
 };
@@ -47,7 +56,12 @@ SalaDao.prototype.mostrarComentario = function (entrada, callback) {
 // Aluno
 
 SalaDao.prototype.listaSalaProfessor = function (id, callback) {
-  this._conexaoDb.query('SELECT * FROM sala WHERE id_professor = ?', id, callback);
+  this._conexaoDb.query(
+    ` SELECT * 
+      FROM sala 
+      WHERE id_professor = ? and cod_sala = ?`,
+    [id.id_professor, id.cod_sala], callback
+  );
 };
 
 
