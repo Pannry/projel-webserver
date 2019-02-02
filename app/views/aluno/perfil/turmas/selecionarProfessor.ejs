@@ -4,40 +4,44 @@
   <h3> Turmas </h3>
   <hr>
 
-  <div class="form-group">
-    <label for="selecionarProfessor">Selecione o Professor</label>
-    <select class="form-control" id="selecionarProfessor" onchange="myFunc()">
-      <option value="0"> Escolha... </option>
-      <% for (var i = 0; i < listaSalaProfessor.length; i++){%>
-      <option value="<%= listaSalaProfessor[i].id %>"> Professor:
-        <%= listaSalaProfessor[i].nome %>
-      </option>
-      <% } %>
-    </select>
-    <br>
+  <form class="" action="/turmas/professor/detalhes" method="GET">
+    <div class="form-group">
 
-    <a class="collapse" id="myAnchor">Abrir lista de Turmas</a>
+      <div class="row">
+        <!-- Dropbox para selecionar o professor -->
+        <div class="col-md-4">
+          <label for="selecionarProfessor">Selecione o Professor</label>
+          <select class="form-control" id="selecionarProfessor" name="idProf"> 
+            <option value="0"> Escolha... </option>
+            <% for (var i = 0; i < listaSalaProfessor.length; i++){%>
+            <option value="<%= listaSalaProfessor[i].id %>" name="idProf"> Prof:
+              <%= listaSalaProfessor[i].nome %>
+            </option>
+            <% } %>
+          </select>
+        </div>
 
-    <script>
-      function myFunc() {
+        <!-- Input box para especificar qual a sala -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Código da turma</label>
+            <input class="form-control" placeholder="Cod. da turma" name="codSala">
+          </div>
+        </div>
 
-        var dropDown = document.getElementById("selecionarProfessor");
-        if (dropDown.value !== '0') {
+        <div class="col-md-2"></div>
+      </div>
 
-          var anchor = document.getElementById("myAnchor");
 
-          var link = document.createAttribute("href");
-          link.value = "/turmas/professor/" + dropDown.value;
+      <br>
+      <div class="row">
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-secondary btn-sm">Procurar sala</button>
+        </div>
+      </div>
 
-          var anchorClass = document.createAttribute("class");
-          anchorClass.value = "btn btn-secondary btn-sm";
-
-          anchor.setAttributeNode(anchorClass);
-          anchor.setAttributeNode(link);
-        }
-      }
-    </script>
-  </div>
+    </div>
+  </form>
 
 </div>
 <% include ../../../partials/aluno-bottom %>

@@ -49,7 +49,7 @@ module.exports = (app) => {
   app.route('/turmas/abrir/:id')
     .get(checkAuth, Turmas.abrirTurmas.get);
 
-  app.route('/turmas/professor/:id')
+  app.route('/turmas/professor/detalhes')
     .get(checkAuth, Turmas.professorTurmas.get)
     .post(checkAuth, Turmas.professorTurmas.post);
 

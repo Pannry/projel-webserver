@@ -25,6 +25,8 @@ module.exports = (app) => {
         const conexaoDb = app.infra.banco.dbConnection();
         const salaDAO = new app.infra.banco.SalaDAO(conexaoDb);
 
+        entrada.cod_sala = Date.now().toString().substring(3, 13);
+
         salaDAO.addSala(entrada, (err) => {
           if (err) throw err;
           res.redirect('/professor/profile/turmas');

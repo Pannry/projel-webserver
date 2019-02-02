@@ -59,3 +59,6 @@ typings/
 
 # Ignorando Downloads
 app/uploads
+
+# Configs do vscode
+.vscode

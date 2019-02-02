@@ -26,14 +26,31 @@
   <div class="form-group">
     <div class="list-group">
 
+      <li class="list-group-item col-md-10 col-sm-12 ">
+        <div class="row">
+          <div class="col-4">
+            <b>Turma</b>
+          </div>
+
+          <div class="col-4">
+            <b>código da turma</b>
+          </div>
+
+        </div>
+      </li>
+
       <!-- elemento 1 -->
       <% for (var i = 0; i < listaSala.length; i++){%>
       <li class="list-group-item col-md-10 col-sm-12 " value="<%=listaSala[i].id%>">
 
         <div class="row">
-          <div class="col-7">
+          <div class="col-4">
             <%=listaSala[i].nome%>,
             <%=listaSala[i].semestre%>
+          </div>
+
+          <div class="col-3">
+            <%=listaSala[i].cod_sala%>
           </div>
 
           <div class="col-5">
@@ -42,13 +59,9 @@
             </a>
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete" 
-              onclick="getSalaValues(<%=listaSala[i].id %>)">
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete" onclick="getSalaValues(<%=listaSala[i].id %>)">
               Excluir
             </button>
-
-
-
           </div>
         </div>
 
