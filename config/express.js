@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 
 const middlewareErro = require('../app/middlewares/erro');
+
+require('dotenv').config()
 // const pool = require('../app/middlewares/poolConnection');
 // const connMiddleware = require('../app/middlewares/connectionMiddleware');
 
