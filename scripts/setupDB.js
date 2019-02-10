@@ -1,8 +1,7 @@
+require('dotenv').config('../.env');
 const Conexao = require('../app/infra/banco/dbConnection')();
 
-
 const con = Conexao()
-
 
 con.query(`DROP DATABASE IF EXISTS projel`);
 con.query(`CREATE DATABASE projel`);
