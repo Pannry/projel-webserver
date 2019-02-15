@@ -1,5 +1,5 @@
 require('dotenv').config('../.env');
-const Conexao = require('../app/infra/banco/dbConnection')();
+const Conexao = require('./conn')();
 
 const con = Conexao()
 
@@ -50,9 +50,10 @@ create table professor(
 con.query(`
 create table sala(
     id int auto_increment,
-    nome varchar(32),
     id_professor int,
+    nome varchar(32),
     semestre varchar(32),
+    cod_sala INT NOT NULL,
     comentario varchar(1000),
     foreign key (id_professor) references professor(id),
     primary key (id)
@@ -164,24 +165,6 @@ create table cursa(
     primary key (id_sala, id_aluno)
 )
 `);
-// con.query(`
-// insert into instituicao set
-//     nome='Instituto Federal de Educação, Ciência e Tecnologia do Ceará',
-//     cnpj= '10.744.098/0001-45',
-//     endereco='Rua Jorge Dumar, Bairro Jardim América, Fortaleza CE',
-//     cep='60410-426',
-//     numero='1703',
-//     telefone='(85) 34012500';
-// `);
-con.query(`
-insert into instituicao set
-    nome='Universidade Estadual do Ceará',
-    cnpj= '07.885.809/0001-97',
-    endereco='Av. Dr. Silas Munguba, Fortaleza CE',
-    cep='60740-000',
-    numero='1700',
-    telefone='(85) 31019610';
-`);
 
-console.log('Success: Database Created!')
+console.log('Success: Database Created!');
 con.end();
