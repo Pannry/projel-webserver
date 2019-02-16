@@ -1,9 +1,9 @@
 require('dotenv').config('../.env');
 const Conexao = require('../app/infra/banco/dbConnection')();
 
-const con = Conexao()
+const con = Conexao();
 
-con.query(`USE projel`);
+con.query('USE projel');
 
 // con.query(`
 // insert into instituicao set
@@ -41,9 +41,6 @@ INSERT INTO professor (
     );
 
 `);
-
-
-
 
 console.log('Success: Database seeded!');
 con.end();

@@ -62,3 +62,8 @@ app/uploads
 
 # Configs do vscode
 .vscode
+
+# unnecessary cypress
+cypress/fixtures
+cypress/plugins
+cypress/support

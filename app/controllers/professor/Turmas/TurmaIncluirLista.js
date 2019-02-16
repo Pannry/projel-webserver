@@ -42,7 +42,11 @@ module.exports = (app) => {
 
           listas.forEach((element) => {
             entrada.id_lista = element;
-            ExerciciosDao.listasParaIncluir(entrada, (err) => { if (err) throw err; });
+            ExerciciosDao.listasParaIncluir(entrada, (err) => {
+              if (err) {
+                if (err.errno !== 1062) throw err;
+              }
+            });
           });
           conexaoDb.end();
         }
