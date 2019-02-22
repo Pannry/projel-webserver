@@ -10,35 +10,32 @@
     <ol class="breadcrumb col-md-10">
       <li class="breadcrumb-item"><a href="/profile/turmas">Turmas</a></li>
       <li class="breadcrumb-item"><a href="/turmas/abrir/<%=sala%>">Painel da turma</a></li>
-      <li class="breadcrumb-item active"><a href="/turmas/abrir/listas/<%=sala%>/<%=exercicios[0].id_lista%>">Lista de
-          exercícios</a></li>
+      <li class="breadcrumb-item active"><a href="#">Lista de exercícios</a></li>
     </ol>
   </nav>
 
   <div class="row">
     <div class="col-md-10">
-      <h6>
-        <%=listaInfo[0].titulo%>
-      </h6>
+      <h5> <%=listaInfo[0].titulo%> </h5>
+      <h6> <%=listaInfo[0].descricao%> </h6>
       <br>
-      <h6>
-        <%=listaInfo[0].descricao%>
-      </h6>
-      <br>
+
+      <% if(exercicios[0] !== undefined) { %>
 
       <div class="list-group">
         <% for(var i = 0; i < exercicios.length; i++) { %>
-
-        <a href="/turmas/abrir/<%= sala[0]%>/<%= lista[0]%>/<%= exercicios[i].id_exercicios %>" class="list-group-item list-group-item-action">
+        <a href="/turmas/abrir/<%= sala[0]%>/<%= lista[0]%>/<%= exercicios[i].id_exercicios %>"
+          class="list-group-item list-group-item-action">
           <div class="row">
-            <h6 class="col-md-6">
-              <%= exercicios[i].titulo%>
-            </h6>
+            <h6 class="col-md-6"> <%= exercicios[i].titulo%> </h6>
           </div>
         </a>
-
-        <% } %>
       </div>
+      <% } %>
+
+      <% } else { %>
+      <h6> Essa lista não possui exercícios. </h6>
+      <% } %>
     </div>
   </div>
 

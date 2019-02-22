@@ -48,7 +48,7 @@ ExerciciosDao.prototype.excluirLista = function (entrada, callback) {
 
 ExerciciosDao.prototype.mostrarListaInfo = function (entrada, callback) {
   this._conexaoDb.query('SELECT * FROM lista where id = ?', entrada, callback);
-}; 
+};
 
 ExerciciosDao.prototype.mostrarListaExercicios = function (entrada, callback) {
   this._conexaoDb.query('SELECT * FROM lista WHERE id_professor = ?', entrada, callback);
@@ -89,11 +89,9 @@ ExerciciosDao.prototype.mostrarQuestoes = function (entrada, callback) {
       exercicios
         ON lista_exercicios.id_exercicios = exercicios.id
         AND lista_exercicios.id_lista = ?`,
-    entrada, callback
+    entrada, callback,
   );
 };
-
-
 
 ExerciciosDao.prototype.mostrarExerciciosInclusos = function (entrada, callback) {
   this._conexaoDb.query(
@@ -105,7 +103,7 @@ ExerciciosDao.prototype.mostrarExerciciosInclusos = function (entrada, callback)
         lista 
           ON sala_lista.id_lista = lista.id
           AND sala_lista.id_sala = ?`,
-    entrada, callback
+    entrada, callback,
   );
 };
 
@@ -116,8 +114,8 @@ ExerciciosDao.prototype.criarResposta = function (entrada, callback) {
 };
 
 ExerciciosDao.prototype.abrirRespostaAluno = function (entrada, callback) {
-    this._conexaoDb.query(
-      ` SELECT 
+  this._conexaoDb.query(
+    ` SELECT 
           * 
         FROM 
           resposta 
@@ -125,9 +123,9 @@ ExerciciosDao.prototype.abrirRespostaAluno = function (entrada, callback) {
           id_exercicios = ? 
           AND id_aluno = ? 
           AND id_sala = ?`,
-      [entrada.id_exercicios, entrada.id_aluno, entrada.id_sala], callback,
-    );
-  };
+    [entrada.id_exercicios, entrada.id_aluno, entrada.id_sala], callback,
+  );
+};
 
 ExerciciosDao.prototype.responderExerciciosAluno = function (entrada, callback) {
   this._conexaoDb.query(
@@ -153,7 +151,7 @@ ExerciciosDao.prototype.mostrarListasAluno = function (entrada, callback) {
         lista
           ON sala_lista.id_lista = lista.id
           AND sala_lista.id_sala = ?`,
-    entrada, callback
+    entrada, callback,
   );
 };
 
@@ -166,7 +164,7 @@ ExerciciosDao.prototype.mostrarExerciciosAluno = function (entrada, callback) {
       INNER JOIN
         exercicios
           ON exercicios.id = lista_exercicios.id_exercicios 
-          AND lista_exercicios.id_lista = ?`, 
-  entrada, callback
+          AND lista_exercicios.id_lista = ?`,
+    entrada, callback,
   );
 };

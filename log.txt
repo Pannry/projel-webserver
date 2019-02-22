@@ -17,12 +17,6 @@
     12/2018: O acesso em atribuir notas n funciona
     12/2018: Melhorar rotas.
 
-
-    !! Adicionar Breadcrumb no professor
-
-    dia 11/12/2018
-    * Se o professor adicionar uma lista de questoes para uma turma, e essa lista ja está adicionada, da erro de chave no sql
-
     //// Lado do professor
     {
     - atualizar perfil
