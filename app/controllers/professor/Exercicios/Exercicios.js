@@ -12,10 +12,10 @@ module.exports = (app) => {
 
         const conexaoDb = app.infra.banco.dbConnection();
         const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
-         ExerciciosDao.listarExercicios(entrada, (err, resultado) => {
+        ExerciciosDao.listarExercicios(entrada, (err, resultado) => {
           if (err) throw err;
           ejs.listaExercicios = resultado;
-           if (!err) { res.render('professor/perfil/exercicios/exercicios', ejs); } else { next(); }
+          if (!err) { res.render('professor/perfil/exercicios/exercicios', ejs); } else { next(); }
         });
         conexaoDb.end();
       }

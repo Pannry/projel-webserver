@@ -63,7 +63,7 @@ module.exports = (app) => {
 
                 const conexaoDb1 = app.infra.banco.dbConnection();
                 const ExerciciosDao1 = new app.infra.banco.ExerciciosDao(conexaoDb1);
-                
+
                 ExerciciosDao1.criarResposta(entrada, (err3) => {
                   if (err3) throw (err3);
                   ejs.respostaAluno = '';

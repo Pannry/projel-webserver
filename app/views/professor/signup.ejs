@@ -2,98 +2,99 @@
 <html>
 
 <head>
-    <% include ../partials/head.ejs %>
+  <% include ../partials/head.ejs %>
 </head>
 
 <body>
-    <div class="container">
+  <div class="container">
 
-        <!-- apresentação  -->
-        <div class="row align-items-end" style="height: 150px">
-            <div class="offset-md-3 col-md-6">
-                <h2>Cadastro - Professor</h2>
-            </div>
-        </div>
-    
-        <% if (message.length > 0) { %>
-            <div class="alert alert-danger"><%= message %></div>
-        <% } %>
-
-        <!-- Formulario de cadastro  -->
-        <form class="" action="/professor/signup" method="post">
-            <br>
-            <div class="row">
-                <div class="offset-md-3 col-md-6 col-sm-12">
-                    <label for="email" class="font-weight-bold">E-mail:</label>
-                    <input type="text" required name="email" value="" class="form-control" placeholder="exemplo@exemplo.com">
-                </div>
-                <div class="offset-md-3 col-md-6 col-sm-12">
-                    <label for="nome" class="font-weight-bold">Nome:</label>
-                    <input type="text" name="nome" value="" class="form-control" placeholder="Seu nome">
-                </div>
-            </div>
-            <div class="row">
-                <div class="offset-md-3 col-md-6 col-sm-12">
-                    <label for="senha" class="font-weight-bold">Senha:</label>
-                    <input type="password" name="senha" value="" class="form-control" placeholder="Insira a sua senha.">
-                </div>
-                <div class="offset-md-3 col-md-6 col-sm-12">
-                    <label for="cpf" class="font-weight-bold">CPF:</label>
-                    <input type="text" name="cpf" value="" class="form-control" placeholder="Insira seu CPF">
-                </div>
-            </div>
-            <div class="row">
-                <div class="offset-md-3 col-md-6 col-sm-12">
-                    <label for="endereco" class="font-weight-bold">Endereço:</label>
-                    <input type="text" name="endereco" value="" class="form-control" placeholder="Insira a sua senha.">
-                </div>
-                <div class="offset-md-3 col-md-6 col-sm-12">
-                    <label for="cep" class="font-weight-bold">CEP:</label>
-                    <input type="text" name="cep" value="" class="form-control" placeholder="Insira seu CPF">
-                </div>
-            </div>
-            <div class="row">
-                <div class="offset-md-3 col-md-6 col-sm-12">
-                    <label for="numero" class="font-weight-bold">Numero:</label>
-                    <input type="text" name="numero" value="" class="form-control" placeholder="Insira a sua senha.">
-                </div>
-                <div class="offset-md-3 col-md-6 col-sm-12">
-                    <label for="telefone" class="font-weight-bold">Telefone:</label>
-                    <input type="text" name="telefone" value="" class="form-control" placeholder="Insira a sua senha.">
-                </div>
-            </div>
-            <br><br>
-            <!-- Campo instituiao -->
-            <div class="row">
-                <div class="offset-md-3 col-md-6 col-sm-12">
-                    <label for="instituicao_id" class="font-weight-bold">Instituição que você pertence</label>
-                    <select class="form-control" name="instituicao_id">
-                        <% for (var i = 0; i < listaDeInstituicao.length; i++){%>
-                        <option value="<%=listaDeInstituicao[i].id%>"><%=listaDeInstituicao[i].nome%></option>
-                        <%}%>
-                    </select>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="offset-md-3 col-md-6">
-                    <input type="submit" value="Cadastrar" class="btn btn-secondary btn-lg">
-                </div>
-            </div>
-
-        </form>
-
-        <!-- footer -->
-        <div class="row align-items-end">
-            <footer class="offset-md-3 col-md-6 footer" style="height: 150px">
-                <p>Projel - 2017</p>
-            </footer>
-        </div>
-
+    <!-- apresentação  -->
+    <div class="row align-items-end justify-content-center" style="height: 150px">
+      <div class="col-md-8">
+        <h2>Cadastro - Professor</h2>
+      </div>
     </div>
 
+    <% if (message.length > 0) { %>
+    <div class="alert alert-danger"><%= message %></div>
+    <% } %>
 
-    <% include ../partials/scripts.ejs %>
+    <!-- Formulario de cadastro  -->
+    <form class="" action="/professor/signup" method="post">
+      <br>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <label for="email" class="font-weight-bold">E-mail:</label>
+          <input type="email" name="email" class="form-control" placeholder="exemplo@exemplo.com">
+        </div>
+        <div class="col-md-8">
+          <label for="nome" class="font-weight-bold">Nome:</label>
+          <input type="text" name="nome" class="form-control" placeholder="Seu nome">
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <label for="senha" class="font-weight-bold">Senha:</label>
+          <input type="password" name="senha" class="form-control" placeholder="Insira a sua senha">
+        </div>
+        <div class="col-md-8">
+          <label for="cpf" class="font-weight-bold">CPF:</label>
+          <input type="number" name="cpf" class="form-control">
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <label for="endereco" class="font-weight-bold">Endereço:</label>
+          <input type="text" name="endereco" class="form-control">
+        </div>
+        <div class="col-md-3">
+          <label for="numero" class="font-weight-bold">Numero:</label>
+          <input type="number" name="numero" class="form-control">
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <label for="cep" class="font-weight-bold">CEP:</label>
+          <input type="number" name="cep" class="form-control">
+        </div>
+        <div class="col-md-8">
+          <label for="telefone" class="font-weight-bold">Telefone:</label>
+          <input type="number" name="telefone" class="form-control">
+        </div>
+      </div>
+
+      <br><br>
+
+      <!-- Campo instituiao -->
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <label for="instituicao_id" class="font-weight-bold">Instituição que você pertence</label>
+          <select class="form-control" name="instituicao_id">
+            <% for (var i = 0; i < listaDeInstituicao.length; i++){%>
+            <option value="<%=listaDeInstituicao[i].id%>"><%=listaDeInstituicao[i].nome%></option>
+            <%}%>
+          </select>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <input type="submit" value="Cadastrar" class="btn btn-secondary btn-lg">
+        </div>
+      </div>
+
+    </form>
+
+<!-- footer -->
+    <hr>
+    <div class="row align-items-end justify-content-center">
+      <footer class="col-md-8 footer" style="height: 150px"> <p>Projel - 2019</p> </footer>
+    </div>
+
+  </div>
+<% include ../partials/scripts.ejs %>
 </body>
 
 </html>

@@ -11,7 +11,7 @@ SalaDao.prototype.salasDoProfessor = function (id, callback) {
     ` SELECT * 
       FROM sala 
       WHERE id_professor = ?`,
-    id, callback
+    id, callback,
   );
 };
 
@@ -23,7 +23,7 @@ SalaDao.prototype.autenticarAluno = function (id, callback) {
   this._conexaoDb.query(
     ` UPDATE cursa SET aluno_aceito = 1 
       WHERE cursa.id_aluno = ? AND cursa.id_sala = ?`,
-    [id.id_aluno, id.id_sala], callback
+    [id.id_aluno, id.id_sala], callback,
   );
 };
 
@@ -60,7 +60,7 @@ SalaDao.prototype.listaSalaProfessor = function (id, callback) {
     ` SELECT * 
       FROM sala 
       WHERE id_professor = ? and cod_sala = ?`,
-    [id.id_professor, id.cod_sala], callback
+    [id.id_professor, id.cod_sala], callback,
   );
 };
 
@@ -78,7 +78,7 @@ SalaDao.prototype.listaSalaAluno = function (id, callback) {
       WHERE 
         id_aluno = ? 
         AND id_sala = id`,
-    id, callback
+    id, callback,
   );
 };
 
@@ -86,7 +86,7 @@ SalaDao.prototype.verificarAutenticacao = function (ent, callback) {
   this._conexaoDb.query(
     ` SELECT * FROM cursa 
       WHERE cursa.id_aluno = ? AND cursa.id_sala = ?`,
-    [ent.id_aluno, ent.id], callback
+    [ent.id_aluno, ent.id], callback,
   );
 };
 

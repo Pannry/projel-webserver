@@ -5,7 +5,6 @@ module.exports = (app) => {
   });
 
   app.use((err, req, res) => {
-    if (err) console.error(err);
     res.status(500).render('erro/500', { accountType: '' });
   });
 };

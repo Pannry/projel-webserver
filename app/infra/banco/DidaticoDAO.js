@@ -59,8 +59,9 @@ DidaticoDAO.prototype.mostrarDidaticosInclusosNaSala = function (entrada, callba
       INNER JOIN
         didatico
           ON sala_didatico.id_didatico = didatico.id
-          AND sala_didatico.id_sala = ?`, 
-    entrada, callback);
+          AND sala_didatico.id_sala = ?`,
+    entrada, callback,
+  );
 };
 
 

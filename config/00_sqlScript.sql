@@ -24,10 +24,10 @@ create table aluno(
 -- Tabela professor
 create table professor(
     id int auto_increment,
-    nome varchar(32) NOT NULL,
-    endereco varchar(64),
-    email varchar(32) NOT NULL,
-    senha varchar(128) NOT NULL,
+    nome varchar(100) NOT NULL,
+    endereco varchar(100),
+    email varchar(100) NOT NULL,
+    senha varchar(200) NOT NULL,
     cpf int,
     cep int,
     numero int,
@@ -39,9 +39,10 @@ create table professor(
 -- Tabela da sala
 create table sala(
     id int auto_increment,
-    nome varchar(32),
     id_professor int,
+    nome varchar(32),
     semestre varchar(32),
+    cod_sala INT NOT NULL,
     comentario varchar(1000),
     foreign key (id_professor) references professor(id),
     primary key (id)

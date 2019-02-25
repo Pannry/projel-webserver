@@ -34,10 +34,10 @@ create table aluno(
 con.query(`
 create table professor(
     id int auto_increment,
-    nome varchar(32) NOT NULL,
-    endereco varchar(64),
-    email varchar(32) NOT NULL,
-    senha varchar(128) NOT NULL,
+    nome varchar(100) NOT NULL,
+    endereco varchar(100),
+    email varchar(100) NOT NULL,
+    senha varchar(200) NOT NULL,
     cpf int,
     cep int,
     numero int,
@@ -166,5 +166,4 @@ create table cursa(
 )
 `);
 
-console.log('Success: Database Created!');
 con.end();

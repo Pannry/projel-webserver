@@ -19,7 +19,7 @@ NotasDAO.prototype.selecionarListas = function (entrada, callback) {
       WHERE 
         lista.id = sala_lista.id_lista
         AND id_sala = ?`,
-    entrada, callback
+    entrada, callback,
   );
 };
 

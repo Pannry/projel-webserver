@@ -69,6 +69,6 @@ module.exports = (app) => {
 
   app.route('/turmas/didaticos/abrir/:id_sala/:id_didatico')
     .get(checkAuth, Didaticos.listaDidaticos.get);
-  app.route('/turmas/didaticos/abrir/:id_sala/download/:path') 
+  app.route('/turmas/didaticos/abrir/:id_sala/download/:path')
     .get(checkAuth, Didaticos.DidaticoDownload.get);
 };
