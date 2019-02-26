@@ -4,11 +4,16 @@
   "description": "web server for projel project",
   "main": "index.js",
   "scripts": {
-    "cy": ".\\node_modules\\.bin\\cypress open",
+    
     "start": " start http://localhost:3000  & node server.js",
+    
+    "test": "./node_modules/.bin/cypress open",
+    
     "lint": "node node_modules/ESLint/bin/eslint app/**/*.js",
-    "db:reset": "node .\\scripts\\setupDB.js",
-    "db:populate": "node .\\scripts\\seedDB.js"
+    
+    "db:reset": "node ./scripts/resetDB.js",
+    "db:tables": "node ./scripts/setTables.js",
+    "db:places": "node ./scripts/setInstituicao.js"
   },
   "repository": {
     "type": "git",

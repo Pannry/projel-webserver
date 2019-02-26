@@ -5,7 +5,7 @@ describe('Student login', function() {
 
   it('Should make login', function() {
 
-    cy.get('input').eq(0).type('a');
+    cy.get('input').eq(0).type('a@email.com');
     cy.get('input').eq(1).type('a');    
     cy.get('input').contains('Entrar').click();
 
