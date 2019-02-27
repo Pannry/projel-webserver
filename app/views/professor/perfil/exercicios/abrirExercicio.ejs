@@ -22,6 +22,7 @@
     <div class="card-body">
       <%= questao[0].descricao%>
     </div>
+    
 
   </div>
   <br>
@@ -37,7 +38,8 @@
 
     <div class="card-body">
       <% for (let i = 0; i < paths.length; i++ ) { %>
-      <a href="/professor/exercicios/abrir/<%= questao[0].id%>/download/<%= paths[i].file_name%>" class="list-group-item list-group-item-action">
+      <a href="/professor/exercicios/abrir/<%= questao[0].id%>/download/<%= paths[i].file_name%>"
+        class="list-group-item list-group-item-action">
         <div class="row">
           <div class="col-md-1"><i class="fa fa-download" aria-hidden="true"></i></div>
           <div class="col-md-10">
@@ -46,10 +48,17 @@
         </div>
       </a>
       <% } %>
+  
     </div>
 
   </div>
   <% } %>
+
+  <div class="row">
+    <div class="col-md-3">
+      <a class="btn btn-secondary" href="/professor/profile/exercicios">Voltar</a>
+    </div>
+  </div>
 
 </div>
 <% include ../../../partials/professor-bottom %>
