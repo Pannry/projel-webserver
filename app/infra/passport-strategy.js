@@ -194,7 +194,7 @@ module.exports = (app) => {
       UsuarioDAO.buscarProfessor(entrada, (err, saida) => {
         if (err) return done(err);
         if (saida.length) {
-          return done(null, false, req.flash('signupMessage', 'Email nÃ£o disponivel'));
+          return done(null, false, req.flash('signupMessage', 'Email não disponivel'));
         }
         if (!saida.length) {
           bcrypt.genSalt((err1, salt) => {
@@ -206,6 +206,7 @@ module.exports = (app) => {
 
               UsuarioDAO2.salvarProfessor(newUser, (err3, insertion) => {
                 if (err3) {
+                  console.log(err3);
                   return done(null, false, req.flash('signupMessage', 'Algum campo foi digitado invalidamente'));
                 }
                 user.id = insertion.insertId;

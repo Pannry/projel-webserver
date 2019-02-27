@@ -11,9 +11,9 @@
     
     "lint": "node node_modules/ESLint/bin/eslint app/**/*.js",
     
-    "db:reset": "node ./scripts/resetDB.js",
-    "db:tables": "node ./scripts/setTables.js",
-    "db:places": "node ./scripts/setInstituicao.js"
+    "db:reset": "node ./scripts/dbReset.js",
+    "db:tables": "node ./scripts/dbTables.js",
+    "db:places": "node ./scripts/dbInstituicao.js"
   },
   "repository": {
     "type": "git",
