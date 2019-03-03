@@ -7,7 +7,7 @@
     
     "start": " start http://localhost:3000  & node server.js",
     
-    "test": "./node_modules/.bin/cypress open",
+    "cy:open": "./node_modules/.bin/cypress open",
     
     "lint": "node node_modules/ESLint/bin/eslint app/**/*.js",
     
