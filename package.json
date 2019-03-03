@@ -4,13 +4,9 @@
   "description": "web server for projel project",
   "main": "index.js",
   "scripts": {
-    
     "start": " start http://localhost:3000  & node server.js",
-    
     "cy:open": "./node_modules/.bin/cypress open",
-    
     "lint": "node node_modules/ESLint/bin/eslint app/**/*.js",
-    
     "db:reset": "node ./scripts/dbReset.js",
     "db:tables": "node ./scripts/dbTables.js",
     "db:places": "node ./scripts/dbInstituicao.js"
