@@ -5,12 +5,13 @@ cache:
   - node_modules
 deploy:
   provider: s3
-  access_key_id: AKIAITA3OX7WRIB66KVA
+  access_key_id: "AKIAITA3OX7WRIB66KVA"
   secret_access_key:
     secure: OHt0jncZ7S0v88H0puQSvrSmH8BHMX5IMYz3LJPQC0sRGXiR5l35HsIwa770Z7RHZBCskGE3K+23nv5ZjKXcFwqyat7ZYQHyKljHKLHuHL8pHSpIqoHzd8AJYG+gGCn868VWHjX08sCw1vh8ictwEGsq7uPomt38nh6lK+Nng/CRCjjcZogEh8bdSRVALYSNCw2OqYJ0El2pbByfHS7rN5Oq9w811RbFBJegrmXCFQiy2YuZXie78Pr8QSfEXoq9LpQKAAD/TuP73EIJHU/PvhitJEy8fHFAaOLpsgKbUrvqK604LApAdS9SfDu2ZSq/gIWNDzntmSXiN4PA3SlcOo89TCPEY0PeIaS8VjcfNdFg6YkMiAtzmHf4Hp95ddOi5qXd1DWdTKmVRBDNgQZCICqFWwsWXtNLQEYKRaf13zsXNqBZPagB8t+Q0kpGyuEtepdg6LyE8Vke0MNtucQM1eVVUmvuOHMqVagxoEGe2a/x6XnNRzujEbfFiiQjh7SUqCTDSBvHCQN5jUD7+qHqXmt1fepr0zWchEf9XkIvaMac8BvtUP5DbtwQV6eBRbGeck927GUnq1To5Tr+FN0RZkuhLT92uknAmQMoifbXL0ZGGUZD9VNIrmhIXxTcaevNMhyUvld3qKMFk0KVac3I1tW4l0//P67c/8evR7RFJgQ=
-  bucket: s3-projel-bucket
+  bucket: "s3-projel-bucket"
   upload-dir: dpl_cd_upload
   acl: public_read
   skip_cleanup: true
-  on:
-    repo: Pannry/projel-webserver
+branches:
+  only:
+    - master
