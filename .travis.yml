@@ -1,18 +1,15 @@
 language: node_js
-
-node_js: "10"
-
-cache:  
-  directories:  
-    - "node_modules"  
-
+node_js: '10'
+cache:
+  directories:
+  - node_modules
 deploy:
-- provider: s3
+  provider: s3
   access_key_id: AKIAITA3OX7WRIB66KVA
-  secret_access_key: &1
-    secure: jWlzP3Y7PNav1kuIWGE7SzMb/Etai9dImyI4b2B9KGpLe98NFfLSLPfHNglBlvZI/66WE9Rt+D4TVKna+Ud/GwJKGiFVRMv//9PPLT5+OfEyFyNrVc1zXgHnRPjj0+tN1y1qVpxObCb0NCU7qC0NREyT0sxrcMigrirOJU7Kdx+u83PUgXcsSgdQlOmJx85jIbX17KmrMO/2a7TjahxO4gB6ViD49zROkDzzw2p96L+Cc9ptSb+jVV9G/ZDJka2+qWWTMWtoiurva/r49vJzWp6JBhfzyqr1G3mK4uREZAmMhwgyjbfxiXBzcmcsy7JP4mT8sl7HW2yD+rWAa8lUjA2f0hSGV6OCzlKI6cREWzwjJwc5Zh9yh6luAtrGJ7Np9Az+hr0fB6K8tu72bKc/y+U5mZTf1u/Ux2kFzYxDGABA70FUJgArAgZIcMDQjEO1CgSylIYvtUkOzL+cPbwUZqLN0uZm95AgqHiMGVGnWplOjmrW1/HauDA8dH1MCvQz9ZvM6S1lyWpHvv/AIZNPSOIPaTcI5Nfw+Xpp0EDxIv+qhuAhq5uENLZGcFCWJTnGTsCZTcIcUxTX/jzcdW+QXdeZqdZ5XIoa1Cj55mYxOhE+MUV/YnG/jtvQx46c8a82kmMJLJswe+AOkcbRrTzT01dRsLY0wUj06TdYsMgW0zY=
-  local_dir: dpl_cd_upload
-  skip_cleanup: true
+  secret_access_key:
+    secure: OHt0jncZ7S0v88H0puQSvrSmH8BHMX5IMYz3LJPQC0sRGXiR5l35HsIwa770Z7RHZBCskGE3K+23nv5ZjKXcFwqyat7ZYQHyKljHKLHuHL8pHSpIqoHzd8AJYG+gGCn868VWHjX08sCw1vh8ictwEGsq7uPomt38nh6lK+Nng/CRCjjcZogEh8bdSRVALYSNCw2OqYJ0El2pbByfHS7rN5Oq9w811RbFBJegrmXCFQiy2YuZXie78Pr8QSfEXoq9LpQKAAD/TuP73EIJHU/PvhitJEy8fHFAaOLpsgKbUrvqK604LApAdS9SfDu2ZSq/gIWNDzntmSXiN4PA3SlcOo89TCPEY0PeIaS8VjcfNdFg6YkMiAtzmHf4Hp95ddOi5qXd1DWdTKmVRBDNgQZCICqFWwsWXtNLQEYKRaf13zsXNqBZPagB8t+Q0kpGyuEtepdg6LyE8Vke0MNtucQM1eVVUmvuOHMqVagxoEGe2a/x6XnNRzujEbfFiiQjh7SUqCTDSBvHCQN5jUD7+qHqXmt1fepr0zWchEf9XkIvaMac8BvtUP5DbtwQV6eBRbGeck927GUnq1To5Tr+FN0RZkuhLT92uknAmQMoifbXL0ZGGUZD9VNIrmhIXxTcaevNMhyUvld3qKMFk0KVac3I1tW4l0//P67c/8evR7RFJgQ=
   bucket: s3-projel-bucket
-  on: &2
+  upload-dir: dpl_cd_upload
+  acl: public_read
+  on:
     repo: Pannry/projel-webserver
