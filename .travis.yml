@@ -12,6 +12,7 @@ deploy:
   upload-dir: dpl_cd_upload
   acl: public_read
   skip_cleanup: true
+  region: us-east-2
 branches:
   only:
     - master
