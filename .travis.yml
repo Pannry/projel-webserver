@@ -11,5 +11,6 @@ deploy:
   bucket: s3-projel-bucket
   upload-dir: dpl_cd_upload
   acl: public_read
+  skip_cleanup: true
   on:
     repo: Pannry/projel-webserver
