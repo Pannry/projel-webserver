@@ -9,8 +9,6 @@ const flash = require('connect-flash');
 const middlewareErro = require('../app/middlewares/erro');
 
 require('dotenv').config();
-// const pool = require('../app/middlewares/poolConnection');
-// const connMiddleware = require('../app/middlewares/connectionMiddleware');
 
 module.exports = () => {
   const app = express();
@@ -26,12 +24,7 @@ module.exports = () => {
   app.use(cookieParser());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(session({
-    // https://github.com/expressjs/session
-    // cookie de 30 min
-    cookie: {
-      maxAge: 1000 * 60 * 30,
-    },
-    secret: 'keyboard dog',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
   }));

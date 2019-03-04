@@ -31,7 +31,7 @@ module.exports = (app) => {
 
   // Professor.js
 
-  app.route('/professor/signup')
+  app.route('/meu/link/secreto/para/cadastrar/o/professor/signup')
     .get(Profile.cadastro.get)
     .post(Profile.cadastro.post);
 
