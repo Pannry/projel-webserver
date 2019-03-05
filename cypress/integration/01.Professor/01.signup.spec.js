@@ -1,6 +1,6 @@
 describe('Teacher signup', function() {
   before(function() {
-    cy.visit('/professor/signup');
+    cy.visit('/meu/link/secreto/para/cadastrar/o/professor/signup');
   });
 
   it('Should make signup', function() {

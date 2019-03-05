@@ -23,15 +23,16 @@
       <% if(exercicios[0] !== undefined) { %>
 
       <div class="list-group">
+
         <% for(var i = 0; i < exercicios.length; i++) { %>
-        <a href="/turmas/abrir/<%= sala[0]%>/<%= lista[0]%>/<%= exercicios[i].id_exercicios %>"
-          class="list-group-item list-group-item-action">
+        <a href="/turmas/abrir/<%= sala[0]%>/<%= lista[0]%>/<%= exercicios[i].id_exercicios %>" class="list-group-item list-group-item-action">
           <div class="row">
             <h6 class="col-md-6"> <%= exercicios[i].titulo%> </h6>
           </div>
         </a>
+        <% } %>
+
       </div>
-      <% } %>
 
       <% } else { %>
       <h6> Essa lista não possui exercícios. </h6>

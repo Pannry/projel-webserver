@@ -20,7 +20,7 @@ module.exports = (app) => {
 
     post: passport.authenticate('local-signup-professor', {
       successRedirect: '/professor/profile',
-      failureRedirect: '/professor/signup',
+      failureRedirect: '/meu/link/secreto/para/cadastrar/o/professor/signup',
       failureFlash: true,
     }),
   };

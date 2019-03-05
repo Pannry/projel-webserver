@@ -194,7 +194,7 @@ module.exports = (app) => {
       UsuarioDAO.buscarProfessor(entrada, (err, saida) => {
         if (err) return done(err);
         if (saida.length) {
-          return done(null, false, req.flash('signupMessage', 'Email não disponivel'));
+          return done(null, false, req.flash('signupMessage', 'Email nÃ£o disponivel'));
         }
         if (!saida.length) {
           bcrypt.genSalt((err1, salt) => {

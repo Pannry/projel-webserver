@@ -21,7 +21,7 @@ describe('Exercises tests', function () {
 
     for (let i = 0; i < 4; i++) {
       cy.contains('Criar').click();
-      cy.get('input').eq(0).type(`material exemplo ${i + 1}`);
+      cy.get('input').eq(0).type(`Exercício exemplo ${i + 1}`);
       cy.get('textarea').eq(0).type('Uma pequena descrição desse material exemplo');
       cy.get('input').contains('Criar').click();
     }
