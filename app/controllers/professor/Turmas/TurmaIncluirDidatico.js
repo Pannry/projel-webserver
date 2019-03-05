@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const turmas = {
 
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const idProfessor = req.user.id;
 
@@ -21,9 +21,9 @@ module.exports = (app) => {
           res.render('professor/perfil/turmas/listarDidaticoParaAdicionar', ejs);
         });
         conexaoDb.end();
-      }
+      } else next();
     },
-    post: (req, res) => {
+    post: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
           id_sala: req.params.id,
@@ -52,7 +52,7 @@ module.exports = (app) => {
         }
 
         res.redirect(`/professor/turma/abrir/${entrada.id_sala}/aluno`);
-      }
+      } else next();
     },
 
   };

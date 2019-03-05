@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const Aluno = {
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'aluno') {
         const ejs = {
           user: req.user,
@@ -17,7 +17,7 @@ module.exports = (app) => {
         });
 
         conexaoDb.end();
-      }
+      } else next();
     },
   };
   return Aluno;

@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const Didatico = {
 
-    get(req, res) {
+    get(req, res, next) {
       if (req.user.tipo === 'aluno') {
         const ejs = {
           user: req.user,
@@ -34,7 +34,7 @@ module.exports = (app) => {
           conexaoDb2.end();
         });
         conexaoDb.end();
-      } else res.status(403);
+      } else next();
     },
   };
   return Didatico;

@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const Exercicios = {
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'aluno') {
         const entrada = {
           id_sala: req.params.id_sala,
@@ -91,32 +91,34 @@ module.exports = (app) => {
           .then(thirdMethod)
           .then(fourthMethod)
           .catch((err) => { throw (err); });
-      } else { res.status(403); }
+      } else next();
     },
 
-    post: (req, res) => {
-      const entrada = {
-        id_aluno: req.user.id,
-        id_exercicios: req.params.id_exercicio,
-        id_sala: req.params.id_sala,
-        file_name: '',
-        resposta: req.body.resposta,
-      };
+    post: (req, res, next) => {
+      if (req.user.tipo === 'aluno') {
+        const entrada = {
+          id_aluno: req.user.id,
+          id_exercicios: req.params.id_exercicio,
+          id_sala: req.params.id_sala,
+          file_name: '',
+          resposta: req.body.resposta,
+        };
 
-      const ejs = {
-        sala: req.params.id_sala,
-        lista: req.params.id_lista,
-      };
+        const ejs = {
+          sala: req.params.id_sala,
+          lista: req.params.id_lista,
+        };
 
-      const conexaoDb = app.infra.banco.dbConnection();
-      const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
+        const conexaoDb = app.infra.banco.dbConnection();
+        const ExerciciosDao = new app.infra.banco.ExerciciosDao(conexaoDb);
 
-      ExerciciosDao.responderExerciciosAluno(entrada, (err) => {
-        if (err) throw (err);
-        res.redirect(`/turmas/abrir/listas/${ejs.sala}/${ejs.lista}`);
-      });
+        ExerciciosDao.responderExerciciosAluno(entrada, (err) => {
+          if (err) throw (err);
+          res.redirect(`/turmas/abrir/listas/${ejs.sala}/${ejs.lista}`);
+        });
 
-      conexaoDb.end();
+        conexaoDb.end();
+      } else next();
     },
   };
 

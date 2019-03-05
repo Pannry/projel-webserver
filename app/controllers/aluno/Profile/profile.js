@@ -1,6 +1,6 @@
 module.exports = () => {
   const Aluno = {
-    get(req, res) {
+    get(req, res, next) {
       if (req.user.tipo === 'aluno') {
         const ejs = {
           user: req.user,
@@ -8,10 +8,10 @@ module.exports = () => {
           accountType: req.user.tipo,
         };
         res.render('aluno/perfil/perfil', ejs);
-      }
+      } else next();
     },
 
-    update(req, res) {
+    update(req, res, next) {
       if (req.user.tipo === 'aluno') {
         const ejs = {
           user: req.user,
@@ -19,7 +19,7 @@ module.exports = () => {
           accountType: req.user.tipo,
         };
         res.render('aluno/perfil/atualizarPerfil', ejs);
-      }
+      } else next();
     },
   };
   return Aluno;

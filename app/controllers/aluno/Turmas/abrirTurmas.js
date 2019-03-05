@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const Aluno = {
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'aluno') {
         const entrada = {
           id: req.params.id,
@@ -91,7 +91,7 @@ module.exports = (app) => {
           .then(fourthMethod)
           .then(fifthMethod)
           .catch((err) => { throw (err); });
-      }
+      } else next();
     },
   };
   return Aluno;

@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const Exercicios = {
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
           id: req.params.id,
@@ -23,7 +23,7 @@ module.exports = (app) => {
           else res.download(`app/uploads/${resultado[0].file_name}`);
         });
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 

@@ -2,7 +2,7 @@ const fs = require('fs');
 
 module.exports = (app) => {
   const Exercicios = {
-    delete: (req, res) => {
+    delete: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = req.params.id;
 
@@ -26,7 +26,7 @@ module.exports = (app) => {
           conexaoDb2.end();
         });
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 

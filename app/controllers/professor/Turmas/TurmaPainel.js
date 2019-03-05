@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const turmas = {
 
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = req.user.id;
 
@@ -21,7 +21,7 @@ module.exports = (app) => {
         });
 
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 

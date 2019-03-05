@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const Exercicios = {
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = req.user.id;
 
@@ -19,7 +19,7 @@ module.exports = (app) => {
           res.render('professor/perfil/exercicios/lista', ejs);
         });
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 

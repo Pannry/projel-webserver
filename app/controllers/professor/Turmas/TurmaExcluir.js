@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const turmas = {
 
-    delete: (req, res) => {
+    delete: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = req.params.id;
 
@@ -13,7 +13,7 @@ module.exports = (app) => {
           res.redirect('/professor/profile/turmas');
         });
         conexaoDb.end();
-      }
+      } else next();
     },
 
   };

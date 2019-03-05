@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const turmas = {
 
-    professorGET: (req, res) => {
+    professorGET: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = req.params.id;
 
@@ -34,10 +34,10 @@ module.exports = (app) => {
           conexaoDb2.end();
         });
         conexaoDb1.end();
-      }
+      } else next();
     },
 
-    alunoGET: (req, res) => {
+    alunoGET: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = req.params.id;
 
@@ -82,10 +82,10 @@ module.exports = (app) => {
           conexaoDb2.end();
         });
         conexaoDb1.end();
-      }
+      } else next();
     },
 
-    autenticarAlunoNaTurma: (req, res) => {
+    autenticarAlunoNaTurma: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
           id_sala: req.params.id,
@@ -100,10 +100,10 @@ module.exports = (app) => {
           res.redirect(`/professor/turma/abrir/${entrada.id_sala}/professor`);
         });
         conexaoDb.end();
-      }
+      } else next();
     },
 
-    comentario: (req, res) => {
+    comentario: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
           id: req.params.id,
@@ -118,7 +118,7 @@ module.exports = (app) => {
         });
 
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 

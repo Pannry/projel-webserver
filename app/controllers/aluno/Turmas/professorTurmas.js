@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const Aluno = {
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'aluno') {
         const entrada = {
           id_professor: req.query.idProf,
@@ -22,10 +22,10 @@ module.exports = (app) => {
         });
 
         conexaoDb.end();
-      } else res.status(403);
+      } else next();
     },
 
-    post: (req, res) => {
+    post: (req, res, next) => {
       if (req.user.tipo === 'aluno') {
         const entrada = {
           id_sala: Object.keys(req.body)[0],
@@ -40,7 +40,7 @@ module.exports = (app) => {
         });
 
         conexaoDb.end();
-      } else { res.status(403); }
+      } else next();
     },
   };
 

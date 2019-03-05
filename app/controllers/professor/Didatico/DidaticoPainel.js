@@ -21,7 +21,7 @@ module.exports = (app) => {
           else next();
         });
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 

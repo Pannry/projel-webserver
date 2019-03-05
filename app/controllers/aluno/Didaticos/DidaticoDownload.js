@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const Aluno = {
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'aluno') {
         const entrada = {
           file_name: req.params.path,
@@ -21,7 +21,7 @@ module.exports = (app) => {
           else res.download(`app/uploads/${resultado[0].file_name}`);
         });
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 

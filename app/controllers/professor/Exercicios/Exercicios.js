@@ -18,7 +18,7 @@ module.exports = (app) => {
           if (!err) { res.render('professor/perfil/exercicios/exercicios', ejs); } else { next(); }
         });
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 

@@ -1,6 +1,6 @@
 module.exports = () => {
   const Professor = {
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const params = {
           user: req.user,
@@ -8,10 +8,10 @@ module.exports = () => {
           accountType: req.user.tipo,
         };
         res.render('professor/perfil/perfil', params);
-      }
+      } else next();
     },
 
-    update: (req, res) => {
+    update: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const params = {
           user: req.user,
@@ -19,7 +19,7 @@ module.exports = () => {
           accountType: req.user.tipo,
         };
         res.render('professor/perfil/atualizarPerfil', params);
-      }
+      } else next();
     },
 
   };

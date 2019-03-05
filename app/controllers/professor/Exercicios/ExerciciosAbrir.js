@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const Exercicios = {
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
           id_exercicios: req.params.id,
@@ -33,7 +33,7 @@ module.exports = (app) => {
           }
         });
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 

@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const turmas = {
 
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const ejs = {
           user: req.user,
@@ -10,10 +10,10 @@ module.exports = (app) => {
         };
 
         res.render('professor/perfil/turmas/criarTurma', ejs);
-      }
+      } else next();
     },
 
-    post: (req, res) => {
+    post: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
           nome: req.body.nome,
@@ -33,7 +33,7 @@ module.exports = (app) => {
         });
 
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 

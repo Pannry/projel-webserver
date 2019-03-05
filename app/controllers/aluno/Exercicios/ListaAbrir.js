@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const Exercicios = {
 
-    get(req, res) {
+    get(req, res, next) {
       if (req.user.tipo === 'aluno') {
         const ejs = {
           user: req.user,
@@ -52,7 +52,7 @@ module.exports = (app) => {
           .then(secondMethod)
           .then(thirdMethod)
           .catch((err) => { throw (err); });
-      } else res.status(403);
+      } else next();
     },
   };
   return Exercicios;

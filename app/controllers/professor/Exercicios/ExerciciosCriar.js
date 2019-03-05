@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const Exercicios = {
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const ejs = {
           user: req.user,
@@ -8,7 +8,7 @@ module.exports = (app) => {
           accountType: req.user.tipo,
         };
         res.render('professor/perfil/exercicios/criarExercicios', ejs);
-      }
+      } else next();
     },
 
     post: (req, res, next) => {
@@ -40,7 +40,7 @@ module.exports = (app) => {
           if (!err) { res.redirect('/professor/profile/exercicios'); } else { next(); }
         });
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 

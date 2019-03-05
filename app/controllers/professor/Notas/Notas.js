@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const notas = {
-    professorGET: (req, res) => {
+    professorGET: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
           id_sala: req.params.id_sala,
@@ -66,10 +66,10 @@ module.exports = (app) => {
           .then(secondMethod)
           .then(thirdMethod)
           .catch((err) => { throw (err); });
-      }
+      } else next();
     },
 
-    post: (req, res) => {
+    post: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
           id_sala: req.params.id_sala,
@@ -96,10 +96,10 @@ module.exports = (app) => {
         });
 
         conexaoDb1.end();
-      }
+      } else next();
     },
 
-    verRespostas: (req, res) => {
+    verRespostas: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
           id_aluno: req.params.id_aluno,
@@ -124,7 +124,7 @@ module.exports = (app) => {
           res.render('professor/perfil/notas/mostrarExerciciosLista', ejs);
         });
         conexaoDb.end();
-      }
+      } else next();
     },
   };
   return notas;

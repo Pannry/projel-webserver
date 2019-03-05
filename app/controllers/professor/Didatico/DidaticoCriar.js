@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const Professor = {
-    get: (req, res) => {
+    get: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const ejs = {
           user: req.user,
@@ -8,10 +8,10 @@ module.exports = (app) => {
           accountType: req.user.tipo,
         };
         res.render('professor/perfil/didatico/criarDidatico', ejs);
-      }
+      } else next();
     },
 
-    post: (req, res) => {
+    post: (req, res, next) => {
       if (req.user.tipo === 'professor') {
         const entrada = {
           id_professor: req.user.id,
@@ -40,7 +40,7 @@ module.exports = (app) => {
           res.redirect('/professor/profile/didatico');
         });
         conexaoDb.end();
-      }
+      } else next();
     },
   };
 
