@@ -31,7 +31,7 @@ module.exports = (app) => {
 
   // Professor.js
 
-  app.route('/meu/link/secreto/para/cadastrar/o/professor/signup')
+  app.route(process.env.TSECRET_SIGNUP)
     .get(Profile.cadastro.get)
     .post(Profile.cadastro.post);
 
