@@ -4,12 +4,14 @@
   "description": "web server for projel project",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js & start http://localhost:3000",
+    "start": "nodemon server.js",
     "cy:open": "./node_modules/.bin/cypress open",
     "lint": "node node_modules/ESLint/bin/eslint app/**/*.js",
     "db:reset": "node ./scripts/dbReset.js",
     "db:tables": "node ./scripts/dbTables.js",
-    "db:places": "node ./scripts/dbInstituicao.js"
+    "db:places": "node ./scripts/dbInstituicao.js",
+    "db:class":"node ./scripts/dbClass.js",
+    "db:cr":"node ./scripts/dbConfirmRgistration.js"
   },
   "repository": {
     "type": "git",

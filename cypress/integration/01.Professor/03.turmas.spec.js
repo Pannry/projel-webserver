@@ -1,4 +1,4 @@
-describe('Classroom tests', function () {
+describe('Teacher classroom tests', function () {
   beforeEach(function () {
     cy.visit('/professor/login');
     cy.get('input').eq(0).type('p@email.com');
@@ -28,4 +28,8 @@ describe('Classroom tests', function () {
     cy.get('#useIdDelete > button').click();
     cy.contains('Logout').click();
   });
+
+  it('Should create a example class for students tests', function () {
+    cy.exec('npm run db:class');    
+  })
 });

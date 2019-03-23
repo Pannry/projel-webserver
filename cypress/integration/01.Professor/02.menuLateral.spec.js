@@ -1,4 +1,4 @@
-describe('Sidebar menu', function () {
+describe('Teacher sidebar menu', function () {
   before(function () {
     cy.visit('/professor/login');
     cy.get('input').eq(0).type('p@email.com');
