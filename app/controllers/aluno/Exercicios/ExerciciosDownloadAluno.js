@@ -3,7 +3,7 @@ module.exports = (app) => {
     get: (req, res, next) => {
       if (req.user.tipo === 'aluno') {
         const entrada = {
-          id_exercicio: req.params.id_exercicio,
+          id: req.params.id_exercicio,
           file_name: req.params.file_name,
         };
         const ejs = {
