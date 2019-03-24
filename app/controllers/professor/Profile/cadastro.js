@@ -4,6 +4,7 @@ module.exports = (app) => {
     get: (req, res) => {
       const params = {
         message: req.flash('signupMessage'),
+        signupLink: process.env.TSECRET_SIGNUP,
       };
 
       const conexaoDb = app.infra.banco.dbConnection();
@@ -20,7 +21,7 @@ module.exports = (app) => {
 
     post: passport.authenticate('local-signup-professor', {
       successRedirect: '/professor/profile',
-      failureRedirect: '/meu/link/secreto/para/cadastrar/o/professor/signup',
+      failureRedirect: process.env.TSECRET_SIGNUP,
       failureFlash: true,
     }),
   };
