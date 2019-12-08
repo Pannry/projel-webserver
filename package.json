@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/Pannry/projel-webserver#readme",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
     "consign": "^0.1.6",
