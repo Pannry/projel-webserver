@@ -1,9 +1,27 @@
-function InstituicaoDAO(conexaoDb) {
-  this._conexaoDb = conexaoDb;
-}
+const dbConn = require('./dbConnection');
 
-module.exports = () => InstituicaoDAO;
+const ConnectionDatabase = dbConn();
 
-InstituicaoDAO.prototype.listaInstituicao = function (callback) {
-  this._conexaoDb.query('SELECT * FROM instituicao', callback);
+function InstituicaoDAO() { }
+
+module.exports = InstituicaoDAO;
+
+InstituicaoDAO.prototype.getConnection = async function () {
+  this.conn = await new ConnectionDatabase();
+};
+
+InstituicaoDAO.prototype.closeConnection = async function () {
+  await this.conn.end();
+  this.conn = undefined;
+};
+
+InstituicaoDAO.prototype.execSQL = async function (sql, input) {
+  await this.getConnection();
+  const result = await this.conn.query(sql, input);
+  this.closeConnection();
+  return result[0];
+};
+
+InstituicaoDAO.prototype.listar = async function (input) {
+  return this.execSQL('SELECT * FROM instituicao', input);
 };

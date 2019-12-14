@@ -2,9 +2,9 @@
 module.exports = (app) => {
   const passport = app.get('passport');
   const Professor = {
-    get: (req, res) => {
-      res.render('professor/login', { message: req.flash('loginMessage') });
-    },
+    //   get: (req, res) => {
+    //     res.render('professor/login', { message: req.flash('loginMessage') });
+    //   },
 
     post: passport.authenticate('local-login-professor', {
       successRedirect: '/professor/profile',
