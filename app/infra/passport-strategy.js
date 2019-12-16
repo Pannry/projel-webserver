@@ -214,7 +214,7 @@ passport.use('local-signup-professor', new LocalStrategy(
     const user = {};
 
     const findUser = new UsuarioDAO();
-    const result = await findUser.findProfessor(entrada.email);
+    const result = await findUser.findProfessor({ email: entrada.email });
 
     if (result.length) {
       return done(null, false, req.flash('signupMessage', 'Email não disponivel'));
