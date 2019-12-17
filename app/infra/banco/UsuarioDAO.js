@@ -26,23 +26,14 @@ UsuarioDAO.prototype.findIdAluno = async function (input) {
   return this.execSQL('SELECT id, nome, email FROM aluno WHERE ?', input);
 };
 
-UsuarioDAO.prototype.findIdProfessor = async function (input) {
-  return this.execSQL('SELECT id, nome, email FROM professor WHERE ?', input);
-};
-
+// TODO: tirar estrela e por um segundo objeto como entrada.
 UsuarioDAO.prototype.findProfessor = async function (input) {
   return this.execSQL('SELECT * FROM professor WHERE ?', input);
 };
 
-UsuarioDAO.prototype.saveProfessor = async function (input) {
+UsuarioDAO.prototype.createProfessor = async function (input) {
   return this.execSQL('INSERT INTO professor SET ?', input);
 };
-
-// function UsuarioDAO(conexaoDb) {
-//   this._conexaoDb = conexaoDb;
-// }
-
-// module.exports = () => UsuarioDAO;
 
 // /**
 //  * Aluno
@@ -57,23 +48,4 @@ UsuarioDAO.prototype.saveProfessor = async function (input) {
 
 // UsuarioDAO.prototype.buscarIdAluno = function (id, callback) {
 //   this._conexaoDb.query('SELECT id, nome, email FROM aluno WHERE id = ?', id, callback);
-// };
-
-// UsuarioDAO.prototype.listaProfessor = function (callback) {
-//   this._conexaoDb.query('SELECT * FROM professor', callback);
-// };
-
-// /**
-//  * Professor
-//  */
-// UsuarioDAO.prototype.salvarProfessor = function (usuario, callback) {
-//   this._conexaoDb.query('INSERT INTO professor SET ?', usuario, callback);
-// };
-
-// UsuarioDAO.prototype.buscarProfessor = function (usuario, callback) {
-//   this._conexaoDb.query('SELECT * FROM professor WHERE email = ?', [usuario.email], callback);
-// };
-
-// UsuarioDAO.prototype.buscarIdProfessor = function (id, callback) {
-//   this._conexaoDb.query('SELECT id, nome, email FROM professor WHERE id = ?', id, callback);
 // };

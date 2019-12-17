@@ -19,10 +19,10 @@ passport.deserializeUser(async (usuario, done) => {
     user[0].tipo = 'aluno';
     done(null, user[0]);
   } else if (usuario.tipo === 'professor') {
-    const result = await savedUser.findIdProfessor({ id: usuario.id });
-    const user = result;
-    user[0].tipo = 'professor';
-    done(null, user[0]);
+    const result = await savedUser.findProfessor({ id: usuario.id });
+    const user = { id: result[0].id, email: result[0].email, nome: result[0].nome };
+    user.tipo = 'professor';
+    done(null, user);
   }
 });
 
@@ -151,41 +151,36 @@ passport.deserializeUser(async (usuario, done) => {
 //    * Login do professor
 //    */
 
-//   // Login
-//   passport.use('local-login-professor', new LocalStrategy(
-//     {
-//       usernameField: 'email',
-//       passwordField: 'senha',
-//       passReqToCallback: true,
-//     },
-//     ((req, username, password, done) => {
-//       const conexaoDb = app.infra.banco.dbConnection();
-//       const usuarioDAO = new app.infra.banco.UsuarioDAO(conexaoDb);
+// Login
+passport.use('local-login-professor', new LocalStrategy(
+  {
+    usernameField: 'email',
+    passwordField: 'senha',
+    passReqToCallback: true,
+  },
+  async (req, username, password, done) => {
+    const entrada = { email: username, senha: password };
 
-//       const entrada = {
-//         email: username,
-//         senha: password,
-//       };
+    const findUser = new UsuarioDAO();
+    const result = await findUser.findProfessor({ email: entrada.email });
 
-//       usuarioDAO.buscarProfessor(entrada, (err, usuario) => {
-//         if (err) {
-//           return done(err);
-//         }
-//         if (!usuario.length) {
-//           return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.'));
-//         }
-//         if (!bcrypt.compareSync(entrada.senha, usuario[0].senha)) {
-//           return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.'));
-//         }
+    // TODO: Erro
+    // if (!result){ 
+    //   return Error
+    // }
 
-//         const user = usuario;
-//         user[0].tipo = 'professor';
-//         return done(null, user[0]);
-//       });
+    if (!result.length) {
+      return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.'));
+    }
+    if (!bcrypt.compareSync(entrada.senha, result[0].senha)) {
+      return done(null, false, req.flash('loginMessage', 'Oops! Email ou senha não encontrado, tente novamente.'));
+    }
 
-//       conexaoDb.end();
-//     }),
-//   ));
+    const user = result;
+    user[0].tipo = 'professor';
+    return done(null, user[0]);
+  },
+));
 
 // Cadastro
 passport.use('local-signup-professor', new LocalStrategy(
@@ -226,7 +221,7 @@ passport.use('local-signup-professor', new LocalStrategy(
       newUser.senha = hash;
 
       const saveUser = new UsuarioDAO();
-      const profDB = await saveUser.saveProfessor(newUser);
+      const profDB = await saveUser.createProfessor(newUser);
 
       if (!profDB) {
         return done(null, false, req.flash('signupMessage', 'Algum campo foi digitado indevidamente'));

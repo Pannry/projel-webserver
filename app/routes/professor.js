@@ -1,11 +1,33 @@
 const express = require('express');
 const {
   getCreate, postCreate,
-  getLogProf,
-} = require('../controllers/professor/Profile/profileTemp');
+  getLogin, postLogin,
+  getProfile, getUpdateProfile,
+} = require('../controllers/professor/Profile');
+
+const {
+  getClassrooms,
+  getCreateClassroom, postCreateClassroom,
+  getOpenClassroomStudentList, IncludeStudentInClassroom,
+  getOpenClassroomDetails, postCommentInDetails,
+  getIncludeExerciseList, postIncludeExerciseList,
+  getIncludeDidacticList, postIncludeDidacticList,
+  deleteClassroom,
+} = require('../controllers/professor/Classroom');
+
+const {
+  getExercises,
+} = require('../controllers/professor/Exercicios/Exercise');
 
 const router = express.Router();
 
+function checkAuth(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/');
+  return 0;
+}
+
+// @Profile
 router
   .route('/cadastro')
   .get(getCreate)
@@ -13,7 +35,59 @@ router
 
 router
   .route('/login')
-  .get(getLogProf);
+  .get(getLogin)
+  .post(postLogin);
+
+router
+  .route('/profile')
+  .get(checkAuth, getProfile);
+
+router
+  .route('/profile/update')
+  .get(checkAuth, getUpdateProfile);
+
+// @Classroom.js
+router
+  .route('/turmas')
+  .get(checkAuth, getClassrooms);
+
+router
+  .route('/turmas/criar')
+  .get(checkAuth, getCreateClassroom)
+  .post(checkAuth, postCreateClassroom);
+
+router
+  .route('/turma/abrir/:id/professor')
+  .get(checkAuth, getOpenClassroomStudentList)
+  .post(checkAuth, IncludeStudentInClassroom);
+
+router
+  .route('/turma/abrir/:id/aluno')
+  .get(checkAuth, getOpenClassroomDetails)
+  .post(checkAuth, postCommentInDetails);
+
+// TODO: rota abaixo
+router
+  .route('/turma/abrir/:id/aluno/incluirlista')
+  .get(checkAuth, getIncludeExerciseList)
+  .post(checkAuth, postIncludeExerciseList);
+
+// TODO: rota abaixo
+router
+  .route('/turma/abrir/:id/aluno/incluirDidatico')
+  .get(checkAuth, getIncludeDidacticList)
+  .post(checkAuth, postIncludeDidacticList);
+
+// TODO: testar .put e .delete
+router
+  .route('/turmas/excluir/:id')
+  .get(checkAuth, deleteClassroom);
+
+// @Exercise.js
+router
+  .route('/exercicios')
+  .get(checkAuth, getExercises);
+
 
 module.exports = function (app) {
   app.use('/professor', router);
@@ -30,13 +104,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
-function checkAuth(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  res.redirect('/');
-  return 0;
-}
-
 // module.exports = (app) => {
 //   const { Profile } = app.controllers.professor;
 //   const { Turmas } = app.controllers.professor;
@@ -50,31 +117,9 @@ function checkAuth(req, res, next) {
 //       res.render('professor/home', { accountType: req.user.tipo });
 //   });
 
-//   // Professor.js
-
-//   app.route('/professor/cadastro')
-//     // .get(Profile.cadastro.get)
-//     .post(Profile.cadastro.post);
-
-//   app.route('/professor/login')
-//     .get(Profile.login.get)
-//     .post(Profile.login.post);
-
-//   app.route('/professor/logout')
-//     .get(Profile.logout.logout);
-
-//   app.route('/professor/profile')
-//     .get(checkAuth, Profile.profile.get);
-
-//   app.route('/professor/profile/update')
-//     .get(checkAuth, Profile.profile.update);
 
 
-//   // Turmas.js
-
-//   app.route('/professor/profile/turmas')
-//     .get(checkAuth, Turmas.TurmaPainel.get);
-
+//   // 
 
 //   app.route('/professor/turmas/criar')
 //     .get(checkAuth, Turmas.TurmaCriar.get)
