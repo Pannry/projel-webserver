@@ -58,7 +58,7 @@ TurmaDao.prototype.editComment = function (input) {
   return this.execSQL('UPDATE sala SET ? WHERE ?', [input.com, input.id]);
 };
 
-TurmaDao.prototype.excluirSala = function (input) {
+TurmaDao.prototype.delete = function (input) {
   return this.execSQL('DELETE FROM sala WHERE ?', input);
 };
 

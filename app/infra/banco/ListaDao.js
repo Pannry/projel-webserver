@@ -2,20 +2,20 @@ const dbConn = require('./dbConnection');
 
 const ConnectionDatabase = dbConn();
 
-function ExercicioDao() { }
+function ListaDao() { }
 
-module.exports = ExercicioDao;
+module.exports = ListaDao;
 
-ExercicioDao.prototype.getConnection = async function () {
+ListaDao.prototype.getConnection = async function () {
   this.conn = await new ConnectionDatabase();
 };
 
-ExercicioDao.prototype.closeConnection = async function () {
+ListaDao.prototype.closeConnection = async function () {
   await this.conn.end();
   this.conn = undefined;
 };
 
-ExercicioDao.prototype.execSQL = async function (sql, input) {
+ListaDao.prototype.execSQL = async function (sql, input) {
   await this.getConnection();
   console.log(this.conn.format(sql, input) + '\n');
   const result = await this.conn.query(sql, input);
@@ -23,67 +23,35 @@ ExercicioDao.prototype.execSQL = async function (sql, input) {
   return result[0];
 };
 
-ExercicioDao.prototype.list = function (input) {
-  return this.execSQL('SELECT * FROM exercicios WHERE ?', input);
+ListaDao.prototype.list = function (input) {
+  return this.execSQL('SELECT * FROM lista WHERE ?', input);
 };
 
-ExercicioDao.prototype.open = function (input) {
-  return this.execSQL('SELECT * FROM exercicios WHERE id=? AND id_professor=?', input);
+ListaDao.prototype.open = function (input) {
+  return this.execSQL('SELECT * FROM lista WHERE id_professor = ? AND id = ?', input);
 };
 
-ExercicioDao.prototype.create = function (input) {
-  return this.execSQL('INSERT INTO exercicios SET ?', input);
+ListaDao.prototype.create = function (input) {
+  return this.execSQL('INSERT INTO lista SET ?', input);
 };
 
-ExercicioDao.prototype.addMaterial = function (input) {
-  return this.execSQL('INSERT INTO exercicios_material SET ?', input);
-};
-
-ExercicioDao.prototype.downloadFiles = function (input) {
-  return this.execSQL('SELECT file_name FROM exercicios_material WHERE ?', input);
-};
-
-ExercicioDao.prototype.download = function (input) {
+ListaDao.prototype.showQuestions = function (input) {
   return this.execSQL(
     ` SELECT 
-      exercicios.id_professor, 
-      exercicios.id, 
-      exercicios_material.file_name
+      *
     FROM
-      exercicios
+      lista_exercicios
     INNER JOIN
-      exercicios_material
-        ON exercicios.id = exercicios_material.id
-        AND exercicios.id = ?
-        AND exercicios_material.file_name = ?`,
+      exercicios
+        ON lista_exercicios.id_exercicios = exercicios.id
+        AND ?`,
     input,
   );
 };
 
-ExercicioDao.prototype.delete = function (input) {
-  return this.execSQL('DELETE FROM exercicios WHERE ?', input);
+ListaDao.prototype.addQuestion = function (input) {
+  return this.execSQL('INSERT INTO lista_exercicios SET ?', input);
 };
-
-
-// function ExerciciosDao(conexaoDb) {
-//   this._conexaoDb = conexaoDb;
-// }
-
-// module.exports = () => ExerciciosDao;
-
-// // Professor
-
-// // Exercicios
-
-// // Lista de Exercicios
-
-// ExerciciosDao.prototype.criarListaExercicios = function (entrada, callback) {
-//   this._conexaoDb.query('INSERT INTO lista SET ?', entrada, callback);
-// };
-
-// ExerciciosDao.prototype.adicionarExercicioLista = function (entrada, callback) {
-//   this._conexaoDb.query('INSERT INTO lista_exercicios SET ?', entrada, callback);
-// };
 
 // ExerciciosDao.prototype.listasParaIncluir = function (entrada, callback) {
 //   this._conexaoDb.query('INSERT INTO sala_lista SET ?', entrada, callback);
@@ -99,24 +67,6 @@ ExercicioDao.prototype.delete = function (input) {
 
 // ExerciciosDao.prototype.mostrarListaExercicios = function (entrada, callback) {
 //   this._conexaoDb.query('SELECT * FROM lista WHERE id_professor = ?', entrada, callback);
-// };
-
-// ExerciciosDao.prototype.abrirLista = function (entrada, callback) {
-//   this._conexaoDb.query('SELECT * FROM lista WHERE id_professor = ? AND id = ?', [entrada.id_professor, entrada.id], callback);
-// };
-
-// ExerciciosDao.prototype.mostrarQuestoes = function (entrada, callback) {
-//   this._conexaoDb.query(
-//     ` SELECT 
-//       *
-//     FROM
-//       lista_exercicios
-//     INNER JOIN
-//       exercicios
-//         ON lista_exercicios.id_exercicios = exercicios.id
-//         AND lista_exercicios.id_lista = ?`,
-//     entrada, callback,
-//   );
 // };
 
 // ExerciciosDao.prototype.mostrarExerciciosInclusos = function (entrada, callback) {

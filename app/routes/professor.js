@@ -1,4 +1,6 @@
 const express = require('express');
+const upload = require('../middlewares/upload');
+
 const {
   getCreate, postCreate,
   getLogin, postLogin,
@@ -17,7 +19,15 @@ const {
 
 const {
   getExercises,
+  getCreateExercises, postCreateExercises,
+  openExercise, deleteExercise, downloadExercice,
 } = require('../controllers/professor/Exercicios/Exercise');
+
+const {
+  getLists, openList, showQuestions,
+  getCreateList, postCreateList, deleteList,
+  getAddQuestionsInList, postAddQuestionsInList,
+} = require('../controllers/professor/Exercicios/ExerciseList');
 
 const router = express.Router();
 
@@ -26,6 +36,7 @@ function checkAuth(req, res, next) {
   res.redirect('/');
   return 0;
 }
+
 
 // @Profile
 router
@@ -88,21 +99,54 @@ router
   .route('/exercicios')
   .get(checkAuth, getExercises);
 
+router
+  .route('/exercicios/criar')
+  .get(checkAuth, getCreateExercises)
+  .post(checkAuth, upload, postCreateExercises);
+
+router
+  .route('/exercicios/abrir/:id')
+  .get(checkAuth, openExercise);
+
+router
+  .route('/exercicios/excluir/:id')
+  .get(checkAuth, deleteExercise);
+
+router
+  .route('/exercicios/abrir/:id_exercicio/download/:file_name')
+  .get(checkAuth, downloadExercice);
+
+// @ExerciseList.js
+router
+  .route('/exercicios/lista')
+  .get(checkAuth, getLists);
+
+router
+  .route('/exercicios/lista/criar')
+  .get(checkAuth, getCreateList)
+  .post(checkAuth, postCreateList);
+
+router
+  .route('/exercicios/lista/excluir/:id')
+  .get(checkAuth, deleteList);
+
+router
+  .route('/exercicios/lista/abrir/:id/info')
+  .get(checkAuth, openList);
+
+router
+  .route('/exercicios/lista/abrir/:id/questoes')
+  .get(checkAuth, showQuestions);
+
+
+router
+  .route('/exercicios/lista/abrir/:id/editar')
+  .get(checkAuth, getAddQuestionsInList)
+  .post(checkAuth, postAddQuestionsInList);
 
 module.exports = function (app) {
   app.use('/professor', router);
 };
-
-const multer = require('multer');
-
-const storage = multer.diskStorage({
-  destination: 'app/uploads/',
-  filename(req, file, cb) {
-    cb(null, `${Date.now().toString().substring(5, 13)}_${file.originalname}`);
-  },
-});
-
-const upload = multer({ storage });
 
 // module.exports = (app) => {
 //   const { Profile } = app.controllers.professor;
@@ -117,13 +161,7 @@ const upload = multer({ storage });
 //       res.render('professor/home', { accountType: req.user.tipo });
 //   });
 
-
-
-//   // 
-
-//   app.route('/professor/turmas/criar')
-//     .get(checkAuth, Turmas.TurmaCriar.get)
-//     .post(checkAuth, Turmas.TurmaCriar.post);
+// Turmas
 
 //   app.route('/professor/turma/abrir/:id/professor')
 //     .get(checkAuth, Turmas.TurmaAbrir.professorGET)
@@ -141,49 +179,7 @@ const upload = multer({ storage });
 //     .get(checkAuth, Turmas.TurmaIncluirDidatico.get)
 //     .post(checkAuth, Turmas.TurmaIncluirDidatico.post);
 
-//   app.route('/professor/turmas/excluir/:id')
-//     .get(checkAuth, Turmas.TurmaExcluir.delete);
-
-//   // Exercicios
-
-//   // Questões
-//   app.route('/professor/profile/exercicios')
-//     .get(checkAuth, Exercicios.Exercicios.get);
-
-//   app.route('/professor/exercicios/abrir/:id')
-//     .get(checkAuth, Exercicios.ExerciciosAbrir.get);
-
-//   app.route('/professor/exercicios/excluir/:id')
-//     .get(checkAuth, Exercicios.ExerciciosExcluir.delete);
-
-//   app.route('/professor/exercicios/criar')
-//     .get(checkAuth, Exercicios.ExerciciosCriar.get)
-//     .post(checkAuth, upload.array('fileUpload', 5), Exercicios.ExerciciosCriar.post);
-
-//   app.route('/professor/exercicios/abrir/:id_exercicio/download/:file_name')
-//     .get(checkAuth, Exercicios.ExerciciosDownloadProfessor.get);
-
-
 //   // Listas
-//   app.route('/professor/profile/exercicios/lista')
-//     .get(checkAuth, Exercicios.Listas.get);
-
-//   app.route('/professor/exercicios/lista/criar')
-//     .get(checkAuth, Exercicios.ListasCriar.get)
-//     .post(checkAuth, Exercicios.ListasCriar.post);
-
-//   app.route('/professor/exercicios/lista/excluir/:id')
-//     .get(checkAuth, Exercicios.ListasExcluir.delete);
-
-//   app.route('/professor/exercicios/lista/abrir/:id/info')
-//     .get(checkAuth, Exercicios.ListasAbrir.mostrarInformacoes);
-
-//   app.route('/professor/exercicios/lista/abrir/:id/questoes')
-//     .get(checkAuth, Exercicios.ListasAbrir.mostrarQuestoes);
-
-//   app.route('/professor/exercicios/lista/abrir/:id/editar')
-//     .get(checkAuth, Exercicios.ListasAdicionarExercicios.get)
-//     .post(checkAuth, Exercicios.ListasAdicionarExercicios.post);
 
 //   // Nota
 

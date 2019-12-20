@@ -52,7 +52,7 @@ exports.postCreateClassroom = asyncHandler(async (req, res, next) => {
 
     const classrooms = new TurmaDao();
     await classrooms.create(entrada);
-    res.redirect('/professor/profile/turmas');
+    res.redirect('/professor/turmas');
   } else {
     next();
   }
@@ -199,8 +199,9 @@ exports.postIncludeDidacticList = asyncHandler(async (req, res, next) => {
 exports.deleteClassroom = asyncHandler(async (req, res, next) => {
   if (req.user.tipo === 'professor') {
     const classroom = new TurmaDao();
+    console.log({ id: req.params.id });
     await classroom.delete({ id: req.params.id });
-    res.redirect('/professor/profile/turmas');
+    res.redirect('/professor/turmas');
   } else {
     next();
   }
