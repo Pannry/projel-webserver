@@ -39,7 +39,7 @@ ExercicioDao.prototype.addMaterial = function (input) {
   return this.execSQL('INSERT INTO exercicios_material SET ?', input);
 };
 
-ExercicioDao.prototype.downloadFiles = function (input) {
+ExercicioDao.prototype.downloadPaths = function (input) {
   return this.execSQL('SELECT file_name FROM exercicios_material WHERE ?', input);
 };
 

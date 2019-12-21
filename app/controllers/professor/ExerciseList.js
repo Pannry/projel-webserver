@@ -1,6 +1,6 @@
-const asyncHandler = require('../../../middlewares/async');
-const ListDao = require('../../../infra/banco/ListaDao');
-const ExercicioDao = require('../../../infra/banco/ExercicioDao');
+const asyncHandler = require('../../middlewares/async');
+const ListDao = require('../../infra/banco/ListaDao');
+const ExercicioDao = require('../../infra/banco/ExercicioDao');
 
 // @Turmas
 exports.getLists = asyncHandler(async (req, res, next) => {

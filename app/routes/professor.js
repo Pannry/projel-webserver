@@ -21,13 +21,19 @@ const {
   getExercises,
   getCreateExercises, postCreateExercises,
   openExercise, deleteExercise, downloadExercice,
-} = require('../controllers/professor/Exercicios/Exercise');
+} = require('../controllers/professor/Exercise');
 
 const {
   getLists, openList, showQuestions,
   getCreateList, postCreateList, deleteList,
   getAddQuestionsInList, postAddQuestionsInList,
-} = require('../controllers/professor/Exercicios/ExerciseList');
+} = require('../controllers/professor/ExerciseList');
+
+const {
+  openDidactic, deleteDidactic,
+  getDidactic, downloadDidactic,
+  getCreateDidactic, postCreateDidactic,
+} = require('../controllers/professor/Didactic');
 
 const router = express.Router();
 
@@ -138,11 +144,32 @@ router
   .route('/exercicios/lista/abrir/:id/questoes')
   .get(checkAuth, showQuestions);
 
-
 router
   .route('/exercicios/lista/abrir/:id/editar')
   .get(checkAuth, getAddQuestionsInList)
   .post(checkAuth, postAddQuestionsInList);
+
+//  @Didactic.js
+router
+  .route('/didatico')
+  .get(checkAuth, getDidactic);
+
+router
+  .route('/didatico/criar')
+  .get(checkAuth, getCreateDidactic)
+  .post(checkAuth, upload, postCreateDidactic);
+
+router
+  .route('/didatico/abrir/:id/')
+  .get(checkAuth, openDidactic);
+
+router
+  .route('/didatico/excluir/:id')
+  .get(checkAuth, deleteDidactic);
+
+router
+  .route('/didatico/abrir/:id/download/:path')
+  .get(checkAuth, downloadDidactic);
 
 module.exports = function (app) {
   app.use('/professor', router);
@@ -192,19 +219,4 @@ module.exports = function (app) {
 
 //   // MATERIAL DIDATICO
 
-//   app.route('/professor/profile/didatico')
-//     .get(checkAuth, Didatico.DidaticoPainel.get);
-
-//   app.route('/professor/didatico/excluir/:id')
-//     .get(checkAuth, Didatico.DidaticoExcluir.delete);
-
-//   app.route('/professor/profile/didatico/criar')
-//     .get(checkAuth, Didatico.DidaticoCriar.get)
-//     .post(checkAuth, upload.array('fileUpload', 5), Didatico.DidaticoCriar.post);
-
-//   app.route('/professor/didatico/abrir/:id/download/:path')
-//     .get(checkAuth, Didatico.DidaticoDownload.get);
-
-//   app.route('/professor/didatico/abrir/:id/')
-//     .get(checkAuth, Didatico.DidaticoAbrir.get);
 // };

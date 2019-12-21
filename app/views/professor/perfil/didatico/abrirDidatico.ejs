@@ -4,13 +4,13 @@
   <h3> Conteúdo: </h3>
   <hr>
 
-    <!-- breadcrumb -->
-    <nav aria-label="breadcrumb row">
-      <ol class="breadcrumb col-md-10">
-        <li class="breadcrumb-item"><a href="/professor/profile/didatico">Material Didático</a></li>
-        <li class="breadcrumb-item active"><a href="#">Material Didático</a></li>
-      </ol>
-    </nav>
+  <!-- breadcrumb -->
+  <nav aria-label="breadcrumb row">
+    <ol class="breadcrumb col-md-10">
+      <li class="breadcrumb-item"><a href="/professor/didatico">Material Didático</a></li>
+      <li class="breadcrumb-item active"><a href="#">Material Didático</a></li>
+    </ol>
+  </nav>
 
   <div class="card">
 
@@ -41,7 +41,8 @@
 
     <div class="card-body">
       <% for (let i = 0; i < paths.length; i++ ) { %>
-      <a href="/professor/didatico/abrir/<%= conteudo[0].id%>/download/<%= paths[i].file_name%>" class="list-group-item list-group-item-action">
+      <a href="/professor/didatico/abrir/<%= conteudo[0].id%>/download/<%= paths[i].file_name%>"
+        class="list-group-item list-group-item-action">
         <div class="row">
           <div class="col-md-1"><i class="fa fa-download" aria-hidden="true"></i></div>
           <div class="col-md-10">
@@ -60,7 +61,7 @@
 
   <div class="row mt-3">
     <div class="col-md-3">
-      <a class="btn btn-secondary" href="/professor/profile/didatico">Voltar</a>
+      <a class="btn btn-secondary" href="/professor/didatico">Voltar</a>
     </div>
   </div>
 

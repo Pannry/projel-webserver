@@ -1,41 +1,54 @@
-function DidaticoDAO(conexaoDb) {
-  this._conexaoDb = conexaoDb;
-}
+const dbConn = require('./dbConnection');
 
-module.exports = () => DidaticoDAO;
+const ConnectionDatabase = dbConn();
 
-// Professor
+function DidaticoDao() { }
 
-DidaticoDAO.prototype.criarDidatico = function (entrada, callback) {
-  this._conexaoDb.query('INSERT INTO didatico SET ?', entrada, callback);
+module.exports = DidaticoDao;
+
+DidaticoDao.prototype.getConnection = async function () {
+  this.conn = await new ConnectionDatabase();
 };
 
-DidaticoDAO.prototype.didaticoParaIncluir = function (entrada, callback) {
-  this._conexaoDb.query('INSERT INTO sala_didatico SET ?', entrada, callback);
+DidaticoDao.prototype.closeConnection = async function () {
+  await this.conn.end();
+  this.conn = undefined;
 };
 
-DidaticoDAO.prototype.adicionarMaterial = function (id, callback) {
-  this._conexaoDb.query('INSERT INTO didatico_material SET ?', id, callback);
+DidaticoDao.prototype.execSQL = async function (sql, input) {
+  await this.getConnection();
+  console.log(this.conn.format(sql, input) + '\n');
+  const result = await this.conn.query(sql, input);
+  this.closeConnection();
+  return result[0];
 };
 
-DidaticoDAO.prototype.excluirDidatico = function (entrada, callback) {
-  this._conexaoDb.query('DELETE FROM didatico WHERE id= ?', entrada, callback);
+DidaticoDao.prototype.list = function (input) {
+  return this.execSQL('SELECT * FROM didatico WHERE ?', input);
 };
 
-DidaticoDAO.prototype.mostrarListaDidaticos = function (entrada, callback) {
-  this._conexaoDb.query('SELECT * FROM didatico WHERE id_professor = ?', entrada, callback);
+DidaticoDao.prototype.open = function (input) {
+  return this.execSQL('SELECT * FROM didatico WHERE ? AND ?', input);
 };
 
-DidaticoDAO.prototype.abrirDidatico = function (id, callback) {
-  this._conexaoDb.query('SELECT * FROM didatico WHERE id = ? AND id_professor = ?', [id.id, id.id_professor], callback);
+DidaticoDao.prototype.create = function (entrada) {
+  return this.execSQL('INSERT INTO didatico SET ?', entrada);
 };
 
-DidaticoDAO.prototype.arquivosDownload = function (id, callback) {
-  this._conexaoDb.query('SELECT file_name FROM didatico_material WHERE id = ?', id, callback);
+DidaticoDao.prototype.addMaterial = function (input) {
+  return this.execSQL('INSERT INTO didatico_material SET ?', input);
 };
 
-DidaticoDAO.prototype.fazerDownloadDidatico = function (id, callback) {
-  this._conexaoDb.query(
+DidaticoDao.prototype.downloadPaths = function (input) {
+  return this.execSQL('SELECT file_name FROM didatico_material WHERE ?', input);
+};
+
+DidaticoDao.prototype.delete = function (input) {
+  return this.execSQL('DELETE FROM didatico WHERE ?', input);
+};
+
+DidaticoDao.prototype.download = function (input) {
+  return this.execSQL(
     ` SELECT 
         didatico.id_professor, 
         didatico.id, 
@@ -46,27 +59,33 @@ DidaticoDAO.prototype.fazerDownloadDidatico = function (id, callback) {
         didatico_material 
           ON didatico.id = didatico_material.id
           AND didatico_material.file_name = ?`,
-    id.file_name, callback,
+    input,
   );
 };
 
-DidaticoDAO.prototype.mostrarDidaticosInclusosNaSala = function (entrada, callback) {
-  this._conexaoDb.query(
-    ` SELECT 
-        id_sala, id_didatico, titulo
-      FROM
-        sala_didatico
-      INNER JOIN
-        didatico
-          ON sala_didatico.id_didatico = didatico.id
-          AND sala_didatico.id_sala = ?`,
-    entrada, callback,
-  );
-};
+// // Professor
+
+// DidaticoDao.prototype.didaticoParaIncluir = function (entrada) {
+//   return this.execSQL('INSERT INTO sala_didatico SET ?', entrada);
+// };
+
+// DidaticoDao.prototype.mostrarDidaticosInclusosNaSala = function (entrada) {
+//   return this.execSQL(
+//     ` SELECT 
+//         id_sala, id_didatico, titulo
+//       FROM
+//         sala_didatico
+//       INNER JOIN
+//         didatico
+//           ON sala_didatico.id_didatico = didatico.id
+//           AND sala_didatico.id_sala = ?`,
+//     entrada,
+//   );
+// };
 
 
-// Aluno
+// // Aluno
 
-DidaticoDAO.prototype.abrirDidaticoAluno = function (entrada, callback) {
-  this._conexaoDb.query('SELECT * FROM didatico WHERE id = ?', entrada, callback);
-}; // ok
+// DidaticoDao.prototype.abrirDidaticoAluno = function (entrada) {
+//   return this.execSQL('SELECT * FROM didatico WHERE id = ?', entrada);
+// }; // ok

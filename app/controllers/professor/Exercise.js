@@ -1,5 +1,5 @@
-const asyncHandler = require('../../../middlewares/async');
-const ExercicioDao = require('../../../infra/banco/ExercicioDao');
+const asyncHandler = require('../../middlewares/async');
+const ExercicioDao = require('../../infra/banco/ExercicioDao');
 const fs = require('fs');
 
 // @Turmas
@@ -92,7 +92,7 @@ exports.openExercise = asyncHandler(async (req, res, next) => {
       ejs.questao = result;
 
       const files = new ExercicioDao();
-      const fileNames = await files.downloadFiles({ id: result[0].id });
+      const fileNames = await files.downloadPaths({ id: result[0].id });
 
       ejs.paths = fileNames;
       res.render('professor/perfil/exercicios/abrirExercicio', ejs);
@@ -130,7 +130,7 @@ exports.deleteExercise = asyncHandler(async (req, res, next) => {
     const entrada = { id: req.params.id };
 
     const fileNames = new ExercicioDao();
-    const downloadFilesName = await fileNames.downloadFiles(entrada);
+    const downloadFilesName = await fileNames.downloadPaths(entrada);
 
     downloadFilesName.forEach((file) => {
       const path = 'app/uploads/';
