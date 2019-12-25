@@ -17,7 +17,7 @@ TurmaDao.prototype.closeConnection = async function () {
 
 TurmaDao.prototype.execSQL = async function (sql, input) {
   await this.getConnection();
-  // console.log(this.conn.format(sql, input) + '\n');
+  console.log(this.conn.format(sql, input) + '\n');
   const result = await this.conn.query(sql, input);
   this.closeConnection();
   return result[0];
@@ -63,22 +63,52 @@ TurmaDao.prototype.delete = function (input) {
 };
 
 
+/*
+ALUNO
+*/
+
+TurmaDao.prototype.findStudent = function (input) {
+  return this.execSQL(
+    ` SELECT 
+        id_aluno, id_sala, id, nome, semestre 
+      FROM 
+        cursa, sala 
+      WHERE 
+        id_sala = id 
+        AND ?`,
+    input,
+  );
+};
+
+TurmaDao.prototype.verify = function (input) {
+  return this.execSQL(
+    ` SELECT * FROM cursa 
+      WHERE ? AND ?`,
+    input,
+  );
+};
+
+TurmaDao.prototype.listTeacherClassrooms = function (input) {
+  return this.execSQL(
+    ` SELECT * 
+      FROM sala 
+      WHERE id_professor = ? and cod_sala = ?`,
+    [input.id_professor, input.cod_sala],
+  );
+};
+
+TurmaDao.prototype.applyToEnter = function (input) {
+  return this.execSQL('INSERT INTO cursa SET ?', input);
+};
+
 // Aluno
-// SalaDao.prototype.listaSalaProfessor = function (id, callback) {
-//   this._conexaoDb.query(
-//     ` SELECT * 
-//       FROM sala 
-//       WHERE id_professor = ? and cod_sala = ?`,
-//     [id.id_professor, id.cod_sala], callback,
-//   );
+
+// TurmaDao.prototype.mostrarComentario = function (entrada) {
+//   return this.execSQL('', entrada);
 // };
 
-// SalaDao.prototype.mostrarComentario = function (entrada, callback) {
-//   this._conexaoDb.query('', entrada, callback);
-// };
-
-// SalaDao.prototype.listaSalaAluno = function (id, callback) {
-//   this._conexaoDb.query(
+// TurmaDao.prototype.listaSalaAluno = function (id) {
+//   return this.execSQL(
 //     ` SELECT 
 //         id_aluno, id_sala, id, nome, semestre 
 //       FROM 
@@ -86,19 +116,8 @@ TurmaDao.prototype.delete = function (input) {
 //       WHERE 
 //         id_aluno = ? 
 //         AND id_sala = id`,
-//     id, callback,
+//     id,
 //   );
 // };
 
-// SalaDao.prototype.verificarAutenticacao = function (ent, callback) {
-//   this._conexaoDb.query(
-//     ` SELECT * FROM cursa 
-//       WHERE cursa.id_aluno = ? AND cursa.id_sala = ?`,
-//     [ent.id_aluno, ent.id], callback,
-//   );
-// };
-
-// SalaDao.prototype.alunoEntrarTurma = function (entrada, callback) {
-//   this._conexaoDb.query('INSERT INTO cursa SET ?', entrada, callback);
-// };
 

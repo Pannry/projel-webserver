@@ -2,7 +2,7 @@ const asyncHandler = require('../../middlewares/async');
 const TurmaDao = require('../../infra/banco/TurmaDao');
 
 // @Turmas
-exports.getClassrooms = asyncHandler(async (req, res, next) => {
+exports.classrooms = asyncHandler(async (req, res, next) => {
   if (req.user.tipo === 'professor') {
     const entrada = {
       id_professor: req.user.id,
@@ -199,7 +199,6 @@ exports.postIncludeDidacticList = asyncHandler(async (req, res, next) => {
 exports.deleteClassroom = asyncHandler(async (req, res, next) => {
   if (req.user.tipo === 'professor') {
     const classroom = new TurmaDao();
-    console.log({ id: req.params.id });
     await classroom.delete({ id: req.params.id });
     res.redirect('/professor/turmas');
   } else {

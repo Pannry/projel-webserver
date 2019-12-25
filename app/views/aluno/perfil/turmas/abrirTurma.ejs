@@ -9,7 +9,7 @@
   <!-- breadcrumb -->
   <nav aria-label="breadcrumb row">
     <ol class="breadcrumb col-md-10">
-      <li class="breadcrumb-item"><a href="/profile/turmas">Turmas</a></li>
+      <li class="breadcrumb-item"><a href="/turmas">Turmas</a></li>
       <li class="breadcrumb-item active"><a href="/turmas/abrir/<%=sala[0].id%>">Painel da turma</a></li>
     </ol>
   </nav>
@@ -21,7 +21,8 @@
       <h5>Esperando autorização professor</h5>
       <% } else if (aluno_aceito === 1){ %>
       <h4>Observações do professor:</h4>
-      <textarea class="form-control col-md-10" id="campoComentario" rows="4" readonly><%= sala[0].comentario %></textarea>
+      <textarea class="form-control col-md-10" id="campoComentario" rows="4"
+        readonly><%= sala[0].comentario %></textarea>
       <br>
 
       <h4>Listas de exercícios:</h4>
@@ -31,7 +32,8 @@
         <h5>Nenhuma lista disponivel.</h5>
         <% } else { %>
         <% for (var i = 0; i < lista.length; i++) { %>
-        <a href="/turmas/abrir/listas/<%= sala[0].id%>/<%= lista[i].id_lista%>/" class="list-group-item list-group-item-action">
+        <a href="/turmas/abrir/listas/<%= sala[0].id%>/<%= lista[i].id_lista%>/"
+          class="list-group-item list-group-item-action">
           <h5>
             <%= lista[i].titulo %>
           </h5>
@@ -49,7 +51,8 @@
         <h5>Nenhuma material disponível.</h5>
         <% } else { %>
         <% for (var i = 0; i < didatico.length; i++) { %>
-        <a href="/turmas/didaticos/abrir/<%= sala[0].id%>/<%= didatico[i].id_didatico%>/" class="list-group-item list-group-item-action">
+        <a href="/turmas/didaticos/abrir/<%= sala[0].id%>/<%= didatico[i].id_didatico%>/"
+          class="list-group-item list-group-item-action">
           <h5>
             <%= didatico[i].titulo %>
           </h5>

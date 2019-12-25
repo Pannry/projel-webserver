@@ -64,6 +64,23 @@ ExercicioDao.prototype.delete = function (input) {
   return this.execSQL('DELETE FROM exercicios WHERE ?', input);
 };
 
+/**
+ *
+ * Aluno
+ */
+ExercicioDao.prototype.showList = function (input) {
+  return this.execSQL(
+    ` SELECT 
+        id_sala, id_lista, titulo
+      FROM
+        sala_lista
+      INNER JOIN
+        lista
+          ON sala_lista.id_lista = lista.id
+          AND sala_lista.id_sala = ?`,
+    input,
+  );
+};
 
 // function ExerciciosDao(conexaoDb) {
 //   this._conexaoDb = conexaoDb;
@@ -164,20 +181,6 @@ ExercicioDao.prototype.delete = function (input) {
 //       AND id_exercicios = ? 
 //       AND id_sala = ?`,
 //     [entrada.resposta, entrada.id_aluno, entrada.id_exercicios, entrada.id_sala], callback,
-//   );
-// };
-
-// ExerciciosDao.prototype.mostrarListasAluno = function (entrada, callback) {
-//   this._conexaoDb.query(
-//     ` SELECT 
-//         id_sala, id_lista, titulo
-//       FROM
-//         sala_lista
-//       INNER JOIN
-//         lista
-//           ON sala_lista.id_lista = lista.id
-//           AND sala_lista.id_sala = ?`,
-//     entrada, callback,
 //   );
 // };
 

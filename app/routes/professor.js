@@ -1,5 +1,6 @@
 const express = require('express');
 const upload = require('../middlewares/upload');
+const checkAuth = require('../middlewares/authenticated');
 
 const {
   getCreate, postCreate,
@@ -8,7 +9,11 @@ const {
 } = require('../controllers/professor/Profile');
 
 const {
-  getClassrooms,
+  logout,
+} = require('../controllers/general');
+
+const {
+  classrooms,
   getCreateClassroom, postCreateClassroom,
   getOpenClassroomStudentList, IncludeStudentInClassroom,
   getOpenClassroomDetails, postCommentInDetails,
@@ -37,13 +42,6 @@ const {
 
 const router = express.Router();
 
-function checkAuth(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  res.redirect('/');
-  return 0;
-}
-
-
 // @Profile
 router
   .route('/cadastro')
@@ -56,6 +54,10 @@ router
   .post(postLogin);
 
 router
+  .route('/logout')
+  .get(logout);
+
+router
   .route('/profile')
   .get(checkAuth, getProfile);
 
@@ -66,7 +68,7 @@ router
 // @Classroom.js
 router
   .route('/turmas')
-  .get(checkAuth, getClassrooms);
+  .get(checkAuth, classrooms);
 
 router
   .route('/turmas/criar')

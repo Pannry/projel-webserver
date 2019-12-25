@@ -62,6 +62,24 @@ DidaticoDao.prototype.download = function (input) {
     input,
   );
 };
+/**
+ * 
+ * Aluon
+ */
+
+DidaticoDao.prototype.showList = function (input) {
+  return this.execSQL(
+    ` SELECT 
+        id_sala, id_didatico, titulo
+      FROM
+        sala_didatico
+      INNER JOIN
+        didatico
+          ON sala_didatico.id_didatico = didatico.id
+          AND sala_didatico.id_sala = ?`,
+    input,
+  );
+};
 
 // // Professor
 
@@ -69,19 +87,7 @@ DidaticoDao.prototype.download = function (input) {
 //   return this.execSQL('INSERT INTO sala_didatico SET ?', entrada);
 // };
 
-// DidaticoDao.prototype.mostrarDidaticosInclusosNaSala = function (entrada) {
-//   return this.execSQL(
-//     ` SELECT 
-//         id_sala, id_didatico, titulo
-//       FROM
-//         sala_didatico
-//       INNER JOIN
-//         didatico
-//           ON sala_didatico.id_didatico = didatico.id
-//           AND sala_didatico.id_sala = ?`,
-//     entrada,
-//   );
-// };
+
 
 
 // // Aluno

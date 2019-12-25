@@ -10,7 +10,7 @@ exports.getCreate = asyncHandler(async (req, res, next) => {
   };
 
   const places = new InstituicaoDAO();
-  const result = await places.listar({});
+  const result = await places.listar();
 
   // TODO: Err de toda a app
   // if (!result)
@@ -36,12 +36,6 @@ exports.postLogin = passport.authenticate('local-login-professor', {
   successRedirect: '/professor/profile',
   failureRedirect: '/professor/login',
   failureFlash: true,
-});
-
-// @Logout
-exports.logout = asyncHandler(async (req, res, next) => {
-  req.logout();
-  res.redirect('/');
 });
 
 // @profile

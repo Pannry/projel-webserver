@@ -17,35 +17,32 @@ UsuarioDAO.prototype.closeConnection = async function () {
 
 UsuarioDAO.prototype.execSQL = async function (sql, input) {
   await this.getConnection();
+  console.log(this.conn.format(sql, input) + '\n');
   const result = await this.conn.query(sql, input);
   this.closeConnection();
   return result[0];
 };
 
-UsuarioDAO.prototype.findIdAluno = async function (input) {
-  return this.execSQL('SELECT id, nome, email FROM aluno WHERE ?', input);
-};
-
 // TODO: tirar estrela e por um segundo objeto como entrada.
 UsuarioDAO.prototype.findProfessor = async function (input) {
-  return this.execSQL('SELECT * FROM professor WHERE ?', input);
+  if (input) {
+    return this.execSQL('SELECT * FROM professor WHERE ?', input);
+  }
+  return this.execSQL('SELECT * FROM professor', input);
 };
 
 UsuarioDAO.prototype.createProfessor = async function (input) {
   return this.execSQL('INSERT INTO professor SET ?', input);
 };
 
-// /**
-//  * Aluno
-//  */
-// UsuarioDAO.prototype.salvarAluno = function (usuario, callback) {
-//   this._conexaoDb.query('INSERT INTO aluno SET ?', usuario, callback);
-// };
+UsuarioDAO.prototype.findAluno = async function (input) {
+  return this.execSQL('SELECT id, nome, email FROM aluno WHERE ?', input);
+};
 
-// UsuarioDAO.prototype.buscarAluno = function (usuario, callback) {
-//   this._conexaoDb.query('SELECT * FROM aluno WHERE email = ?', [usuario.email], callback);
-// };
+UsuarioDAO.prototype.createAluno = function (input) {
+  return this.execSQL('INSERT INTO aluno SET ?', input);
+};
 
-// UsuarioDAO.prototype.buscarIdAluno = function (id, callback) {
-//   this._conexaoDb.query('SELECT id, nome, email FROM aluno WHERE id = ?', id, callback);
-// };
+UsuarioDAO.prototype.findAluno = function (input) {
+  return this.execSQL('SELECT * FROM aluno WHERE ?', input);
+};
