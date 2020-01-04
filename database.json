@@ -30,5 +30,18 @@
     "database": {
       "ENV": "DB_DATABASE"
     }
+  },
+  "prodsetup": {
+    "multipleStatements": true,
+    "driver": "mysql",
+    "host": {
+      "ENV": "DB_HOST"
+    },
+    "user": {
+      "ENV": "DB_USER"
+    },
+    "password": {
+      "ENV": "DB_PASSWORD"
+    }
   }
 }

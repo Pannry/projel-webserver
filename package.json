@@ -10,7 +10,8 @@
     "lint": "node node_modules/ESLint/bin/eslint app/**/*.js",
     "m:reset": "db-migrate db:drop projel -e reset && db-migrate db:create projel -e reset",
     "m:setup": "npm run m:reset && db-migrate up",
-    "m:prod": "npm run m:reset && db-migrate up -e prod"
+    "m:resetprod": "db-migrate db:drop projel -e prod && db-migrate db:create projel -e prodsetup",
+    "m:prod": "npm run m:resetprod && db-migrate up -e prod"
   },
   "repository": {
     "type": "git",
