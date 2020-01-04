@@ -1,5 +1,5 @@
-const asyncHandler = require('../../../middlewares/async');
-const InstituicaoDAO = require('../../../infra/banco/InstituicaoDAO');
+const asyncHandler = require('../../middlewares/async');
+const InstituicaoDAO = require('../../infra/banco/InstituicaoDAO');
 const passport = require('passport');
 
 // @Cadastro

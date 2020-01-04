@@ -24,16 +24,25 @@ ListaDao.prototype.execSQL = async function (sql, input) {
 };
 
 ListaDao.prototype.list = function (input) {
-  return this.execSQL('SELECT * FROM lista WHERE ?', input);
-};
+  let values;
+  let sql = 'Select * from lista WHERE ?';
 
-ListaDao.prototype.open = function (input) {
-  return this.execSQL('SELECT * FROM lista WHERE id_professor = ? AND id = ?', input);
+  if (Array.isArray(input)) values = input;
+  else values = Array.of(input);
+
+  for (let i = 1; i < values.length; i += 1) sql += ' AND ?';
+
+  return this.execSQL(sql, input);
 };
 
 ListaDao.prototype.create = function (input) {
   return this.execSQL('INSERT INTO lista SET ?', input);
 };
+
+ListaDao.prototype.delete = function (input) {
+  return this.execSQL('DELETE FROM lista WHERE ?', input);
+};
+
 
 ListaDao.prototype.showQuestions = function (input) {
   return this.execSQL(
@@ -53,24 +62,20 @@ ListaDao.prototype.addQuestion = function (input) {
   return this.execSQL('INSERT INTO lista_exercicios SET ?', input);
 };
 
-// ExerciciosDao.prototype.listasParaIncluir = function (entrada, callback) {
-//   this._conexaoDb.query('INSERT INTO sala_lista SET ?', entrada, callback);
+// ListaDao.prototype.listasParaIncluir = function (input) {
+//   return this.execSQL('INSERT INTO sala_lista SET ?', input);
 // };
 
-// ExerciciosDao.prototype.excluirLista = function (entrada, callback) {
-//   this._conexaoDb.query('DELETE FROM lista WHERE id= ?', entrada, callback);
+// ListaDao.prototype.mostrarListaInfo = function (input) {
+//   return this.execSQL('SELECT * FROM lista where id = ?', input);
 // };
 
-// ExerciciosDao.prototype.mostrarListaInfo = function (entrada, callback) {
-//   this._conexaoDb.query('SELECT * FROM lista where id = ?', entrada, callback);
+// ListaDao.prototype.mostrarListaExercicios = function (input) {
+//   return this.execSQL('SELECT * FROM lista WHERE id_professor = ?', input);
 // };
 
-// ExerciciosDao.prototype.mostrarListaExercicios = function (entrada, callback) {
-//   this._conexaoDb.query('SELECT * FROM lista WHERE id_professor = ?', entrada, callback);
-// };
-
-// ExerciciosDao.prototype.mostrarExerciciosInclusos = function (entrada, callback) {
-//   this._conexaoDb.query(
+// ListaDao.prototype.mostrarExerciciosInclusos = function (input) {
+//   return this.execSQL(
 //     `SELECT 
 //         id_sala, id_lista, titulo
 //       FROM
@@ -79,18 +84,18 @@ ListaDao.prototype.addQuestion = function (input) {
 //         lista 
 //           ON sala_lista.id_lista = lista.id
 //           AND sala_lista.id_sala = ?`,
-//     entrada, callback,
+//     input,
 //   );
 // };
 
 // // Aluno
 
-// ExerciciosDao.prototype.criarResposta = function (entrada, callback) {
-//   this._conexaoDb.query('INSERT INTO resposta SET ?', entrada, callback);
+// ListaDao.prototype.criarResposta = function (input) {
+//   return this.execSQL('INSERT INTO resposta SET ?', input);
 // };
 
-// ExerciciosDao.prototype.abrirRespostaAluno = function (entrada, callback) {
-//   this._conexaoDb.query(
+// ListaDao.prototype.abrirRespostaAluno = function (input) {
+//   return this.execSQL(
 //     ` SELECT 
 //           * 
 //         FROM 
@@ -99,12 +104,12 @@ ListaDao.prototype.addQuestion = function (input) {
 //           id_exercicios = ? 
 //           AND id_aluno = ? 
 //           AND id_sala = ?`,
-//     [entrada.id_exercicios, entrada.id_aluno, entrada.id_sala], callback,
+//     [input.id_exercicios, input.id_aluno, input.id_sala],
 //   );
 // };
 
-// ExerciciosDao.prototype.responderExerciciosAluno = function (entrada, callback) {
-//   this._conexaoDb.query(
+// ListaDao.prototype.responderExerciciosAluno = function (input) {
+//   return this.execSQL(
 //     `UPDATE 
 //       resposta 
 //     SET 
@@ -113,12 +118,12 @@ ListaDao.prototype.addQuestion = function (input) {
 //       id_aluno = ? 
 //       AND id_exercicios = ? 
 //       AND id_sala = ?`,
-//     [entrada.resposta, entrada.id_aluno, entrada.id_exercicios, entrada.id_sala], callback,
+//     [input.resposta, input.id_aluno, input.id_exercicios, input.id_sala],
 //   );
 // };
 
-// ExerciciosDao.prototype.mostrarListasAluno = function (entrada, callback) {
-//   this._conexaoDb.query(
+// ListaDao.prototype.mostrarListasAluno = function (input) {
+//   return this.execSQL(
 //     ` SELECT 
 //         id_sala, id_lista, titulo
 //       FROM
@@ -127,12 +132,12 @@ ListaDao.prototype.addQuestion = function (input) {
 //         lista
 //           ON sala_lista.id_lista = lista.id
 //           AND sala_lista.id_sala = ?`,
-//     entrada, callback,
+//     input,
 //   );
 // };
 
-// ExerciciosDao.prototype.mostrarExerciciosAluno = function (entrada, callback) {
-//   this._conexaoDb.query(
+// ListaDao.prototype.mostrarExerciciosAluno = function (input) {
+//   return this.execSQL(
 //     ` SELECT 
 //         id_lista, id_exercicios, titulo
 //       FROM
@@ -141,6 +146,6 @@ ListaDao.prototype.addQuestion = function (input) {
 //         exercicios
 //           ON exercicios.id = lista_exercicios.id_exercicios 
 //           AND lista_exercicios.id_lista = ?`,
-//     entrada, callback,
+//     input,
 //   );
 // };

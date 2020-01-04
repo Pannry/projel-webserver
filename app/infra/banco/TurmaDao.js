@@ -39,8 +39,8 @@ TurmaDao.prototype.listarAlunos = function (input) {
       FROM 
         cursa, aluno 
       WHERE 
-        cursa.id_aluno = aluno.id AND
-        ?`,
+        cursa.id_aluno = aluno.id 
+        AND ?`,
     input,
   );
 };
@@ -49,7 +49,7 @@ TurmaDao.prototype.listarAlunos = function (input) {
 TurmaDao.prototype.includeStudent = function (input) {
   return this.execSQL(
     ` UPDATE cursa SET aluno_aceito = 1 
-      WHERE ?`,
+      WHERE ? AND ?`,
     input,
   );
 };

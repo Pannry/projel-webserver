@@ -1,5 +1,4 @@
 module.exports = (app) => {
-  // 404
   app.use((req, res) => {
     res.status(404).render('erro/404', { accountType: '' });
   });

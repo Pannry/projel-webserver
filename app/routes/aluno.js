@@ -9,12 +9,16 @@ const {
   getCreate, postCreate,
   getLogin, postLogin,
   getProfile, getUpdateProfile,
-} = require('../controllers/aluno/Profile/profile');
+} = require('../controllers/aluno/Profile');
 
 const {
   classrooms, findClassrooms, openClassrooms,
   getIntroduceClassrooms, postIntroduceClassrooms,
 } = require('../controllers/aluno/Classroom');
+
+const {
+  download, openList, getAwnser, postAwnser,
+} = require('../controllers/aluno/Exercise');
 
 const router = express.Router();
 
@@ -66,6 +70,19 @@ router
   .route('/turmas/professor/detalhes')
   .get(checkAuth, getIntroduceClassrooms)
   .post(checkAuth, postIntroduceClassrooms);
+
+router
+  .route('/turmas/abrir/listas/:id_sala/:id_lista')
+  .get(checkAuth, openList);
+
+router
+  .route('/turmas/abrir/:id_sala/:id_lista/:id_exercicio')
+  .get(checkAuth, getAwnser)
+  .post(checkAuth, postAwnser);
+
+router
+  .route('/exercicios/download/:id_exercicio/:file_name')
+  .get(checkAuth, download);
 
 module.exports = function (app) {
   app.use('/', router);

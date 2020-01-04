@@ -18,17 +18,29 @@ DidaticoDao.prototype.closeConnection = async function () {
 DidaticoDao.prototype.execSQL = async function (sql, input) {
   await this.getConnection();
   console.log(this.conn.format(sql, input) + '\n');
-  const result = await this.conn.query(sql, input);
+  let result;
+  try {
+    result = await this.conn.query(sql, input);
+  } catch (error) {
+    if (error.errno === 1062) {
+      console.log('elemento já adicionado!');
+      return undefined;
+    }
+  }
   this.closeConnection();
   return result[0];
 };
 
 DidaticoDao.prototype.list = function (input) {
-  return this.execSQL('SELECT * FROM didatico WHERE ?', input);
-};
+  let values;
+  let sql = 'Select * from didatico WHERE ?';
 
-DidaticoDao.prototype.open = function (input) {
-  return this.execSQL('SELECT * FROM didatico WHERE ? AND ?', input);
+  if (Array.isArray(input)) values = input;
+  else values = Array.of(input);
+
+  for (let i = 1; i < values.length; i += 1) sql += ' AND ?';
+
+  return this.execSQL(sql, input);
 };
 
 DidaticoDao.prototype.create = function (entrada) {
@@ -63,8 +75,7 @@ DidaticoDao.prototype.download = function (input) {
   );
 };
 /**
- * 
- * Aluon
+ * Aluno
  */
 
 DidaticoDao.prototype.showList = function (input) {
@@ -81,17 +92,6 @@ DidaticoDao.prototype.showList = function (input) {
   );
 };
 
-// // Professor
-
-// DidaticoDao.prototype.didaticoParaIncluir = function (entrada) {
-//   return this.execSQL('INSERT INTO sala_didatico SET ?', entrada);
-// };
-
-
-
-
-// // Aluno
-
-// DidaticoDao.prototype.abrirDidaticoAluno = function (entrada) {
-//   return this.execSQL('SELECT * FROM didatico WHERE id = ?', entrada);
-// }; // ok
+DidaticoDao.prototype.didaticoParaIncluir = function (input) {
+  return this.execSQL('INSERT INTO sala_didatico SET ?', input);
+};

@@ -23,7 +23,10 @@ exports.getLists = asyncHandler(async (req, res, next) => {
 
 exports.openList = asyncHandler(async (req, res, next) => {
   if (req.user.tipo === 'professor') {
-    const listInfo = [req.user.id, req.params.id];
+    const listInfo = [
+      { id_professor: req.user.id },
+      { id: req.params.id },
+    ];
 
     const ejs = {
       user: req.user,
@@ -33,7 +36,7 @@ exports.openList = asyncHandler(async (req, res, next) => {
     };
 
     const list = new ListDao();
-    const result = await list.open(listInfo);
+    const result = await list.list(listInfo);
 
     if (result.length === 0) res.render('erro/403', ejs);
     else {
@@ -97,11 +100,9 @@ exports.postCreateList = asyncHandler(async (req, res, next) => {
 
 exports.deleteList = asyncHandler(async (req, res, next) => {
   if (req.user.tipo === 'professor') {
-    const entrada = req.params.id;
-
     const list = new ListDao();
-    await list.delete(entrada);
-    res.redirect('/professor/profile/exercicios/lista');
+    await list.delete({ id: req.params.id });
+    res.redirect('/professor/exercicios/lista');
   } else {
     next();
   }
@@ -130,10 +131,13 @@ exports.getAddQuestionsInList = asyncHandler(async (req, res, next) => {
 exports.postAddQuestionsInList = asyncHandler(async (req, res, next) => {
   if (req.user.tipo === 'professor') {
     const checkbox = req.body.options;
-    const promiseList = [];
+    let questoes = [];
+    if (!Array.isArray(checkbox)) questoes = Array.of(checkbox);
+    else questoes = checkbox;
 
     if (checkbox !== undefined) {
-      checkbox.forEach(async (element) => {
+      const promiseList = [];
+      questoes.forEach(async (element) => {
         const returnPromise = new Promise(async (resolve) => {
           const list = new ListDao();
           const entrada = {
@@ -146,8 +150,8 @@ exports.postAddQuestionsInList = asyncHandler(async (req, res, next) => {
         });
         promiseList.push(returnPromise);
       });
+      await Promise.all(promiseList);
     }
-    await Promise.all(promiseList);
     res.redirect('/professor/exercicios/lista');
   } else {
     next();

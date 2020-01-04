@@ -36,7 +36,7 @@ exports.openDidactic = asyncHandler(async (req, res, next) => {
     };
 
     const openDidactic = new DidaticoDAO();
-    const result = await openDidactic.open(entrada);
+    const result = await openDidactic.list(entrada);
 
     if (result.length === 0) {
       res.render('erro/403', ejs);
