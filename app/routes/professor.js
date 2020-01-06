@@ -40,6 +40,10 @@ const {
   getCreateDidactic, postCreateDidactic,
 } = require('../controllers/professor/Didactic');
 
+const {
+  professorGET, verRespostas, post,
+} = require('../controllers/professor/Grades');
+
 const router = express.Router();
 
 // @Profile
@@ -173,6 +177,16 @@ router
   .route('/didatico/abrir/:id/download/:path')
   .get(checkAuth, downloadDidactic);
 
+// notas
+router
+  .route('/turma/abrir/:id_sala/professor/:id_aluno')
+  .get(checkAuth, professorGET);
+
+router
+  .route('/turma/abrir/:id_sala/professor/:id_aluno/:id_lista')
+  .get(checkAuth, verRespostas)
+  .post(checkAuth, post);
+
 module.exports = function (app) {
   app.use('/professor', router);
 };
@@ -212,12 +226,7 @@ module.exports = function (app) {
 
 //   // Nota
 
-//   app.route('/professor/turma/abrir/:id_sala/professor/:id_aluno')
-//     .get(checkAuth, Notas.Notas.professorGET);
 
-//   app.route('/professor/turma/abrir/:id_sala/professor/:id_aluno/:id_lista')
-//     .get(checkAuth, Notas.Notas.verRespostas)
-//     .post(checkAuth, Notas.Notas.post);
 
 //   // MATERIAL DIDATICO
 
