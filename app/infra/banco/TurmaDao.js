@@ -70,7 +70,7 @@ ALUNO
 TurmaDao.prototype.findStudent = function (input) {
   return this.execSQL(
     ` SELECT 
-        id_aluno, id_sala, id, nome, semestre 
+        id_aluno, id_sala, id, nome, semestre, comentario 
       FROM 
         cursa, sala 
       WHERE 

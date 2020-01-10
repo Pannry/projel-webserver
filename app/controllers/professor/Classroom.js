@@ -114,7 +114,7 @@ exports.getOpenClassroomDetails = asyncHandler(async (req, res, next) => {
     };
 
     const classrooms = new TurmaDao();
-    const room = await classrooms.find(req.params.id);
+    const room = await classrooms.find({ id: req.params.id });
 
     ejs.infoProfessor = room;
 

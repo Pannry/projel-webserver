@@ -6,7 +6,7 @@
   <!-- breadcrumb -->
   <nav aria-label="breadcrumb row">
     <ol class="breadcrumb col-md-10">
-      <li class="breadcrumb-item"><a href="/professor/profile/exercicios/lista">Lista de exercícios</a></li>
+      <li class="breadcrumb-item"><a href="/professor/exercicios/lista">Lista de exercícios</a></li>
       <li class="breadcrumb-item active"><a href="#">Informações da lista</a></li>
     </ol>
   </nav>
@@ -29,7 +29,8 @@
       <hr>
       <% for(var i = 0; i < exercicios.length; i++ ) { %>
 
-      <a href="/professor/exercicios/abrir/<%= exercicios[i].id_exercicios%>" class="list-group-item list-group-item-action">
+      <a href="/professor/exercicios/abrir/<%= exercicios[i].id_exercicios%>"
+        class="list-group-item list-group-item-action">
         <h5>
           <%= exercicios[i].titulo%>
         </h5>

@@ -7,7 +7,7 @@
   <!-- breadcrumb -->
   <nav aria-label="breadcrumb row">
     <ol class="breadcrumb col-md-10">
-      <li class="breadcrumb-item"><a href="/professor/profile/turmas">Turmas</a></li>
+      <li class="breadcrumb-item"><a href="/professor/turmas">Turmas</a></li>
       <li class="breadcrumb-item"><a href="/professor/turma/abrir/<%=id_sala%>/professor">Alunos Matriculados</a></li>
       <li class="breadcrumb-item active"><a href="#">Exercícios</a></li>
     </ol>
@@ -18,9 +18,10 @@
   <% for(let i = 0; i < lista.length; i++) { %>
   <div class="row col-md-12">
 
-    <form class="col-md-12 row" action="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>"
-      method="post">
-      <a href="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>" class="list-group-item col-md-3">
+    <form class="col-md-12 row"
+      action="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>" method="post">
+      <a href="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>"
+        class="list-group-item col-md-3">
         <h6>
           <%=lista[i].titulo%>
         </h6>

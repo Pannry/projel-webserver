@@ -75,7 +75,7 @@ exports.postCreateExercises = asyncHandler(async (req, res, next) => {
 
 exports.openExercise = asyncHandler(async (req, res, next) => {
   if (req.user.tipo === 'professor') {
-    const teacherData = [req.params.id, req.user.id];
+    const teacherData = [{ id: req.params.id }, { id_professor: req.user.id }];
 
     const ejs = {
       user: req.user,
@@ -84,7 +84,7 @@ exports.openExercise = asyncHandler(async (req, res, next) => {
     };
 
     const exercises = new ExercicioDao();
-    const result = await exercises.open(teacherData);
+    const result = await exercises.list(teacherData);
 
     if (result.length === 0) {
       res.render('erro/403', ejs);
