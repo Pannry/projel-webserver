@@ -18,28 +18,31 @@
         </div>
 
         <% if (message.length > 0) { %>
-            <div class="alert alert-danger"><%= message %></div>
+        <div class="alert alert-danger"><%= message %></div>
         <% } %>
 
         <!-- Formulario de cadastro  -->
-        <form class="" action="/aluno/signup" method="post">
+        <form class="" action="/cadastro" method="post">
             <br>
             <div class="row">
                 <div class="offset-md-3 col-md-6 col-sm-12">
                     <label for="nome" class="font-weight-bold">Nome Completo:</label>
-                    <input required type="text" name="nome" value="" class="form-control" placeholder="Insira o seu nome.">
+                    <input required type="text" name="nome" value="" class="form-control"
+                        placeholder="Insira o seu nome.">
                 </div>
             </div>
             <div class="row">
                 <div class="offset-md-3 col-md-6 col-sm-12">
                     <label for="email" class="font-weight-bold">E-mail:</label>
-                    <input required type="email" name="email" value="" class="form-control" placeholder="exemplo@exemplo.com">
+                    <input required type="text" name="email" value="" class="form-control"
+                        placeholder="exemplo@exemplo.com">
                 </div>
             </div>
             <div class="row">
                 <div class="offset-md-3 col-md-6 col-sm-12">
                     <label for="senha" class="font-weight-bold">Senha:</label>
-                    <input required type="password" name="senha" value="" class="form-control" placeholder="Insira a sua senha.">
+                    <input required type="password" name="senha" value="" class="form-control"
+                        placeholder="Insira a sua senha.">
                 </div>
             </div>
             <br><br>
@@ -64,7 +67,7 @@
         </form>
         <label for="" class="offset-md-3 col-md-6">
             <hr>
-            Já possui conta no site? <a href="/aluno/login">Entrar</a><br>
+            Já possui conta no site? <a href="/login">Entrar</a><br>
             Ou volte para <a href="/">home</a>.
             <hr>
         </label>

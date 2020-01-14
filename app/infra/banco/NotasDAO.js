@@ -1,17 +1,30 @@
-function NotasDAO(conexaoDb) {
-  this._conexaoDb = conexaoDb;
-}
+const dbConn = require('./dbConnection');
 
-module.exports = () => NotasDAO;
+const ConnectionDatabase = dbConn();
 
-// Professor
+function NotasDao() { }
 
-NotasDAO.prototype.criarNotaAlunoSala = function (entrada, callback) {
-  this._conexaoDb.query('INSERT INTO nota SET ?', entrada, callback);
+module.exports = NotasDao;
+
+NotasDao.prototype.getConnection = async function () {
+  this.conn = await new ConnectionDatabase();
 };
 
-NotasDAO.prototype.selecionarListas = function (entrada, callback) {
-  this._conexaoDb.query(
+NotasDao.prototype.closeConnection = async function () {
+  await this.conn.end();
+  this.conn = undefined;
+};
+
+NotasDao.prototype.execSQL = async function (sql, input) {
+  await this.getConnection();
+  console.log(this.conn.format(sql, input) + '\n');
+  const result = await this.conn.query(sql, input);
+  this.closeConnection();
+  return result[0];
+};
+
+NotasDao.prototype.list = function (input) {
+  return this.execSQL(
     ` SELECT 
         id_lista, titulo 
       FROM 
@@ -19,12 +32,28 @@ NotasDAO.prototype.selecionarListas = function (entrada, callback) {
       WHERE 
         lista.id = sala_lista.id_lista
         AND id_sala = ?`,
-    entrada, callback,
+    input,
   );
 };
 
-NotasDAO.prototype.mostrarNotaAlunoSala = function (entrada, callback) {
-  this._conexaoDb.query(
+NotasDao.prototype.checkGradeCreated = function (input) {
+  let values;
+  let sql = 'Select * from nota WHERE ?';
+
+  if (Array.isArray(input)) values = input;
+  else values = Array.of(input);
+
+  for (let i = 1; i < values.length; i += 1) sql += ' AND ?';
+
+  return this.execSQL(sql, input);
+};
+
+NotasDao.prototype.create = function (input) {
+  return this.execSQL('INSERT INTO nota SET ?', input);
+};
+
+NotasDao.prototype.showEnrolledStudent = function (input) {
+  return this.execSQL(
     ` SELECT 
         nota.id_sala, nota.id_aluno, nota.id_lista, nota
       FROM
@@ -35,12 +64,12 @@ NotasDAO.prototype.mostrarNotaAlunoSala = function (entrada, callback) {
           AND cursa.id_sala = nota.id_sala
           AND cursa.id_aluno = ?
           AND cursa.id_sala = ?`,
-    [entrada.id_aluno, entrada.id_sala], callback,
+    [input.id_aluno, input.id_sala],
   );
 };
 
-NotasDAO.prototype.atualizarNota = function (entrada, callback) {
-  this._conexaoDb.query(
+NotasDao.prototype.update = function (input) {
+  return this.execSQL(
     ` UPDATE 
         nota 
       SET 
@@ -49,13 +78,13 @@ NotasDAO.prototype.atualizarNota = function (entrada, callback) {
         id_aluno = ? 
         AND id_lista = ? 
         AND id_sala = ?`,
-    [entrada.nota, entrada.id_aluno, entrada.id_lista, entrada.id_sala], callback,
+    [input.nota, input.id_aluno, input.id_lista, input.id_sala],
   );
 };
 
 // resposta está vinculada ao aluno, e não a sala & aluno.
-NotasDAO.prototype.MostrarRespostas = function (entrada, callback) {
-  this._conexaoDb.query(
+NotasDao.prototype.showAwnser = function (input) {
+  return this.execSQL(
     ` SELECT 
         resposta.id_aluno, 
         resposta.id_sala, 
@@ -75,6 +104,6 @@ NotasDAO.prototype.MostrarRespostas = function (entrada, callback) {
           AND id_aluno = ?
           AND id_lista = ? 
           AND id_sala = ?`,
-    [entrada.id_aluno, entrada.id_lista, entrada.id_sala], callback,
+    [input.id_aluno, input.id_lista, input.id_sala],
   );
 };

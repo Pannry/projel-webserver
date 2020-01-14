@@ -1,0 +1,15 @@
+DROP TABLE `sala_lista`;
+DROP TABLE `sala_didatico`;
+DROP TABLE `resposta`;
+DROP TABLE `nota`;
+DROP TABLE `lista_exercicios`;
+DROP TABLE `lista`;
+DROP TABLE `exercicios_material`;
+DROP TABLE `exercicios`;
+DROP TABLE `didatico_material`;
+DROP TABLE `didatico`;
+DROP TABLE `cursa`;
+DROP TABLE `aluno`;
+DROP TABLE `sala`;
+DROP TABLE `professor`;
+DROP TABLE `instituicao`;

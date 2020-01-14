@@ -10,7 +10,7 @@
   <!-- breadcrumb -->
   <nav aria-label="breadcrumb row">
     <ol class="breadcrumb col-md-10">
-      <li class="breadcrumb-item"><a href="/professor/profile/turmas">Turmas</a></li>
+      <li class="breadcrumb-item"><a href="/professor/turmas">Turmas</a></li>
       <li class="breadcrumb-item active"><a href="#">Alunos Matriculados</a></li>
     </ol>
   </nav>
@@ -71,7 +71,8 @@
                   <div class="col-10">
                     <% if(listaDeAlunos[i].aluno_aceito === 0) { %>
                     <form class="" action="/professor/turma/abrir/<%=idSala%>/professor" method="post">
-                      <input class="btn btn-secondary btn-sm" type="submit" value="Incluir aluno" name="<%= listaDeAlunos[i].id_aluno%>"></input>
+                      <input class="btn btn-secondary btn-sm" type="submit" value="Incluir aluno"
+                        name="<%= listaDeAlunos[i].id_aluno%>"></input>
                     </form>
                     <% } else if(listaDeAlunos[i].aluno_aceito === 1){ %>
                     <input class="btn btn-secondary btn-sm" type="submit" value="Aluno incluso" disabled></input>

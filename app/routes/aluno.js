@@ -1,74 +1,116 @@
-function checkAuth(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  res.redirect('/');
-  return 0;
-}
+const express = require('express');
+const checkAuth = require('../middlewares/authenticated');
 
-module.exports = (app) => {
-  const { Profile } = app.controllers.aluno;
-  const { Turmas } = app.controllers.aluno;
-  const { Exercicios } = app.controllers.aluno;
-  const { Didaticos } = app.controllers.aluno;
+const {
+  logout, index,
+} = require('../controllers/general');
 
+const {
+  getCreate, postCreate,
+  getLogin, postLogin,
+  getProfile, getUpdateProfile,
+} = require('../controllers/aluno/Profile');
 
-  app.get('/', (req, res) => {
-    (req.user === undefined) ?
-      res.render('index', { accountType: '' }) :
-      res.render('index', { accountType: req.user.tipo });
-  });
+const {
+  classrooms, findClassrooms, openClassrooms,
+  getIntroduceClassrooms, postIntroduceClassrooms,
+} = require('../controllers/aluno/Classroom');
 
-  /**
-     *      Aluno.js
-     */
-  app.route('/aluno/signup')
-    .get(Profile.cadastro.get)
-    .post(Profile.cadastro.post);
+const {
+  download, openList, getAwnser, postAwnser,
+} = require('../controllers/aluno/Exercise');
 
-  app.route('/aluno/login')
-    .get(Profile.login.get)
-    .post(Profile.login.post);
+const router = express.Router();
 
-  app.route('/profile')
-    .get(checkAuth, Profile.profile.get);
+router
+  .route('/')
+  .get(index);
 
-  app.route('/profile/update')
-    .get(checkAuth, Profile.profile.update);
+router
+  .route('/login')
+  .get(getLogin)
+  .post(postLogin);
 
-  app.route('/logout')
-    .get(Profile.logout.logout);
+router
+  .route('/logout')
+  .get(logout);
 
-  /**
-     *      Turmas.js
-     */
-  app.route('/profile/turmas')
-    .get(checkAuth, Turmas.painelTurmas.get);
+// @Profile
+router
+  .route('/cadastro')
+  .get(getCreate)
+  .post(postCreate);
 
-  app.route('/profile/turmas/procurar')
-    .get(checkAuth, Turmas.procurarTurmas.get);
+router
+  .route('/profile')
+  .get(checkAuth, getProfile);
 
-  app.route('/turmas/abrir/:id')
-    .get(checkAuth, Turmas.abrirTurmas.get);
+router
+  .route('/profile/update')
+  .get(checkAuth, getUpdateProfile);
 
-  app.route('/turmas/professor/detalhes')
-    .get(checkAuth, Turmas.professorTurmas.get)
-    .post(checkAuth, Turmas.professorTurmas.post);
+// @Turmas
+router
+  .route('/turmas')
+  .get(classrooms);
 
-  // Exercicios.js
+router
+  .route('/turmas/procurar')
+  .get(checkAuth, findClassrooms);
 
-  app.route('/turmas/abrir/listas/:id_sala/:id_lista')
-    .get(checkAuth, Exercicios.ListaAbrir.get);
+router
+  .route('/turma/update')
+  .get(checkAuth, getUpdateProfile);
 
-  app.route('/turmas/abrir/:id_sala/:id_lista/:id_exercicio')
-    .get(checkAuth, Exercicios.ExerciciosResponder.get)
-    .post(checkAuth, Exercicios.ExerciciosResponder.post);
+router
+  .route('/turmas/abrir/:id')
+  .get(checkAuth, openClassrooms);
 
-  app.route('/exercicios/download/:id_exercicio/:file_name')
-    .get(checkAuth, Exercicios.ExerciciosDownloadAluno.get);
+router
+  .route('/turmas/professor/detalhes')
+  .get(checkAuth, getIntroduceClassrooms)
+  .post(checkAuth, postIntroduceClassrooms);
 
-  // didatico.js
+router
+  .route('/turmas/abrir/listas/:id_sala/:id_lista')
+  .get(checkAuth, openList);
 
-  app.route('/turmas/didaticos/abrir/:id_sala/:id_didatico')
-    .get(checkAuth, Didaticos.listaDidaticos.get);
-  app.route('/turmas/didaticos/abrir/:id_sala/download/:path')
-    .get(checkAuth, Didaticos.DidaticoDownload.get);
+router
+  .route('/turmas/abrir/:id_sala/:id_lista/:id_exercicio')
+  .get(checkAuth, getAwnser)
+  .post(checkAuth, postAwnser);
+
+router
+  .route('/exercicios/download/:id_exercicio/:file_name')
+  .get(checkAuth, download);
+
+module.exports = function (app) {
+  app.use('/', router);
 };
+
+//     Turmas.js
+
+// // Exercicios.js
+
+// router
+//   .route('/turmas/abrir/listas/:id_sala/:id_lista')
+//   .get(checkAuth, Exercicios.ListaAbrir.get);
+
+// router
+//   .route('/turmas/abrir/:id_sala/:id_lista/:id_exercicio')
+//   .get(checkAuth, Exercicios.ExerciciosResponder.get)
+//   .post(checkAuth, Exercicios.ExerciciosResponder.post);
+
+// router
+//   .route('/exercicios/download/:id_exercicio/:file_name')
+//   .get(checkAuth, Exercicios.ExerciciosDownloadAluno.get);
+
+// // didatico.js
+
+// router
+//   .route('/turmas/didaticos/abrir/:id_sala/:id_didatico')
+//   .get(checkAuth, Didaticos.listaDidaticos.get);
+// router
+//   .route('/turmas/didaticos/abrir/:id_sala/download/:path')
+//   .get(checkAuth, Didaticos.DidaticoDownload.get);
+// };

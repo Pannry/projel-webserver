@@ -6,7 +6,7 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 
-const middlewareErro = require('../app/middlewares/erro');
+const errorHandler = require('../app/middlewares/erro');
 
 require('dotenv').config();
 
@@ -43,7 +43,7 @@ module.exports = () => {
     .then('routes')
     .into(app);
 
-  middlewareErro(app);
+  errorHandler(app);
 
   return app;
 };
