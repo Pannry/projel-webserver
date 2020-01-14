@@ -6,12 +6,12 @@
   "scripts": {
     "devdb": "nodemon --inspect server.js",
     "dev": "nodemon server.js",
-    "cy:open": "./node_modules/.bin/cypress open",
     "lint": "node node_modules/ESLint/bin/eslint app/**/*.js",
     "m:reset": "db-migrate db:drop projel -e reset && db-migrate db:create projel -e reset",
     "m:setup": "npm run m:reset && db-migrate up",
     "m:resetprod": "db-migrate db:drop projel -e prod && db-migrate db:create projel -e prodsetup",
-    "m:prod": "npm run m:resetprod && db-migrate up -e prod"
+    "m:prod": "npm run m:resetprod && db-migrate up -e prod",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,6 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "cypress": "^3.3.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.17.3"
