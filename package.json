@@ -13,6 +13,10 @@
     "m:prod": "npm run m:resetprod && db-migrate up -e prod",
     "start": "node server.js"
   },
+  "engines": {
+    "node": "10.17.0",
+    "npm": "6.11.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Pannry/projel-webserver.git"
