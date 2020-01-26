@@ -20,6 +20,10 @@ const {
   download, openList, getAwnser, postAwnser,
 } = require('../controllers/aluno/Exercise');
 
+const {
+  donwloadDidactic, listDidactic,
+} = require('../controllers/aluno/Didactic');
+
 const router = express.Router();
 
 router
@@ -84,6 +88,17 @@ router
   .route('/exercicios/download/:id_exercicio/:file_name')
   .get(checkAuth, download);
 
+// @Didactic
+
+router
+  .route('/turmas/didaticos/abrir/:id_sala/:id_didatico')
+  .get(checkAuth, listDidactic);
+
+router
+  .route('/turmas/didaticos/abrir/:id_sala/download/:path')
+  .get(checkAuth, donwloadDidactic);
+
+
 module.exports = function (app) {
   app.use('/', router);
 };
@@ -107,10 +122,4 @@ module.exports = function (app) {
 
 // // didatico.js
 
-// router
-//   .route('/turmas/didaticos/abrir/:id_sala/:id_didatico')
-//   .get(checkAuth, Didaticos.listaDidaticos.get);
-// router
-//   .route('/turmas/didaticos/abrir/:id_sala/download/:path')
-//   .get(checkAuth, Didaticos.DidaticoDownload.get);
-// };
+

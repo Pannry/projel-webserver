@@ -1,5 +1,8 @@
 const asyncHandler = require('../../middlewares/async');
 const DidaticoDAO = require('../../infra/banco/DidaticoDAO');
+const s3AwsUpload = require('../../infra/s3Upload')();
+const s3AwsDownload = require('../../infra/s3Download')();
+const { getDisplayName } = require('../../utils/getDisplayName');
 const fs = require('fs');
 
 // @Didatico
@@ -45,7 +48,9 @@ exports.openDidactic = asyncHandler(async (req, res, next) => {
 
 
       const didactic = new DidaticoDAO();
-      const downloadPaths = await didactic.downloadPaths({ id: result[0].id });
+      let downloadPaths = await didactic.downloadPaths({ id: result[0].id });
+
+      downloadPaths = getDisplayName(downloadPaths);
 
       ejs.paths = downloadPaths;
       res.render('professor/perfil/didatico/abrirDidatico', ejs);
@@ -86,10 +91,12 @@ exports.downloadDidactic = asyncHandler(async (req, res, next) => {
     const didactic = new DidaticoDAO();
     const result = await didactic.download(req.params.path);
 
+    const file = await s3AwsDownload(result[0].file_name);
+
     if (result.length === 0) {
       res.render('erro/403', ejs);
     } else {
-      res.download(`app/uploads/${result[0].file_name}`);
+      res.redirect(file);
     }
   } else {
     next();
@@ -118,15 +125,15 @@ exports.postCreateDidactic = asyncHandler(async (req, res, next) => {
     };
     const createDidactic = new DidaticoDAO();
     const result = await createDidactic.create(entrada);
+    const { files } = req;
+
 
     const promiseList = [];
 
-    req.files.forEach((element) => {
+    files.forEach((element) => {
       const returnPromise = new Promise(async (resolve) => {
-        const didacticData = {
-          id: result.insertId, // retorna a PRIMARY KEY do INSERT anterior
-          file_name: element.filename,
-        };
+        const uploadData = await s3AwsUpload(element, req.user.email);
+        const didacticData = { id: result.insertId, file_name: uploadData };
         const addMaterial = new DidaticoDAO();
         await addMaterial.addMaterial(didacticData);
         resolve();

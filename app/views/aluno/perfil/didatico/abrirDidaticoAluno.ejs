@@ -32,12 +32,13 @@
       <div class="card-body">
 
         <% for (let i = 0; i < paths.length; i++ ) { %>
-        <a href="/turmas/didaticos/abrir/<%= didatico[0].id%>/download/<%= paths[i].file_name%>" class="list-group-item list-group-item-action">
+        <a href="/turmas/didaticos/abrir/<%= didatico[0].id%>/download/<%= encodeURIComponent(paths[i].file_name)%>"
+          class="list-group-item list-group-item-action">
           <div class="row">
             <div class="col-md-1"><i class="fa fa-download" aria-hidden="true"></i></div>
             <div class="col-md-10">
 
-              <%= paths[i].file_name %>
+              <%= paths[i].displayName %>
 
             </div>
           </div>

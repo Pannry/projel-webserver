@@ -39,6 +39,7 @@ module.exports = () => {
 
   consign({ cwd: 'app', verbose: false })
     .include('controllers')
+    .then('utils')
     .then('infra')
     .then('routes')
     .into(app);

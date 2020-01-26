@@ -1,5 +1,7 @@
 const asyncHandler = require('../../middlewares/async');
 const ExercicioDao = require('../../infra/banco/ExercicioDao');
+const s3AwsDownload = require('../../infra/s3Download')();
+const { getDisplayName } = require('../../utils/getDisplayName');
 
 exports.download = asyncHandler(async (req, res, next) => {
   if (req.user.tipo === 'aluno') {
@@ -14,10 +16,12 @@ exports.download = asyncHandler(async (req, res, next) => {
     const exercises = new ExercicioDao();
     const downloadFilesName = await exercises.download(entrada);
 
+    const file = await s3AwsDownload(downloadFilesName[0].file_name);
+
     if (downloadFilesName.length === 0) {
       res.render('erro/403', ejs);
     } else {
-      res.download(`app/uploads/${downloadFilesName[0].file_name}`);
+      res.redirect(file);
     }
   } else {
     next();
@@ -72,6 +76,7 @@ exports.getAwnser = asyncHandler(async (req, res, next) => {
 
     exercise = new ExercicioDao();
     result = await exercise.downloadPaths(exercicio);
+    result = getDisplayName(result);
     ejs.file_name = result;
 
     exercise = new ExercicioDao();

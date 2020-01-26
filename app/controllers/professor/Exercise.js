@@ -1,5 +1,8 @@
 const asyncHandler = require('../../middlewares/async');
 const ExercicioDao = require('../../infra/banco/ExercicioDao');
+const s3AwsUpload = require('../../infra/s3Upload')();
+const s3AwsDownload = require('../../infra/s3Download')();
+const { getDisplayName } = require('../../utils/getDisplayName');
 const fs = require('fs');
 
 // @Turmas
@@ -49,15 +52,14 @@ exports.postCreateExercises = asyncHandler(async (req, res, next) => {
 
     const exercises = new ExercicioDao();
     const result = await exercises.create(exerciseDescription);
+    const { files } = req;
 
     const promiseList = [];
 
-    req.files.forEach((element) => {
+    files.forEach((element) => {
       const returnPromise = new Promise(async (resolve) => {
-        const exerciseData = {
-          id: result.insertId,
-          file_name: element.filename,
-        };
+        const uploadData = await s3AwsUpload(element, req.user.email);
+        const exerciseData = { id: result.insertId, file_name: uploadData };
         const materialExercises = new ExercicioDao();
         await materialExercises.addMaterial(exerciseData);
         resolve();
@@ -92,7 +94,9 @@ exports.openExercise = asyncHandler(async (req, res, next) => {
       ejs.questao = result;
 
       const files = new ExercicioDao();
-      const fileNames = await files.downloadPaths({ id: result[0].id });
+      let fileNames = await files.downloadPaths({ id: result[0].id });
+
+      fileNames = getDisplayName(fileNames);
 
       ejs.paths = fileNames;
       res.render('professor/perfil/exercicios/abrirExercicio', ejs);
@@ -115,10 +119,12 @@ exports.downloadExercice = asyncHandler(async (req, res, next) => {
     const exercises = new ExercicioDao();
     const downloadFilesName = await exercises.download(entrada);
 
+    const file = await s3AwsDownload(downloadFilesName[0].file_name);
+
     if (downloadFilesName.length === 0) {
       res.render('erro/403', ejs);
     } else {
-      res.download(`app/uploads/${downloadFilesName[0].file_name}`);
+      res.redirect(file);
     }
   } else {
     next();

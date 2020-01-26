@@ -1,7 +1,9 @@
 const asyncHandler = require('../../middlewares/async');
 const DidaticoDAO = require('../../infra/banco/DidaticoDAO');
+const s3AwsDownload = require('../../infra/s3Download')();
+const { getDisplayName } = require('../../utils/getDisplayName');
 
-exports.donwload = asyncHandler(async (req, res, next) => {
+exports.donwloadDidactic = asyncHandler(async (req, res, next) => {
   if (req.user.tipo === 'aluno') {
     const ejs = {
       user: req.user,
@@ -12,15 +14,17 @@ exports.donwload = asyncHandler(async (req, res, next) => {
     const didactic = new DidaticoDAO();
     const result = await didactic.download(req.params.path);
 
+    const file = await s3AwsDownload(result[0].file_name);
+
     if (result.length === 0) {
       res.render('erro/403', ejs);
     } else {
-      res.download(`app/uploads/${result[0].file_name}`);
+      res.redirect(file);
     }
   } else next();
 });
 
-exports.list = asyncHandler(async (req, res, next) => {
+exports.listDidactic = asyncHandler(async (req, res, next) => {
   if (req.user.tipo === 'aluno') {
     const ejs = {
       user: req.user,
@@ -41,8 +45,9 @@ exports.list = asyncHandler(async (req, res, next) => {
 
     didactic = new DidaticoDAO();
     result = await didactic.downloadPaths(result[0].id);
-
+    result = getDisplayName(result);
     ejs.paths = result;
+
     res.render('aluno/perfil/didatico/abrirDidaticoAluno', ejs);
   } else next();
 });

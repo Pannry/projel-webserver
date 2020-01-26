@@ -9,10 +9,11 @@
       <li class="breadcrumb-item"><a href="/profile/turmas">Turmas</a></li>
       <li class="breadcrumb-item"><a href="/turmas/abrir/<%=sala%>">Painel da turma</a></li>
       <li class="breadcrumb-item"><a href="/turmas/abrir/listas/<%=sala%>/<%=lista%>">Lista de exercícios</a></li>
-      <li class="breadcrumb-item active"><a href="/turmas/abrir/<%=sala%>/<%=lista%>/<%=exercicio[0].id%>">Exercício</a></li>
+      <li class="breadcrumb-item active"><a href="/turmas/abrir/<%=sala%>/<%=lista%>/<%=exercicio[0].id%>">Exercício</a>
+      </li>
     </ol>
   </nav>
-  
+
 
   <div class="col-md-12">
     <div class="card">
@@ -35,14 +36,15 @@
       <div class="card-body">
         <% if( !(file_name.length === 0) ) {%>
         <h5>
-          Conteúdo para download
+          Conteúdo para download:
         </h5>
         <% for( let i = 0; i < file_name.length; i++)  {%>
-        <a href="/exercicios/download/<%= exercicio[0].id%>/<%= file_name[i].file_name%>" class="list-group-item list-group-item-action">
+        <a href="/exercicios/download/<%= exercicio[0].id%>/<%= encodeURIComponent(file_name[i].file_name)%>"
+          class="list-group-item list-group-item-action">
           <div class="row">
             <div class="col-md-1"><i class="fa fa-download" aria-hidden="true"></i></div>
             <div class="col-md-10">
-              <%= file_name[i].file_name %>
+              <%= file_name[i].displayName %>
             </div>
           </div>
         </a>
