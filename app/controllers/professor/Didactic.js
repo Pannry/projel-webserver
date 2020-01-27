@@ -2,6 +2,7 @@ const asyncHandler = require('../../middlewares/async');
 const DidaticoDAO = require('../../infra/banco/DidaticoDAO');
 const s3AwsUpload = require('../../infra/s3Upload')();
 const s3AwsDownload = require('../../infra/s3Download')();
+const s3AwsDelete = require('../../infra/s3Delete')();
 const { getDisplayName } = require('../../utils/getDisplayName');
 const fs = require('fs');
 
@@ -66,9 +67,13 @@ exports.deleteDidactic = asyncHandler(async (req, res, next) => {
     const didacticPaths = new DidaticoDAO();
     const downloadFilesName = await didacticPaths.downloadPaths(entrada);
 
-    downloadFilesName.forEach((file) => {
-      const path = 'app/uploads/';
-      fs.unlinkSync(path + file.file_name);
+    const nominalNames = getDisplayName(downloadFilesName);
+
+    await s3AwsDelete(downloadFilesName);
+
+    nominalNames.forEach((file) => {
+      const path = `app/uploads/${file.displayName}`;
+      if (fs.existsSync(path)) fs.unlinkSync(path);
     });
 
     const didactic = new DidaticoDAO();

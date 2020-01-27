@@ -2,6 +2,7 @@ const asyncHandler = require('../../middlewares/async');
 const ExercicioDao = require('../../infra/banco/ExercicioDao');
 const s3AwsUpload = require('../../infra/s3Upload')();
 const s3AwsDownload = require('../../infra/s3Download')();
+const s3AwsDelete = require('../../infra/s3Delete')();
 const { getDisplayName } = require('../../utils/getDisplayName');
 const fs = require('fs');
 
@@ -138,9 +139,13 @@ exports.deleteExercise = asyncHandler(async (req, res, next) => {
     const fileNames = new ExercicioDao();
     const downloadFilesName = await fileNames.downloadPaths(entrada);
 
-    downloadFilesName.forEach((file) => {
-      const path = 'app/uploads/';
-      fs.unlinkSync(path + file.file_name);
+    const nominalNames = getDisplayName(downloadFilesName);
+
+    await s3AwsDelete(downloadFilesName);
+
+    nominalNames.forEach((file) => {
+      const path = `app/uploads/${file.displayName}`;
+      if (fs.existsSync(path)) fs.unlinkSync(path);
     });
 
     const exercise = new ExercicioDao();
