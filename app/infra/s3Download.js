@@ -24,6 +24,7 @@ function downloadFromS3(file) {
       Bucket: process.env.S3_BUCKET,
       Key: key,
       Expires: 20,
+      ACL: 'public-read',
     };
 
     s3.getSignedUrl('getObject', downloadParams, (err, url) => {
