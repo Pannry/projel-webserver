@@ -28,7 +28,7 @@ function downloadFromS3(files) {
     const Delete = {
       Objects,
       Quiet: false,
-    }
+    };
 
     const params = {
       Bucket: process.env.S3_BUCKET,

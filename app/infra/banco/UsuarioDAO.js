@@ -17,7 +17,6 @@ UsuarioDAO.prototype.closeConnection = async function () {
 
 UsuarioDAO.prototype.execSQL = async function (sql, input) {
   await this.getConnection();
-  console.log(this.conn.format(sql, input) + '\n');
   const result = await this.conn.query(sql, input);
   this.closeConnection();
   return result[0];

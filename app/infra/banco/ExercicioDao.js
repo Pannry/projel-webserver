@@ -1,4 +1,3 @@
-const asyncHandler = require('../../middlewares/async');
 const dbConn = require('./dbConnection');
 
 const ConnectionDatabase = dbConn();
@@ -18,13 +17,11 @@ ExercicioDao.prototype.closeConnection = async function () {
 
 ExercicioDao.prototype.execSQL = async function (sql, input) {
   await this.getConnection();
-  console.log(this.conn.format(sql, input) + '\n');
   let result;
   try {
     result = await this.conn.query(sql, input);
   } catch (error) {
     if (error.errno === 1062) {
-      console.log('elemento já adicionado!');
       return undefined;
     }
   }
@@ -114,7 +111,6 @@ ExercicioDao.prototype.listInfo = function (input) {
 };
 
 ExercicioDao.prototype.listAwnser = function (input) {
-
   let values;
   let sql = 'Select * from resposta WHERE ?';
 
@@ -177,12 +173,14 @@ ExercicioDao.prototype.listasParaIncluir = function (input) {
 // };
 
 // ExercicioDao.prototype.abrirLista = function (input) {
-//   return this.execSQL('SELECT * FROM lista WHERE id_professor = ? AND id = ?', [input.id_professor, input.id]);
+// return this
+//   .execSQL('SELECT * FROM lista WHERE id_professor = ? AND id = ?',
+//     [input.id_professor, input.id]);
 // };
 
 // ExercicioDao.prototype.mostrarQuestoes = function (input) {
 //   return this.execSQL(
-//     ` SELECT 
+//     ` SELECT
 //       *
 //     FROM
 //       lista_exercicios
@@ -198,13 +196,13 @@ ExercicioDao.prototype.listasParaIncluir = function (input) {
 
 // ExercicioDao.prototype.mostrarExerciciosAluno = function (input) {
 //   return this.execSQL(
-//     ` SELECT 
+//     `SELECT
 //         id_lista, id_exercicios, titulo
 //       FROM
 //         lista_exercicios
 //       INNER JOIN
 //         exercicios
-//           ON exercicios.id = lista_exercicios.id_exercicios 
+//           ON exercicios.id = lista_exercicios.id_exercicios
 //           AND lista_exercicios.id_lista = ?`,
 //     input,
 //   );

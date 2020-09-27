@@ -25,7 +25,7 @@ module.exports = () => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(session({
     secret: process.env.SESSION_SECRET,
-    resave: true,
+    resave: false,
     saveUninitialized: true,
   }));
 

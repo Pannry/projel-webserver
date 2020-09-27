@@ -121,5 +121,3 @@ module.exports = function (app) {
 //   .get(checkAuth, Exercicios.ExerciciosDownloadAluno.get);
 
 // // didatico.js
-
-

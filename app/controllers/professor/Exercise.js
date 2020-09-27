@@ -53,7 +53,6 @@ exports.postCreateExercises = asyncHandler(async (req, res, next) => {
 
     const exercises = new ExercicioDao();
     const result = await exercises.create(exerciseDescription);
-    console.log(result)
     const { files } = req;
 
     const promiseList = [];

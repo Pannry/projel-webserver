@@ -17,13 +17,11 @@ DidaticoDao.prototype.closeConnection = async function () {
 
 DidaticoDao.prototype.execSQL = async function (sql, input) {
   await this.getConnection();
-  console.log(this.conn.format(sql, input) + '\n');
   let result;
   try {
     result = await this.conn.query(sql, input);
   } catch (error) {
     if (error.errno === 1062) {
-      console.log('elemento já adicionado!');
       return undefined;
     }
   }

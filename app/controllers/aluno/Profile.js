@@ -3,7 +3,7 @@ const InstituicaoDAO = require('../../infra/banco/InstituicaoDAO');
 const passport = require('passport');
 
 // @Cadastro
-exports.getCreate = asyncHandler(async (req, res, next) => {
+exports.getCreate = asyncHandler(async (req, res) => {
   const ejs = {
     message: req.flash('signupMessage'),
   };
@@ -21,7 +21,7 @@ exports.postCreate = passport.authenticate('local-signup-aluno', {
 });
 
 // @Login
-exports.getLogin = asyncHandler(async (req, res, next) => {
+exports.getLogin = asyncHandler(async (req, res) => {
   res.render('aluno/login', { message: req.flash('loginMessage') });
 });
 
@@ -31,7 +31,7 @@ exports.postLogin = passport.authenticate('local-login-aluno', {
   failureFlash: true,
 });
 
-exports.getLogin = asyncHandler(async (req, res, next) => {
+exports.getLogin = asyncHandler(async (req, res) => {
   res.render('aluno/login', { message: req.flash('loginMessage') });
 });
 

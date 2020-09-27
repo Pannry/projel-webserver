@@ -54,7 +54,6 @@ passport.use('local-login-aluno', new LocalStrategy(
     const user = result;
     user[0].tipo = 'aluno';
     return done(null, user[0]);
-
   },
 ));
 
@@ -117,7 +116,7 @@ passport.use('local-login-professor', new LocalStrategy(
     const result = await findUser.findProfessor({ email: entrada.email });
 
     // TODO: Erro
-    // if (!result){ 
+    // if (!result){
     //   return Error
     // }
 

@@ -3,7 +3,7 @@ const InstituicaoDAO = require('../../infra/banco/InstituicaoDAO');
 const passport = require('passport');
 
 // @Cadastro
-exports.getCreate = asyncHandler(async (req, res, next) => {
+exports.getCreate = asyncHandler(async (req, res) => {
   const params = {
     message: req.flash('signupMessage'),
     signupLink: process.env.TSECRET_SIGNUP,
@@ -28,7 +28,7 @@ exports.postCreate = passport.authenticate('local-signup-professor', {
 });
 
 // @Login
-exports.getLogin = asyncHandler(async (req, res, next) => {
+exports.getLogin = asyncHandler(async (req, res) => {
   res.render('professor/login', { message: req.flash('loginMessage') });
 });
 
