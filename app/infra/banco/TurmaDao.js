@@ -16,11 +16,10 @@ TurmaDao.prototype.closeConnection = async function () {
 };
 
 TurmaDao.prototype.execSQL = async function (sql, input) {
-  console.log(sql);
   await this.getConnection();
   const result = await this.conn.query(sql, input);
   this.closeConnection();
-  console.log(result[0]);
+  console.log(`Result: ${result}`);
   return result[0];
 };
 
@@ -69,6 +68,7 @@ ALUNO
 */
 
 TurmaDao.prototype.findStudent = function (input) {
+  console.log(`Input: ${input}`);
   return this.execSQL(
     ` SELECT 
         id_aluno, id_sala, id, nome, semestre, comentario 
