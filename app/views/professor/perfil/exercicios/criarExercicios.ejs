@@ -1,49 +1,49 @@
 <% include ../../../partials/professor-top %>
-<div class="card-body">
+  <div class="card-body">
 
-  <h3> Criar Exercícios: </h3>
-  <hr>
+    <h3> Criar Exercícios: </h3>
+    <hr>
 
-  <form class="" action="/professor/exercicios/criar" method="post" enctype="multipart/form-data">
-    <br>
+    <form class="" action="/professor/exercicios/criar" method="post" enctype="multipart/form-data">
+      <br>
 
-    <div class="row">
-      <div class="col-md-8 col-sm-12">
-        <label for="titulo" class="font-weight-bold">Titulo do execício:</label>
-        <input required type="text" name="titulo" class="form-control">
+      <div class="row">
+        <div class="col-md-8 col-sm-12">
+          <label for="titulo" class="font-weight-bold">Titulo do execício:</label>
+          <input required type="text" name="titulo" class="form-control">
+        </div>
       </div>
-    </div>
-    
-    <br>
-   
-    <div class="row">
-      <div class="col-md-8 col-sm-12">
-        <label for="descricao" class="font-weight-bold">Descrição do execício:</label>
-        <textarea required class="form-control" name="descricao" rows="5"></textarea>
+
+      <br>
+
+      <div class="row">
+        <div class="col-md-8 col-sm-12">
+          <label for="descricao" class="font-weight-bold">Descrição do execício:</label>
+          <textarea required class="form-control" name="descricao" rows="5"></textarea>
+        </div>
       </div>
-    </div>
 
-    <br>
+      <br>
 
-    <div class="row">
-      <div class="col-md-8 col-sm-12">
-        <label for="fileUpload" class="font-weight-bold">Upload do material (Até 5 arquivos):</label>
-        <input type="file" class="form-control-file" name="fileUpload" multiple="multiple">
+      <div class="row">
+        <div class="col-md-8 col-sm-12">
+          <label for="fileUpload" class="font-weight-bold">Upload do material (Até 5 arquivos):</label>
+          <input type="file" class="form-control-file" name="fileUpload" multiple="multiple">
+        </div>
       </div>
-    </div>
 
-    <br>
+      <br>
 
-    <div class="row">
-      <div class="col-md-2 mr-1">
-        <input class="btn btn-info" type="submit" value="Criar">
+      <div class="row">
+        <div class="col-md-2 mr-1">
+          <input class="btn btn-info" type="submit" value="Criar">
+        </div>
+        <div class="col-md-2">
+          <a class="btn btn-info" href="/professor/exercicios">Voltar</a>
+        </div>
       </div>
-      <div class="col-md-2">
-        <a class="btn btn-info" href="/professor/profile/exercicios">Voltar</a>
-      </div>
-    </div>
 
-  </form>
+    </form>
 
-</div>
-<% include ../../../partials/professor-bottom %>
+  </div>
+  <% include ../../../partials/professor-bottom %>
