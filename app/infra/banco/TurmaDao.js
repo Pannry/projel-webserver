@@ -17,13 +17,7 @@ TurmaDao.prototype.closeConnection = async function () {
 
 TurmaDao.prototype.execSQL = async function (sql, input) {
   await this.getConnection();
-  console.log('===============sql==============');
-  console.log(sql);
-  console.log(input);
-  const result = await this.conn.query(sql, input, (err, results) => {
-    console.log('===============results==============');
-    console.log(results);
-  });
+  const result = await this.conn.query(sql, input);
   this.closeConnection();
   return result[0];
 };
