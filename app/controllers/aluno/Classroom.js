@@ -53,6 +53,8 @@ exports.openClassrooms = asyncHandler(async (req, res, next) => {
     const classrooms = new TurmaDao();
     const getClass = await classrooms.findStudent({ id_aluno: req.params.id });
 
+    console.log(getClass);
+
     ejs.sala = getClass;
 
     const inclusion = new TurmaDao();
@@ -68,8 +70,6 @@ exports.openClassrooms = asyncHandler(async (req, res, next) => {
     const studentL = new DidaticoDAO();
     const getDidaticList = await studentL.showList(entrada[1].id_sala);
     ejs.didatico = getDidaticList;
-
-    console.log(ejs)
 
     res.render('aluno/perfil/turmas/abrirTurma', ejs);
   } else {
