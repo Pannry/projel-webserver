@@ -49,6 +49,9 @@ exports.professorGET = asyncHandler(async (req, res, next) => {
     const NotasDAO2 = await conexaoDb2.showEnrolledStudent(entrada);
     ejs.notas = NotasDAO2;
 
+    console.log('====ejs====');
+    console.log(ejs);
+
     res.render('professor/perfil/notas/AbrirNotasAluno', ejs);
   } else {
     next();

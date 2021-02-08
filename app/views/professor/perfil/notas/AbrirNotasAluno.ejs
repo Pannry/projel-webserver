@@ -1,48 +1,48 @@
 <% include ../../../partials/professor-top %>
-<div class="card-body">
+  <div class="card-body">
 
-  <h3> Atribuir notas </h3>
-  <hr>
+    <h3> Atribuir notas </h3>
+    <hr>
 
-  <!-- breadcrumb -->
-  <nav aria-label="breadcrumb row">
-    <ol class="breadcrumb col-md-10">
-      <li class="breadcrumb-item"><a href="/professor/turmas">Turmas</a></li>
-      <li class="breadcrumb-item"><a href="/professor/turma/abrir/<%=id_sala%>/professor">Alunos Matriculados</a></li>
-      <li class="breadcrumb-item active"><a href="#">Exercícios</a></li>
-    </ol>
-  </nav>
+    <!-- breadcrumb -->
+    <nav aria-label="breadcrumb row">
+      <ol class="breadcrumb col-md-10">
+        <li class="breadcrumb-item"><a href="/professor/turmas">Turmas</a></li>
+        <li class="breadcrumb-item"><a href="/professor/turma/abrir/<%=id_sala%>/professor">Alunos Matriculados</a></li>
+        <li class="breadcrumb-item active"><a href="#">Exercícios</a></li>
+      </ol>
+    </nav>
 
-  <h4>Listas: (!)</h4>
+    <h4>Listas:</h4>
 
-  <% for(let i = 0; i < lista.length; i++) { %>
-  <div class="row col-md-12">
+    <% for(let i=0; i < lista.length; i++) { %>
+      <div class="row col-md-12">
 
-    <form class="col-md-12 row"
-      action="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>" method="post">
-      <a href="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>"
-        class="list-group-item col-md-3">
-        <h6>
-          <%=lista[i].titulo%>
-        </h6>
-      </a>
+        <form class="col-md-12 row"
+          action="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>" method="post">
+          <a href="/professor/turma/abrir/<%=id_sala%>/professor/<%=id_aluno%>/<%=lista[i].id_lista%>"
+            class="list-group-item col-md-3">
+            <h6>
+              <%=lista[i].titulo%>
+            </h6>
+          </a>
 
-      <label class="col-md-3 list-group-item">
-        <% if(notas[i].nota === null) { %>
-        <h6>Nota:</h6>
-        <% } else { %>
-        <h6>Nota:
-          <%=notas[i].nota%>
-        </h6>
-        <% } %>
-      </label>
-      <input type="text" class="form-control col-md-3" placeholder="Digite a nota aqui" name="nota">
-      <input class="col-md-3 btn btn-default" value="Salvar" type="submit"></input>
-    </form>
+          <label class="col-md-3 list-group-item">
+            <% if(notas[i].nota===null) { %>
+              <h6>Nota:</h6>
+              <% } else { %>
+                <h6>Nota:
+                  <%=notas[i].nota%>
+                </h6>
+                <% } %>
+          </label>
+          <input type="text" class="form-control col-md-3" placeholder="Digite a nota aqui" name="nota">
+          <input class="col-md-3 btn btn-default" value="Salvar" type="submit"></input>
+        </form>
+
+      </div>
+      <br>
+      <% } %>
 
   </div>
-  <br>
-  <% } %>
-
-</div>
-<% include ../../../partials/professor-bottom %>
+  <% include ../../../partials/professor-bottom %>
