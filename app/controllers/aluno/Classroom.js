@@ -69,6 +69,9 @@ exports.openClassrooms = asyncHandler(async (req, res, next) => {
     const getDidaticList = await studentL.showList(entrada[1].id_sala);
     ejs.didatico = getDidaticList;
 
+    console.log('=====ejs====');
+    console.log(ejs);
+
     res.render('aluno/perfil/turmas/abrirTurma', ejs);
   } else {
     next();
