@@ -7,6 +7,7 @@ exports.professorGET = asyncHandler(async (req, res, next) => {
       id_sala: req.params.id_sala,
       id_aluno: req.params.id_aluno,
     };
+
     const ejs = {
       user: req.user,
       page_name: req.path,

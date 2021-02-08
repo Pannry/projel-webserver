@@ -30,7 +30,7 @@ NotasDao.prototype.list = function (input) {
         lista, sala_lista 
       WHERE 
         lista.id = sala_lista.id_lista
-        AND id_sala = ?`,
+        AND ?`,
     input,
   );
 };
