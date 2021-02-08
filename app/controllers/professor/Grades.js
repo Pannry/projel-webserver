@@ -50,9 +50,6 @@ exports.professorGET = asyncHandler(async (req, res, next) => {
     const NotasDAO2 = await conexaoDb2.showEnrolledStudent(entrada);
     ejs.notas = NotasDAO2;
 
-    console.log('====ejs====');
-    console.log(ejs);
-
     res.render('professor/perfil/notas/AbrirNotasAluno', ejs);
   } else {
     next();
@@ -73,6 +70,10 @@ exports.post = asyncHandler(async (req, res, next) => {
     };
 
     entrada.nota = req.body.nota;
+
+    if (entrada.nota === '' || entrada.nota === undefined) {
+      entrada.nota = 0;
+    }
 
     const notas = new NotasDAO();
     await notas.update(entrada);
